@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN SECRET_KEY=build-placeholder python manage.py collectstatic --noinput
+RUN SECRET_KEY=build-placeholder DATABASE_URL=sqlite:///tmp/db.sqlite3 python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
