@@ -255,6 +255,16 @@
                         {% if cs.deadline %} · Límite: {{ cs.deadline|date:"d/m/Y" }}{% endif %}
                         {% if cs.submitted_at %} · Entregado {{ cs.submitted_at|date:"d/m/Y H:i" }}{% endif %}
                     </p>
+                    {% if cs.sent_at and not cs.submitted_at %}
+                    <div class="mt-2 flex items-center gap-2" x-data="{ copied: false }">
+                        <span class="text-xs text-gray-500">Enlace portal:</span>
+                        <code class="text-xs bg-gray-100 px-2 py-0.5 rounded select-all break-all">{{ request.scheme }}://{{ request.get_host }}/portal/case/{{ candidate.portal_token }}/</code>
+                        <button type="button" @click="navigator.clipboard.writeText('{{ request.scheme }}://{{ request.get_host }}/portal/case/{{ candidate.portal_token }}/'); copied = true; setTimeout(() => copied = false, 2000)"
+                                class="text-xs text-blue-600 hover:text-blue-500 whitespace-nowrap">
+                            <span x-text="copied ? 'Copiado!' : 'Copiar'"></span>
+                        </button>
+                    </div>
+                    {% endif %}
                     {% if cs.score %}<p class="mt-1 text-sm"><span class="font-medium">Puntuación:</span> {{ cs.score }}/10</p>{% endif %}
 
                     {% if cs.submitted_at and cs.submission_text %}
