@@ -104,15 +104,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / env('MEDIA_ROOT', default='media/')
 
 # ---------- Email ----------
-if DEBUG and not env('EMAIL_HOST', default=''):
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
+if env('EMAIL_HOST', default=''):
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = env('EMAIL_HOST')
     EMAIL_PORT = env.int('EMAIL_PORT', default=587)
     EMAIL_HOST_USER = env('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     EMAIL_USE_TLS = True
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@pekata.com')
 
