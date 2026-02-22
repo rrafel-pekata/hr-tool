@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'apps.evaluations',
     'apps.portal',
     'apps.chatbot',
+    'apps.notifications',
 ]
 
 # ---------- Middleware ----------
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.notifications.context_processors.unread_notification_count',
             ],
         },
     },

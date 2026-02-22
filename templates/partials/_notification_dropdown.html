@@ -1,0 +1,55 @@
+<!-- Notification bell + dropdown -->
+<div x-data="notificationBell()" @click.away="open = false" class="relative">
+    <!-- Bell button -->
+    <button @click="toggle()" class="relative rounded-full p-1 text-gray-400 hover:text-gray-600 focus:outline-none">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+        </svg>
+        <!-- Badge -->
+        <span x-show="count > 0" x-text="count > 99 ? '99+' : count"
+              class="absolute -top-1 -right-1 inline-flex items-center justify-center rounded-full bg-red-500 px-1.5 py-0.5 text-xs font-bold text-white min-w-[18px] h-[18px]"
+              x-cloak></span>
+    </button>
+
+    <!-- Dropdown -->
+    <div x-show="open" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b px-4 py-3">
+            <h3 class="text-sm font-semibold text-gray-900">Notificaciones</h3>
+            <button x-show="count > 0" @click="markAllRead()" class="text-xs text-primary-600 hover:text-primary-800">
+                Marcar todas como leídas
+            </button>
+        </div>
+
+        <!-- List -->
+        <div class="max-h-96 overflow-y-auto">
+            <template x-if="notifications.length === 0">
+                <p class="px-4 py-8 text-center text-sm text-gray-500">Sin notificaciones</p>
+            </template>
+            <template x-for="n in notifications" :key="n.id">
+                <a :href="n.link || '#'" @click="markRead(n)"
+                   class="block border-b last:border-b-0 px-4 py-3 hover:bg-gray-50 transition-colors"
+                   :class="n.is_read ? 'opacity-60' : ''">
+                    <div class="flex items-start gap-3">
+                        <!-- Dot indicator -->
+                        <span x-show="!n.is_read" class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary-500"></span>
+                        <span x-show="n.is_read" class="mt-1.5 h-2 w-2 flex-shrink-0"></span>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-sm font-medium text-gray-900 truncate" x-text="n.title"></p>
+                            <p class="mt-0.5 text-xs text-gray-500 line-clamp-2" x-text="n.message"></p>
+                            <p class="mt-1 text-xs text-gray-400" x-text="timeAgo(n.created_at)"></p>
+                        </div>
+                    </div>
+                </a>
+            </template>
+        </div>
+    </div>
+</div>

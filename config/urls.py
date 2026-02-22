@@ -14,6 +14,7 @@ urlpatterns = [
     path('evaluations/', include('apps.evaluations.urls')),
     path('portal/', include('apps.portal.urls')),
     path('chatbot/', include('apps.chatbot.urls')),
+    path('notifications/', include('apps.notifications.urls')),
 ]
 
 if settings.DEBUG:
