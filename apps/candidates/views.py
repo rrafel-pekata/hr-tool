@@ -24,6 +24,46 @@ MAX_CV_SIZE = 10 * 1024 * 1024  # 10 MB
 MAX_CV_TEXT_LENGTH = 15_000
 
 
+@login_required
+def candidate_list(request):
+    """Base de datos global de candidatos de la empresa."""
+    candidates = (
+        Candidate.objects
+        .filter(position__company=request.company)
+        .select_related('position')
+        .order_by('-created_at')
+    )
+
+    # Filtros
+    search = request.GET.get('q', '').strip()
+    if search:
+        from django.db.models import Q
+        candidates = candidates.filter(
+            Q(first_name__icontains=search)
+            | Q(last_name__icontains=search)
+            | Q(email__icontains=search)
+        )
+
+    status_filter = request.GET.get('status', '')
+    if status_filter:
+        candidates = candidates.filter(status=status_filter)
+
+    position_filter = request.GET.get('position', '')
+    if position_filter:
+        candidates = candidates.filter(position__pk=position_filter)
+
+    positions = Position.objects.filter(company=request.company).order_by('-created_at')
+
+    return render(request, 'candidates/candidate_list.html', {
+        'candidates': candidates,
+        'positions': positions,
+        'status_choices': Candidate.Status.choices,
+        'search': search,
+        'status_filter': status_filter,
+        'position_filter': position_filter,
+    })
+
+
 @require_POST
 @login_required
 def bulk_upload_cvs(request, position_pk):
@@ -97,6 +137,13 @@ def bulk_upload_cvs(request, position_pk):
     cv_file.seek(0)
     candidate.cv_file.save(cv_file.name, cv_file, save=False)
     candidate.save()
+
+    # Auto-publish position if still a draft
+    if position.status == Position.Status.DRAFT:
+        from django.utils import timezone
+        position.status = Position.Status.PUBLISHED
+        position.published_at = timezone.now()
+        position.save(update_fields=['status', 'published_at', 'updated_at'])
 
     return JsonResponse({
         'success': True,

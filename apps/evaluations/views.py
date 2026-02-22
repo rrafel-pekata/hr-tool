@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from apps.candidates.models import Candidate
 from apps.core.services import call_claude
+from apps.notifications.services import notify_company
 
 from .models import AIEvaluation
 from .prompts import EVALUATION_SYSTEM_PROMPT, EVALUATION_USER_PROMPT
@@ -114,6 +115,8 @@ def evaluate_candidate(request, candidate_pk):
             result = call_claude(EVALUATION_SYSTEM_PROMPT, user_prompt, json_output=True)
 
             if isinstance(result, dict):
+                strengths = result.get('strengths', [])
+                weaknesses = result.get('weaknesses', [])
                 evaluation = AIEvaluation.objects.create(
                     candidate=candidate,
                     prompt_used=user_prompt,
@@ -124,11 +127,24 @@ def evaluate_candidate(request, candidate_pk):
                     overall_score=result.get('overall_score'),
                     recommendation=result.get('recommendation', ''),
                     summary=result.get('summary', ''),
+                    strengths=strengths if isinstance(strengths, list) else [],
+                    weaknesses=weaknesses if isinstance(weaknesses, list) else [],
                 )
 
                 # Update candidate status
                 candidate.status = 'evaluation'
                 candidate.save(update_fields=['status', 'updated_at'])
+
+                rec_labels = {'hire': 'Contratar', 'hold': 'En espera', 'reject': 'Rechazar'}
+                rec = rec_labels.get(evaluation.recommendation, evaluation.recommendation)
+                notify_company(
+                    company=request.company,
+                    title=f'Evaluación IA: {candidate.full_name}',
+                    message=f'Puntuación: {evaluation.overall_score}/10 — Recomendación: {rec}.',
+                    link=f'/evaluations/{candidate.pk}/',
+                    notification_type='evaluation',
+                    exclude_user=request.user,
+                )
 
                 messages.success(request, 'Evaluación IA generada correctamente.')
             else:

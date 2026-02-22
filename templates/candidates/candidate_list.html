@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load candidates_tags %}
+
+{% block title %}Candidatos — Pekata ATS{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">Candidatos</span></li>
+{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Candidatos</h1>
+    <p class="mt-1 text-sm text-gray-500">Base de datos de todos los candidatos de {{ request.company.name }}.</p>
+</div>
+
+<!-- Filtros -->
+<div class="mb-6 flex flex-col sm:flex-row gap-3">
+    <form method="get" class="flex flex-1 gap-3">
+        <!-- Buscar -->
+        <div class="relative flex-1">
+            <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+            <input type="text" name="q" value="{{ search }}" placeholder="Buscar por nombre o email..."
+                   class="block w-full rounded-md border border-gray-300 pl-10 pr-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+        </div>
+        <!-- Estado -->
+        <select name="status"
+                class="rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+            <option value="">Todos los estados</option>
+            {% for value, label in status_choices %}
+            <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <!-- Posición -->
+        <select name="position"
+                class="rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none max-w-xs truncate">
+            <option value="">Todas las posiciones</option>
+            {% for pos in positions %}
+            <option value="{{ pos.pk }}" {% if position_filter == pos.pk|slugify or position_filter == pos.pk|stringformat:"s" %}selected{% endif %}>{{ pos.title }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Filtrar</button>
+        {% if search or status_filter or position_filter %}
+        <a href="{% url 'candidates:candidate_list' %}" class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">Limpiar</a>
+        {% endif %}
+    </form>
+</div>
+
+{% if candidates %}
+<div class="overflow-hidden bg-white shadow-sm ring-1 ring-gray-200 rounded-lg">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Candidato</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Posición</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Encaje IA</th>
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Valoración</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+            {% for candidate in candidates %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                    <a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="flex items-center gap-3">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-600 text-xs font-medium">
+                            {{ candidate.first_name|first }}{{ candidate.last_name|first }}
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-sm font-medium text-blue-600 hover:text-blue-500 truncate">{{ candidate.full_name }}</p>
+                            <p class="text-xs text-gray-500 truncate">{{ candidate.email }}</p>
+                        </div>
+                    </a>
+                </td>
+                <td class="px-4 py-3">
+                    <a href="{% url 'positions:position_detail' candidate.position.pk %}" class="text-sm text-gray-700 hover:text-blue-600 truncate block max-w-[200px]">{{ candidate.position.title }}</a>
+                </td>
+                <td class="px-4 py-3">
+                    {% candidate_status_badge candidate.status %}
+                </td>
+                <td class="px-4 py-3 text-center">
+                    {% if candidate.ai_fit_score %}
+                    <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {% if candidate.ai_fit_score >= 7 %}bg-green-100 text-green-700{% elif candidate.ai_fit_score >= 4 %}bg-yellow-100 text-yellow-700{% else %}bg-red-100 text-red-700{% endif %}">
+                        {{ candidate.ai_fit_score }}/10
+                    </span>
+                    {% else %}
+                    <span class="text-xs text-gray-400">—</span>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-3 text-center">
+                    {% if candidate.rating %}
+                    <div class="flex items-center justify-center gap-1 text-xs text-yellow-500">
+                        <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        {{ candidate.rating }}
+                    </div>
+                    {% else %}
+                    <span class="text-xs text-gray-400">—</span>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-500">{{ candidate.created_at|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+{% include "partials/_empty_state.html" with title="Sin candidatos" description="Aún no hay candidatos que coincidan con tu búsqueda." %}
+{% endif %}
+{% endblock %}

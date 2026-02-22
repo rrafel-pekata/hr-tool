@@ -38,7 +38,19 @@ Responde en JSON con exactamente estos campos:
     "case_score": 7,
     "overall_score": 7,
     "recommendation": "hire",
-    "summary": "Resumen ejecutivo de 3-5 párrafos con: perfil del candidato, puntos fuertes, puntos débiles, encaje con la posición y recomendación final. Sé concreto y directo."
+    "summary": "Resumen ejecutivo de 2-3 párrafos con: perfil del candidato, encaje con la posición y recomendación final. Sé concreto y directo.",
+    "strengths": [
+        "Punto fuerte 1 concreto y específico",
+        "Punto fuerte 2 concreto y específico",
+        "Punto fuerte 3 concreto y específico",
+        "Punto fuerte 4 concreto y específico"
+    ],
+    "weaknesses": [
+        "Punto débil o gap 1 concreto y específico",
+        "Punto débil o gap 2 concreto y específico",
+        "Punto débil o gap 3 concreto y específico",
+        "Punto débil o gap 4 concreto y específico"
+    ]
 }}
 
 IMPORTANTE:
@@ -47,6 +59,8 @@ IMPORTANTE:
 - case_score: evalúa la respuesta al caso práctico. null si no hay caso práctico entregado.
 - overall_score: puntuación global del 1 al 10 (obligatorio, basado en la info disponible).
 - recommendation: "hire" (contratar), "hold" (seguir evaluando) o "reject" (descartar).
-- summary: debe ser un análisis detallado y útil para la toma de decisiones. Incluye fortalezas concretas, áreas de mejora y tu razonamiento.
+- summary: debe ser un análisis detallado y útil para la toma de decisiones. No repitas los puntos fuertes/débiles aquí, céntrate en el razonamiento y la recomendación.
+- strengths: EXACTAMENTE 4 puntos fuertes concretos y específicos (máx 15 palabras cada uno), basados en datos reales.
+- weaknesses: EXACTAMENTE 4 puntos débiles concretos y específicos (máx 15 palabras cada uno), basados en datos reales.
 - Basa tu evaluación SOLO en los datos proporcionados, no inventes información.
 - Si falta información en alguna área, menciónalo en el summary."""

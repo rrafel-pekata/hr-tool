@@ -5,6 +5,7 @@ from . import views
 app_name = 'candidates'
 
 urlpatterns = [
+    path('', views.candidate_list, name='candidate_list'),
     path('analyze-cv/<uuid:position_pk>/', views.analyze_cv, name='analyze_cv'),
     path('bulk-upload/<uuid:position_pk>/', views.bulk_upload_cvs, name='bulk_upload_cvs'),
     path('new/<uuid:position_pk>/', views.candidate_create, name='candidate_create'),

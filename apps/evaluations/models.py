@@ -44,6 +44,8 @@ class AIEvaluation(TimeStampedModel):
         blank=True,
     )
     summary = models.TextField('Resumen ejecutivo', blank=True)
+    strengths = models.JSONField('Puntos fuertes', default=list, blank=True)
+    weaknesses = models.JSONField('Puntos débiles', default=list, blank=True)
 
     class Meta:
         verbose_name = 'Evaluación IA'
