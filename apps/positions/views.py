@@ -3,13 +3,14 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, OuterRef, Subquery
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from apps.core.services import call_claude
+from apps.evaluations.models import AIEvaluation
 from apps.notifications.services import notify_company
 
 from .forms import PositionForm
@@ -91,7 +92,13 @@ def position_detail(request, pk):
         pk=pk,
         company=request.company,
     )
-    candidates = position.candidates.order_by('-created_at')
+    latest_eval = AIEvaluation.objects.filter(
+        candidate=OuterRef('pk'),
+    ).order_by('-generated_at')
+    candidates = position.candidates.annotate(
+        eval_score=Subquery(latest_eval.values('overall_score')[:1]),
+        eval_recommendation=Subquery(latest_eval.values('recommendation')[:1]),
+    ).order_by('-created_at')
 
     # Filtro candidatos por estado
     candidate_status = request.GET.get('candidate_status', '')
