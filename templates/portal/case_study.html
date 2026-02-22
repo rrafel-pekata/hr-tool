@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-gray-50">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Caso práctico — {{ company.name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full">
+<div class="min-h-full">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="mx-auto max-w-3xl px-4 py-4 flex items-center gap-3">
+            {% if company.logo %}
+            <img src="{{ company.logo.url }}" alt="{{ company.name }}" class="h-8 w-8 rounded-md object-cover">
+            {% endif %}
+            <span class="text-lg font-semibold text-gray-900">{{ company.name }}</span>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-4 py-8">
+        {% if ccs.submitted_at %}
+        <!-- Already submitted -->
+        <div class="rounded-lg bg-green-50 border border-green-200 p-6 text-center">
+            <svg class="mx-auto h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h2 class="mt-3 text-lg font-semibold text-green-800">Caso práctico entregado</h2>
+            <p class="mt-1 text-sm text-green-700">Tu respuesta fue recibida el {{ ccs.submitted_at|date:"d/m/Y" }} a las {{ ccs.submitted_at|time:"H:i" }}.</p>
+        </div>
+
+        {% elif expired %}
+        <!-- Expired -->
+        <div class="rounded-lg bg-red-50 border border-red-200 p-6 text-center">
+            <svg class="mx-auto h-12 w-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+            <h2 class="mt-3 text-lg font-semibold text-red-800">Plazo expirado</h2>
+            <p class="mt-1 text-sm text-red-700">El plazo para entregar este caso práctico ha finalizado ({{ ccs.deadline|date:"d/m/Y" }}).</p>
+        </div>
+
+        {% else %}
+        <!-- Case study content + response form -->
+        <div class="space-y-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{{ case_study.title }}</h1>
+                <p class="mt-1 text-sm text-gray-500">Posición: <span class="font-medium text-gray-700">{{ ccs.candidate.position.title }}</span></p>
+                {% if ccs.deadline %}
+                <p class="mt-1 text-sm text-gray-500">
+                    <span class="font-medium text-gray-700">Fecha límite:</span> {{ ccs.deadline|date:"d/m/Y" }} a las {{ ccs.deadline|time:"H:i" }}
+                </p>
+                {% endif %}
+            </div>
+
+            <!-- Case study content -->
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ case_study.full_content }}</div>
+            </div>
+
+            <!-- Error -->
+            {% if error %}
+            <div class="rounded-md bg-red-50 border border-red-200 p-3">
+                <p class="text-sm text-red-700">{{ error }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Response form -->
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-4">Tu respuesta</h2>
+                <form method="post" enctype="multipart/form-data" class="space-y-4">
+                    {% csrf_token %}
+
+                    <div>
+                        <label for="submission_text" class="block text-sm font-medium text-gray-700 mb-1">Escribe tu respuesta</label>
+                        <textarea name="submission_text" id="submission_text" rows="12"
+                                  class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                                  placeholder="Escribe aquí tu respuesta al caso práctico..."></textarea>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
+                        <div class="relative flex justify-center"><span class="bg-white px-3 text-xs text-gray-500">o también puedes</span></div>
+                    </div>
+
+                    <div>
+                        <label for="submission_file" class="block text-sm font-medium text-gray-700 mb-1">Adjuntar archivo (opcional)</label>
+                        <input type="file" name="submission_file" id="submission_file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip"
+                               class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <p class="mt-1 text-xs text-gray-500">PDF, Word, PowerPoint, Excel o ZIP. Máximo 10MB.</p>
+                    </div>
+
+                    <div>
+                        <label for="submission_notes" class="block text-sm font-medium text-gray-700 mb-1">Comentarios adicionales (opcional)</label>
+                        <textarea name="submission_notes" id="submission_notes" rows="2"
+                                  class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                                  placeholder="Cualquier nota o comentario adicional..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+                        Entregar respuesta
+                    </button>
+                    <p class="text-xs text-gray-400 text-center">Una vez entregada no podrás modificar tu respuesta.</p>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+</div>
+</body>
+</html>

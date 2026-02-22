@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — Pekata ATS{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_detail' position.pk %}" class="hover:text-gray-700">{{ position.title }}</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="hover:text-gray-700">{{ candidate.full_name }}</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">Caso práctico</span></li>
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-3xl" x-data="caseStudyGenerate()" x-init="generate()">
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Caso práctico</h1>
+        <p class="mt-1 text-sm text-gray-500">
+            Para <span class="font-medium text-gray-700">{{ candidate.full_name }}</span>
+            — Posición: <span class="font-medium text-gray-700">{{ position.title }}</span>
+        </p>
+    </div>
+
+    <!-- Loading state -->
+    <div x-show="loading" x-cloak class="bg-white rounded-lg border border-gray-200 p-12 text-center">
+        <svg class="animate-spin h-8 w-8 text-indigo-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p class="text-base font-medium text-gray-900">Generando caso práctico con IA...</p>
+        <p class="mt-1 text-sm text-gray-500">Analizando el perfil del candidato y los requisitos del puesto.</p>
+    </div>
+
+    <!-- Error state -->
+    <div x-show="error && !loading" x-cloak class="bg-white rounded-lg border border-red-200 p-8 text-center">
+        <svg class="h-8 w-8 text-red-400 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+        <p class="text-sm text-red-700" x-text="error"></p>
+        <button type="button" @click="generate()" class="mt-4 inline-flex items-center gap-2 rounded-md bg-red-50 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-100">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" /></svg>
+            Reintentar
+        </button>
+    </div>
+
+    <!-- Generated content (editable form) -->
+    <form x-show="!loading && !error" x-cloak method="post" class="space-y-5">
+        {% csrf_token %}
+
+        <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-base font-semibold text-gray-900">Caso generado</h2>
+                <span class="inline-flex items-center gap-1 rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-700">
+                    <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                    Generado con IA
+                </span>
+            </div>
+
+            <div>
+                <label for="cs_title" class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                <input type="text" id="cs_title" name="title" x-model="title"
+                       class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+            </div>
+
+            <div>
+                <label for="cs_content" class="block text-sm font-medium text-gray-700 mb-1">Contenido del caso práctico</label>
+                <textarea id="cs_content" name="full_content" x-model="fullContent" rows="16"
+                          class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"></textarea>
+                <p class="mt-1 text-xs text-gray-500">Este es el contenido que verá el candidato. Puedes editarlo antes de enviar.</p>
+            </div>
+
+            <div>
+                <label for="cs_criteria" class="block text-sm font-medium text-gray-700 mb-1">Criterios de evaluación</label>
+                <textarea id="cs_criteria" name="evaluation_criteria" x-model="evaluationCriteria" rows="3"
+                          class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"></textarea>
+                <p class="mt-1 text-xs text-gray-500">Criterios internos para evaluar la respuesta (no los verá el candidato).</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="cs_deadline" class="block text-sm font-medium text-gray-700 mb-1">Días para entrega</label>
+                    <input type="number" id="cs_deadline" name="deadline_days" value="7" min="1" max="30"
+                           class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button type="button" @click="generate()"
+                    class="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" /></svg>
+                Regenerar
+            </button>
+            <div class="flex items-center gap-3">
+                <a href="{% url 'candidates:candidate_detail' candidate.pk %}"
+                   class="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-300">Cancelar</a>
+                <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+                    Guardar y enviar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function caseStudyGenerate() {
+    return {
+        loading: false,
+        error: '',
+        title: '',
+        fullContent: '',
+        evaluationCriteria: '',
+
+        async generate() {
+            this.loading = true;
+            this.error = '';
+
+            try {
+                const response = await fetch('{% url "casestudies:casestudy_ai_generate" candidate.pk %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: JSON.stringify({}),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    this.error = data.error || 'Error al generar el caso práctico.';
+                    return;
+                }
+
+                this.title = data.title || '';
+                this.fullContent = data.full_content || '';
+                this.evaluationCriteria = data.evaluation_criteria || '';
+            } catch (err) {
+                this.error = 'Error de conexión. Inténtalo de nuevo.';
+            } finally {
+                this.loading = false;
+            }
+        },
+    };
+}
+</script>
+{% endblock %}

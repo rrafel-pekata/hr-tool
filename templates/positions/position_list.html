@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Posiciones — Pekata ATS{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">Posiciones</span></li>
+{% endblock %}
+
+{% block topbar_actions %}
+<a href="{% url 'positions:position_create' %}" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+    <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+    Nueva posición
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900">Posiciones</h1>
+        <p class="mt-1 text-sm text-gray-500">Gestiona las ofertas de trabajo de {{ request.company.name }}.</p>
+    </div>
+
+    <!-- Filtros -->
+    <div class="flex items-center gap-2">
+        <a href="{% url 'positions:position_list' %}"
+           class="rounded-md px-3 py-1.5 text-sm font-medium {% if not status_filter %}bg-blue-100 text-blue-700{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+            Todas
+        </a>
+        {% for value, label in status_choices %}
+        <a href="?status={{ value }}"
+           class="rounded-md px-3 py-1.5 text-sm font-medium {% if status_filter == value %}bg-blue-100 text-blue-700{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+            {{ label }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% if positions %}
+<div class="overflow-hidden bg-white shadow-sm ring-1 ring-gray-200 rounded-lg">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Posición</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ubicación</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipo</th>
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Candidatos</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+            {% for position in positions %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                    <a href="{% url 'positions:position_detail' position.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{{ position.title }}</a>
+                    {% if position.department %}<p class="text-xs text-gray-500">{{ position.department }}</p>{% endif %}
+                </td>
+                <td class="px-4 py-3">
+                    {% if position.status == 'published' %}{% include "partials/_badge.html" with label="Publicada" color="green" %}
+                    {% elif position.status == 'draft' %}{% include "partials/_badge.html" with label="Borrador" color="gray" %}
+                    {% elif position.status == 'paused' %}{% include "partials/_badge.html" with label="Pausada" color="yellow" %}
+                    {% else %}{% include "partials/_badge.html" with label="Cerrada" color="red" %}{% endif %}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-500">{{ position.location|default:"—" }}</td>
+                <td class="px-4 py-3 text-sm text-gray-500">{{ position.get_employment_type_display }}</td>
+                <td class="px-4 py-3 text-center text-sm text-gray-900 font-medium">{{ position.num_candidates }}</td>
+                <td class="px-4 py-3 text-sm text-gray-500">{{ position.created_at|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+{% include "partials/_empty_state.html" with title="Sin posiciones" description="Crea tu primera oferta de trabajo." action_url="/positions/create/" action_label="Nueva posición" %}
+{% endif %}
+{% endblock %}

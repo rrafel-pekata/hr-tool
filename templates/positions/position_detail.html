@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% load candidates_tags %}
+
+{% block title %}{{ position.title }} — Pekata ATS{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_list' %}" class="hover:text-gray-700">Posiciones</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{{ position.title }}</span></li>
+{% endblock %}
+
+{% block topbar_actions %}
+<a href="{% url 'positions:position_edit' position.pk %}" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+    <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+    Editar oferta
+</a>
+<a href="{% url 'candidates:candidate_create' position.pk %}" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+    <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+    Añadir candidato
+</a>
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="mb-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+    <div>
+        <div class="flex items-center gap-3">
+            <h1 class="text-2xl font-bold text-gray-900">{{ position.title }}</h1>
+            {% if position.status == 'published' %}{% include "partials/_badge.html" with label="Publicada" color="green" %}
+            {% elif position.status == 'draft' %}{% include "partials/_badge.html" with label="Borrador" color="gray" %}
+            {% elif position.status == 'paused' %}{% include "partials/_badge.html" with label="Pausada" color="yellow" %}
+            {% else %}{% include "partials/_badge.html" with label="Cerrada" color="red" %}{% endif %}
+        </div>
+        <div class="mt-1 flex items-center gap-4 text-sm text-gray-500">
+            {% if position.department %}<span>{{ position.department }}</span>{% endif %}
+            {% if position.location %}<span>{{ position.location }}</span>{% endif %}
+            <span>{{ position.get_employment_type_display }}</span>
+            {% if position.salary_range %}<span>{{ position.salary_range }}</span>{% endif %}
+        </div>
+    </div>
+
+    <!-- Status actions -->
+    <div class="flex items-center gap-2" x-data>
+        {% if position.status == 'draft' %}
+        <form method="post" action="{% url 'positions:position_status' position.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="publish">
+            <button type="submit" class="inline-flex items-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500">Publicar</button>
+        </form>
+        {% elif position.status == 'published' %}
+        <form method="post" action="{% url 'positions:position_status' position.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="pause">
+            <button type="submit" class="inline-flex items-center rounded-md bg-yellow-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-400">Pausar</button>
+        </form>
+        <form method="post" action="{% url 'positions:position_status' position.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="close">
+            <button type="submit" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500">Cerrar</button>
+        </form>
+        {% elif position.status == 'paused' %}
+        <form method="post" action="{% url 'positions:position_status' position.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="publish">
+            <button type="submit" class="inline-flex items-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500">Reactivar</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left: Job posting content -->
+    <div class="lg:col-span-2 space-y-6">
+        {% if position.description %}
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 class="text-base font-semibold text-gray-900 mb-3">Descripción</h2>
+            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.description }}</div>
+        </div>
+        {% endif %}
+
+        {% if position.requirements %}
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 class="text-base font-semibold text-gray-900 mb-3">Requisitos</h2>
+            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.requirements }}</div>
+        </div>
+        {% endif %}
+
+        {% if position.benefits %}
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 class="text-base font-semibold text-gray-900 mb-3">Qué ofrecemos</h2>
+            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.benefits }}</div>
+        </div>
+        {% endif %}
+
+        {% if position.about_company_snippet %}
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 class="text-base font-semibold text-gray-900 mb-3">Sobre la empresa</h2>
+            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.about_company_snippet }}</div>
+        </div>
+        {% endif %}
+
+        <!-- Candidates section -->
+        <div class="bg-white rounded-lg border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <h2 class="text-base font-semibold text-gray-900">Candidatos ({{ candidates|length }})</h2>
+                <a href="{% url 'candidates:candidate_create' position.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ Añadir</a>
+            </div>
+            {% if candidates %}
+            <div class="divide-y divide-gray-200">
+                {% for candidate in candidates %}
+                <a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="flex items-center gap-4 px-6 py-3 hover:bg-gray-50">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 text-xs font-medium">
+                        {{ candidate.first_name|first }}{{ candidate.last_name|first }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate">{{ candidate.full_name }}</p>
+                        <p class="text-xs text-gray-500">{{ candidate.email }}</p>
+                    </div>
+                    <div>
+                        {% with status=candidate.status %}
+                        {% candidate_status_badge status %}
+                        {% endwith %}
+                    </div>
+                    {% if candidate.rating %}
+                    <div class="flex items-center gap-1 text-xs text-yellow-500">
+                        <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        {{ candidate.rating }}
+                    </div>
+                    {% endif %}
+                    <span class="text-xs text-gray-400">{{ candidate.created_at|date:"d/m" }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="px-6 py-8 text-center text-sm text-gray-500">
+                Aún no hay candidatos para esta posición.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Right sidebar: info + case study -->
+    <div class="space-y-6">
+        <!-- Position info card -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">Datos de la oferta</h3>
+            <dl class="space-y-2.5 text-sm">
+                {% if position.department %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Departamento</dt>
+                    <dd class="text-gray-900 font-medium">{{ position.department }}</dd>
+                </div>
+                {% endif %}
+                {% if position.location %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Ubicación</dt>
+                    <dd class="text-gray-900">{{ position.location }}</dd>
+                </div>
+                {% endif %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Tipo</dt>
+                    <dd class="text-gray-900">{{ position.get_employment_type_display }}</dd>
+                </div>
+                {% if position.salary_range %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Salario</dt>
+                    <dd class="text-gray-900 font-medium">{{ position.salary_range }}</dd>
+                </div>
+                {% endif %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Candidatos</dt>
+                    <dd class="text-gray-900 font-medium">{{ candidates|length }}</dd>
+                </div>
+                <div class="border-t border-gray-100 pt-2 mt-2 flex justify-between">
+                    <dt class="text-gray-500">Creada</dt>
+                    <dd class="text-gray-900">{{ position.created_at|date:"d/m/Y" }}</dd>
+                </div>
+                {% if position.published_at %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Publicada</dt>
+                    <dd class="text-gray-900">{{ position.published_at|date:"d/m/Y" }}</dd>
+                </div>
+                {% endif %}
+                {% if position.closed_at %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Cerrada</dt>
+                    <dd class="text-gray-900">{{ position.closed_at|date:"d/m/Y" }}</dd>
+                </div>
+                {% endif %}
+                {% if position.ai_generated_draft %}
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">IA</dt>
+                    <dd>{% include "partials/_badge.html" with label="Generado con IA" color="indigo" %}</dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+
+        <!-- Case Studies -->
+        {% if position.has_case_study %}
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-gray-900">Case Studies</h3>
+                <a href="{% url 'casestudies:casestudy_create' position.pk %}" class="text-xs font-medium text-blue-600 hover:text-blue-500">+ Crear</a>
+            </div>
+            {% if case_studies %}
+            <ul class="space-y-2">
+                {% for cs in case_studies %}
+                <li class="text-sm">
+                    <span class="font-medium text-gray-900">{{ cs.title }}</span>
+                    {% if cs.ai_generated %}
+                    <span class="ml-1 text-xs text-indigo-600">(IA)</span>
+                    {% endif %}
+                    <p class="text-xs text-gray-500">{{ cs.deadline_days }} días · {{ cs.submissions.count }} envíos</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-sm text-gray-500">Sin case studies definidos aún.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

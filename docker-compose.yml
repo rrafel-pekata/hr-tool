@@ -1,0 +1,66 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: pekata_ats
+      POSTGRES_USER: pekata
+      POSTGRES_PASSWORD: pekata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://pekata:pekata@db:5432/pekata_ats
+      - REDIS_URL=redis://redis:6379/0
+
+  celery:
+    build: .
+    command: celery -A config worker -l info
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://pekata:pekata@db:5432/pekata_ats
+      - REDIS_URL=redis://redis:6379/0
+
+  celery-beat:
+    build: .
+    command: celery -A config beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://pekata:pekata@db:5432/pekata_ats
+      - REDIS_URL=redis://redis:6379/0
+
+volumes:
+  postgres_data:
+  media_data:

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — Pekata ATS{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="hover:text-gray-700">{{ candidate.full_name }}</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{{ title }}</span></li>
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-xl">
+    <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ title }}</h1>
+    <p class="text-sm text-gray-500 mb-6">Candidato: <span class="font-medium text-gray-700">{{ candidate.full_name }}</span></p>
+
+    {% if case_studies %}
+    <form method="post" class="space-y-5">
+        {% csrf_token %}
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <label class="block text-sm font-medium text-gray-700 mb-3">Selecciona el case study a enviar:</label>
+            <div class="space-y-3">
+                {% for cs in case_studies %}
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                    <input type="radio" name="case_study" value="{{ cs.pk }}" class="mt-1 h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" {% if forloop.first %}checked{% endif %}>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">{{ cs.title }}</p>
+                        <p class="text-xs text-gray-500">{{ cs.deadline_days }} días de plazo · {% if cs.ai_generated %}Generado con IA{% else %}Manual{% endif %}</p>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+            <a href="{% url 'candidates:candidate_detail' candidate.pk %}"
+               class="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-300">Cancelar</a>
+            <button type="submit" class="rounded-md bg-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500">Enviar case study</button>
+        </div>
+    </form>
+    {% else %}
+    <div class="bg-white rounded-lg border border-gray-200 p-6 text-center">
+        <p class="text-sm text-gray-500 mb-4">No hay case studies definidos para esta posición.</p>
+        <a href="{% url 'casestudies:casestudy_create' candidate.position.pk %}" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Crear case study</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
