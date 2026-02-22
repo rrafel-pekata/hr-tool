@@ -16,6 +16,8 @@ from apps.candidates.models import Candidate
 from apps.core.services import call_claude
 from apps.positions.models import Position
 
+from apps.notifications.services import notify_company
+
 from .forms import CaseStudyForm
 from .models import CandidateCaseStudy, CaseStudy
 from .prompts import GENERATE_CASE_STUDY_PROMPT, SYSTEM_PROMPT
@@ -117,6 +119,14 @@ def casestudy_generate(request, candidate_pk):
 
         candidate.status = 'case_sent'
         candidate.save(update_fields=['status', 'updated_at'])
+        notify_company(
+            company=position.company,
+            title='Caso práctico enviado',
+            message=f'"{cs.title}" enviado a {candidate.full_name}.',
+            link=f'/candidates/{candidate.pk}/',
+            notification_type='case_study',
+            exclude_user=request.user,
+        )
 
         # Send email
         if candidate.email:
@@ -214,6 +224,14 @@ def casestudy_detail(request, ccs_pk):
 
         ccs.candidate.status = 'case_submitted'
         ccs.candidate.save(update_fields=['status', 'updated_at'])
+        notify_company(
+            company=ccs.candidate.position.company,
+            title='Caso práctico entregado',
+            message=f'{ccs.candidate.full_name} ha entregado "{ccs.case_study.title}".',
+            link=f'/candidates/{ccs.candidate.pk}/',
+            notification_type='case_study',
+            exclude_user=request.user,
+        )
 
         messages.success(request, f'Respuesta registrada para {ccs.candidate.full_name}.')
         return redirect('candidates:candidate_detail', pk=ccs.candidate.pk)
@@ -287,6 +305,14 @@ def casestudy_send(request, candidate_pk):
         if created:
             candidate.status = 'case_sent'
             candidate.save(update_fields=['status'])
+            notify_company(
+                company=candidate.position.company,
+                title='Caso práctico enviado',
+                message=f'"{cs.title}" enviado a {candidate.full_name}.',
+                link=f'/candidates/{candidate.pk}/',
+                notification_type='case_study',
+                exclude_user=request.user,
+            )
 
             if candidate.email:
                 _send_casestudy_email(request, candidate, ccs)

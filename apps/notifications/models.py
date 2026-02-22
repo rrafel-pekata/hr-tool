@@ -8,6 +8,10 @@ class Notification(TimeStampedModel):
     class Type(models.TextChoices):
         CANDIDATE_NEW = 'candidate_new', 'Nuevo candidato'
         STATUS_CHANGE = 'status_change', 'Cambio de estado'
+        INTERVIEW = 'interview', 'Entrevista'
+        CASE_STUDY = 'case_study', 'Caso práctico'
+        EVALUATION = 'evaluation', 'Evaluación'
+        POSITION = 'position', 'Posición'
         INFO = 'info', 'Información'
         SYSTEM = 'system', 'Sistema'
 

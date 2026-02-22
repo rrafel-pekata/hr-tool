@@ -231,6 +231,12 @@ def candidate_create(request, position_pk):
             except (ValueError, TypeError):
                 candidate.ai_fit_score = None
             candidate.save()
+            # Auto-publish position if still a draft
+            if position.status == Position.Status.DRAFT:
+                from django.utils import timezone
+                position.status = Position.Status.PUBLISHED
+                position.published_at = timezone.now()
+                position.save(update_fields=['status', 'published_at', 'updated_at'])
             notify_company(
                 company=position.company,
                 title='Nuevo candidato',

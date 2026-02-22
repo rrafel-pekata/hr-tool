@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 
 from apps.casestudies.models import CandidateCaseStudy
+from apps.notifications.services import notify_company
 from apps.tenants.models import UserProfile
 
 logger = logging.getLogger(__name__)
@@ -51,6 +52,15 @@ def portal_case_study(request, token):
         candidate = ccs.candidate
         candidate.status = 'case_submitted'
         candidate.save(update_fields=['status'])
+
+        # In-app notification to all company members
+        notify_company(
+            company=company,
+            title='Caso práctico entregado',
+            message=f'{candidate.full_name} ha entregado "{ccs.case_study.title}".',
+            link=f'/candidates/{candidate.pk}/',
+            notification_type='case_study',
+        )
 
         # Notify recruiters by email
         _notify_submission(request, ccs)

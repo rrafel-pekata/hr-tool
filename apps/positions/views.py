@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from apps.core.services import call_claude
+from apps.notifications.services import notify_company
 
 from .forms import PositionForm
 from .models import Position
@@ -128,6 +129,15 @@ def position_status(request, pk):
             position.status = Position.Status.DRAFT
             messages.success(request, 'Posición movida a borrador.')
         position.save()
+        if action in ('publish', 'close'):
+            notify_company(
+                company=request.company,
+                title=f'Posición {position.get_status_display().lower()}',
+                message=f'"{position.title}" — {position.get_status_display()}.',
+                link=f'/positions/{position.pk}/',
+                notification_type='position',
+                exclude_user=request.user,
+            )
     return redirect('positions:position_detail', pk=position.pk)
 
 
