@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block tour_page %}position_form{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
@@ -17,7 +18,7 @@
         {% csrf_token %}
 
         <!-- Basic info grid -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-position-basic" class="bg-white rounded-lg border border-gray-200 p-6">
             <h2 class="text-base font-semibold text-gray-900 mb-4">Información básica</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="sm:col-span-2">
@@ -45,10 +46,10 @@
         </div>
 
         <!-- Description + AI button -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-position-content" class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-base font-semibold text-gray-900">Contenido de la oferta</h2>
-                <button type="button"
+                <button id="tour-position-ai-btn" type="button"
                         @click="improveWithAI()"
                         :disabled="loading"
                         class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
@@ -96,7 +97,7 @@
         </div>
 
         <!-- Options -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-position-options" class="bg-white rounded-lg border border-gray-200 p-6">
             <h2 class="text-base font-semibold text-gray-900 mb-4">Opciones</h2>
             <label class="flex items-center gap-3">
                 {{ form.has_case_study }}

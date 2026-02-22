@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block tour_page %}evaluation_page{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
@@ -12,7 +13,7 @@
 <div class="mx-auto max-w-3xl">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold text-gray-900">{{ title }}</h1>
-        <form method="post">
+        <form id="tour-eval-generate" method="post">
             {% csrf_token %}
             <button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
                 <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
@@ -25,7 +26,7 @@
     {% with eval=latest_evaluation %}
     <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
         <!-- Scores -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div id="tour-eval-scores" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div class="text-center p-4 rounded-lg bg-gray-50">
                 <p class="text-3xl font-bold {% if eval.overall_score >= 7 %}text-green-600{% elif eval.overall_score >= 5 %}text-yellow-600{% else %}text-red-600{% endif %}">{{ eval.overall_score|default:"—" }}</p>
                 <p class="text-sm text-gray-500">Global</p>

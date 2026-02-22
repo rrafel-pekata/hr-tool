@@ -30,3 +30,8 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('core:login')
+
+
+@login_required
+def help_page(request):
+    return render(request, 'core/help.html')

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load candidates_tags %}
 
+{% block tour_page %}position_detail{% endblock %}
 {% block title %}{{ position.title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
@@ -40,7 +41,7 @@
     </div>
 
     <!-- Status actions -->
-    <div class="flex items-center gap-2" x-data>
+    <div id="tour-position-status" class="flex items-center gap-2" x-data>
         {% if position.status == 'draft' %}
         <form method="post" action="{% url 'positions:position_status' position.pk %}">
             {% csrf_token %}
@@ -70,7 +71,7 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Left: Job posting content -->
-    <div class="lg:col-span-2 space-y-6">
+    <div id="tour-position-description" class="lg:col-span-2 space-y-6">
         {% if position.description %}
         <div class="bg-white rounded-lg border border-gray-200 p-6">
             <h2 class="text-base font-semibold text-gray-900 mb-3">Descripción</h2>
@@ -100,7 +101,7 @@
         {% endif %}
 
         <!-- Candidates section -->
-        <div class="bg-white rounded-lg border border-gray-200">
+        <div id="tour-position-candidates" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-900">Candidatos ({{ candidates|length }})</h2>
                 <a href="{% url 'candidates:candidate_create' position.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ Añadir</a>
@@ -142,7 +143,7 @@
     <!-- Right sidebar: info + case study -->
     <div class="space-y-6">
         <!-- Position info card -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-position-info" class="bg-white rounded-lg border border-gray-200 p-6">
             <h3 class="text-sm font-semibold text-gray-900 mb-3">Datos de la oferta</h3>
             <dl class="space-y-2.5 text-sm">
                 {% if position.department %}
@@ -198,7 +199,7 @@
 
         <!-- Case Studies -->
         {% if position.has_case_study %}
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-position-casestudies" class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-sm font-semibold text-gray-900">Case Studies</h3>
                 <a href="{% url 'casestudies:casestudy_create' position.pk %}" class="text-xs font-medium text-blue-600 hover:text-blue-500">+ Crear</a>

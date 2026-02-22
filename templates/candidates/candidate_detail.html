@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load candidates_tags %}
 
+{% block tour_page %}candidate_detail{% endblock %}
 {% block title %}{{ candidate.full_name }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
@@ -37,7 +38,7 @@
     </div>
 
     <!-- Pipeline status selector -->
-    <form method="post" action="{% url 'candidates:candidate_status' candidate.pk %}" class="flex items-center gap-2">
+    <form id="tour-candidate-status" method="post" action="{% url 'candidates:candidate_status' candidate.pk %}" class="flex items-center gap-2">
         {% csrf_token %}
         <label class="text-sm font-medium text-gray-700">Estado:</label>
         <select name="status" onchange="this.form.submit()"
@@ -50,7 +51,7 @@
 </div>
 
 <!-- Rating stars -->
-<div class="mb-6 flex items-center gap-4">
+<div id="tour-candidate-rating" class="mb-6 flex items-center gap-4">
     <span class="text-sm font-medium text-gray-700">Valoración:</span>
     <form method="post" action="{% url 'candidates:candidate_rating' candidate.pk %}" class="flex items-center gap-1">
         {% csrf_token %}
@@ -70,7 +71,7 @@
     <!-- LEFT COLUMN: CV + AI summary -->
     <div class="lg:col-span-2 space-y-6">
         <!-- CV Section -->
-        <div class="bg-white rounded-lg border border-gray-200">
+        <div id="tour-candidate-cv" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-900">Currículum</h2>
                 <div class="flex items-center gap-3">
@@ -128,7 +129,7 @@
 
         <!-- AI Analysis: Summary + Strengths/Weaknesses -->
         <template x-if="aiSummary">
-            <div class="bg-white rounded-lg border border-gray-200">
+            <div id="tour-candidate-ai" class="bg-white rounded-lg border border-gray-200">
                 <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                     <h2 class="text-base font-semibold text-gray-900">
                         Análisis IA
@@ -182,7 +183,7 @@
         </template>
 
         <!-- Interviews -->
-        <div class="bg-white rounded-lg border border-gray-200">
+        <div id="tour-candidate-interviews" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-900">Entrevistas ({{ interviews|length }})</h2>
                 <a href="{% url 'interviews:interview_create' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ Programar</a>
@@ -221,7 +222,7 @@
         </div>
 
         <!-- Case Studies -->
-        <div class="bg-white rounded-lg border border-gray-200">
+        <div id="tour-candidate-casestudies" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-900">Casos prácticos ({{ case_studies|length }})</h2>
                 <a href="{% url 'casestudies:casestudy_generate' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ Generar caso práctico</a>
@@ -268,7 +269,7 @@
         </div>
 
         <!-- AI Evaluations -->
-        <div class="bg-white rounded-lg border border-gray-200">
+        <div id="tour-candidate-evaluations" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-900">
                     Evaluación IA ({{ evaluations|length }})
@@ -352,7 +353,7 @@
 
         <!-- AI Strengths / Weaknesses -->
         <template x-if="strengths.length || weaknesses.length">
-            <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <div id="tour-candidate-sidebar-ai" class="bg-white rounded-lg border border-gray-200 p-6">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-sm font-semibold text-gray-900 flex items-center gap-1.5">
                         Análisis IA
@@ -400,7 +401,7 @@
         </template>
 
         <!-- Recruiter notes -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-candidate-notes" class="bg-white rounded-lg border border-gray-200 p-6">
             <h3 class="text-sm font-semibold text-gray-900 mb-3">Notas del reclutador</h3>
             <form method="post" action="{% url 'candidates:candidate_notes' candidate.pk %}">
                 {% csrf_token %}
@@ -414,7 +415,7 @@
         </div>
 
         <!-- Quick actions -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-candidate-actions" class="bg-white rounded-lg border border-gray-200 p-6">
             <h3 class="text-sm font-semibold text-gray-900 mb-3">Acciones rápidas</h3>
             <div class="space-y-2">
                 <a href="{% url 'interviews:interview_create' candidate.pk %}"

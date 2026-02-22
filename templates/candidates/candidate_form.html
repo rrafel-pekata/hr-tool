@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block tour_page %}candidate_form{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
@@ -24,7 +25,7 @@
         <input type="hidden" name="ai_fit_score" :value="aiFitScore">
 
         <!-- CV section FIRST -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-candidate-cv" class="bg-white rounded-lg border border-gray-200 p-6">
             <h2 class="text-base font-semibold text-gray-900 mb-4">CV y origen</h2>
             <div class="space-y-4">
                 <div>
@@ -121,7 +122,7 @@
         </template>
 
         <!-- Personal data section -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div id="tour-candidate-personal" class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center gap-2 mb-4">
                 <h2 class="text-base font-semibold text-gray-900">Datos personales</h2>
                 <span x-show="analyzeSuccess" x-cloak class="inline-flex items-center rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-700">

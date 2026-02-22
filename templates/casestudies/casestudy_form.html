@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block tour_page %}casestudy_form{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
@@ -18,7 +19,7 @@
         <input type="hidden" name="ai_generated" :value="wasImproved ? 'true' : 'false'">
 
         <!-- Briefing: title + brief description (user writes here) -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+        <div id="tour-cs-briefing" class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
             <h2 class="text-base font-semibold text-gray-900">Tu idea</h2>
             <p class="text-sm text-gray-500 -mt-2">Escribe el título y una descripción breve de lo que quieres evaluar. La IA generará el case study completo.</p>
             <div>
@@ -40,7 +41,7 @@
         </div>
 
         <!-- AI Improve button -->
-        <div class="flex justify-center">
+        <div id="tour-cs-ai-btn" class="flex justify-center">
             <button type="button"
                     @click="improveWithAI()"
                     :disabled="loading"
@@ -69,7 +70,7 @@
         </div>
 
         <!-- Generated content (editable) -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+        <div id="tour-cs-content" class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
             <div class="flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-900">Contenido del case study</h2>
                 <span x-show="wasImproved" x-cloak class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-700">

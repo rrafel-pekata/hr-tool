@@ -1,0 +1,66 @@
+/* Driver.js custom popover styling — matches Tailwind/Pekata theme */
+.driver-popover {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    max-width: 340px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, .15), 0 8px 10px -6px rgba(0, 0, 0, .1);
+    border: 1px solid #e5e7eb;
+}
+
+.driver-popover .driver-popover-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.4;
+}
+
+.driver-popover .driver-popover-description {
+    font-size: 0.8125rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin-top: 0.35rem;
+}
+
+.driver-popover .driver-popover-footer {
+    margin-top: 0.75rem;
+}
+
+.driver-popover .driver-popover-progress-text {
+    font-size: 0.6875rem;
+    color: #9ca3af;
+}
+
+.driver-popover .driver-popover-navigation-btns {
+    gap: 0.375rem;
+}
+
+.driver-popover .driver-popover-prev-btn {
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.375rem;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    background: #fff;
+}
+
+.driver-popover .driver-popover-prev-btn:hover {
+    background: #f9fafb;
+}
+
+.driver-popover .driver-popover-next-btn,
+.driver-popover .driver-popover-close-btn-text {
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.375rem;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    text-shadow: none;
+}
+
+.driver-popover .driver-popover-next-btn:hover,
+.driver-popover .driver-popover-close-btn-text:hover {
+    background: #1d4ed8;
+}
+

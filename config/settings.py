@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'apps.casestudies',
     'apps.evaluations',
     'apps.portal',
+    'apps.chatbot',
 ]
 
 # ---------- Middleware ----------

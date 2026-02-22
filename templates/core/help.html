@@ -1,0 +1,361 @@
+{% extends "base.html" %}
+
+{% block title %}Ayuda — Pekata ATS{% endblock %}
+
+{% block tour_page %}help_page{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li class="flex items-center">
+    <svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>
+    <span class="ml-2 text-gray-700 font-medium">Ayuda</span>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900">Centro de Ayuda</h1>
+        <p class="mt-2 text-gray-600">Guia completa de Pekata ATS. Haz clic en cada seccion para ver las preguntas frecuentes y tutoriales.</p>
+    </div>
+
+    <div class="space-y-4">
+
+        <!-- 1. Primeros pasos -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.841m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Primeros pasos</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Que es Pekata ATS?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Pekata es un sistema de seguimiento de candidatos (ATS) con inteligencia artificial integrada. Te ayuda a gestionar todo el proceso de seleccion: desde publicar posiciones hasta evaluar candidatos con IA.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Cual es el flujo general del sistema?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>El flujo principal es: <strong>Empresa</strong> &rarr; <strong>Posicion</strong> &rarr; <strong>Candidato</strong> &rarr; <strong>Evaluacion</strong>. Primero creas o seleccionas una empresa, luego defines posiciones abiertas, agregas candidatos a esas posiciones, y finalmente evaluas a los candidatos con entrevistas, casos practicos y evaluacion IA.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como empiezo a usar el sistema?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>1. Ve a <strong>Empresas</strong> y crea tu primera empresa con su informacion basica. 2. Dentro de la empresa, crea una <strong>Posicion</strong> abierta. 3. Agrega <strong>Candidatos</strong> a esa posicion. 4. Usa las herramientas de evaluacion (entrevistas, casos practicos, evaluacion IA) para seleccionar al mejor candidato.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Empresas -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Empresas</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como creo o edito una empresa?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Desde la pagina de <strong>Empresas</strong>, haz clic en <strong>"Nueva empresa"</strong>. Rellena el nombre, sector, descripcion y otros datos. Puedes usar el boton <strong>"Mejorar con IA"</strong> para que la IA complete automaticamente la descripcion de la empresa a partir del nombre y sector. Para editar, entra al dashboard de la empresa y haz clic en <strong>"Editar"</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Que son los KPIs del dashboard?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>El dashboard de cada empresa muestra metricas clave: <strong>Posiciones activas</strong> (cuantas posiciones estan publicadas), <strong>Candidatos en proceso</strong> (cuantos candidatos estan siendo evaluados), <strong>Entrevistas programadas</strong> y <strong>Evaluaciones completadas</strong>. Estos KPIs te dan una vision rapida del estado de la seleccion.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Puedo gestionar varias empresas?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Si. Pekata es multi-empresa: puedes crear tantas empresas como necesites. Desde el menu <strong>Empresas</strong> del sidebar puedes ver todas tus empresas y cambiar entre ellas. Cada empresa tiene sus propias posiciones, candidatos y evaluaciones de forma independiente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Posiciones -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 text-green-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Posiciones</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como creo una posicion?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Desde el dashboard de la empresa, haz clic en <strong>"Nueva posicion"</strong>. Completa el titulo, departamento, tipo de contrato, ubicacion y descripcion. Puedes usar <strong>"Generar con IA"</strong> para que la IA cree automaticamente la descripcion del puesto, requisitos y responsabilidades a partir del titulo y datos basicos.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Que estados tiene una posicion?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Las posiciones siguen un ciclo de vida: <strong>Borrador</strong> (en preparacion, no visible), <strong>Publicada</strong> (activa y recibiendo candidatos), <strong>Pausada</strong> (temporalmente inactiva) y <strong>Cerrada</strong> (proceso finalizado). Puedes cambiar el estado desde el detalle de la posicion.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como filtro las posiciones?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>En la lista de posiciones tienes filtros por <strong>estado</strong> (borrador, publicada, etc.) y un <strong>buscador</strong> por titulo. Usa estos filtros para encontrar rapidamente la posicion que necesitas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Candidatos -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Candidatos</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como agrego un candidato?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Desde el detalle de una posicion, haz clic en <strong>"Agregar candidato"</strong>. Rellena nombre, email, telefono y sube su CV en formato PDF. Al subir el CV, la IA lo analiza automaticamente extrayendo experiencia, habilidades y educacion relevantes para la posicion.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Que es el pipeline de estados?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Cada candidato pasa por etapas del proceso de seleccion: <strong>Nuevo</strong> &rarr; <strong>En revision</strong> &rarr; <strong>Entrevista</strong> &rarr; <strong>Evaluacion</strong> &rarr; <strong>Oferta</strong> &rarr; <strong>Contratado</strong> (o <strong>Descartado</strong> en cualquier momento). Puedes cambiar el estado desde el perfil del candidato para mantener el seguimiento actualizado.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como funciona la valoracion con estrellas?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Puedes asignar una valoracion de 1 a 5 estrellas a cada candidato como indicador rapido de tu impresion general. Esta valoracion es manual y complementa las puntuaciones de la evaluacion IA, entrevistas y casos practicos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Entrevistas -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Entrevistas</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como programo una entrevista?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Desde el perfil del candidato, haz clic en <strong>"Programar entrevista"</strong>. Selecciona la fecha, hora, tipo de entrevista (presencial, telefonica, videollamada) y agrega notas opcionales. La entrevista aparecera tanto en el perfil del candidato como en el dashboard de la empresa.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como registro el resultado de una entrevista?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Despues de realizar la entrevista, accede a ella y haz clic en <strong>"Editar"</strong>. Ahi puedes registrar tus <strong>notas</strong> detalladas y asignar una <strong>puntuacion</strong>. Estas notas y puntuacion se reflejan en el perfil del candidato y se usan como input para la evaluacion IA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Casos practicos -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-100 text-rose-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Casos practicos</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Que es un caso practico?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Un caso practico (case study) es un ejercicio o prueba que envias al candidato para evaluar sus habilidades en un escenario real. Puede ser una prueba tecnica, un analisis de negocio, una presentacion, etc. Pekata te permite crear estos casos y gestionar su envio y entrega.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como genero un caso con IA?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Tienes dos opciones: 1. <strong>Crear manualmente</strong>: redacta tu propio caso practico con titulo, descripcion y criterios de evaluacion. 2. <strong>Generar con IA</strong>: la IA crea un caso personalizado basado en la posicion y el perfil del candidato. Puedes editar el caso generado antes de enviarlo.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como es el flujo de envio y entrega?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Una vez creado el caso, lo <strong>envias</strong> al candidato. El caso queda en estado <strong>"Enviado"</strong> hasta que el candidato entrega su respuesta. Cuando registras la entrega, puedes agregar notas y una puntuacion. El resultado se integra en la evaluacion global del candidato.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Evaluacion IA -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-100 text-teal-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Evaluacion IA</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Que evalua la IA?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>La evaluacion IA analiza toda la informacion disponible del candidato: <strong>CV</strong> (experiencia, habilidades, educacion), <strong>notas de entrevistas</strong>, <strong>resultados de casos practicos</strong> y los <strong>requisitos de la posicion</strong>. Genera una puntuacion global y un analisis detallado de fortalezas, debilidades y fit con el puesto.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como interpreto las puntuaciones?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>La IA asigna puntuaciones en varias dimensiones (ajuste tecnico, experiencia, habilidades blandas, etc.) y una <strong>puntuacion global</strong>. Las puntuaciones son orientativas y deben complementarse con tu criterio profesional. Usa el analisis detallado para entender las razones detras de cada puntuacion.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Puedo regenerar una evaluacion?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Si. Si has actualizado informacion del candidato (nuevas notas de entrevista, resultado de caso practico, CV actualizado), puedes <strong>regenerar la evaluacion</strong> para que la IA tenga en cuenta los datos mas recientes. La nueva evaluacion reemplaza la anterior.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Tours interactivos -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm" x-data="{ open: false }">
+            <button @click="open = !open" class="flex w-full items-center justify-between px-6 py-4 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-100 text-gray-600">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+                    </span>
+                    <span class="text-base font-semibold text-gray-900">Tours interactivos</span>
+                </div>
+                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+            </button>
+            <div x-show="open" x-collapse x-cloak class="border-t border-gray-200">
+                <div class="divide-y divide-gray-100">
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Que es el boton "?" flotante?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>En cada pagina del sistema veras un boton <strong>"?"</strong> flotante en la esquina inferior derecha. Al hacer clic se abre un menu con dos opciones: <strong>"Ver tour de esta pagina"</strong> (inicia una guia paso a paso que explica cada elemento de la pagina actual) y <strong>"Reiniciar todos los tours"</strong> (permite volver a ver los tours aunque ya los hayas completado).</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4" x-data="{ faq: false }">
+                        <button @click="faq = !faq" class="flex w-full items-center justify-between text-left">
+                            <span class="text-sm font-medium text-gray-700">Como reinicio los tours?</span>
+                            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': faq }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div x-show="faq" x-collapse x-cloak class="mt-2 text-sm text-gray-600">
+                            <p>Haz clic en el boton <strong>"?"</strong> y selecciona <strong>"Reiniciar todos los tours"</strong>. Esto borra el registro de tours completados y la proxima vez que entres a cualquier pagina, el tour se mostrara automaticamente de nuevo. Es util si quieres refrescar la memoria sobre como funciona una seccion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -31,6 +31,10 @@
     <style>
         [x-cloak] { display: none !important; }
     </style>
+    <!-- Driver.js (guided tours) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet" href="/static/css/tours.css">
+    <link rel="stylesheet" href="/static/css/chatbot.css">
     {% block extra_head %}{% endblock %}
 </head>
 <body class="h-full" x-data="{ sidebarOpen: false }">
@@ -98,6 +102,15 @@
 {% else %}
     {% block content_public %}{% endblock %}
 {% endif %}
+
+{% if user.is_authenticated %}
+<!-- Unified help widget (chatbot + tours) -->
+{% include "partials/_chatbot_widget.html" %}
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+<script src="/static/js/tours.js"></script>
+<script src="/static/js/chatbot.js"></script>
+{% endif %}
+
 {% block extra_js %}{% endblock %}
 </body>
 </html>
