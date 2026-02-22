@@ -60,6 +60,59 @@
 
     // ── Tour definitions (per page) ──────────────────────────
     var TOURS = {
+        company_list: [
+            {
+                popover: {
+                    title: 'Bienvenido a Pekata ATS',
+                    description: 'Lo primero que necesitas es crear tu empresa. Toda la gestión de posiciones y candidatos se organiza dentro de una empresa.',
+                },
+            },
+            {
+                element: '#tour-btn-new-company',
+                popover: {
+                    title: 'Crear empresa',
+                    description: 'Haz clic aquí para crear tu primera empresa. Rellena los datos básicos y, si quieres, usa la IA para mejorar la descripción.',
+                },
+            },
+            {
+                element: '#tour-company-grid',
+                popover: {
+                    title: 'Tus empresas',
+                    description: 'Aquí aparecerán tus empresas. Haz clic en cualquiera para ver su dashboard con posiciones, candidatos y KPIs.',
+                },
+            },
+        ],
+
+        company_form: [
+            {
+                popover: {
+                    title: 'Crear tu empresa',
+                    description: 'Completa los datos de tu empresa. Cuanta más información añadas, mejores serán las sugerencias de la IA al generar ofertas de trabajo.',
+                },
+            },
+            {
+                element: '#tour-company-basic',
+                popover: {
+                    title: 'Datos básicos',
+                    description: 'Nombre, descripción, web y logo. La descripción es especialmente importante: la IA la usará como contexto para generar ofertas.',
+                },
+            },
+            {
+                element: '#tour-company-ai-btn',
+                popover: {
+                    title: 'Mejorar con IA',
+                    description: 'Escribe al menos el nombre y pulsa este botón. La IA generará una descripción profesional, beneficios y cultura automáticamente.',
+                },
+            },
+            {
+                element: '#tour-company-offers',
+                popover: {
+                    title: 'Info para ofertas',
+                    description: 'Beneficios, jornada, política de remoto y cultura. Esta información se reutilizará en todas las ofertas que generes con IA.',
+                },
+            },
+        ],
+
         company_dashboard: [
             {
                 element: '#tour-company-header',

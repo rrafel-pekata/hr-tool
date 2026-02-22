@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block tour_page %}company_form{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
@@ -12,7 +13,7 @@
 <div class="mx-auto max-w-2xl" x-data="companyForm()">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold text-gray-900">{{ title }}</h1>
-        <button type="button"
+        <button id="tour-company-ai-btn" type="button"
                 @click="improveWithAI()"
                 :disabled="loading"
                 class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
@@ -43,7 +44,7 @@
         {% csrf_token %}
 
         <!-- Datos básicos -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+        <div id="tour-company-basic" class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
             <h2 class="text-base font-semibold text-gray-900">Datos básicos</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -75,7 +76,7 @@
         </div>
 
         <!-- Info para ofertas -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+        <div id="tour-company-offers" class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
             <div>
                 <h2 class="text-base font-semibold text-gray-900">Información general para ofertas</h2>
                 <p class="text-sm text-gray-500 mt-1">Esta información se usará como base al generar ofertas de trabajo con IA.</p>

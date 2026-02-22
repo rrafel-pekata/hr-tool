@@ -78,7 +78,8 @@ document.addEventListener('alpine:init', function () {
             // ── Tour integration ──────────────────────────────
             startTour: function () {
                 this.open = false;
-                var page = this.$el.dataset.tourPage || '';
+                var el = document.getElementById('tour-page-id');
+                var page = el ? el.dataset.tourPage : '';
                 if (page && window.PekataTours) {
                     window.PekataTours.run(page, { skipMark: true });
                 }

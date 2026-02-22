@@ -1,4 +1,4 @@
-<div id="chatbot-widget" x-data="chatbotWidget" data-tour-page="{% block tour_page %}{% endblock %}" @click.away="open = false">
+<div id="chatbot-widget" x-data="chatbotWidget" @click.away="open = false">
     <!-- CSRF token -->
     <div id="chatbot-csrf" style="display:none">{% csrf_token %}</div>
 
