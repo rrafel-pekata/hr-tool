@@ -9,8 +9,35 @@
 {% endblock %}
 
 {% block content %}
-<div class="mx-auto max-w-2xl">
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ title }}</h1>
+<div class="mx-auto max-w-2xl" x-data="companyForm()">
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">{{ title }}</h1>
+        <button type="button"
+                @click="improveWithAI()"
+                :disabled="loading"
+                class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+            <template x-if="!loading">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                </svg>
+            </template>
+            <template x-if="loading">
+                <svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </template>
+            <span x-text="loading ? 'Generando...' : 'Mejorar con IA'"></span>
+        </button>
+    </div>
+
+    <!-- AI status message -->
+    <div x-show="aiMessage" x-cloak
+         :class="aiError ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'"
+         class="mb-4 rounded-md p-3 text-sm flex items-center justify-between">
+        <span x-text="aiMessage"></span>
+        <button type="button" @click="aiMessage = ''" class="ml-2 opacity-60 hover:opacity-100">&times;</button>
+    </div>
 
     <form method="post" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
@@ -90,4 +117,73 @@
         </div>
     </form>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function companyForm() {
+    return {
+        loading: false,
+        aiMessage: '',
+        aiError: false,
+
+        async improveWithAI() {
+            const name = document.getElementById('id_name')?.value;
+            if (!name) {
+                this.aiError = true;
+                this.aiMessage = 'Escribe al menos el nombre de la empresa antes de generar.';
+                return;
+            }
+
+            this.loading = true;
+            this.aiMessage = '';
+            this.aiError = false;
+
+            const payload = {
+                name: name,
+                website: document.getElementById('id_website')?.value || '',
+                description: document.getElementById('id_description')?.value || '',
+                benefits: document.getElementById('id_benefits')?.value || '',
+                work_schedule: document.getElementById('id_work_schedule')?.value || '',
+                remote_policy: document.getElementById('id_remote_policy')?.value || '',
+                office_location: document.getElementById('id_office_location')?.value || '',
+                culture: document.getElementById('id_culture')?.value || '',
+            };
+
+            try {
+                const response = await fetch('{% url "tenants:company_ai_improve" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    this.aiError = true;
+                    this.aiMessage = data.error || 'Error al generar contenido.';
+                    return;
+                }
+
+                if (data.description) document.getElementById('id_description').value = data.description;
+                if (data.benefits) document.getElementById('id_benefits').value = data.benefits;
+                if (data.work_schedule) document.getElementById('id_work_schedule').value = data.work_schedule;
+                if (data.remote_policy) document.getElementById('id_remote_policy').value = data.remote_policy;
+                if (data.culture) document.getElementById('id_culture').value = data.culture;
+
+                this.aiError = false;
+                this.aiMessage = 'Contenido generado con IA. Revisa y edita antes de guardar.';
+            } catch (err) {
+                this.aiError = true;
+                this.aiMessage = 'Error de conexión. Inténtalo de nuevo.';
+            } finally {
+                this.loading = false;
+            }
+        }
+    }
+}
+</script>
 {% endblock %}

@@ -1,10 +1,20 @@
+import json
+import logging
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
+
+from apps.core.services import call_claude
 
 from .forms import CompanyForm
 from .models import Company, UserProfile
+from .prompts import IMPROVE_COMPANY_PROMPT, SYSTEM_PROMPT
+
+logger = logging.getLogger(__name__)
 
 
 @login_required
@@ -93,6 +103,41 @@ def company_detail(request, pk):
         'active_positions': active_positions,
         'total_candidates': total_candidates,
     })
+
+
+@require_POST
+@login_required
+def company_ai_improve(request):
+    """Endpoint AJAX: mejorar información de empresa con IA."""
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'JSON inválido.'}, status=400)
+
+    user_prompt = IMPROVE_COMPANY_PROMPT.format(
+        name=data.get('name', ''),
+        website=data.get('website', ''),
+        description=data.get('description', ''),
+        benefits=data.get('benefits', ''),
+        work_schedule=data.get('work_schedule', ''),
+        remote_policy=data.get('remote_policy', ''),
+        office_location=data.get('office_location', ''),
+        culture=data.get('culture', ''),
+    )
+
+    try:
+        result = call_claude(SYSTEM_PROMPT, user_prompt, json_output=True)
+        if isinstance(result, dict):
+            return JsonResponse(result)
+        return JsonResponse({'description': str(result)})
+    except ValueError as e:
+        return JsonResponse({'error': str(e)}, status=400)
+    except Exception:
+        logger.exception("Error llamando a Claude API")
+        return JsonResponse(
+            {'error': 'Error al conectar con la IA. Inténtalo de nuevo.'},
+            status=500,
+        )
 
 
 @login_required
