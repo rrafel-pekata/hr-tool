@@ -6,6 +6,7 @@ app_name = 'candidates'
 
 urlpatterns = [
     path('analyze-cv/<uuid:position_pk>/', views.analyze_cv, name='analyze_cv'),
+    path('bulk-upload/<uuid:position_pk>/', views.bulk_upload_cvs, name='bulk_upload_cvs'),
     path('new/<uuid:position_pk>/', views.candidate_create, name='candidate_create'),
     path('<uuid:pk>/', views.candidate_detail, name='candidate_detail'),
     path('<uuid:pk>/edit/', views.candidate_edit, name='candidate_edit'),

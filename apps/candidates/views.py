@@ -12,6 +12,8 @@ from django.views.decorators.http import require_POST
 from apps.core.services import call_claude, extract_pdf_text
 from apps.positions.models import Position
 
+from apps.notifications.services import notify_company
+
 from .forms import CandidateCreateForm, CandidateEditForm
 from .models import Candidate
 from .prompts import CV_ANALYSIS_SYSTEM_PROMPT, CV_ANALYSIS_USER_PROMPT
@@ -20,6 +22,87 @@ logger = logging.getLogger(__name__)
 
 MAX_CV_SIZE = 10 * 1024 * 1024  # 10 MB
 MAX_CV_TEXT_LENGTH = 15_000
+
+
+@require_POST
+@login_required
+def bulk_upload_cvs(request, position_pk):
+    """Endpoint AJAX: sube un PDF, extrae datos con IA y crea candidato."""
+    position = get_object_or_404(Position, pk=position_pk, company=request.company)
+
+    cv_file = request.FILES.get('cv_file')
+    if not cv_file:
+        return JsonResponse({'success': False, 'error': 'No se ha enviado ningún archivo.'}, status=400)
+
+    if not cv_file.name.lower().endswith('.pdf'):
+        return JsonResponse({'success': False, 'error': 'Solo se permiten archivos PDF.'}, status=400)
+
+    if cv_file.size > MAX_CV_SIZE:
+        return JsonResponse({'success': False, 'error': 'El archivo excede el tamaño máximo de 10MB.'}, status=400)
+
+    # Extract text from PDF
+    try:
+        cv_text = extract_pdf_text(cv_file)
+    except ValueError as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=400)
+
+    cv_text_truncated = cv_text[:MAX_CV_TEXT_LENGTH]
+
+    # Call Claude for AI analysis
+    user_prompt = CV_ANALYSIS_USER_PROMPT.format(
+        cv_text=cv_text_truncated,
+        position_title=position.title,
+        position_department=position.department or 'No especificado',
+        position_location=position.location or 'No especificada',
+        position_description=position.description or 'No disponible',
+        position_requirements=position.requirements or 'No disponibles',
+    )
+
+    try:
+        result = call_claude(CV_ANALYSIS_SYSTEM_PROMPT, user_prompt, json_output=True)
+    except Exception:
+        logger.exception("Error llamando a Claude API en carga masiva")
+        return JsonResponse({'success': False, 'error': 'Error al conectar con la IA.'}, status=500)
+
+    if not isinstance(result, dict):
+        return JsonResponse({'success': False, 'error': 'La IA no devolvió un formato válido.'}, status=500)
+
+    # Create candidate from AI-extracted data
+    first_name = result.get('first_name', '').strip() or 'Sin nombre'
+    last_name = result.get('last_name', '').strip()
+
+    strengths = result.get('strengths', [])
+    weaknesses = result.get('weaknesses', [])
+    try:
+        fit_score = int(result.get('fit_score', 0)) or None
+    except (ValueError, TypeError):
+        fit_score = None
+
+    candidate = Candidate(
+        position=position,
+        first_name=first_name,
+        last_name=last_name,
+        email=result.get('email', '').strip(),
+        phone=result.get('phone', '').strip(),
+        linkedin_url=result.get('linkedin_url', '').strip(),
+        cv_text_extracted=cv_text,
+        ai_summary=result.get('summary', ''),
+        ai_strengths=strengths if isinstance(strengths, list) else [],
+        ai_weaknesses=weaknesses if isinstance(weaknesses, list) else [],
+        ai_fit_score=fit_score,
+        source='manual',
+    )
+
+    # Save CV file
+    cv_file.seek(0)
+    candidate.cv_file.save(cv_file.name, cv_file, save=False)
+    candidate.save()
+
+    return JsonResponse({
+        'success': True,
+        'candidate_name': candidate.full_name,
+        'fit_score': fit_score or 0,
+    })
 
 
 @require_POST
@@ -101,6 +184,14 @@ def candidate_create(request, position_pk):
             except (ValueError, TypeError):
                 candidate.ai_fit_score = None
             candidate.save()
+            notify_company(
+                company=position.company,
+                title='Nuevo candidato',
+                message=f'{candidate.full_name} añadido a {position.title}.',
+                link=f'/candidates/{candidate.pk}/',
+                notification_type='candidate_new',
+                exclude_user=request.user,
+            )
             messages.success(request, f'Candidato {candidate.full_name} añadido correctamente.')
             return redirect('candidates:candidate_detail', pk=candidate.pk)
     else:
@@ -167,6 +258,14 @@ def candidate_status(request, pk):
             candidate.status = new_status
             candidate.save(update_fields=['status', 'updated_at'])
             messages.success(request, f'Estado actualizado a "{candidate.get_status_display()}".')
+            notify_company(
+                company=request.company,
+                title=f'{candidate.full_name} → {candidate.get_status_display()}',
+                message=f'Estado actualizado en {candidate.position.title}.',
+                link=f'/candidates/{candidate.pk}/',
+                notification_type='status_change',
+                exclude_user=request.user,
+            )
 
             # Cerrar la posición automáticamente al contratar
             if new_status == Candidate.Status.HIRED:

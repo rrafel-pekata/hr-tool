@@ -15,6 +15,10 @@
     <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
     Editar oferta
 </a>
+<button @click="$dispatch('open-bulk-upload')" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+    <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+    Carga masiva de CVs
+</button>
 <a href="{% url 'candidates:candidate_create' position.pk %}" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
     <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
     Añadir candidato
@@ -223,4 +227,201 @@
         {% endif %}
     </div>
 </div>
+
+<!-- Bulk Upload Modal -->
+<div x-data="bulkUpload()" @open-bulk-upload.window="open()" x-show="show" x-cloak class="relative z-50">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-gray-500/75 transition-opacity" @click="closeIfDone()"></div>
+
+    <!-- Modal -->
+    <div class="fixed inset-0 z-50 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div class="relative w-full max-w-lg rounded-xl bg-white shadow-2xl" @click.outside="closeIfDone()">
+                <!-- Header -->
+                <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Carga masiva de CVs</h3>
+                    <button @click="closeIfDone()" class="text-gray-400 hover:text-gray-500">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="px-6 py-5">
+                    <!-- Drop zone (only when no files selected yet) -->
+                    <template x-if="files.length === 0">
+                        <div class="relative rounded-lg border-2 border-dashed border-gray-300 p-8 text-center hover:border-gray-400 transition-colors"
+                             :class="{ 'border-blue-400 bg-blue-50': dragging }"
+                             @dragover.prevent="dragging = true"
+                             @dragleave.prevent="dragging = false"
+                             @drop.prevent="handleDrop($event)">
+                            <svg class="mx-auto h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                            <p class="mt-2 text-sm text-gray-600">Arrastra archivos PDF aquí</p>
+                            <p class="mt-1 text-xs text-gray-500">o</p>
+                            <label class="mt-2 inline-flex cursor-pointer items-center rounded-md bg-white px-3 py-1.5 text-sm font-medium text-blue-600 ring-1 ring-inset ring-blue-600/20 hover:bg-blue-50">
+                                Seleccionar archivos
+                                <input type="file" multiple accept=".pdf" class="sr-only" @change="handleSelect($event)">
+                            </label>
+                        </div>
+                    </template>
+
+                    <!-- File list -->
+                    <template x-if="files.length > 0">
+                        <div>
+                            <ul class="space-y-2 max-h-64 overflow-y-auto">
+                                <template x-for="(f, idx) in files" :key="idx">
+                                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2 text-sm"
+                                        :class="{
+                                            'border-gray-200 bg-gray-50': f.status === 'pending',
+                                            'border-blue-200 bg-blue-50': f.status === 'uploading' || f.status === 'analyzing',
+                                            'border-green-200 bg-green-50': f.status === 'done',
+                                            'border-red-200 bg-red-50': f.status === 'error',
+                                        }">
+                                        <!-- Icon -->
+                                        <div class="flex-shrink-0">
+                                            <template x-if="f.status === 'pending'">
+                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                                            </template>
+                                            <template x-if="f.status === 'uploading' || f.status === 'analyzing'">
+                                                <svg class="h-5 w-5 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+                                            </template>
+                                            <template x-if="f.status === 'done'">
+                                                <svg class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            </template>
+                                            <template x-if="f.status === 'error'">
+                                                <svg class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+                                            </template>
+                                        </div>
+                                        <!-- Info -->
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-900 truncate" x-text="f.name"></p>
+                                            <p class="text-xs" :class="{
+                                                'text-gray-500': f.status === 'pending',
+                                                'text-blue-600': f.status === 'uploading' || f.status === 'analyzing',
+                                                'text-green-600': f.status === 'done',
+                                                'text-red-600': f.status === 'error',
+                                            }">
+                                                <span x-show="f.status === 'pending'">Pendiente</span>
+                                                <span x-show="f.status === 'uploading'">Subiendo...</span>
+                                                <span x-show="f.status === 'analyzing'">Analizando con IA...</span>
+                                                <span x-show="f.status === 'done'" x-text="f.result"></span>
+                                                <span x-show="f.status === 'error'" x-text="f.error"></span>
+                                            </p>
+                                        </div>
+                                        <!-- Score badge -->
+                                        <template x-if="f.status === 'done' && f.score">
+                                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
+                                                  :class="f.score >= 7 ? 'bg-green-100 text-green-700' : f.score >= 4 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'"
+                                                  x-text="f.score + '/10'"></span>
+                                        </template>
+                                    </li>
+                                </template>
+                            </ul>
+
+                            <!-- Summary -->
+                            <template x-if="finished">
+                                <div class="mt-4 rounded-lg bg-gray-50 p-3 text-sm text-gray-700">
+                                    <span class="font-medium" x-text="doneCount + ' candidato' + (doneCount !== 1 ? 's' : '') + ' creado' + (doneCount !== 1 ? 's' : '')"></span>
+                                    <template x-if="errorCount > 0">
+                                        <span class="text-red-600" x-text="', ' + errorCount + ' error' + (errorCount !== 1 ? 'es' : '')"></span>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Footer -->
+                <div class="flex items-center justify-end gap-3 border-t border-gray-200 px-6 py-4">
+                    <template x-if="!processing && !finished && files.length > 0">
+                        <div class="flex gap-3">
+                            <button @click="reset()" class="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50">Cancelar</button>
+                            <button @click="startUpload()" class="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-500" x-text="'Subir ' + files.length + ' archivo' + (files.length !== 1 ? 's' : '')"></button>
+                        </div>
+                    </template>
+                    <template x-if="processing">
+                        <button disabled class="rounded-md bg-gray-300 px-3 py-1.5 text-sm font-semibold text-gray-500 cursor-not-allowed">Procesando...</button>
+                    </template>
+                    <template x-if="finished">
+                        <button @click="closeAndReload()" class="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-500">Cerrar y actualizar</button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function bulkUpload() {
+    return {
+        show: false,
+        dragging: false,
+        files: [],
+        processing: false,
+        finished: false,
+
+        get doneCount() { return this.files.filter(f => f.status === 'done').length; },
+        get errorCount() { return this.files.filter(f => f.status === 'error').length; },
+
+        open() { this.show = true; },
+        closeIfDone() {
+            if (!this.processing) {
+                if (this.finished) { this.closeAndReload(); }
+                else { this.show = false; this.reset(); }
+            }
+        },
+        closeAndReload() { window.location.reload(); },
+        reset() { this.files = []; this.processing = false; this.finished = false; },
+
+        handleDrop(event) {
+            this.dragging = false;
+            const dropped = Array.from(event.dataTransfer.files).filter(f => f.name.toLowerCase().endsWith('.pdf'));
+            this.files = dropped.map(f => ({ file: f, name: f.name, status: 'pending', result: '', error: '', score: null }));
+        },
+        handleSelect(event) {
+            const selected = Array.from(event.target.files).filter(f => f.name.toLowerCase().endsWith('.pdf'));
+            this.files = selected.map(f => ({ file: f, name: f.name, status: 'pending', result: '', error: '', score: null }));
+        },
+
+        async startUpload() {
+            this.processing = true;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value
+                           || document.cookie.match(/csrftoken=([^;]+)/)?.[1]
+                           || '';
+
+            for (let i = 0; i < this.files.length; i++) {
+                const f = this.files[i];
+                f.status = 'uploading';
+
+                const formData = new FormData();
+                formData.append('cv_file', f.file);
+
+                try {
+                    f.status = 'analyzing';
+                    const resp = await fetch("{% url 'candidates:bulk_upload_cvs' position.pk %}", {
+                        method: 'POST',
+                        headers: { 'X-CSRFToken': csrfToken },
+                        body: formData,
+                    });
+                    const data = await resp.json();
+
+                    if (data.success) {
+                        f.status = 'done';
+                        f.result = data.candidate_name + (data.fit_score ? ' — Encaje: ' + data.fit_score + '/10' : '');
+                        f.score = data.fit_score || null;
+                    } else {
+                        f.status = 'error';
+                        f.error = data.error || 'Error desconocido';
+                    }
+                } catch (err) {
+                    f.status = 'error';
+                    f.error = 'Error de conexión';
+                }
+            }
+
+            this.processing = false;
+            this.finished = true;
+        },
+    };
+}
+</script>
 {% endblock %}
