@@ -43,7 +43,7 @@
                     <div class="flex items-center justify-end gap-2">
                         <a href="{% url 'tenants:department_edit' dept.pk %}" class="text-sm text-blue-600 hover:text-blue-500">Editar</a>
                         <form method="post" action="{% url 'tenants:department_delete' dept.pk %}" x-data
-                              @submit.prevent="if (confirm('Eliminar departamento &quot;{{ dept.name }}&quot;? Las posiciones asociadas quedarán sin departamento.')) $el.submit()">
+                              @submit.prevent="$dispatch('confirm-delete', { title: 'Eliminar departamento', message: '¿Eliminar departamento «{{ dept.name }}»? Las posiciones asociadas quedarán sin departamento.', form: $el })">
                             {% csrf_token %}
                             <button type="submit" class="text-sm text-red-600 hover:text-red-500">Eliminar</button>
                         </form>

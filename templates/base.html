@@ -110,6 +110,7 @@
 <!-- Tour page identifier (blocks only work in base, not in includes) -->
 <div id="tour-page-id" data-tour-page="{% block tour_page %}{% endblock %}" style="display:none"></div>
 <!-- Unified help widget (chatbot + tours) -->
+{% include "partials/_confirm_modal.html" %}
 {% include "partials/_chatbot_widget.html" %}
 <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
 <script src="/static/js/tours.js"></script>
