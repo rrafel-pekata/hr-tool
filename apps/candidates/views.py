@@ -366,6 +366,17 @@ def candidate_rating(request, pk):
     return redirect('candidates:candidate_detail', pk=candidate.pk)
 
 
+@require_POST
+@login_required
+def candidate_delete(request, pk):
+    """Soft-delete de candidato."""
+    candidate = get_object_or_404(Candidate, pk=pk, position__company=request.company)
+    position_pk = candidate.position_id
+    candidate.soft_delete()
+    messages.success(request, f'Candidato "{candidate.full_name}" eliminado.')
+    return redirect('positions:position_detail', pk=position_pk)
+
+
 @login_required
 def candidate_cv_preview(request, pk):
     """Genera una imagen PNG de la primera página del CV."""

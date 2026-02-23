@@ -2,11 +2,11 @@ import uuid
 
 from django.db import models
 
-from apps.core.models import TimeStampedModel
+from apps.core.models import SoftDeleteMixin, TimeStampedModel
 from apps.positions.models import Position
 
 
-class Candidate(TimeStampedModel):
+class Candidate(SoftDeleteMixin, TimeStampedModel):
     """Candidato asociado a una posición."""
 
     class Source(models.TextChoices):

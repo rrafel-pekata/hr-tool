@@ -162,6 +162,16 @@ def position_status(request, pk):
 
 @require_POST
 @login_required
+def position_delete(request, pk):
+    """Soft-delete de posición."""
+    position = get_object_or_404(Position, pk=pk, company=request.company)
+    position.soft_delete()
+    messages.success(request, f'Posición "{position.title}" eliminada.')
+    return redirect('positions:position_list')
+
+
+@require_POST
+@login_required
 def position_ai_generate(request):
     """Endpoint AJAX: mejorar oferta con IA."""
     if not request.company:

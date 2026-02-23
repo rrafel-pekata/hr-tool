@@ -10,6 +10,7 @@ urlpatterns = [
     path('bulk-upload/<uuid:position_pk>/', views.bulk_upload_cvs, name='bulk_upload_cvs'),
     path('new/<uuid:position_pk>/', views.candidate_create, name='candidate_create'),
     path('<uuid:pk>/', views.candidate_detail, name='candidate_detail'),
+    path('<uuid:pk>/delete/', views.candidate_delete, name='candidate_delete'),
     path('<uuid:pk>/edit/', views.candidate_edit, name='candidate_edit'),
     path('<uuid:pk>/status/', views.candidate_status, name='candidate_status'),
     path('<uuid:pk>/notes/', views.candidate_notes, name='candidate_notes'),

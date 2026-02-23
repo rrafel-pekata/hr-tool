@@ -21,7 +21,10 @@ class TenantMiddleware:
 
         if request.user.is_authenticated:
             memberships = list(
-                CompanyMembership.objects.filter(user=request.user)
+                CompanyMembership.objects.filter(
+                    user=request.user,
+                    company__deleted_at__isnull=True,
+                )
                 .select_related('company')
                 .order_by('company__name')
             )

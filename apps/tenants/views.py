@@ -145,6 +145,19 @@ def company_ai_improve(request):
         )
 
 
+@require_POST
+@login_required
+def company_delete(request, pk):
+    """Soft-delete de empresa."""
+    company = get_object_or_404(Company, pk=pk)
+    company.soft_delete()
+    # Limpiar empresa activa de la sesión si era esta
+    if str(request.session.get('active_company_id')) == str(company.pk):
+        request.session.pop('active_company_id', None)
+    messages.success(request, f'Empresa "{company.name}" eliminada.')
+    return redirect('core:select_company')
+
+
 @login_required
 def company_toggle_active(request, pk):
     """Activar/desactivar empresa."""

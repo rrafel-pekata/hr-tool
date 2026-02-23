@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.db import models
 
-from apps.core.models import TimeStampedModel
+from apps.core.models import SoftDeleteMixin, TimeStampedModel
 
 
-class Company(TimeStampedModel):
+class Company(SoftDeleteMixin, TimeStampedModel):
     """Empresa / Tenant."""
     name = models.CharField('Nombre', max_length=200)
     slug = models.SlugField('Slug', unique=True, max_length=200)

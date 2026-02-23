@@ -1,10 +1,10 @@
 from django.db import models
 
-from apps.core.models import TimeStampedModel
+from apps.core.models import SoftDeleteMixin, TimeStampedModel
 from apps.tenants.models import Company, Department
 
 
-class Position(TimeStampedModel):
+class Position(SoftDeleteMixin, TimeStampedModel):
     """Oferta de trabajo / Posición."""
 
     class EmploymentType(models.TextChoices):
