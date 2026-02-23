@@ -2,14 +2,8 @@
 <div class="flex h-full flex-col">
     <!-- Logo / Company switcher -->
     <div class="relative flex h-14 items-center gap-3 px-4 border-b border-primary-800"
-         {% if request.user_companies|length > 1 %}
-         x-data="{ showSwitcher: false }"
-         {% endif %}>
-        {% if request.user_companies|length > 1 %}
+         x-data="{ showSwitcher: false }">
         <button @click="showSwitcher = !showSwitcher" class="flex items-center gap-3 w-full text-left">
-        {% else %}
-        <div class="flex items-center gap-3 w-full">
-        {% endif %}
             {% if request.company and request.company.logo %}
             <img src="{{ request.company.logo.url }}" alt="{{ request.company.name }}" class="h-8 w-8 rounded-md object-cover">
             {% else %}
@@ -20,12 +14,9 @@
             <span class="text-sm font-semibold text-white truncate flex-1">
                 {% if request.company %}{{ request.company.name }}{% else %}Pekata ATS{% endif %}
             </span>
-            {% if request.user_companies|length > 1 %}
             <svg class="h-4 w-4 text-primary-300 shrink-0 transition-transform" :class="showSwitcher && 'rotate-180'" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
-            {% endif %}
-        {% if request.user_companies|length > 1 %}
         </button>
         <!-- Company switcher dropdown -->
         <div x-show="showSwitcher" x-cloak @click.outside="showSwitcher = false"
@@ -59,9 +50,6 @@
                 </a>
             </div>
         </div>
-        {% else %}
-        </div>
-        {% endif %}
     </div>
 
     <!-- Navigation -->
