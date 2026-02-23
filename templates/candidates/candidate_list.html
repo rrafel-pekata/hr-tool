@@ -31,6 +31,14 @@
             <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
         </select>
+        <!-- Departamento -->
+        <select name="department"
+                class="rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none max-w-xs truncate">
+            <option value="">Todos los departamentos</option>
+            {% for dept in departments %}
+            <option value="{{ dept.pk }}" {% if department_filter == dept.pk|stringformat:"s" %}selected{% endif %}>{{ dept.name }}</option>
+            {% endfor %}
+        </select>
         <!-- Posición -->
         <select name="position"
                 class="rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none max-w-xs truncate">
@@ -40,7 +48,7 @@
             {% endfor %}
         </select>
         <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Filtrar</button>
-        {% if search or status_filter or position_filter %}
+        {% if search or status_filter or position_filter or department_filter %}
         <a href="{% url 'candidates:candidate_list' %}" class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">Limpiar</a>
         {% endif %}
     </form>

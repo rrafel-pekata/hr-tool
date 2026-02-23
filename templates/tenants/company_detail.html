@@ -79,7 +79,7 @@
             <tr class="hover:bg-gray-50">
                 <td class="px-4 py-3">
                     <a href="{% url 'positions:position_detail' position.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{{ position.title }}</a>
-                    {% if position.department %}<p class="text-xs text-gray-500">{{ position.department }}</p>{% endif %}
+                    {% if position.department %}<p class="text-xs text-gray-500">{{ position.department.name }}</p>{% endif %}
                 </td>
                 <td class="px-4 py-3">
                     {% if position.status == 'published' %}{% include "partials/_badge.html" with label="Publicada" color="green" %}

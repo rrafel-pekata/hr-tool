@@ -29,7 +29,7 @@ class Company(TimeStampedModel):
 
 
 class UserProfile(models.Model):
-    """Perfil de usuario vinculado a una empresa."""
+    """Perfil de usuario vinculado a una empresa. DEPRECATED: usar CompanyMembership."""
 
     class Role(models.TextChoices):
         ADMIN = 'admin', 'Admin'
@@ -63,3 +63,62 @@ class UserProfile(models.Model):
     @property
     def is_admin(self):
         return self.role == self.Role.ADMIN
+
+
+class CompanyMembership(models.Model):
+    """Membresía usuario ↔ empresa (through model)."""
+
+    class Role(models.TextChoices):
+        ADMIN = 'admin', 'Admin'
+        RECRUITER = 'recruiter', 'Recruiter'
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='company_memberships',
+    )
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name='memberships',
+        verbose_name='Empresa',
+    )
+    role = models.CharField(
+        'Rol',
+        max_length=20,
+        choices=Role.choices,
+        default=Role.RECRUITER,
+    )
+
+    class Meta:
+        verbose_name = 'Membresía de empresa'
+        verbose_name_plural = 'Membresías de empresa'
+        unique_together = [('user', 'company')]
+
+    def __str__(self):
+        return f'{self.user.get_full_name()} → {self.company.name} ({self.get_role_display()})'
+
+    @property
+    def is_admin(self):
+        return self.role == self.Role.ADMIN
+
+
+class Department(TimeStampedModel):
+    """Departamento dentro de una empresa."""
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name='departments',
+        verbose_name='Empresa',
+    )
+    name = models.CharField('Nombre', max_length=100)
+    description = models.TextField('Descripción', blank=True)
+
+    class Meta:
+        verbose_name = 'Departamento'
+        verbose_name_plural = 'Departamentos'
+        unique_together = [('company', 'name')]
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name

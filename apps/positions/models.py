@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.core.models import TimeStampedModel
-from apps.tenants.models import Company
+from apps.tenants.models import Company, Department
 
 
 class Position(TimeStampedModel):
@@ -26,7 +26,14 @@ class Position(TimeStampedModel):
         verbose_name='Empresa',
     )
     title = models.CharField('Título del puesto', max_length=200)
-    department = models.CharField('Departamento', max_length=100, blank=True)
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='positions',
+        verbose_name='Departamento',
+    )
     location = models.CharField('Ubicación', max_length=200, blank=True)
     employment_type = models.CharField(
         'Tipo de empleo',

@@ -10,8 +10,8 @@ from django.views.decorators.http import require_POST
 
 from apps.core.services import call_claude
 
-from .forms import CompanyForm
-from .models import Company, UserProfile
+from .forms import CompanyForm, DepartmentForm
+from .models import Company, CompanyMembership, Department
 from .prompts import IMPROVE_COMPANY_PROMPT, SYSTEM_PROMPT
 
 logger = logging.getLogger(__name__)
@@ -20,23 +20,27 @@ logger = logging.getLogger(__name__)
 @login_required
 def company_list(request):
     """Listado de empresas del usuario."""
-    if hasattr(request.user, 'profile'):
-        companies = Company.objects.filter(
-            pk=request.user.profile.company_id
-        ).annotate(
+    memberships = CompanyMembership.objects.filter(user=request.user)
+    company_ids = memberships.values_list('company_id', flat=True)
+
+    if company_ids:
+        companies = Company.objects.filter(pk__in=company_ids).annotate(
             active_positions=Count(
                 'positions',
                 filter=Q(positions__status='published')
             )
         )
-    else:
-        # Superuser sin perfil: ver todas
+    elif request.user.is_superuser:
+        # Superuser sin memberships: ver todas
         companies = Company.objects.all().annotate(
             active_positions=Count(
                 'positions',
                 filter=Q(positions__status='published')
             )
         )
+    else:
+        companies = Company.objects.none()
+
     return render(request, 'tenants/company_list.html', {'companies': companies})
 
 
@@ -47,13 +51,14 @@ def company_create(request):
         form = CompanyForm(request.POST, request.FILES)
         if form.is_valid():
             company = form.save()
-            # Si el usuario no tiene perfil, asignarlo como admin
-            if not hasattr(request.user, 'profile'):
-                UserProfile.objects.create(
-                    user=request.user,
-                    company=company,
-                    role=UserProfile.Role.ADMIN,
-                )
+            # Create membership as admin
+            CompanyMembership.objects.create(
+                user=request.user,
+                company=company,
+                role=CompanyMembership.Role.ADMIN,
+            )
+            # Set as active company
+            request.session['active_company_id'] = str(company.pk)
             messages.success(request, f'Empresa "{company.name}" creada correctamente.')
             return redirect('tenants:company_detail', pk=company.pk)
     else:
@@ -150,3 +155,74 @@ def company_toggle_active(request, pk):
         estado = 'activada' if company.is_active else 'desactivada'
         messages.success(request, f'Empresa {estado} correctamente.')
     return redirect('tenants:company_detail', pk=company.pk)
+
+
+# ─── Department CRUD ─────────────────────────────────────────────
+
+
+@login_required
+def department_list(request):
+    """Lista departamentos de la empresa activa con conteo de posiciones."""
+    if not request.company:
+        return redirect('core:select_company')
+
+    departments = (
+        Department.objects.filter(company=request.company)
+        .annotate(num_positions=Count('positions'))
+        .order_by('name')
+    )
+    return render(request, 'tenants/department_list.html', {
+        'departments': departments,
+    })
+
+
+@login_required
+def department_create(request):
+    """Crear nuevo departamento."""
+    if not request.company:
+        return redirect('core:select_company')
+
+    if request.method == 'POST':
+        form = DepartmentForm(request.POST)
+        if form.is_valid():
+            department = form.save(commit=False)
+            department.company = request.company
+            department.save()
+            messages.success(request, f'Departamento "{department.name}" creado correctamente.')
+            return redirect('tenants:department_list')
+    else:
+        form = DepartmentForm()
+    return render(request, 'tenants/department_form.html', {
+        'form': form,
+        'title': 'Nuevo departamento',
+    })
+
+
+@login_required
+def department_edit(request, pk):
+    """Editar departamento existente."""
+    department = get_object_or_404(Department, pk=pk, company=request.company)
+    if request.method == 'POST':
+        form = DepartmentForm(request.POST, instance=department)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Departamento actualizado correctamente.')
+            return redirect('tenants:department_list')
+    else:
+        form = DepartmentForm(instance=department)
+    return render(request, 'tenants/department_form.html', {
+        'form': form,
+        'department': department,
+        'title': f'Editar: {department.name}',
+    })
+
+
+@require_POST
+@login_required
+def department_delete(request, pk):
+    """Eliminar departamento (posiciones quedan con department=NULL)."""
+    department = get_object_or_404(Department, pk=pk, company=request.company)
+    name = department.name
+    department.delete()
+    messages.success(request, f'Departamento "{name}" eliminado.')
+    return redirect('tenants:department_list')

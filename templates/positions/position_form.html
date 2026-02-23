@@ -140,7 +140,7 @@ function positionForm() {
 
             const payload = {
                 title: title,
-                department: document.getElementById('id_department')?.value || '',
+                department: document.getElementById('id_department')?.value || '',  // sends the ID; backend resolves name
                 location: document.getElementById('id_location')?.value || '',
                 employment_type: document.getElementById('id_employment_type')?.value || '',
                 salary_range: document.getElementById('id_salary_range')?.value || '',

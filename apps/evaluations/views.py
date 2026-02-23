@@ -99,7 +99,7 @@ def evaluate_candidate(request, candidate_pk):
 
         user_prompt = EVALUATION_USER_PROMPT.format(
             position_title=position.title,
-            position_department=position.department or 'No especificado',
+            position_department=position.department.name if position.department else 'No especificado',
             position_description=position.description or 'No disponible',
             position_requirements=position.requirements or 'No disponibles',
             company_name=company.name,

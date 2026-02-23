@@ -1,5 +1,7 @@
 from django import forms
 
+from apps.tenants.models import Department
+
 from .models import Position
 
 INPUT_CLASS = 'block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none'
@@ -16,7 +18,7 @@ class PositionForm(forms.ModelForm):
         ]
         widgets = {
             'title': forms.TextInput(attrs={'class': INPUT_CLASS, 'placeholder': 'Ej: Senior Backend Developer'}),
-            'department': forms.TextInput(attrs={'class': INPUT_CLASS, 'placeholder': 'Ej: Ingeniería'}),
+            'department': forms.Select(attrs={'class': SELECT_CLASS}),
             'location': forms.TextInput(attrs={'class': INPUT_CLASS, 'placeholder': 'Ej: Remoto / Barcelona'}),
             'employment_type': forms.Select(attrs={'class': SELECT_CLASS}),
             'description': forms.Textarea(attrs={'class': INPUT_CLASS, 'rows': 8, 'placeholder': 'Descripción del puesto...'}),
@@ -26,3 +28,12 @@ class PositionForm(forms.ModelForm):
             'salary_range': forms.TextInput(attrs={'class': INPUT_CLASS, 'placeholder': 'Ej: 40.000€ - 55.000€'}),
             'has_case_study': forms.CheckboxInput(attrs={'class': 'h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500'}),
         }
+
+    def __init__(self, *args, company=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if company:
+            self.fields['department'].queryset = Department.objects.filter(company=company)
+        else:
+            self.fields['department'].queryset = Department.objects.none()
+        self.fields['department'].empty_label = '(Sin departamento)'
+        self.fields['department'].required = False

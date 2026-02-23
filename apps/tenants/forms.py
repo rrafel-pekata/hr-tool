@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Company
+from .models import Company, Department
 
 INPUT_CLASS = 'block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none'
 
@@ -25,4 +25,14 @@ class CompanyForm(forms.ModelForm):
             'remote_policy': forms.TextInput(attrs={'class': INPUT_CLASS, 'placeholder': 'Ej: Híbrido 2 días oficina, 100% remoto...'}),
             'office_location': forms.TextInput(attrs={'class': INPUT_CLASS, 'placeholder': 'Ej: Calle Mayor 10, Barcelona'}),
             'culture': forms.Textarea(attrs={'class': INPUT_CLASS, 'rows': 3, 'placeholder': 'Valores de la empresa, ambiente de trabajo...'}),
+        }
+
+
+class DepartmentForm(forms.ModelForm):
+    class Meta:
+        model = Department
+        fields = ['name', 'description']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': INPUT_CLASS, 'placeholder': 'Ej: Ingeniería'}),
+            'description': forms.Textarea(attrs={'class': INPUT_CLASS, 'rows': 3, 'placeholder': 'Descripción del departamento...'}),
         }

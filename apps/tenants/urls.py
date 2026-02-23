@@ -11,4 +11,9 @@ urlpatterns = [
     path('<uuid:pk>/edit/', views.company_edit, name='company_edit'),
     path('<uuid:pk>/toggle/', views.company_toggle_active, name='company_toggle_active'),
     path('ai/improve/', views.company_ai_improve, name='company_ai_improve'),
+    # Departments
+    path('departments/', views.department_list, name='department_list'),
+    path('departments/create/', views.department_create, name='department_create'),
+    path('departments/<uuid:pk>/edit/', views.department_edit, name='department_edit'),
+    path('departments/<uuid:pk>/delete/', views.department_delete, name='department_delete'),
 ]

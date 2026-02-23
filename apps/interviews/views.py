@@ -34,7 +34,7 @@ def interview_create(request, candidate_pk):
         form = InterviewForm()
         # Filtrar entrevistadores a usuarios de la misma empresa
         form.fields['interviewer'].queryset = form.fields['interviewer'].queryset.filter(
-            profile__company=request.company
+            company_memberships__company=request.company
         )
 
     return render(request, 'interviews/interview_form.html', {

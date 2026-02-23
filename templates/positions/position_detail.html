@@ -37,7 +37,7 @@
             {% else %}{% include "partials/_badge.html" with label="Cerrada" color="red" %}{% endif %}
         </div>
         <div class="mt-1 flex items-center gap-4 text-sm text-gray-500">
-            {% if position.department %}<span>{{ position.department }}</span>{% endif %}
+            {% if position.department %}<span>{{ position.department.name }}</span>{% endif %}
             {% if position.location %}<span>{{ position.location }}</span>{% endif %}
             <span>{{ position.get_employment_type_display }}</span>
             {% if position.salary_range %}<span>{{ position.salary_range }}</span>{% endif %}
@@ -159,7 +159,7 @@
                 {% if position.department %}
                 <div class="flex justify-between">
                     <dt class="text-gray-500">Departamento</dt>
-                    <dd class="text-gray-900 font-medium">{{ position.department }}</dd>
+                    <dd class="text-gray-900 font-medium">{{ position.department.name }}</dd>
                 </div>
                 {% endif %}
                 {% if position.location %}

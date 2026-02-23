@@ -8,7 +8,7 @@ from django.utils import timezone
 
 from apps.casestudies.models import CandidateCaseStudy
 from apps.notifications.services import notify_company
-from apps.tenants.models import UserProfile
+from apps.tenants.models import CompanyMembership
 
 logger = logging.getLogger(__name__)
 
@@ -84,8 +84,8 @@ def _notify_submission(request, ccs):
     company = candidate.position.company
 
     # Get all users in this company
-    profiles = UserProfile.objects.filter(company=company).select_related('user')
-    recipient_emails = [p.user.email for p in profiles if p.user.email]
+    memberships = CompanyMembership.objects.filter(company=company).select_related('user')
+    recipient_emails = [m.user.email for m in memberships if m.user.email]
 
     if not recipient_emails:
         return

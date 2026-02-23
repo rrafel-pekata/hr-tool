@@ -23,17 +23,30 @@
     </div>
 
     <!-- Filtros -->
-    <div id="tour-position-filters" class="flex items-center gap-2">
-        <a href="{% url 'positions:position_list' %}"
+    <div id="tour-position-filters" class="flex flex-wrap items-center gap-2">
+        <a href="{% url 'positions:position_list' %}{% if department_filter %}?department={{ department_filter }}{% endif %}"
            class="rounded-md px-3 py-1.5 text-sm font-medium {% if not status_filter %}bg-blue-100 text-blue-700{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
             Todas
         </a>
         {% for value, label in status_choices %}
-        <a href="?status={{ value }}"
+        <a href="?status={{ value }}{% if department_filter %}&department={{ department_filter }}{% endif %}"
            class="rounded-md px-3 py-1.5 text-sm font-medium {% if status_filter == value %}bg-blue-100 text-blue-700{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
             {{ label }}
         </a>
         {% endfor %}
+        {% if departments %}
+        <span class="mx-1 text-gray-300">|</span>
+        <form method="get" class="flex items-center gap-2">
+            {% if status_filter %}<input type="hidden" name="status" value="{{ status_filter }}">{% endif %}
+            <select name="department" onchange="this.form.submit()"
+                    class="rounded-md border border-gray-300 px-3 py-1.5 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+                <option value="">Todos los departamentos</option>
+                {% for dept in departments %}
+                <option value="{{ dept.pk }}" {% if department_filter == dept.pk|stringformat:"s" %}selected{% endif %}>{{ dept.name }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        {% endif %}
     </div>
 </div>
 
@@ -55,7 +68,7 @@
             <tr class="hover:bg-gray-50">
                 <td class="px-4 py-3">
                     <a href="{% url 'positions:position_detail' position.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{{ position.title }}</a>
-                    {% if position.department %}<p class="text-xs text-gray-500">{{ position.department }}</p>{% endif %}
+                    {% if position.department %}<p class="text-xs text-gray-500">{{ position.department.name }}</p>{% endif %}
                 </td>
                 <td class="px-4 py-3">
                     {% if position.status == 'published' %}{% include "partials/_badge.html" with label="Publicada" color="green" %}

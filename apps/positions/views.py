@@ -12,6 +12,7 @@ from django.views.decorators.http import require_POST
 from apps.core.services import call_claude
 from apps.evaluations.models import AIEvaluation
 from apps.notifications.services import notify_company
+from apps.tenants.models import Department
 
 from .forms import PositionForm
 from .models import Position
@@ -24,9 +25,11 @@ logger = logging.getLogger(__name__)
 def position_list(request):
     """Listado de posiciones de la empresa activa."""
     if not request.company:
-        return redirect('tenants:company_list')
+        return redirect('core:select_company')
 
-    positions = Position.objects.filter(company=request.company).annotate(
+    positions = Position.objects.filter(company=request.company).select_related(
+        'department'
+    ).annotate(
         num_candidates=Count('candidates')
     ).order_by('-created_at')
 
@@ -35,9 +38,18 @@ def position_list(request):
     if status_filter:
         positions = positions.filter(status=status_filter)
 
+    # Filtro por departamento
+    department_filter = request.GET.get('department', '')
+    if department_filter:
+        positions = positions.filter(department_id=department_filter)
+
+    departments = request.company.departments.order_by('name')
+
     return render(request, 'positions/position_list.html', {
         'positions': positions,
         'status_filter': status_filter,
+        'department_filter': department_filter,
+        'departments': departments,
         'status_choices': Position.Status.choices,
     })
 
@@ -47,10 +59,10 @@ def position_create(request):
     """Crear nueva posición."""
     if not request.company:
         messages.error(request, 'Debes tener una empresa asignada para crear posiciones.')
-        return redirect('tenants:company_list')
+        return redirect('core:select_company')
 
     if request.method == 'POST':
-        form = PositionForm(request.POST)
+        form = PositionForm(request.POST, company=request.company)
         if form.is_valid():
             position = form.save(commit=False)
             position.company = request.company
@@ -58,7 +70,7 @@ def position_create(request):
             messages.success(request, f'Posición "{position.title}" creada correctamente.')
             return redirect('positions:position_detail', pk=position.pk)
     else:
-        form = PositionForm()
+        form = PositionForm(company=request.company)
     return render(request, 'positions/position_form.html', {
         'form': form,
         'title': 'Nueva posición',
@@ -70,13 +82,13 @@ def position_edit(request, pk):
     """Editar posición existente."""
     position = get_object_or_404(Position, pk=pk, company=request.company)
     if request.method == 'POST':
-        form = PositionForm(request.POST, instance=position)
+        form = PositionForm(request.POST, instance=position, company=request.company)
         if form.is_valid():
             form.save()
             messages.success(request, 'Posición actualizada correctamente.')
             return redirect('positions:position_detail', pk=position.pk)
     else:
-        form = PositionForm(instance=position)
+        form = PositionForm(instance=position, company=request.company)
     return render(request, 'positions/position_form.html', {
         'form': form,
         'position': position,
@@ -161,9 +173,17 @@ def position_ai_generate(request):
         return JsonResponse({'error': 'JSON inválido.'}, status=400)
 
     company = request.company
+    # Resolve department name from ID (the select sends a UUID)
+    department_value = data.get('department', '')
+    department_name = ''
+    if department_value:
+        dept = Department.objects.filter(pk=department_value, company=company).first()
+        if dept:
+            department_name = dept.name
+
     user_prompt = GENERATE_POSITION_PROMPT.format(
         title=data.get('title', ''),
-        department=data.get('department', ''),
+        department=department_name,
         location=data.get('location', ''),
         employment_type=data.get('employment_type', ''),
         salary_range=data.get('salary_range', ''),

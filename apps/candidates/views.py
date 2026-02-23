@@ -52,15 +52,22 @@ def candidate_list(request):
     if position_filter:
         candidates = candidates.filter(position__pk=position_filter)
 
+    department_filter = request.GET.get('department', '')
+    if department_filter:
+        candidates = candidates.filter(position__department_id=department_filter)
+
     positions = Position.objects.filter(company=request.company).order_by('-created_at')
+    departments = request.company.departments.order_by('name')
 
     return render(request, 'candidates/candidate_list.html', {
         'candidates': candidates,
         'positions': positions,
+        'departments': departments,
         'status_choices': Candidate.Status.choices,
         'search': search,
         'status_filter': status_filter,
         'position_filter': position_filter,
+        'department_filter': department_filter,
     })
 
 
@@ -92,7 +99,7 @@ def bulk_upload_cvs(request, position_pk):
     user_prompt = CV_ANALYSIS_USER_PROMPT.format(
         cv_text=cv_text_truncated,
         position_title=position.title,
-        position_department=position.department or 'No especificado',
+        position_department=position.department.name if position.department else 'No especificado',
         position_location=position.location or 'No especificada',
         position_description=position.description or 'No disponible',
         position_requirements=position.requirements or 'No disponibles',
@@ -178,7 +185,7 @@ def analyze_cv(request, position_pk):
     user_prompt = CV_ANALYSIS_USER_PROMPT.format(
         cv_text=cv_text_truncated,
         position_title=position.title,
-        position_department=position.department or 'No especificado',
+        position_department=position.department.name if position.department else 'No especificado',
         position_location=position.location or 'No especificada',
         position_description=position.description or 'No disponible',
         position_requirements=position.requirements or 'No disponibles',
@@ -424,7 +431,7 @@ def candidate_upload_cv(request, pk):
     user_prompt = CV_ANALYSIS_USER_PROMPT.format(
         cv_text=cv_text_truncated,
         position_title=position.title,
-        position_department=position.department or 'No especificado',
+        position_department=position.department.name if position.department else 'No especificado',
         position_location=position.location or 'No especificada',
         position_description=position.description or 'No disponible',
         position_requirements=position.requirements or 'No disponibles',
