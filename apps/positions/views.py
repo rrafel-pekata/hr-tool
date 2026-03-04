@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.utils.translation import get_language, gettext as _
 from django.views.decorators.http import require_POST
 
-from apps.core.services import call_claude
+from apps.core.services import ALL_LANGUAGES, call_claude, translate_fields
 from apps.core.tasks import translate_instance_fields
 from apps.evaluations.models import AIEvaluation
 from apps.notifications.services import notify_company
@@ -129,11 +129,20 @@ def position_detail(request, pk):
 
     case_studies = position.case_studies.all()
 
+    translatable_fields = ['description', 'requirements', 'benefits', 'about_company_snippet']
+    translations = {}
+    for lang in ALL_LANGUAGES:
+        translations[lang] = {
+            field: getattr(position, f'{field}_{lang}', '') or ''
+            for field in translatable_fields
+        }
+
     return render(request, 'positions/position_detail.html', {
         'position': position,
         'candidates': candidates,
         'candidate_status': candidate_status,
         'case_studies': case_studies,
+        'translations_json': json.dumps(translations, ensure_ascii=False),
     })
 
 
@@ -236,3 +245,40 @@ def position_ai_generate(request):
             {'error': _('Error al conectar con la IA. Inténtalo de nuevo.')},
             status=500,
         )
+
+
+@require_POST
+@login_required
+def position_translate(request, pk):
+    """AJAX endpoint: translate position fields synchronously."""
+    position = get_object_or_404(Position, pk=pk, company=request.company)
+
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': _('JSON inválido.')}, status=400)
+
+    source_lang = data.get('source_lang', get_language())
+    if source_lang not in ('es', 'en', 'ca'):
+        return JsonResponse({'error': _('Idioma no válido.')}, status=400)
+
+    translatable_fields = ['description', 'requirements', 'benefits', 'about_company_snippet']
+
+    try:
+        translate_fields(position, source_lang, translatable_fields)
+    except Exception:
+        logger.exception("Error translating position pk=%s", pk)
+        return JsonResponse(
+            {'error': _('Error al traducir. Inténtalo de nuevo.')},
+            status=500,
+        )
+
+    position.refresh_from_db()
+    translations = {}
+    for lang in ALL_LANGUAGES:
+        translations[lang] = {
+            field: getattr(position, f'{field}_{lang}', '') or ''
+            for field in translatable_fields
+        }
+
+    return JsonResponse({'translations': translations})

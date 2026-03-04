@@ -11,5 +11,6 @@ urlpatterns = [
     path('<uuid:pk>/edit/', views.position_edit, name='position_edit'),
     path('<uuid:pk>/delete/', views.position_delete, name='position_delete'),
     path('<uuid:pk>/status/', views.position_status, name='position_status'),
+    path('<uuid:pk>/translate/', views.position_translate, name='position_translate'),
     path('ai/generate/', views.position_ai_generate, name='position_ai_generate'),
 ]

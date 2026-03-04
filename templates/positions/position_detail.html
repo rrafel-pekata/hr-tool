@@ -83,34 +83,91 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Left: Job posting content -->
-    <div id="tour-position-description" class="lg:col-span-2 space-y-6">
-        {% if position.description %}
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Descripción" %}</h2>
-            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.description }}</div>
+    <div id="tour-position-description" class="lg:col-span-2 space-y-6"
+         x-data="positionTranslations()">
+        <!-- Language tabs + Translate button -->
+        <div class="flex items-center justify-between">
+            <div class="flex gap-1">
+                <template x-for="lang in ['es', 'en', 'ca']" :key="lang">
+                    <button @click="activeTab = lang"
+                            class="px-3 py-1.5 text-sm font-medium rounded-md transition-colors"
+                            :class="activeTab === lang
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'"
+                            x-text="lang.toUpperCase()">
+                    </button>
+                </template>
+            </div>
+            <button @click="translateAll()" :disabled="translating"
+                    class="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg x-show="!translating" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" /></svg>
+                <svg x-show="translating" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+                <span x-text="translating ? '{% trans "Traduciendo..." %}' : '{% trans "Traducir" %}'"></span>
+            </button>
         </div>
-        {% endif %}
 
-        {% if position.requirements %}
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Requisitos" %}</h2>
-            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.requirements }}</div>
+        <!-- Translation feedback message -->
+        <div x-show="message" x-transition
+             class="rounded-md p-3 text-sm font-medium"
+             :class="messageType === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'">
+            <div class="flex items-center justify-between">
+                <span x-text="message"></span>
+                <button @click="message = ''" class="ml-3 opacity-50 hover:opacity-100">&times;</button>
+            </div>
         </div>
-        {% endif %}
 
-        {% if position.benefits %}
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Qué ofrecemos" %}</h2>
-            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.benefits }}</div>
-        </div>
-        {% endif %}
+        <!-- Content cards per active tab -->
+        <template x-if="fields.description">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Descripción" %}</h2>
+                <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap" x-text="fields.description"></div>
+            </div>
+        </template>
+        <template x-if="!fields.description">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Descripción" %}</h2>
+                <p class="text-sm text-gray-400 italic">{% trans "Sin traducción disponible" %}</p>
+            </div>
+        </template>
 
-        {% if position.about_company_snippet %}
-        <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Sobre la empresa" %}</h2>
-            <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.about_company_snippet }}</div>
-        </div>
-        {% endif %}
+        <template x-if="fields.requirements">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Requisitos" %}</h2>
+                <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap" x-text="fields.requirements"></div>
+            </div>
+        </template>
+        <template x-if="!fields.requirements">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Requisitos" %}</h2>
+                <p class="text-sm text-gray-400 italic">{% trans "Sin traducción disponible" %}</p>
+            </div>
+        </template>
+
+        <template x-if="fields.benefits">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Qué ofrecemos" %}</h2>
+                <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap" x-text="fields.benefits"></div>
+            </div>
+        </template>
+        <template x-if="!fields.benefits">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Qué ofrecemos" %}</h2>
+                <p class="text-sm text-gray-400 italic">{% trans "Sin traducción disponible" %}</p>
+            </div>
+        </template>
+
+        <template x-if="fields.about_company_snippet">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Sobre la empresa" %}</h2>
+                <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap" x-text="fields.about_company_snippet"></div>
+            </div>
+        </template>
+        <template x-if="!fields.about_company_snippet">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Sobre la empresa" %}</h2>
+                <p class="text-sm text-gray-400 italic">{% trans "Sin traducción disponible" %}</p>
+            </div>
+        </template>
 
         <!-- Candidates section -->
         <div id="tour-position-candidates" class="bg-white rounded-lg border border-gray-200">
@@ -365,6 +422,53 @@
 </div>
 
 <script>
+function positionTranslations() {
+    const allTranslations = JSON.parse('{{ translations_json|escapejs }}');
+    return {
+        activeTab: '{{ LANGUAGE_CODE }}',
+        translations: allTranslations,
+        translating: false,
+        message: '',
+        messageType: 'success',
+
+        get fields() {
+            return this.translations[this.activeTab] || {};
+        },
+
+        async translateAll() {
+            this.translating = true;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value
+                           || document.cookie.match(/csrftoken=([^;]+)/)?.[1]
+                           || '';
+            try {
+                const resp = await fetch("{% url 'positions:position_translate' position.pk %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                    body: JSON.stringify({ source_lang: this.activeTab }),
+                });
+                const data = await resp.json();
+                if (data.translations) {
+                    this.translations = data.translations;
+                    this.message = '{% trans "Traducción completada" %}';
+                    this.messageType = 'success';
+                    setTimeout(() => this.message = '', 5000);
+                } else if (data.error) {
+                    this.message = data.error;
+                    this.messageType = 'error';
+                }
+            } catch (err) {
+                this.message = '{% trans "Error de conexión" %}';
+                this.messageType = 'error';
+            } finally {
+                this.translating = false;
+            }
+        },
+    };
+}
+
 function bulkUpload() {
     return {
         show: false,
