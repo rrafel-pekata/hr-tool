@@ -112,6 +112,7 @@ USE_TZ = True
 # ---------- django-modeltranslation ----------
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'es'
 MODELTRANSLATION_LANGUAGES = ('es', 'en', 'ca')
+MODELTRANSLATION_FALLBACK_LANGUAGES = {'default': ('es',)}
 
 # ---------- Static & Media ----------
 STATIC_URL = 'static/'
