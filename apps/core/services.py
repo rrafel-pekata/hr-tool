@@ -44,7 +44,7 @@ def extract_pdf_text(file_obj) -> str:
     return full_text
 
 
-def call_claude(system_prompt: str, user_prompt: str, json_output: bool = False) -> str:
+def call_claude(system_prompt: str, user_prompt: str, json_output: bool = False, model: str = "claude-sonnet-4-6", max_tokens: int = 4096) -> str:
     """Llama a Claude API y devuelve la respuesta como texto."""
     if not settings.ANTHROPIC_API_KEY:
         raise ValueError(
@@ -54,8 +54,8 @@ def call_claude(system_prompt: str, user_prompt: str, json_output: bool = False)
     client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
 
     message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4096,
+        model=model,
+        max_tokens=max_tokens,
         system=system_prompt,
         messages=[
             {"role": "user", "content": user_prompt}
@@ -119,7 +119,7 @@ def translate_fields(instance, source_lang, fields):
     )
 
     try:
-        result = call_claude(system_prompt, user_prompt, json_output=True)
+        result = call_claude(system_prompt, user_prompt, json_output=True, model="claude-haiku-4-5-20251001")
         if not isinstance(result, dict):
             logger.warning("translate_fields: Claude did not return valid JSON")
             return
