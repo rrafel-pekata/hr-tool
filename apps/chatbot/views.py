@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .context import build_user_context
@@ -16,10 +17,10 @@ def chatbot_message(request):
         data = json.loads(request.body)
         question = data.get('message', '').strip()
     except (json.JSONDecodeError, AttributeError):
-        return JsonResponse({'error': 'Mensaje inválido'}, status=400)
+        return JsonResponse({'error': _('Mensaje inválido')}, status=400)
 
     if not question:
-        return JsonResponse({'error': 'El mensaje no puede estar vacío'}, status=400)
+        return JsonResponse({'error': _('El mensaje no puede estar vacío')}, status=400)
 
     # Obtener o inicializar historial de sesión
     history = request.session.get('chatbot_history', [])

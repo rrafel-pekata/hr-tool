@@ -1,16 +1,17 @@
+{% load i18n %}
 {% if page_obj.has_other_pages %}
 <nav class="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-0 mt-6">
     <div class="flex flex-1 justify-between sm:hidden">
         {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Anterior</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">{% trans "Anterior" %}</a>
         {% endif %}
         {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Siguiente</a>
+        <a href="?page={{ page_obj.next_page_number }}" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">{% trans "Siguiente" %}</a>
         {% endif %}
     </div>
     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <p class="text-sm text-gray-700">
-            Mostrando <span class="font-medium">{{ page_obj.start_index }}</span> a <span class="font-medium">{{ page_obj.end_index }}</span> de <span class="font-medium">{{ page_obj.paginator.count }}</span> resultados
+            {% blocktrans with start=page_obj.start_index end=page_obj.end_index total=page_obj.paginator.count %}Mostrando <span class="font-medium">{{ start }}</span> a <span class="font-medium">{{ end }}</span> de <span class="font-medium">{{ total }}</span> resultados{% endblocktrans %}
         </p>
         <div class="flex gap-1">
             {% for num in page_obj.paginator.page_range %}

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block tour_page %}position_form{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
-<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
-<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_list' %}" class="hover:text-gray-700">Posiciones</a></li>
+<li><a href="/" class="hover:text-gray-700">{% trans "Inicio" %}</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_list' %}" class="hover:text-gray-700">{% trans "Posiciones" %}</a></li>
 {% if position %}<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_detail' position.pk %}" class="hover:text-gray-700">{{ position.title }}</a></li>{% endif %}
-<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{% if position %}Editar{% else %}Nueva{% endif %}</span></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{% if position %}{% trans "Editar" %}{% else %}{% trans "Nueva" %}{% endif %}</span></li>
 {% endblock %}
 
 {% block content %}
@@ -19,27 +20,27 @@
 
         <!-- Basic info grid -->
         <div id="tour-position-basic" class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-4">Información básica</h2>
+            <h2 class="text-base font-semibold text-gray-900 mb-4">{% trans "Información básica" %}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="sm:col-span-2">
-                    <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Título del puesto *</label>
+                    <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Título del puesto" %} *</label>
                     {{ form.title }}
                     {% if form.title.errors %}<p class="mt-1 text-sm text-red-600">{{ form.title.errors.0 }}</p>{% endif %}
                 </div>
                 <div>
-                    <label for="{{ form.department.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Departamento</label>
+                    <label for="{{ form.department.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Departamento" %}</label>
                     {{ form.department }}
                 </div>
                 <div>
-                    <label for="{{ form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                    <label for="{{ form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Ubicación" %}</label>
                     {{ form.location }}
                 </div>
                 <div>
-                    <label for="{{ form.employment_type.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Tipo de empleo</label>
+                    <label for="{{ form.employment_type.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Tipo de empleo" %}</label>
                     {{ form.employment_type }}
                 </div>
                 <div>
-                    <label for="{{ form.salary_range.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Rango salarial</label>
+                    <label for="{{ form.salary_range.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Rango salarial" %}</label>
                     {{ form.salary_range }}
                 </div>
             </div>
@@ -48,7 +49,7 @@
         <!-- Description + AI button -->
         <div id="tour-position-content" class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-base font-semibold text-gray-900">Contenido de la oferta</h2>
+                <h2 class="text-base font-semibold text-gray-900">{% trans "Contenido de la oferta" %}</h2>
                 <button id="tour-position-ai-btn" type="button"
                         @click="improveWithAI()"
                         :disabled="loading"
@@ -64,7 +65,7 @@
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                     </template>
-                    <span x-text="loading ? 'Generando...' : 'Mejorar con IA'"></span>
+                    <span x-text="loading ? '{% trans "Generando..." %}' : '{% trans "Mejorar con IA" %}'"></span>
                 </button>
             </div>
 
@@ -78,19 +79,19 @@
 
             <div class="space-y-4">
                 <div>
-                    <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Descripción del puesto</label>
+                    <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Descripción del puesto" %}</label>
                     {{ form.description }}
                 </div>
                 <div>
-                    <label for="{{ form.requirements.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Requisitos</label>
+                    <label for="{{ form.requirements.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Requisitos" %}</label>
                     {{ form.requirements }}
                 </div>
                 <div>
-                    <label for="{{ form.benefits.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Qué ofrecemos</label>
+                    <label for="{{ form.benefits.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Qué ofrecemos" %}</label>
                     {{ form.benefits }}
                 </div>
                 <div>
-                    <label for="{{ form.about_company_snippet.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Sobre la empresa</label>
+                    <label for="{{ form.about_company_snippet.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Sobre la empresa" %}</label>
                     {{ form.about_company_snippet }}
                 </div>
             </div>
@@ -98,20 +99,20 @@
 
         <!-- Options -->
         <div id="tour-position-options" class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-4">Opciones</h2>
+            <h2 class="text-base font-semibold text-gray-900 mb-4">{% trans "Opciones" %}</h2>
             <label class="flex items-center gap-3">
                 {{ form.has_case_study }}
-                <span class="text-sm text-gray-700">Esta posición incluye case study</span>
+                <span class="text-sm text-gray-700">{% trans "Esta posición incluye case study" %}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end gap-3 pt-2">
             <a href="{% if position %}{% url 'positions:position_detail' position.pk %}{% else %}{% url 'positions:position_list' %}{% endif %}"
                class="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-300">
-                Cancelar
+                {% trans "Cancelar" %}
             </a>
             <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
-                {% if position %}Guardar cambios{% else %}Crear posición{% endif %}
+                {% if position %}{% trans "Guardar cambios" %}{% else %}{% trans "Crear posición" %}{% endif %}
             </button>
         </div>
     </form>
@@ -130,7 +131,7 @@ function positionForm() {
             const title = document.getElementById('id_title')?.value;
             if (!title) {
                 this.aiError = true;
-                this.aiMessage = 'Escribe al menos el título del puesto antes de generar.';
+                this.aiMessage = '{% trans "Escribe al menos el título del puesto antes de generar." %}';
                 return;
             }
 
@@ -162,7 +163,7 @@ function positionForm() {
 
                 if (!response.ok) {
                     this.aiError = true;
-                    this.aiMessage = data.error || 'Error al generar contenido.';
+                    this.aiMessage = data.error || '{% trans "Error al generar contenido." %}';
                     return;
                 }
 
@@ -181,10 +182,10 @@ function positionForm() {
                 }
 
                 this.aiError = false;
-                this.aiMessage = 'Contenido generado con IA. Revisa y edita antes de guardar.';
+                this.aiMessage = '{% trans "Contenido generado con IA. Revisa y edita antes de guardar." %}';
             } catch (err) {
                 this.aiError = true;
-                this.aiMessage = 'Error de conexión. Inténtalo de nuevo.';
+                this.aiMessage = '{% trans "Error de conexión. Inténtalo de nuevo." %}';
             } finally {
                 this.loading = false;
             }

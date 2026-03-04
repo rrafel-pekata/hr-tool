@@ -54,7 +54,7 @@ document.addEventListener('alpine:init', function () {
                 })
                 .catch(function () {
                     self.loading = false;
-                    self.messages.push({ role: 'bot', content: '<p>Error de conexión. Inténtalo de nuevo.</p>' });
+                    self.messages.push({ role: 'bot', content: '<p>' + gettext('Error de conexión. Inténtalo de nuevo.') + '</p>' });
                     self.scrollToBottom();
                 });
             },

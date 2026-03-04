@@ -1,0 +1,543 @@
+# Catalan translations for Pekata ATS.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 16:59+0100\n"
+"PO-Revision-Date: 2026-03-04 12:00+0100\n"
+"Last-Translator: Pekata ATS\n"
+"Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: static/js/chatbot.js:57
+msgid "Error de conexión. Inténtalo de nuevo."
+msgstr "Error de connexió. Torna-ho a provar."
+
+#: static/js/notifications.js:73
+msgid "ahora"
+msgstr "ara"
+
+#: static/js/notifications.js:74
+msgid "min"
+msgstr "min"
+
+#: static/js/notifications.js:75
+msgid "h"
+msgstr "h"
+
+#: static/js/notifications.js:76
+msgid "d"
+msgstr "d"
+
+#: static/js/tours.js:47
+msgid "Siguiente"
+msgstr "Següent"
+
+#: static/js/tours.js:48
+msgid "Anterior"
+msgstr "Anterior"
+
+#: static/js/tours.js:49
+msgid "Entendido"
+msgstr "Entès"
+
+#: static/js/tours.js:50
+msgid "de"
+msgstr "de"
+
+#: static/js/tours.js:66
+msgid "Bienvenido a Pekata ATS"
+msgstr "Benvingut a Pekata ATS"
+
+#: static/js/tours.js:67
+msgid ""
+"Lo primero que necesitas es crear tu empresa. Toda la gestión de posiciones "
+"y candidatos se organiza dentro de una empresa."
+msgstr ""
+"El primer que necessites és crear la teva empresa. Tota la gestió de "
+"posicions i candidats s'organitza dins d'una empresa."
+
+#: static/js/tours.js:73
+msgid "Crear empresa"
+msgstr "Crear empresa"
+
+#: static/js/tours.js:74
+msgid ""
+"Haz clic aquí para crear tu primera empresa. Rellena los datos básicos y, si "
+"quieres, usa la IA para mejorar la descripción."
+msgstr ""
+"Fes clic aquí per crear la teva primera empresa. Omple les dades bàsiques "
+"i, si vols, utilitza la IA per millorar la descripció."
+
+#: static/js/tours.js:80
+msgid "Tus empresas"
+msgstr "Les teves empreses"
+
+#: static/js/tours.js:81
+msgid ""
+"Aquí aparecerán tus empresas. Haz clic en cualquiera para ver su dashboard "
+"con posiciones, candidatos y KPIs."
+msgstr ""
+"Aquí apareixeran les teves empreses. Fes clic en qualsevol per veure el seu "
+"tauler amb posicions, candidats i KPIs."
+
+#: static/js/tours.js:89
+msgid "Crear tu empresa"
+msgstr "Crear la teva empresa"
+
+#: static/js/tours.js:90
+msgid ""
+"Completa los datos de tu empresa. Cuanta más información añadas, mejores "
+"serán las sugerencias de la IA al generar ofertas de trabajo."
+msgstr ""
+"Completa les dades de la teva empresa. Com més informació hi afegeixis, "
+"millors seran els suggeriments de la IA en generar ofertes de treball."
+
+#: static/js/tours.js:96
+msgid "Datos básicos"
+msgstr "Dades bàsiques"
+
+#: static/js/tours.js:97
+msgid ""
+"Nombre, descripción, web y logo. La descripción es especialmente importante: "
+"la IA la usará como contexto para generar ofertas."
+msgstr ""
+"Nom, descripció, web i logotip. La descripció és especialment important: "
+"la IA la farà servir com a context per generar ofertes."
+
+#: static/js/tours.js:103
+msgid "Mejorar con IA"
+msgstr "Millorar amb IA"
+
+#: static/js/tours.js:104
+msgid ""
+"Escribe al menos el nombre y pulsa este botón. La IA generará una "
+"descripción profesional, beneficios y cultura automáticamente."
+msgstr ""
+"Escriu almenys el nom i prem aquest botó. La IA generarà una descripció "
+"professional, beneficis i cultura automàticament."
+
+#: static/js/tours.js:110
+msgid "Info para ofertas"
+msgstr "Info per a ofertes"
+
+#: static/js/tours.js:111
+msgid ""
+"Beneficios, jornada, política de remoto y cultura. Esta información se "
+"reutilizará en todas las ofertas que generes con IA."
+msgstr ""
+"Beneficis, jornada, política de teletreball i cultura. Aquesta informació "
+"es reutilitzarà en totes les ofertes que generis amb IA."
+
+#: static/js/tours.js:120
+msgid "Panel de empresa"
+msgstr "Tauler d'empresa"
+
+#: static/js/tours.js:121
+msgid ""
+"Aquí verás la información general de la empresa: nombre, logo y enlace web."
+msgstr ""
+"Aquí veuràs la informació general de l'empresa: nom, logotip i enllaç web."
+
+#: static/js/tours.js:127
+msgid "Indicadores clave"
+msgstr "Indicadors clau"
+
+#: static/js/tours.js:128
+msgid ""
+"Estos KPIs te muestran el total de posiciones, las activas y el número de "
+"candidatos de un vistazo."
+msgstr ""
+"Aquests KPIs et mostren el total de posicions, les actives i el nombre de "
+"candidats d'un cop d'ull."
+
+#: static/js/tours.js:134
+msgid "Tabla de posiciones"
+msgstr "Taula de posicions"
+
+#: static/js/tours.js:135
+msgid ""
+"Aquí aparecen todas las posiciones de la empresa con su estado, tipo y "
+"candidatos."
+msgstr ""
+"Aquí apareixen totes les posicions de l'empresa amb el seu estat, tipus i "
+"candidats."
+
+#: static/js/tours.js:141
+msgid "Editar empresa"
+msgstr "Editar empresa"
+
+#: static/js/tours.js:142
+msgid ""
+"Haz clic aquí para modificar los datos de la empresa (nombre, web, logo...)."
+msgstr ""
+"Fes clic aquí per modificar les dades de l'empresa (nom, web, logotip...)."
+
+#: static/js/tours.js:148
+msgid "Crear posición"
+msgstr "Crear posició"
+
+#: static/js/tours.js:149
+msgid "Crea una nueva oferta de trabajo para esta empresa."
+msgstr "Crea una nova oferta de treball per a aquesta empresa."
+
+#: static/js/tours.js:158
+msgid "Filtros de estado"
+msgstr "Filtres d'estat"
+
+#: static/js/tours.js:159
+msgid ""
+"Filtra las posiciones por estado: todas, publicadas, borradores, pausadas o "
+"cerradas."
+msgstr ""
+"Filtra les posicions per estat: totes, publicades, esborranys, pausades o "
+"tancades."
+
+#: static/js/tours.js:165
+msgid "Listado de posiciones"
+msgstr "Llistat de posicions"
+
+#: static/js/tours.js:166
+msgid ""
+"Haz clic en cualquier posición para ver su detalle, candidatos y case "
+"studies."
+msgstr ""
+"Fes clic en qualsevol posició per veure el seu detall, candidats i case "
+"studies."
+
+#: static/js/tours.js:172
+msgid "Nueva posición"
+msgstr "Nova posició"
+
+#: static/js/tours.js:173
+msgid "Crea una nueva oferta de trabajo desde aquí."
+msgstr "Crea una nova oferta de treball des d'aquí."
+
+#: static/js/tours.js:182
+msgid "Ciclo de vida"
+msgstr "Cicle de vida"
+
+#: static/js/tours.js:183
+msgid ""
+"Cambia el estado de la posición: publícala, páusala o ciérrala según avance "
+"el proceso."
+msgstr ""
+"Canvia l'estat de la posició: publica-la, pausa-la o tanca-la segons avanci "
+"el procés."
+
+#: static/js/tours.js:189
+msgid "Descripción de la oferta"
+msgstr "Descripció de l'oferta"
+
+#: static/js/tours.js:190
+msgid ""
+"Contenido de la oferta: descripción, requisitos, beneficios y sobre la "
+"empresa."
+msgstr ""
+"Contingut de l'oferta: descripció, requisits, beneficis i sobre l'empresa."
+
+#: static/js/tours.js:196
+msgid "Candidatos"
+msgstr "Candidats"
+
+#: static/js/tours.js:197
+msgid ""
+"Listado de candidatos para esta posición. Haz clic en uno para ver su perfil "
+"completo."
+msgstr ""
+"Llistat de candidats per a aquesta posició. Fes clic en un per veure el seu "
+"perfil complet."
+
+#: static/js/tours.js:203
+msgid "Datos de la oferta"
+msgstr "Dades de l'oferta"
+
+#: static/js/tours.js:204
+msgid ""
+"Resumen con departamento, ubicación, tipo de empleo, salario y fechas clave."
+msgstr ""
+"Resum amb departament, ubicació, tipus de feina, salari i dates clau."
+
+#: static/js/tours.js:210
+msgid "Case Studies"
+msgstr "Case Studies"
+
+#: static/js/tours.js:211
+msgid ""
+"Si la posición incluye case study, aquí verás los casos creados y podrás "
+"añadir nuevos."
+msgstr ""
+"Si la posició inclou case study, aquí veuràs els casos creats i podràs "
+"afegir-ne de nous."
+
+#: static/js/tours.js:220
+msgid "Información básica"
+msgstr "Informació bàsica"
+
+#: static/js/tours.js:221
+msgid "Completa el título, departamento, ubicación, tipo de empleo y salario."
+msgstr "Completa el títol, departament, ubicació, tipus de feina i salari."
+
+#: static/js/tours.js:227 static/js/tours.js:366
+msgid "Generar con IA"
+msgstr "Generar amb IA"
+
+#: static/js/tours.js:228
+msgid ""
+"Escribe al menos el título y pulsa este botón. La IA generará descripción, "
+"requisitos y beneficios automáticamente."
+msgstr ""
+"Escriu almenys el títol i prem aquest botó. La IA generarà descripció, "
+"requisits i beneficis automàticament."
+
+#: static/js/tours.js:234
+msgid "Contenido de la oferta"
+msgstr "Contingut de l'oferta"
+
+#: static/js/tours.js:235
+msgid ""
+"Edita o revisa el contenido generado. Puedes modificarlo libremente antes de "
+"guardar."
+msgstr ""
+"Edita o revisa el contingut generat. Pots modificar-lo lliurement abans de "
+"desar."
+
+#: static/js/tours.js:241
+msgid "Opciones"
+msgstr "Opcions"
+
+#: static/js/tours.js:242
+msgid ""
+"Activa el case study si quieres enviar pruebas prácticas a los candidatos de "
+"esta posición."
+msgstr ""
+"Activa el case study si vols enviar proves pràctiques als candidats "
+"d'aquesta posició."
+
+#: static/js/tours.js:251
+msgid "Sube el CV"
+msgstr "Puja el CV"
+
+#: static/js/tours.js:252
+msgid ""
+"Sube un PDF y la IA extraerá automáticamente los datos del candidato "
+"(nombre, email, teléfono, LinkedIn)."
+msgstr ""
+"Puja un PDF i la IA n'extreurà automàticament les dades del candidat "
+"(nom, correu electrònic, telèfon, LinkedIn)."
+
+#: static/js/tours.js:258
+msgid "Datos personales"
+msgstr "Dades personals"
+
+#: static/js/tours.js:259
+msgid ""
+"Estos campos se autocompletarán con la información extraída del CV. Puedes "
+"editarlos si necesitas corregir algo."
+msgstr ""
+"Aquests camps s'autocompletaran amb la informació extreta del CV. Pots "
+"editar-los si necessites corregir alguna cosa."
+
+#: static/js/tours.js:268
+msgid "Estado del pipeline"
+msgstr "Estat del pipeline"
+
+#: static/js/tours.js:269
+msgid ""
+"Cambia el estado del candidato a medida que avanza en el proceso de "
+"selección."
+msgstr ""
+"Canvia l'estat del candidat a mesura que avança en el procés de selecció."
+
+#: static/js/tours.js:275
+msgid "Valoración"
+msgstr "Valoració"
+
+#: static/js/tours.js:276
+msgid "Puntúa al candidato de 1 a 5 estrellas para priorizar entre candidatos."
+msgstr "Puntua el candidat d'1 a 5 estrelles per prioritzar entre candidats."
+
+#: static/js/tours.js:282
+msgid "Currículum"
+msgstr "Currículum"
+
+#: static/js/tours.js:283
+msgid ""
+"Visualiza, descarga o sube un nuevo CV. La IA lo analizará automáticamente."
+msgstr ""
+"Visualitza, descarrega o puja un nou CV. La IA l'analitzarà automàticament."
+
+#: static/js/tours.js:289
+msgid "Análisis IA"
+msgstr "Anàlisi IA"
+
+#: static/js/tours.js:290
+msgid ""
+"Resumen generado por IA con puntos fuertes, débiles y puntuación de encaje "
+"con la posición."
+msgstr ""
+"Resum generat per IA amb punts forts, febles i puntuació d'encaix amb la "
+"posició."
+
+#: static/js/tours.js:296
+msgid "Entrevistas"
+msgstr "Entrevistes"
+
+#: static/js/tours.js:297
+msgid "Programa, consulta y gestiona las entrevistas del candidato."
+msgstr "Programa, consulta i gestiona les entrevistes del candidat."
+
+#: static/js/tours.js:303
+msgid "Casos prácticos"
+msgstr "Casos pràctics"
+
+#: static/js/tours.js:304
+msgid "Envía case studies y consulta el estado de las entregas."
+msgstr "Envia case studies i consulta l'estat de les entregues."
+
+#: static/js/tours.js:310
+msgid "Evaluación IA"
+msgstr "Avaluació IA"
+
+#: static/js/tours.js:311
+msgid ""
+"Genera una evaluación global del candidato usando toda la información "
+"disponible (CV, entrevistas, case studies)."
+msgstr ""
+"Genera una avaluació global del candidat utilitzant tota la informació "
+"disponible (CV, entrevistes, case studies)."
+
+#: static/js/tours.js:317
+msgid "Notas del reclutador"
+msgstr "Notes del reclutador"
+
+#: static/js/tours.js:318
+msgid ""
+"Espacio libre para anotar impresiones, recordatorios o comentarios sobre el "
+"candidato."
+msgstr ""
+"Espai lliure per anotar impressions, recordatoris o comentaris sobre el "
+"candidat."
+
+#: static/js/tours.js:324
+msgid "Acciones rápidas"
+msgstr "Accions ràpides"
+
+#: static/js/tours.js:325
+msgid ""
+"Accesos directos para programar entrevistas, generar casos prácticos o "
+"evaluaciones IA."
+msgstr ""
+"Accessos directes per programar entrevistes, generar casos pràctics o "
+"avaluacions IA."
+
+#: static/js/tours.js:331
+msgid "Resumen IA (sidebar)"
+msgstr "Resum IA (barra lateral)"
+
+#: static/js/tours.js:332
+msgid ""
+"Vista compacta del análisis IA con puntos fuertes y débiles en la barra "
+"lateral."
+msgstr ""
+"Vista compacta de l'anàlisi IA amb punts forts i febles a la barra lateral."
+
+#: static/js/tours.js:340
+msgid "Programar entrevista"
+msgstr "Programar entrevista"
+
+#: static/js/tours.js:341
+msgid ""
+"Completa la fecha, hora, duración, entrevistador y ubicación o enlace de "
+"videollamada para programar la entrevista."
+msgstr ""
+"Completa la data, hora, durada, entrevistador i ubicació o enllaç de "
+"videotrucada per programar l'entrevista."
+
+#: static/js/tours.js:349
+msgid "Editar entrevista"
+msgstr "Editar entrevista"
+
+#: static/js/tours.js:350
+msgid ""
+"Tras realizar la entrevista, actualiza el estado, añade notas, puntos "
+"fuertes/débiles y una puntuación global."
+msgstr ""
+"Després de fer l'entrevista, actualitza l'estat, afegeix notes, punts "
+"forts/febles i una puntuació global."
+
+#: static/js/tours.js:359
+msgid "Tu idea"
+msgstr "La teva idea"
+
+#: static/js/tours.js:360
+msgid ""
+"Escribe el título y una descripción breve de lo que quieres evaluar. La IA "
+"se encargará del resto."
+msgstr ""
+"Escriu el títol i una descripció breu del que vols avaluar. La IA "
+"s'encarregarà de la resta."
+
+#: static/js/tours.js:366
+msgid ""
+"Pulsa aquí para que la IA genere el contenido completo del case study "
+"basándose en tu briefing."
+msgstr ""
+"Prem aquí perquè la IA generi el contingut complet del case study "
+"basant-se en el teu briefing."
+
+#: static/js/tours.js:373
+msgid "Contenido generado"
+msgstr "Contingut generat"
+
+#: static/js/tours.js:374
+msgid ""
+"Revisa y edita el case study y los criterios de evaluación antes de "
+"guardarlo."
+msgstr ""
+"Revisa i edita el case study i els criteris d'avaluació abans de desar-lo."
+
+#: static/js/tours.js:382
+msgid "Caso práctico con IA"
+msgstr "Cas pràctic amb IA"
+
+#: static/js/tours.js:383
+msgid ""
+"La IA genera automáticamente un caso práctico personalizado para este "
+"candidato basándose en su perfil y la posición. Puedes editar el resultado "
+"antes de enviarlo."
+msgstr ""
+"La IA genera automàticament un cas pràctic personalitzat per a aquest "
+"candidat basant-se en el seu perfil i la posició. Pots editar el resultat "
+"abans d'enviar-lo."
+
+#: static/js/tours.js:392
+msgid "Generar evaluación"
+msgstr "Generar avaluació"
+
+#: static/js/tours.js:393
+msgid ""
+"Pulsa este botón para que la IA analice toda la información del candidato "
+"(CV, entrevistas, case studies) y genere una evaluación global."
+msgstr ""
+"Prem aquest botó perquè la IA analitzi tota la informació del candidat "
+"(CV, entrevistes, case studies) i generi una avaluació global."
+
+#: static/js/tours.js:399
+msgid "Puntuaciones"
+msgstr "Puntuacions"
+
+#: static/js/tours.js:400
+msgid ""
+"Desglose de puntuaciones: global, CV, entrevista y case study, con una "
+"recomendación final (contratar, esperar o rechazar)."
+msgstr ""
+"Desglossament de puntuacions: global, CV, entrevista i case study, amb una "
+"recomanació final (contractar, esperar o rebutjar)."

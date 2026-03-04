@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block tour_page %}company_form{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
-<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
-<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'tenants:company_list' %}" class="hover:text-gray-700">Empresas</a></li>
+<li><a href="/" class="hover:text-gray-700">{% trans "Inicio" %}</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'tenants:company_list' %}" class="hover:text-gray-700">{% trans "Empresas" %}</a></li>
 <li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{{ title }}</span></li>
 {% endblock %}
 
@@ -28,7 +29,7 @@
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
             </template>
-            <span x-text="loading ? 'Generando...' : 'Mejorar con IA'"></span>
+            <span x-text="loading ? '{% trans "Generando..." %}' : '{% trans "Mejorar con IA" %}'"></span>
         </button>
     </div>
 
@@ -45,31 +46,31 @@
 
         <!-- Datos básicos -->
         <div id="tour-company-basic" class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-            <h2 class="text-base font-semibold text-gray-900">Datos básicos</h2>
+            <h2 class="text-base font-semibold text-gray-900">{% trans "Datos básicos" %}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+                    <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Nombre" %} *</label>
                     {{ form.name }}
                     {% if form.name.errors %}<p class="mt-1 text-sm text-red-600">{{ form.name.errors.0 }}</p>{% endif %}
                 </div>
                 <div>
-                    <label for="{{ form.slug.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Slug *</label>
+                    <label for="{{ form.slug.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Slug" %} *</label>
                     {{ form.slug }}
                     {% if form.slug.errors %}<p class="mt-1 text-sm text-red-600">{{ form.slug.errors.0 }}</p>{% endif %}
                 </div>
             </div>
             <div>
-                <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Descripción de la empresa</label>
+                <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Descripción de la empresa" %}</label>
                 {{ form.description }}
-                <p class="mt-1 text-xs text-gray-500">Qué hace la empresa, sector, misión. Se usará en las ofertas generadas con IA.</p>
+                <p class="mt-1 text-xs text-gray-500">{% trans "Qué hace la empresa, sector, misión. Se usará en las ofertas generadas con IA." %}</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="{{ form.website.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Web corporativa</label>
+                    <label for="{{ form.website.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Web corporativa" %}</label>
                     {{ form.website }}
                 </div>
                 <div>
-                    <label for="{{ form.logo.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Logo</label>
+                    <label for="{{ form.logo.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Logo" %}</label>
                     {{ form.logo }}
                 </div>
             </div>
@@ -78,42 +79,42 @@
         <!-- Info para ofertas -->
         <div id="tour-company-offers" class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
             <div>
-                <h2 class="text-base font-semibold text-gray-900">Información general para ofertas</h2>
-                <p class="text-sm text-gray-500 mt-1">Esta información se usará como base al generar ofertas de trabajo con IA.</p>
+                <h2 class="text-base font-semibold text-gray-900">{% trans "Información general para ofertas" %}</h2>
+                <p class="text-sm text-gray-500 mt-1">{% trans "Esta información se usará como base al generar ofertas de trabajo con IA." %}</p>
             </div>
             <div>
-                <label for="{{ form.benefits.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Beneficios y ventajas</label>
+                <label for="{{ form.benefits.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Beneficios y ventajas" %}</label>
                 {{ form.benefits }}
-                <p class="mt-1 text-xs text-gray-500">Seguro médico, formación, bonus, fruta, gym, plan de carrera...</p>
+                <p class="mt-1 text-xs text-gray-500">{% trans "Seguro médico, formación, bonus, fruta, gym, plan de carrera..." %}</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="{{ form.work_schedule.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Jornada laboral</label>
+                    <label for="{{ form.work_schedule.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Jornada laboral" %}</label>
                     {{ form.work_schedule }}
                 </div>
                 <div>
-                    <label for="{{ form.remote_policy.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Trabajo remoto</label>
+                    <label for="{{ form.remote_policy.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Trabajo remoto" %}</label>
                     {{ form.remote_policy }}
                 </div>
             </div>
             <div>
-                <label for="{{ form.office_location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Ubicación oficina</label>
+                <label for="{{ form.office_location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Ubicación oficina" %}</label>
                 {{ form.office_location }}
             </div>
             <div>
-                <label for="{{ form.culture.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Cultura y valores</label>
+                <label for="{{ form.culture.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Cultura y valores" %}</label>
                 {{ form.culture }}
-                <p class="mt-1 text-xs text-gray-500">Ambiente de trabajo, valores, tipo de equipo...</p>
+                <p class="mt-1 text-xs text-gray-500">{% trans "Ambiente de trabajo, valores, tipo de equipo..." %}</p>
             </div>
         </div>
 
         <div class="flex items-center justify-end gap-3">
             <a href="{% if company %}{% url 'tenants:company_detail' company.pk %}{% else %}{% url 'tenants:company_list' %}{% endif %}"
                class="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-300">
-                Cancelar
+                {% trans "Cancelar" %}
             </a>
             <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
-                {% if company %}Guardar cambios{% else %}Crear empresa{% endif %}
+                {% if company %}{% trans "Guardar cambios" %}{% else %}{% trans "Crear empresa" %}{% endif %}
             </button>
         </div>
     </form>
@@ -132,7 +133,7 @@ function companyForm() {
             const name = document.getElementById('id_name')?.value;
             if (!name) {
                 this.aiError = true;
-                this.aiMessage = 'Escribe al menos el nombre de la empresa antes de generar.';
+                this.aiMessage = '{% trans "Escribe al menos el nombre de la empresa antes de generar." %}';
                 return;
             }
 
@@ -165,7 +166,7 @@ function companyForm() {
 
                 if (!response.ok) {
                     this.aiError = true;
-                    this.aiMessage = data.error || 'Error al generar contenido.';
+                    this.aiMessage = data.error || '{% trans "Error al generar contenido." %}';
                     return;
                 }
 
@@ -176,10 +177,10 @@ function companyForm() {
                 if (data.culture) document.getElementById('id_culture').value = data.culture;
 
                 this.aiError = false;
-                this.aiMessage = 'Contenido generado con IA. Revisa y edita antes de guardar.';
+                this.aiMessage = '{% trans "Contenido generado con IA. Revisa y edita antes de guardar." %}';
             } catch (err) {
                 this.aiError = true;
-                this.aiMessage = 'Error de conexión. Inténtalo de nuevo.';
+                this.aiMessage = '{% trans "Error de conexión. Inténtalo de nuevo." %}';
             } finally {
                 this.loading = false;
             }

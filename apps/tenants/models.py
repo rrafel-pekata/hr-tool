@@ -1,27 +1,28 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import SoftDeleteMixin, TimeStampedModel
 
 
 class Company(SoftDeleteMixin, TimeStampedModel):
     """Empresa / Tenant."""
-    name = models.CharField('Nombre', max_length=200)
-    slug = models.SlugField('Slug', unique=True, max_length=200)
-    description = models.TextField('Descripción', blank=True, help_text='Qué hace la empresa, sector, misión...')
-    logo = models.ImageField('Logo', upload_to='companies/logos/', blank=True)
-    website = models.URLField('Web corporativa', blank=True)
+    name = models.CharField(_('Nombre'), max_length=200)
+    slug = models.SlugField(_('Slug'), unique=True, max_length=200)
+    description = models.TextField(_('Descripción'), blank=True, help_text=_('Qué hace la empresa, sector, misión...'))
+    logo = models.ImageField(_('Logo'), upload_to='companies/logos/', blank=True)
+    website = models.URLField(_('Web corporativa'), blank=True)
     # Info general para ofertas
-    benefits = models.TextField('Beneficios y ventajas', blank=True, help_text='Qué ofrece la empresa a los trabajadores: seguro, formación, fruta, gym...')
-    work_schedule = models.CharField('Jornada laboral', max_length=200, blank=True, help_text='Ej: L-V 9:00-18:00, jornada flexible...')
-    remote_policy = models.CharField('Política de trabajo remoto', max_length=200, blank=True, help_text='Ej: 100% remoto, híbrido 3 días oficina, presencial...')
-    office_location = models.CharField('Ubicación oficina', max_length=300, blank=True, help_text='Dirección o zona de la oficina principal')
-    culture = models.TextField('Cultura y valores', blank=True, help_text='Valores de la empresa, ambiente de trabajo, equipo...')
-    is_active = models.BooleanField('Activa', default=True)
+    benefits = models.TextField(_('Beneficios y ventajas'), blank=True, help_text=_('Qué ofrece la empresa a los trabajadores: seguro, formación, fruta, gym...'))
+    work_schedule = models.CharField(_('Jornada laboral'), max_length=200, blank=True, help_text=_('Ej: L-V 9:00-18:00, jornada flexible...'))
+    remote_policy = models.CharField(_('Política de trabajo remoto'), max_length=200, blank=True, help_text=_('Ej: 100% remoto, híbrido 3 días oficina, presencial...'))
+    office_location = models.CharField(_('Ubicación oficina'), max_length=300, blank=True, help_text=_('Dirección o zona de la oficina principal'))
+    culture = models.TextField(_('Cultura y valores'), blank=True, help_text=_('Valores de la empresa, ambiente de trabajo, equipo...'))
+    is_active = models.BooleanField(_('Activa'), default=True)
 
     class Meta:
-        verbose_name = 'Empresa'
-        verbose_name_plural = 'Empresas'
+        verbose_name = _('Empresa')
+        verbose_name_plural = _('Empresas')
         ordering = ['name']
 
     def __str__(self):
@@ -32,8 +33,8 @@ class UserProfile(models.Model):
     """Perfil de usuario vinculado a una empresa. DEPRECATED: usar CompanyMembership."""
 
     class Role(models.TextChoices):
-        ADMIN = 'admin', 'Admin'
-        RECRUITER = 'recruiter', 'Recruiter'
+        ADMIN = 'admin', _('Admin')
+        RECRUITER = 'recruiter', _('Recruiter')
 
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
@@ -44,18 +45,18 @@ class UserProfile(models.Model):
         Company,
         on_delete=models.CASCADE,
         related_name='members',
-        verbose_name='Empresa',
+        verbose_name=_('Empresa'),
     )
     role = models.CharField(
-        'Rol',
+        _('Rol'),
         max_length=20,
         choices=Role.choices,
         default=Role.RECRUITER,
     )
 
     class Meta:
-        verbose_name = 'Perfil de usuario'
-        verbose_name_plural = 'Perfiles de usuario'
+        verbose_name = _('Perfil de usuario')
+        verbose_name_plural = _('Perfiles de usuario')
 
     def __str__(self):
         return f'{self.user.get_full_name()} ({self.company.name})'
@@ -69,8 +70,8 @@ class CompanyMembership(models.Model):
     """Membresía usuario ↔ empresa (through model)."""
 
     class Role(models.TextChoices):
-        ADMIN = 'admin', 'Admin'
-        RECRUITER = 'recruiter', 'Recruiter'
+        ADMIN = 'admin', _('Admin')
+        RECRUITER = 'recruiter', _('Recruiter')
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -81,18 +82,18 @@ class CompanyMembership(models.Model):
         Company,
         on_delete=models.CASCADE,
         related_name='memberships',
-        verbose_name='Empresa',
+        verbose_name=_('Empresa'),
     )
     role = models.CharField(
-        'Rol',
+        _('Rol'),
         max_length=20,
         choices=Role.choices,
         default=Role.RECRUITER,
     )
 
     class Meta:
-        verbose_name = 'Membresía de empresa'
-        verbose_name_plural = 'Membresías de empresa'
+        verbose_name = _('Membresía de empresa')
+        verbose_name_plural = _('Membresías de empresa')
         unique_together = [('user', 'company')]
 
     def __str__(self):
@@ -109,14 +110,14 @@ class Department(TimeStampedModel):
         Company,
         on_delete=models.CASCADE,
         related_name='departments',
-        verbose_name='Empresa',
+        verbose_name=_('Empresa'),
     )
-    name = models.CharField('Nombre', max_length=100)
-    description = models.TextField('Descripción', blank=True)
+    name = models.CharField(_('Nombre'), max_length=100)
+    description = models.TextField(_('Descripción'), blank=True)
 
     class Meta:
-        verbose_name = 'Departamento'
-        verbose_name_plural = 'Departamentos'
+        verbose_name = _('Departamento')
+        verbose_name_plural = _('Departamentos')
         unique_together = [('company', 'name')]
         ordering = ['name']
 

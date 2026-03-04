@@ -7,6 +7,7 @@ from django.db.models import Count, OuterRef, Subquery
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from apps.core.services import call_claude
@@ -58,7 +59,7 @@ def position_list(request):
 def position_create(request):
     """Crear nueva posición."""
     if not request.company:
-        messages.error(request, 'Debes tener una empresa asignada para crear posiciones.')
+        messages.error(request, _('Debes tener una empresa asignada para crear posiciones.'))
         return redirect('core:select_company')
 
     if request.method == 'POST':
@@ -67,13 +68,13 @@ def position_create(request):
             position = form.save(commit=False)
             position.company = request.company
             position.save()
-            messages.success(request, f'Posición "{position.title}" creada correctamente.')
+            messages.success(request, _('Posición "%(title)s" creada correctamente.') % {'title': position.title})
             return redirect('positions:position_detail', pk=position.pk)
     else:
         form = PositionForm(company=request.company)
     return render(request, 'positions/position_form.html', {
         'form': form,
-        'title': 'Nueva posición',
+        'title': _('Nueva posición'),
     })
 
 
@@ -85,14 +86,14 @@ def position_edit(request, pk):
         form = PositionForm(request.POST, instance=position, company=request.company)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Posición actualizada correctamente.')
+            messages.success(request, _('Posición actualizada correctamente.'))
             return redirect('positions:position_detail', pk=position.pk)
     else:
         form = PositionForm(instance=position, company=request.company)
     return render(request, 'positions/position_form.html', {
         'form': form,
         'position': position,
-        'title': f'Editar: {position.title}',
+        'title': _('Editar: %(title)s') % {'title': position.title},
     })
 
 
@@ -136,17 +137,17 @@ def position_status(request, pk):
         if action == 'publish':
             position.status = Position.Status.PUBLISHED
             position.published_at = timezone.now()
-            messages.success(request, 'Posición publicada.')
+            messages.success(request, _('Posición publicada.'))
         elif action == 'pause':
             position.status = Position.Status.PAUSED
-            messages.success(request, 'Posición pausada.')
+            messages.success(request, _('Posición pausada.'))
         elif action == 'close':
             position.status = Position.Status.CLOSED
             position.closed_at = timezone.now()
-            messages.success(request, 'Posición cerrada.')
+            messages.success(request, _('Posición cerrada.'))
         elif action == 'draft':
             position.status = Position.Status.DRAFT
-            messages.success(request, 'Posición movida a borrador.')
+            messages.success(request, _('Posición movida a borrador.'))
         position.save()
         if action in ('publish', 'close'):
             notify_company(
@@ -166,7 +167,7 @@ def position_delete(request, pk):
     """Soft-delete de posición."""
     position = get_object_or_404(Position, pk=pk, company=request.company)
     position.soft_delete()
-    messages.success(request, f'Posición "{position.title}" eliminada.')
+    messages.success(request, _('Posición "%(title)s" eliminada.') % {'title': position.title})
     return redirect('positions:position_list')
 
 
@@ -175,12 +176,12 @@ def position_delete(request, pk):
 def position_ai_generate(request):
     """Endpoint AJAX: mejorar oferta con IA."""
     if not request.company:
-        return JsonResponse({'error': 'Sin empresa asignada.'}, status=400)
+        return JsonResponse({'error': _('Sin empresa asignada.')}, status=400)
 
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
-        return JsonResponse({'error': 'JSON inválido.'}, status=400)
+        return JsonResponse({'error': _('JSON inválido.')}, status=400)
 
     company = request.company
     # Resolve department name from ID (the select sends a UUID)
@@ -223,6 +224,6 @@ def position_ai_generate(request):
     except Exception:
         logger.exception("Error llamando a Claude API")
         return JsonResponse(
-            {'error': 'Error al conectar con la IA. Inténtalo de nuevo.'},
+            {'error': _('Error al conectar con la IA. Inténtalo de nuevo.')},
             status=500,
         )

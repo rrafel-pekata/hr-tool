@@ -44,10 +44,10 @@
             stagePadding: 8,
             stageRadius: 8,
             popoverClass: 'pekata-tour',
-            nextBtnText: 'Siguiente',
-            prevBtnText: 'Anterior',
-            doneBtnText: 'Entendido',
-            progressText: '{{current}} de {{total}}',
+            nextBtnText: gettext('Siguiente'),
+            prevBtnText: gettext('Anterior'),
+            doneBtnText: gettext('Entendido'),
+            progressText: '{{current}} ' + gettext('de') + ' {{total}}',
             steps: steps,
             onDestroyStarted: function () {
                 if (!opts.skipMark) markDone(pageKey);
@@ -63,22 +63,22 @@
         company_list: [
             {
                 popover: {
-                    title: 'Bienvenido a Pekata ATS',
-                    description: 'Lo primero que necesitas es crear tu empresa. Toda la gestión de posiciones y candidatos se organiza dentro de una empresa.',
+                    title: gettext('Bienvenido a Pekata ATS'),
+                    description: gettext('Lo primero que necesitas es crear tu empresa. Toda la gestión de posiciones y candidatos se organiza dentro de una empresa.'),
                 },
             },
             {
                 element: '#tour-btn-new-company',
                 popover: {
-                    title: 'Crear empresa',
-                    description: 'Haz clic aquí para crear tu primera empresa. Rellena los datos básicos y, si quieres, usa la IA para mejorar la descripción.',
+                    title: gettext('Crear empresa'),
+                    description: gettext('Haz clic aquí para crear tu primera empresa. Rellena los datos básicos y, si quieres, usa la IA para mejorar la descripción.'),
                 },
             },
             {
                 element: '#tour-company-grid',
                 popover: {
-                    title: 'Tus empresas',
-                    description: 'Aquí aparecerán tus empresas. Haz clic en cualquiera para ver su dashboard con posiciones, candidatos y KPIs.',
+                    title: gettext('Tus empresas'),
+                    description: gettext('Aquí aparecerán tus empresas. Haz clic en cualquiera para ver su dashboard con posiciones, candidatos y KPIs.'),
                 },
             },
         ],
@@ -86,29 +86,29 @@
         company_form: [
             {
                 popover: {
-                    title: 'Crear tu empresa',
-                    description: 'Completa los datos de tu empresa. Cuanta más información añadas, mejores serán las sugerencias de la IA al generar ofertas de trabajo.',
+                    title: gettext('Crear tu empresa'),
+                    description: gettext('Completa los datos de tu empresa. Cuanta más información añadas, mejores serán las sugerencias de la IA al generar ofertas de trabajo.'),
                 },
             },
             {
                 element: '#tour-company-basic',
                 popover: {
-                    title: 'Datos básicos',
-                    description: 'Nombre, descripción, web y logo. La descripción es especialmente importante: la IA la usará como contexto para generar ofertas.',
+                    title: gettext('Datos básicos'),
+                    description: gettext('Nombre, descripción, web y logo. La descripción es especialmente importante: la IA la usará como contexto para generar ofertas.'),
                 },
             },
             {
                 element: '#tour-company-ai-btn',
                 popover: {
-                    title: 'Mejorar con IA',
-                    description: 'Escribe al menos el nombre y pulsa este botón. La IA generará una descripción profesional, beneficios y cultura automáticamente.',
+                    title: gettext('Mejorar con IA'),
+                    description: gettext('Escribe al menos el nombre y pulsa este botón. La IA generará una descripción profesional, beneficios y cultura automáticamente.'),
                 },
             },
             {
                 element: '#tour-company-offers',
                 popover: {
-                    title: 'Info para ofertas',
-                    description: 'Beneficios, jornada, política de remoto y cultura. Esta información se reutilizará en todas las ofertas que generes con IA.',
+                    title: gettext('Info para ofertas'),
+                    description: gettext('Beneficios, jornada, política de remoto y cultura. Esta información se reutilizará en todas las ofertas que generes con IA.'),
                 },
             },
         ],
@@ -117,36 +117,36 @@
             {
                 element: '#tour-company-header',
                 popover: {
-                    title: 'Panel de empresa',
-                    description: 'Aquí verás la información general de la empresa: nombre, logo y enlace web.',
+                    title: gettext('Panel de empresa'),
+                    description: gettext('Aquí verás la información general de la empresa: nombre, logo y enlace web.'),
                 },
             },
             {
                 element: '#tour-company-kpis',
                 popover: {
-                    title: 'Indicadores clave',
-                    description: 'Estos KPIs te muestran el total de posiciones, las activas y el número de candidatos de un vistazo.',
+                    title: gettext('Indicadores clave'),
+                    description: gettext('Estos KPIs te muestran el total de posiciones, las activas y el número de candidatos de un vistazo.'),
                 },
             },
             {
                 element: '#tour-company-positions',
                 popover: {
-                    title: 'Tabla de posiciones',
-                    description: 'Aquí aparecen todas las posiciones de la empresa con su estado, tipo y candidatos.',
+                    title: gettext('Tabla de posiciones'),
+                    description: gettext('Aquí aparecen todas las posiciones de la empresa con su estado, tipo y candidatos.'),
                 },
             },
             {
                 element: '#tour-btn-edit-company',
                 popover: {
-                    title: 'Editar empresa',
-                    description: 'Haz clic aquí para modificar los datos de la empresa (nombre, web, logo...).',
+                    title: gettext('Editar empresa'),
+                    description: gettext('Haz clic aquí para modificar los datos de la empresa (nombre, web, logo...).'),
                 },
             },
             {
                 element: '#tour-btn-new-position',
                 popover: {
-                    title: 'Crear posición',
-                    description: 'Crea una nueva oferta de trabajo para esta empresa.',
+                    title: gettext('Crear posición'),
+                    description: gettext('Crea una nueva oferta de trabajo para esta empresa.'),
                 },
             },
         ],
@@ -155,22 +155,22 @@
             {
                 element: '#tour-position-filters',
                 popover: {
-                    title: 'Filtros de estado',
-                    description: 'Filtra las posiciones por estado: todas, publicadas, borradores, pausadas o cerradas.',
+                    title: gettext('Filtros de estado'),
+                    description: gettext('Filtra las posiciones por estado: todas, publicadas, borradores, pausadas o cerradas.'),
                 },
             },
             {
                 element: '#tour-position-table',
                 popover: {
-                    title: 'Listado de posiciones',
-                    description: 'Haz clic en cualquier posición para ver su detalle, candidatos y case studies.',
+                    title: gettext('Listado de posiciones'),
+                    description: gettext('Haz clic en cualquier posición para ver su detalle, candidatos y case studies.'),
                 },
             },
             {
                 element: '#tour-btn-new-position',
                 popover: {
-                    title: 'Nueva posición',
-                    description: 'Crea una nueva oferta de trabajo desde aquí.',
+                    title: gettext('Nueva posición'),
+                    description: gettext('Crea una nueva oferta de trabajo desde aquí.'),
                 },
             },
         ],
@@ -179,36 +179,36 @@
             {
                 element: '#tour-position-status',
                 popover: {
-                    title: 'Ciclo de vida',
-                    description: 'Cambia el estado de la posición: publícala, páusala o ciérrala según avance el proceso.',
+                    title: gettext('Ciclo de vida'),
+                    description: gettext('Cambia el estado de la posición: publícala, páusala o ciérrala según avance el proceso.'),
                 },
             },
             {
                 element: '#tour-position-description',
                 popover: {
-                    title: 'Descripción de la oferta',
-                    description: 'Contenido de la oferta: descripción, requisitos, beneficios y sobre la empresa.',
+                    title: gettext('Descripción de la oferta'),
+                    description: gettext('Contenido de la oferta: descripción, requisitos, beneficios y sobre la empresa.'),
                 },
             },
             {
                 element: '#tour-position-candidates',
                 popover: {
-                    title: 'Candidatos',
-                    description: 'Listado de candidatos para esta posición. Haz clic en uno para ver su perfil completo.',
+                    title: gettext('Candidatos'),
+                    description: gettext('Listado de candidatos para esta posición. Haz clic en uno para ver su perfil completo.'),
                 },
             },
             {
                 element: '#tour-position-info',
                 popover: {
-                    title: 'Datos de la oferta',
-                    description: 'Resumen con departamento, ubicación, tipo de empleo, salario y fechas clave.',
+                    title: gettext('Datos de la oferta'),
+                    description: gettext('Resumen con departamento, ubicación, tipo de empleo, salario y fechas clave.'),
                 },
             },
             {
                 element: '#tour-position-casestudies',
                 popover: {
-                    title: 'Case Studies',
-                    description: 'Si la posición incluye case study, aquí verás los casos creados y podrás añadir nuevos.',
+                    title: gettext('Case Studies'),
+                    description: gettext('Si la posición incluye case study, aquí verás los casos creados y podrás añadir nuevos.'),
                 },
             },
         ],
@@ -217,29 +217,29 @@
             {
                 element: '#tour-position-basic',
                 popover: {
-                    title: 'Información básica',
-                    description: 'Completa el título, departamento, ubicación, tipo de empleo y salario.',
+                    title: gettext('Información básica'),
+                    description: gettext('Completa el título, departamento, ubicación, tipo de empleo y salario.'),
                 },
             },
             {
                 element: '#tour-position-ai-btn',
                 popover: {
-                    title: 'Generar con IA',
-                    description: 'Escribe al menos el título y pulsa este botón. La IA generará descripción, requisitos y beneficios automáticamente.',
+                    title: gettext('Generar con IA'),
+                    description: gettext('Escribe al menos el título y pulsa este botón. La IA generará descripción, requisitos y beneficios automáticamente.'),
                 },
             },
             {
                 element: '#tour-position-content',
                 popover: {
-                    title: 'Contenido de la oferta',
-                    description: 'Edita o revisa el contenido generado. Puedes modificarlo libremente antes de guardar.',
+                    title: gettext('Contenido de la oferta'),
+                    description: gettext('Edita o revisa el contenido generado. Puedes modificarlo libremente antes de guardar.'),
                 },
             },
             {
                 element: '#tour-position-options',
                 popover: {
-                    title: 'Opciones',
-                    description: 'Activa el case study si quieres enviar pruebas prácticas a los candidatos de esta posición.',
+                    title: gettext('Opciones'),
+                    description: gettext('Activa el case study si quieres enviar pruebas prácticas a los candidatos de esta posición.'),
                 },
             },
         ],
@@ -248,15 +248,15 @@
             {
                 element: '#tour-candidate-cv',
                 popover: {
-                    title: 'Sube el CV',
-                    description: 'Sube un PDF y la IA extraerá automáticamente los datos del candidato (nombre, email, teléfono, LinkedIn).',
+                    title: gettext('Sube el CV'),
+                    description: gettext('Sube un PDF y la IA extraerá automáticamente los datos del candidato (nombre, email, teléfono, LinkedIn).'),
                 },
             },
             {
                 element: '#tour-candidate-personal',
                 popover: {
-                    title: 'Datos personales',
-                    description: 'Estos campos se autocompletarán con la información extraída del CV. Puedes editarlos si necesitas corregir algo.',
+                    title: gettext('Datos personales'),
+                    description: gettext('Estos campos se autocompletarán con la información extraída del CV. Puedes editarlos si necesitas corregir algo.'),
                 },
             },
         ],
@@ -265,71 +265,71 @@
             {
                 element: '#tour-candidate-status',
                 popover: {
-                    title: 'Estado del pipeline',
-                    description: 'Cambia el estado del candidato a medida que avanza en el proceso de selección.',
+                    title: gettext('Estado del pipeline'),
+                    description: gettext('Cambia el estado del candidato a medida que avanza en el proceso de selección.'),
                 },
             },
             {
                 element: '#tour-candidate-rating',
                 popover: {
-                    title: 'Valoración',
-                    description: 'Puntúa al candidato de 1 a 5 estrellas para priorizar entre candidatos.',
+                    title: gettext('Valoración'),
+                    description: gettext('Puntúa al candidato de 1 a 5 estrellas para priorizar entre candidatos.'),
                 },
             },
             {
                 element: '#tour-candidate-cv',
                 popover: {
-                    title: 'Currículum',
-                    description: 'Visualiza, descarga o sube un nuevo CV. La IA lo analizará automáticamente.',
+                    title: gettext('Currículum'),
+                    description: gettext('Visualiza, descarga o sube un nuevo CV. La IA lo analizará automáticamente.'),
                 },
             },
             {
                 element: '#tour-candidate-ai',
                 popover: {
-                    title: 'Análisis IA',
-                    description: 'Resumen generado por IA con puntos fuertes, débiles y puntuación de encaje con la posición.',
+                    title: gettext('Análisis IA'),
+                    description: gettext('Resumen generado por IA con puntos fuertes, débiles y puntuación de encaje con la posición.'),
                 },
             },
             {
                 element: '#tour-candidate-interviews',
                 popover: {
-                    title: 'Entrevistas',
-                    description: 'Programa, consulta y gestiona las entrevistas del candidato.',
+                    title: gettext('Entrevistas'),
+                    description: gettext('Programa, consulta y gestiona las entrevistas del candidato.'),
                 },
             },
             {
                 element: '#tour-candidate-casestudies',
                 popover: {
-                    title: 'Casos prácticos',
-                    description: 'Envía case studies y consulta el estado de las entregas.',
+                    title: gettext('Casos prácticos'),
+                    description: gettext('Envía case studies y consulta el estado de las entregas.'),
                 },
             },
             {
                 element: '#tour-candidate-evaluations',
                 popover: {
-                    title: 'Evaluación IA',
-                    description: 'Genera una evaluación global del candidato usando toda la información disponible (CV, entrevistas, case studies).',
+                    title: gettext('Evaluación IA'),
+                    description: gettext('Genera una evaluación global del candidato usando toda la información disponible (CV, entrevistas, case studies).'),
                 },
             },
             {
                 element: '#tour-candidate-notes',
                 popover: {
-                    title: 'Notas del reclutador',
-                    description: 'Espacio libre para anotar impresiones, recordatorios o comentarios sobre el candidato.',
+                    title: gettext('Notas del reclutador'),
+                    description: gettext('Espacio libre para anotar impresiones, recordatorios o comentarios sobre el candidato.'),
                 },
             },
             {
                 element: '#tour-candidate-actions',
                 popover: {
-                    title: 'Acciones rápidas',
-                    description: 'Accesos directos para programar entrevistas, generar casos prácticos o evaluaciones IA.',
+                    title: gettext('Acciones rápidas'),
+                    description: gettext('Accesos directos para programar entrevistas, generar casos prácticos o evaluaciones IA.'),
                 },
             },
             {
                 element: '#tour-candidate-sidebar-ai',
                 popover: {
-                    title: 'Resumen IA (sidebar)',
-                    description: 'Vista compacta del análisis IA con puntos fuertes y débiles en la barra lateral.',
+                    title: gettext('Resumen IA (sidebar)'),
+                    description: gettext('Vista compacta del análisis IA con puntos fuertes y débiles en la barra lateral.'),
                 },
             },
         ],
@@ -337,8 +337,8 @@
         interview_form: [
             {
                 popover: {
-                    title: 'Programar entrevista',
-                    description: 'Completa la fecha, hora, duración, entrevistador y ubicación o enlace de videollamada para programar la entrevista.',
+                    title: gettext('Programar entrevista'),
+                    description: gettext('Completa la fecha, hora, duración, entrevistador y ubicación o enlace de videollamada para programar la entrevista.'),
                 },
             },
         ],
@@ -346,8 +346,8 @@
         interview_edit: [
             {
                 popover: {
-                    title: 'Editar entrevista',
-                    description: 'Tras realizar la entrevista, actualiza el estado, añade notas, puntos fuertes/débiles y una puntuación global.',
+                    title: gettext('Editar entrevista'),
+                    description: gettext('Tras realizar la entrevista, actualiza el estado, añade notas, puntos fuertes/débiles y una puntuación global.'),
                 },
             },
         ],
@@ -356,22 +356,22 @@
             {
                 element: '#tour-cs-briefing',
                 popover: {
-                    title: 'Tu idea',
-                    description: 'Escribe el título y una descripción breve de lo que quieres evaluar. La IA se encargará del resto.',
+                    title: gettext('Tu idea'),
+                    description: gettext('Escribe el título y una descripción breve de lo que quieres evaluar. La IA se encargará del resto.'),
                 },
             },
             {
                 element: '#tour-cs-ai-btn',
                 popover: {
-                    title: 'Generar con IA',
-                    description: 'Pulsa aquí para que la IA genere el contenido completo del case study basándose en tu briefing.',
+                    title: gettext('Generar con IA'),
+                    description: gettext('Pulsa aquí para que la IA genere el contenido completo del case study basándose en tu briefing.'),
                 },
             },
             {
                 element: '#tour-cs-content',
                 popover: {
-                    title: 'Contenido generado',
-                    description: 'Revisa y edita el case study y los criterios de evaluación antes de guardarlo.',
+                    title: gettext('Contenido generado'),
+                    description: gettext('Revisa y edita el case study y los criterios de evaluación antes de guardarlo.'),
                 },
             },
         ],
@@ -379,8 +379,8 @@
         casestudy_generate: [
             {
                 popover: {
-                    title: 'Caso práctico con IA',
-                    description: 'La IA genera automáticamente un caso práctico personalizado para este candidato basándose en su perfil y la posición. Puedes editar el resultado antes de enviarlo.',
+                    title: gettext('Caso práctico con IA'),
+                    description: gettext('La IA genera automáticamente un caso práctico personalizado para este candidato basándose en su perfil y la posición. Puedes editar el resultado antes de enviarlo.'),
                 },
             },
         ],
@@ -389,15 +389,15 @@
             {
                 element: '#tour-eval-generate',
                 popover: {
-                    title: 'Generar evaluación',
-                    description: 'Pulsa este botón para que la IA analice toda la información del candidato (CV, entrevistas, case studies) y genere una evaluación global.',
+                    title: gettext('Generar evaluación'),
+                    description: gettext('Pulsa este botón para que la IA analice toda la información del candidato (CV, entrevistas, case studies) y genere una evaluación global.'),
                 },
             },
             {
                 element: '#tour-eval-scores',
                 popover: {
-                    title: 'Puntuaciones',
-                    description: 'Desglose de puntuaciones: global, CV, entrevista y case study, con una recomendación final (contratar, esperar o rechazar).',
+                    title: gettext('Puntuaciones'),
+                    description: gettext('Desglose de puntuaciones: global, CV, entrevista y case study, con una recomendación final (contratar, esperar o rechazar).'),
                 },
             },
         ],

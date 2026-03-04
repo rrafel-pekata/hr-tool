@@ -70,10 +70,10 @@ document.addEventListener('alpine:init', function () {
 
             timeAgo: function (iso) {
                 var diff = (Date.now() - new Date(iso).getTime()) / 1000;
-                if (diff < 60) return 'ahora';
-                if (diff < 3600) return Math.floor(diff / 60) + ' min';
-                if (diff < 86400) return Math.floor(diff / 3600) + ' h';
-                return Math.floor(diff / 86400) + ' d';
+                if (diff < 60) return gettext('ahora');
+                if (diff < 3600) return Math.floor(diff / 60) + ' ' + gettext('min');
+                if (diff < 86400) return Math.floor(diff / 3600) + ' ' + gettext('h');
+                return Math.floor(diff / 86400) + ' ' + gettext('d');
             },
         };
     });

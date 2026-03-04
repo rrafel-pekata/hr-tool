@@ -6,6 +6,7 @@ import pypdfium2 as pdfium
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
+from django.utils.translation import gettext as _
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
@@ -79,13 +80,13 @@ def bulk_upload_cvs(request, position_pk):
 
     cv_file = request.FILES.get('cv_file')
     if not cv_file:
-        return JsonResponse({'success': False, 'error': 'No se ha enviado ningún archivo.'}, status=400)
+        return JsonResponse({'success': False, 'error': _('No se ha enviado ningún archivo.')}, status=400)
 
     if not cv_file.name.lower().endswith('.pdf'):
-        return JsonResponse({'success': False, 'error': 'Solo se permiten archivos PDF.'}, status=400)
+        return JsonResponse({'success': False, 'error': _('Solo se permiten archivos PDF.')}, status=400)
 
     if cv_file.size > MAX_CV_SIZE:
-        return JsonResponse({'success': False, 'error': 'El archivo excede el tamaño máximo de 10MB.'}, status=400)
+        return JsonResponse({'success': False, 'error': _('El archivo excede el tamaño máximo de 10MB.')}, status=400)
 
     # Extract text from PDF
     try:
@@ -109,13 +110,13 @@ def bulk_upload_cvs(request, position_pk):
         result = call_claude(CV_ANALYSIS_SYSTEM_PROMPT, user_prompt, json_output=True)
     except Exception:
         logger.exception("Error llamando a Claude API en carga masiva")
-        return JsonResponse({'success': False, 'error': 'Error al conectar con la IA.'}, status=500)
+        return JsonResponse({'success': False, 'error': _('Error al conectar con la IA.')}, status=500)
 
     if not isinstance(result, dict):
-        return JsonResponse({'success': False, 'error': 'La IA no devolvió un formato válido.'}, status=500)
+        return JsonResponse({'success': False, 'error': _('La IA no devolvió un formato válido.')}, status=500)
 
     # Create candidate from AI-extracted data
-    first_name = result.get('first_name', '').strip() or 'Sin nombre'
+    first_name = result.get('first_name', '').strip() or _('Sin nombre')
     last_name = result.get('last_name', '').strip()
 
     strengths = result.get('strengths', [])
@@ -167,13 +168,13 @@ def analyze_cv(request, position_pk):
 
     cv_file = request.FILES.get('cv_file')
     if not cv_file:
-        return JsonResponse({'error': 'No se ha enviado ningún archivo.'}, status=400)
+        return JsonResponse({'error': _('No se ha enviado ningún archivo.')}, status=400)
 
     if not cv_file.name.lower().endswith('.pdf'):
-        return JsonResponse({'error': 'Solo se permiten archivos PDF.'}, status=400)
+        return JsonResponse({'error': _('Solo se permiten archivos PDF.')}, status=400)
 
     if cv_file.size > MAX_CV_SIZE:
-        return JsonResponse({'error': 'El archivo excede el tamaño máximo de 10MB.'}, status=400)
+        return JsonResponse({'error': _('El archivo excede el tamaño máximo de 10MB.')}, status=400)
 
     try:
         cv_text = extract_pdf_text(cv_file)
@@ -199,7 +200,7 @@ def analyze_cv(request, position_pk):
             return JsonResponse(result)
 
         return JsonResponse({
-            'error': 'La IA no devolvió un formato válido. Inténtalo de nuevo.',
+            'error': _('La IA no devolvió un formato válido. Inténtalo de nuevo.'),
         }, status=500)
 
     except ValueError as e:
@@ -207,7 +208,7 @@ def analyze_cv(request, position_pk):
     except Exception:
         logger.exception("Error llamando a Claude API para análisis de CV")
         return JsonResponse(
-            {'error': 'Error al conectar con la IA. Inténtalo de nuevo.'},
+            {'error': _('Error al conectar con la IA. Inténtalo de nuevo.')},
             status=500,
         )
 
@@ -252,7 +253,7 @@ def candidate_create(request, position_pk):
                 notification_type='candidate_new',
                 exclude_user=request.user,
             )
-            messages.success(request, f'Candidato {candidate.full_name} añadido correctamente.')
+            messages.success(request, _('Candidato %(name)s añadido correctamente.') % {'name': candidate.full_name})
             return redirect('candidates:candidate_detail', pk=candidate.pk)
     else:
         form = CandidateCreateForm()
@@ -260,7 +261,7 @@ def candidate_create(request, position_pk):
     return render(request, 'candidates/candidate_form.html', {
         'form': form,
         'position': position,
-        'title': 'Nuevo candidato',
+        'title': _('Nuevo candidato'),
     })
 
 
@@ -273,7 +274,7 @@ def candidate_edit(request, pk):
         form = CandidateEditForm(request.POST, instance=candidate)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Candidato actualizado correctamente.')
+            messages.success(request, _('Candidato actualizado correctamente.'))
             return redirect('candidates:candidate_detail', pk=candidate.pk)
     else:
         form = CandidateEditForm(instance=candidate)
@@ -317,7 +318,7 @@ def candidate_status(request, pk):
         if new_status and new_status in dict(Candidate.Status.choices):
             candidate.status = new_status
             candidate.save(update_fields=['status', 'updated_at'])
-            messages.success(request, f'Estado actualizado a "{candidate.get_status_display()}".')
+            messages.success(request, _('Estado actualizado a "%(status)s".') % {'status': candidate.get_status_display()})
             notify_company(
                 company=request.company,
                 title=f'{candidate.full_name} → {candidate.get_status_display()}',
@@ -335,7 +336,7 @@ def candidate_status(request, pk):
                     position.status = Position.Status.CLOSED
                     position.closed_at = timezone.now()
                     position.save(update_fields=['status', 'closed_at', 'updated_at'])
-                    messages.info(request, f'La posición "{position.title}" se ha cerrado automáticamente.')
+                    messages.info(request, _('La posición "%(title)s" se ha cerrado automáticamente.') % {'title': position.title})
     return redirect('candidates:candidate_detail', pk=candidate.pk)
 
 
@@ -346,7 +347,7 @@ def candidate_notes(request, pk):
     if request.method == 'POST':
         candidate.recruiter_notes = request.POST.get('recruiter_notes', '')
         candidate.save(update_fields=['recruiter_notes', 'updated_at'])
-        messages.success(request, 'Notas guardadas.')
+        messages.success(request, _('Notas guardadas.'))
     return redirect('candidates:candidate_detail', pk=candidate.pk)
 
 
@@ -360,7 +361,7 @@ def candidate_rating(request, pk):
             if 1 <= rating <= 5:
                 candidate.rating = rating
                 candidate.save(update_fields=['rating', 'updated_at'])
-                messages.success(request, f'Valoración actualizada: {rating}/5.')
+                messages.success(request, _('Valoración actualizada: %(rating)s/5.') % {'rating': rating})
         except (ValueError, TypeError):
             pass
     return redirect('candidates:candidate_detail', pk=candidate.pk)
@@ -373,7 +374,7 @@ def candidate_delete(request, pk):
     candidate = get_object_or_404(Candidate, pk=pk, position__company=request.company)
     position_pk = candidate.position_id
     candidate.soft_delete()
-    messages.success(request, f'Candidato "{candidate.full_name}" eliminado.')
+    messages.success(request, _('Candidato "%(name)s" eliminado.') % {'name': candidate.full_name})
     return redirect('positions:position_detail', pk=position_pk)
 
 
@@ -415,13 +416,13 @@ def candidate_upload_cv(request, pk):
 
     cv_file = request.FILES.get('cv_file')
     if not cv_file:
-        return JsonResponse({'error': 'No se ha enviado ningún archivo.'}, status=400)
+        return JsonResponse({'error': _('No se ha enviado ningún archivo.')}, status=400)
 
     if not cv_file.name.lower().endswith('.pdf'):
-        return JsonResponse({'error': 'Solo se permiten archivos PDF.'}, status=400)
+        return JsonResponse({'error': _('Solo se permiten archivos PDF.')}, status=400)
 
     if cv_file.size > MAX_CV_SIZE:
-        return JsonResponse({'error': 'El archivo excede el tamaño máximo de 10MB.'}, status=400)
+        return JsonResponse({'error': _('El archivo excede el tamaño máximo de 10MB.')}, status=400)
 
     # Save the file to the candidate
     candidate.cv_file.save(cv_file.name, cv_file, save=True)
@@ -487,6 +488,6 @@ def candidate_upload_cv(request, pk):
         # CV was saved even if AI fails
         return JsonResponse({
             'success': True,
-            'ai_error': 'CV subido correctamente, pero hubo un error al analizar con IA.',
+            'ai_error': _('CV subido correctamente, pero hubo un error al analizar con IA.'),
             'cv_url': candidate.cv_file.url,
         })

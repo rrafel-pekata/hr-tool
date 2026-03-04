@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
-<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li><a href="/" class="hover:text-gray-700">{% trans "Inicio" %}</a></li>
 <li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="hover:text-gray-700">{{ candidate.full_name }}</a></li>
 <li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{{ title }}</span></li>
 {% endblock %}
@@ -15,31 +16,31 @@
             <h1 class="text-2xl font-bold text-gray-900">{{ case_study.title }}</h1>
             <div class="flex items-center gap-2">
                 {% if ccs.submitted_at %}
-                    {% include "partials/_badge.html" with label="Entregado" color="green" %}
+                    {% include "partials/_badge.html" with label=_("Entregado") color="green" %}
                 {% elif ccs.sent_at %}
-                    {% include "partials/_badge.html" with label="Enviado" color="blue" %}
+                    {% include "partials/_badge.html" with label=_("Enviado") color="blue" %}
                 {% else %}
-                    {% include "partials/_badge.html" with label="Pendiente" color="gray" %}
+                    {% include "partials/_badge.html" with label=_("Pendiente") color="gray" %}
                 {% endif %}
-                <a href="{% url 'casestudies:casestudy_edit' ccs.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">Editar</a>
+                <a href="{% url 'casestudies:casestudy_edit' ccs.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{% trans "Editar" %}</a>
             </div>
         </div>
         <p class="mt-1 text-sm text-gray-500">
-            Candidato: <span class="font-medium text-gray-700">{{ candidate.full_name }}</span>
-            — Posición: <span class="font-medium text-gray-700">{{ position.title }}</span>
+            {% blocktrans with name=candidate.full_name pos=position.title %}Candidato: <span class="font-medium text-gray-700">{{ name }}</span>
+            — Posición: <span class="font-medium text-gray-700">{{ pos }}</span>{% endblocktrans %}
         </p>
         <div class="mt-1 flex items-center gap-3 text-xs text-gray-500">
-            {% if ccs.sent_at %}<span>Enviado {{ ccs.sent_at|date:"d/m/Y" }}</span>{% endif %}
-            {% if ccs.deadline %}<span>Límite: {{ ccs.deadline|date:"d/m/Y H:i" }}</span>{% endif %}
+            {% if ccs.sent_at %}<span>{% blocktrans with date=ccs.sent_at|date:"d/m/Y" %}Enviado {{ date }}{% endblocktrans %}</span>{% endif %}
+            {% if ccs.deadline %}<span>{% blocktrans with date=ccs.deadline|date:"d/m/Y H:i" %}Límite: {{ date }}{% endblocktrans %}</span>{% endif %}
         </div>
     </div>
 
     <!-- Case study content -->
     <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6">
         <h2 class="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            Enunciado del caso
+            {% trans "Enunciado del caso" %}
             {% if case_study.ai_generated %}
-            <span class="inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700">IA</span>
+            <span class="inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700">{% trans "IA" %}</span>
             {% endif %}
         </h2>
         <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ case_study.full_content }}</div>
@@ -47,7 +48,7 @@
 
     {% if case_study.evaluation_criteria %}
     <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-        <h2 class="text-sm font-semibold text-gray-900 mb-3">Criterios de evaluación (interno)</h2>
+        <h2 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Criterios de evaluación (interno)" %}</h2>
         <div class="text-sm text-gray-600 whitespace-pre-wrap">{{ case_study.evaluation_criteria }}</div>
     </div>
     {% endif %}
@@ -56,10 +57,10 @@
     <!-- Submission already received -->
     <div class="bg-white rounded-lg border border-green-200 p-6 mb-6">
         <h2 class="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            Respuesta del candidato
-            {% include "partials/_badge.html" with label="Entregado" color="green" %}
+            {% trans "Respuesta del candidato" %}
+            {% include "partials/_badge.html" with label=_("Entregado") color="green" %}
         </h2>
-        <p class="text-xs text-gray-500 mb-3">Entregado el {{ ccs.submitted_at|date:"d/m/Y" }} a las {{ ccs.submitted_at|time:"H:i" }}</p>
+        <p class="text-xs text-gray-500 mb-3">{% blocktrans with date=ccs.submitted_at|date:"d/m/Y" time=ccs.submitted_at|time:"H:i" %}Entregado el {{ date }} a las {{ time }}{% endblocktrans %}</p>
 
         {% if ccs.submission_text %}
         <div class="rounded-lg bg-gray-50 border border-gray-200 p-4 mb-3">
@@ -71,17 +72,17 @@
         <div class="mb-3">
             <a href="{{ ccs.submission_file.url }}" target="_blank" class="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-500">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                Descargar archivo adjunto
+                {% trans "Descargar archivo adjunto" %}
             </a>
         </div>
         {% endif %}
 
         {% if ccs.submission_notes %}
-        <p class="text-xs text-gray-500"><strong>Notas del candidato:</strong> {{ ccs.submission_notes }}</p>
+        <p class="text-xs text-gray-500"><strong>{% trans "Notas del candidato:" %}</strong> {{ ccs.submission_notes }}</p>
         {% endif %}
 
         {% if ccs.score %}
-        <p class="mt-3 text-sm"><span class="font-medium">Puntuación:</span> {{ ccs.score }}/10</p>
+        <p class="mt-3 text-sm"><span class="font-medium">{% trans "Puntuación:" %}</span> {{ ccs.score }}/10</p>
         {% endif %}
     </div>
 
@@ -90,40 +91,40 @@
     <div class="bg-white rounded-lg border border-amber-200 p-6 mb-6">
         <h2 class="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-2">
             <svg class="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-            Subir respuesta del candidato
+            {% trans "Subir respuesta del candidato" %}
         </h2>
-        <p class="text-xs text-gray-500 mb-4">Si el candidato te ha enviado la respuesta por email u otro medio, puedes subirla aquí manualmente.</p>
+        <p class="text-xs text-gray-500 mb-4">{% trans "Si el candidato te ha enviado la respuesta por email u otro medio, puedes subirla aquí manualmente." %}</p>
 
         <form method="post" enctype="multipart/form-data" class="space-y-4">
             {% csrf_token %}
             <div>
-                <label for="submission_text" class="block text-sm font-medium text-gray-700 mb-1">Respuesta en texto</label>
+                <label for="submission_text" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Respuesta en texto" %}</label>
                 <textarea name="submission_text" id="submission_text" rows="8"
                           class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                          placeholder="Pega aquí la respuesta del candidato..."></textarea>
+                          placeholder="{% trans "Pega aquí la respuesta del candidato..." %}"></textarea>
             </div>
 
             <div>
-                <label for="submission_file" class="block text-sm font-medium text-gray-700 mb-1">Archivo adjunto (opcional)</label>
+                <label for="submission_file" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Archivo adjunto (opcional)" %}</label>
                 <input type="file" name="submission_file" id="submission_file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip"
                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                <p class="mt-1 text-xs text-gray-500">PDF, Word, PowerPoint, Excel o ZIP.</p>
+                <p class="mt-1 text-xs text-gray-500">{% trans "PDF, Word, PowerPoint, Excel o ZIP." %}</p>
             </div>
 
             <div>
-                <label for="submission_notes" class="block text-sm font-medium text-gray-700 mb-1">Notas internas (opcional)</label>
+                <label for="submission_notes" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Notas internas (opcional)" %}</label>
                 <textarea name="submission_notes" id="submission_notes" rows="2"
                           class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                          placeholder="Ej: Recibido por email el 15/02..."></textarea>
+                          placeholder="{% trans "Ej: Recibido por email el 15/02..." %}"></textarea>
             </div>
 
             <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
-                Registrar respuesta
+                {% trans "Registrar respuesta" %}
             </button>
         </form>
     </div>
     {% endif %}
 
-    <a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="text-sm text-blue-600 hover:text-blue-500">&larr; Volver al candidato</a>
+    <a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="text-sm text-blue-600 hover:text-blue-500">&larr; {% trans "Volver al candidato" %}</a>
 </div>
 {% endblock %}

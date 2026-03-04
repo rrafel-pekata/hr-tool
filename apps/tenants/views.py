@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from apps.core.services import call_claude
@@ -59,13 +60,13 @@ def company_create(request):
             )
             # Set as active company
             request.session['active_company_id'] = str(company.pk)
-            messages.success(request, f'Empresa "{company.name}" creada correctamente.')
+            messages.success(request, _('Empresa "%(name)s" creada correctamente.') % {'name': company.name})
             return redirect('tenants:company_detail', pk=company.pk)
     else:
         form = CompanyForm()
     return render(request, 'tenants/company_form.html', {
         'form': form,
-        'title': 'Nueva empresa',
+        'title': _('Nueva empresa'),
     })
 
 
@@ -77,7 +78,7 @@ def company_edit(request, pk):
         form = CompanyForm(request.POST, request.FILES, instance=company)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Empresa actualizada correctamente.')
+            messages.success(request, _('Empresa actualizada correctamente.'))
             return redirect('tenants:company_detail', pk=company.pk)
     else:
         form = CompanyForm(instance=company)
@@ -117,7 +118,7 @@ def company_ai_improve(request):
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
-        return JsonResponse({'error': 'JSON inválido.'}, status=400)
+        return JsonResponse({'error': _('JSON inválido.')}, status=400)
 
     user_prompt = IMPROVE_COMPANY_PROMPT.format(
         name=data.get('name', ''),
@@ -140,7 +141,7 @@ def company_ai_improve(request):
     except Exception:
         logger.exception("Error llamando a Claude API")
         return JsonResponse(
-            {'error': 'Error al conectar con la IA. Inténtalo de nuevo.'},
+            {'error': _('Error al conectar con la IA. Inténtalo de nuevo.')},
             status=500,
         )
 
@@ -154,7 +155,7 @@ def company_delete(request, pk):
     # Limpiar empresa activa de la sesión si era esta
     if str(request.session.get('active_company_id')) == str(company.pk):
         request.session.pop('active_company_id', None)
-    messages.success(request, f'Empresa "{company.name}" eliminada.')
+    messages.success(request, _('Empresa "%(name)s" eliminada.') % {'name': company.name})
     return redirect('core:select_company')
 
 
@@ -165,8 +166,10 @@ def company_toggle_active(request, pk):
     if request.method == 'POST':
         company.is_active = not company.is_active
         company.save(update_fields=['is_active'])
-        estado = 'activada' if company.is_active else 'desactivada'
-        messages.success(request, f'Empresa {estado} correctamente.')
+        if company.is_active:
+            messages.success(request, _('Empresa activada correctamente.'))
+        else:
+            messages.success(request, _('Empresa desactivada correctamente.'))
     return redirect('tenants:company_detail', pk=company.pk)
 
 
@@ -201,13 +204,13 @@ def department_create(request):
             department = form.save(commit=False)
             department.company = request.company
             department.save()
-            messages.success(request, f'Departamento "{department.name}" creado correctamente.')
+            messages.success(request, _('Departamento "%(name)s" creado correctamente.') % {'name': department.name})
             return redirect('tenants:department_list')
     else:
         form = DepartmentForm()
     return render(request, 'tenants/department_form.html', {
         'form': form,
-        'title': 'Nuevo departamento',
+        'title': _('Nuevo departamento'),
     })
 
 
@@ -219,7 +222,7 @@ def department_edit(request, pk):
         form = DepartmentForm(request.POST, instance=department)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Departamento actualizado correctamente.')
+            messages.success(request, _('Departamento actualizado correctamente.'))
             return redirect('tenants:department_list')
     else:
         form = DepartmentForm(instance=department)
@@ -237,5 +240,5 @@ def department_delete(request, pk):
     department = get_object_or_404(Department, pk=pk, company=request.company)
     name = department.name
     department.delete()
-    messages.success(request, f'Departamento "{name}" eliminado.')
+    messages.success(request, _('Departamento "%(name)s" eliminado.') % {'name': name})
     return redirect('tenants:department_list')

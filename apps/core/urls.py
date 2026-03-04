@@ -11,4 +11,5 @@ urlpatterns = [
     path('ayuda/', views.help_page, name='help'),
     path('select-company/', views.select_company, name='select_company'),
     path('switch-company/', views.switch_company, name='switch_company'),
+    path('change-language/', views.change_language, name='change_language'),
 ]

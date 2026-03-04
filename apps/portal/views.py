@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 from apps.casestudies.models import CandidateCaseStudy
 from apps.notifications.services import notify_company
@@ -38,7 +39,7 @@ def portal_case_study(request, token):
                 'case_study': ccs.case_study,
                 'company': company,
                 'expired': expired,
-                'error': 'Debes escribir tu respuesta o adjuntar un archivo.',
+                'error': _('Debes escribir tu respuesta o adjuntar un archivo.'),
             })
 
         if submission_file:
@@ -104,8 +105,8 @@ def _notify_submission(request, ccs):
 
     try:
         send_mail(
-            subject=f'Caso práctico entregado — {candidate.full_name} — {candidate.position.title}',
-            message=f'{candidate.full_name} ha entregado el caso práctico "{ccs.case_study.title}".',
+            subject=_('Caso práctico entregado — %(name)s — %(position)s') % {'name': candidate.full_name, 'position': candidate.position.title},
+            message=_('%(name)s ha entregado el caso práctico "%(title)s".') % {'name': candidate.full_name, 'title': ccs.case_study.title},
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=recipient_emails,
             html_message=html_content,

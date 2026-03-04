@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-gray-50">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Caso práctico — {{ company.name }}</title>
+    <title>{% trans "Caso práctico" %} — {{ company.name }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="h-full">
@@ -25,8 +26,8 @@
             <svg class="mx-auto h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h2 class="mt-3 text-lg font-semibold text-green-800">Caso práctico entregado</h2>
-            <p class="mt-1 text-sm text-green-700">Tu respuesta fue recibida el {{ ccs.submitted_at|date:"d/m/Y" }} a las {{ ccs.submitted_at|time:"H:i" }}.</p>
+            <h2 class="mt-3 text-lg font-semibold text-green-800">{% trans "Caso práctico entregado" %}</h2>
+            <p class="mt-1 text-sm text-green-700">{% blocktrans with date=ccs.submitted_at|date:"d/m/Y" time=ccs.submitted_at|time:"H:i" %}Tu respuesta fue recibida el {{ date }} a las {{ time }}.{% endblocktrans %}</p>
         </div>
 
         {% elif expired %}
@@ -35,8 +36,8 @@
             <svg class="mx-auto h-12 w-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
             </svg>
-            <h2 class="mt-3 text-lg font-semibold text-red-800">Plazo expirado</h2>
-            <p class="mt-1 text-sm text-red-700">El plazo para entregar este caso práctico ha finalizado ({{ ccs.deadline|date:"d/m/Y" }}).</p>
+            <h2 class="mt-3 text-lg font-semibold text-red-800">{% trans "Plazo expirado" %}</h2>
+            <p class="mt-1 text-sm text-red-700">{% blocktrans with date=ccs.deadline|date:"d/m/Y" %}El plazo para entregar este caso práctico ha finalizado ({{ date }}).{% endblocktrans %}</p>
         </div>
 
         {% else %}
@@ -44,10 +45,10 @@
         <div class="space-y-6">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">{{ case_study.title }}</h1>
-                <p class="mt-1 text-sm text-gray-500">Posición: <span class="font-medium text-gray-700">{{ ccs.candidate.position.title }}</span></p>
+                <p class="mt-1 text-sm text-gray-500">{% blocktrans with pos=ccs.candidate.position.title %}Posición: <span class="font-medium text-gray-700">{{ pos }}</span>{% endblocktrans %}</p>
                 {% if ccs.deadline %}
                 <p class="mt-1 text-sm text-gray-500">
-                    <span class="font-medium text-gray-700">Fecha límite:</span> {{ ccs.deadline|date:"d/m/Y" }} a las {{ ccs.deadline|time:"H:i" }}
+                    <span class="font-medium text-gray-700">{% trans "Fecha límite:" %}</span> {{ ccs.deadline|date:"d/m/Y" }} a las {{ ccs.deadline|time:"H:i" }}
                 </p>
                 {% endif %}
             </div>
@@ -66,40 +67,40 @@
 
             <!-- Response form -->
             <div class="bg-white rounded-lg border border-gray-200 p-6">
-                <h2 class="text-base font-semibold text-gray-900 mb-4">Tu respuesta</h2>
+                <h2 class="text-base font-semibold text-gray-900 mb-4">{% trans "Tu respuesta" %}</h2>
                 <form method="post" enctype="multipart/form-data" class="space-y-4">
                     {% csrf_token %}
 
                     <div>
-                        <label for="submission_text" class="block text-sm font-medium text-gray-700 mb-1">Escribe tu respuesta</label>
+                        <label for="submission_text" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Escribe tu respuesta" %}</label>
                         <textarea name="submission_text" id="submission_text" rows="12"
                                   class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                                  placeholder="Escribe aquí tu respuesta al caso práctico..."></textarea>
+                                  placeholder="{% trans "Escribe aquí tu respuesta al caso práctico..." %}"></textarea>
                     </div>
 
                     <div class="relative">
                         <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
-                        <div class="relative flex justify-center"><span class="bg-white px-3 text-xs text-gray-500">o también puedes</span></div>
+                        <div class="relative flex justify-center"><span class="bg-white px-3 text-xs text-gray-500">{% trans "o también puedes" %}</span></div>
                     </div>
 
                     <div>
-                        <label for="submission_file" class="block text-sm font-medium text-gray-700 mb-1">Adjuntar archivo (opcional)</label>
+                        <label for="submission_file" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Adjuntar archivo (opcional)" %}</label>
                         <input type="file" name="submission_file" id="submission_file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip"
                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        <p class="mt-1 text-xs text-gray-500">PDF, Word, PowerPoint, Excel o ZIP. Máximo 10MB.</p>
+                        <p class="mt-1 text-xs text-gray-500">{% trans "PDF, Word, PowerPoint, Excel o ZIP. Máximo 10MB." %}</p>
                     </div>
 
                     <div>
-                        <label for="submission_notes" class="block text-sm font-medium text-gray-700 mb-1">Comentarios adicionales (opcional)</label>
+                        <label for="submission_notes" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Comentarios adicionales (opcional)" %}</label>
                         <textarea name="submission_notes" id="submission_notes" rows="2"
                                   class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                                  placeholder="Cualquier nota o comentario adicional..."></textarea>
+                                  placeholder="{% trans "Cualquier nota o comentario adicional..." %}"></textarea>
                     </div>
 
                     <button type="submit" class="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
-                        Entregar respuesta
+                        {% trans "Entregar respuesta" %}
                     </button>
-                    <p class="text-xs text-gray-400 text-center">Una vez entregada no podrás modificar tu respuesta.</p>
+                    <p class="text-xs text-gray-400 text-center">{% trans "Una vez entregada no podrás modificar tu respuesta." %}</p>
                 </form>
             </div>
         </div>

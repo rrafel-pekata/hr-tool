@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from apps.candidates.models import Candidate
@@ -46,8 +47,8 @@ def _send_casestudy_email(request, candidate, ccs):
 
     try:
         send_mail(
-            subject=f'Caso práctico — {candidate.position.title} — {company.name}',
-            message=f'Hola {candidate.first_name}, tienes un caso práctico pendiente. Accede aquí: {portal_url}',
+            subject=_('Caso práctico — %(position)s — %(company)s') % {'position': candidate.position.title, 'company': company.name},
+            message=_('Hola %(name)s, tienes un caso práctico pendiente. Accede aquí: %(url)s') % {'name': candidate.first_name, 'url': portal_url},
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[candidate.email],
             html_message=html_content,
@@ -72,7 +73,7 @@ def casestudy_create(request, position_pk):
             if request.POST.get('ai_generated') == 'true':
                 cs.ai_generated = True
             cs.save()
-            messages.success(request, f'Case study "{cs.title}" creado correctamente.')
+            messages.success(request, _('Case study "%(title)s" creado correctamente.') % {'title': cs.title})
             return redirect('positions:position_detail', pk=position.pk)
     else:
         form = CaseStudyForm()
@@ -80,7 +81,7 @@ def casestudy_create(request, position_pk):
     return render(request, 'casestudies/casestudy_form.html', {
         'form': form,
         'position': position,
-        'title': 'Nuevo Case Study',
+        'title': _('Nuevo Case Study'),
     })
 
 
@@ -97,7 +98,7 @@ def casestudy_generate(request, candidate_pk):
         deadline_days = int(request.POST.get('deadline_days', 7))
 
         if not title or not full_content:
-            messages.error(request, 'El caso práctico debe tener título y contenido.')
+            messages.error(request, _('El caso práctico debe tener título y contenido.'))
             return redirect('casestudies:casestudy_generate', candidate_pk=candidate.pk)
 
         cs = CaseStudy.objects.create(
@@ -132,11 +133,11 @@ def casestudy_generate(request, candidate_pk):
         if candidate.email:
             sent = _send_casestudy_email(request, candidate, ccs)
             if sent:
-                messages.success(request, f'Caso práctico creado y enviado por email a {candidate.email}.')
+                messages.success(request, _('Caso práctico creado y enviado por email a %(email)s.') % {'email': candidate.email})
             else:
-                messages.warning(request, 'Caso práctico creado, pero hubo un error al enviar el email. Puedes reenviarlo.')
+                messages.warning(request, _('Caso práctico creado, pero hubo un error al enviar el email. Puedes reenviarlo.'))
         else:
-            messages.success(request, 'Caso práctico creado. El candidato no tiene email, no se pudo enviar.')
+            messages.success(request, _('Caso práctico creado. El candidato no tiene email, no se pudo enviar.'))
 
         return redirect('candidates:candidate_detail', pk=candidate.pk)
 
@@ -165,7 +166,7 @@ def casestudy_edit(request, ccs_pk):
         cs.deadline_days = int(request.POST.get('deadline_days', cs.deadline_days))
         cs.save()
 
-        messages.success(request, 'Caso práctico actualizado.')
+        messages.success(request, _('Caso práctico actualizado.'))
         return redirect('candidates:candidate_detail', pk=candidate.pk)
 
     return render(request, 'casestudies/casestudy_edit.html', {
@@ -190,9 +191,9 @@ def casestudy_resend(request, ccs_pk):
     if request.method == 'POST' and candidate.email:
         sent = _send_casestudy_email(request, candidate, ccs)
         if sent:
-            messages.success(request, f'Email reenviado a {candidate.email}.')
+            messages.success(request, _('Email reenviado a %(email)s.') % {'email': candidate.email})
         else:
-            messages.error(request, 'Error al enviar el email.')
+            messages.error(request, _('Error al enviar el email.'))
 
     return redirect('candidates:candidate_detail', pk=candidate.pk)
 
@@ -211,7 +212,7 @@ def casestudy_detail(request, ccs_pk):
         submission_file = request.FILES.get('submission_file')
 
         if not submission_text and not submission_file:
-            messages.error(request, 'Debes escribir una respuesta o adjuntar un archivo.')
+            messages.error(request, _('Debes escribir una respuesta o adjuntar un archivo.'))
             return redirect('casestudies:casestudy_detail', ccs_pk=ccs.pk)
 
         if submission_file:
@@ -233,7 +234,7 @@ def casestudy_detail(request, ccs_pk):
             exclude_user=request.user,
         )
 
-        messages.success(request, f'Respuesta registrada para {ccs.candidate.full_name}.')
+        messages.success(request, _('Respuesta registrada para %(name)s.') % {'name': ccs.candidate.full_name})
         return redirect('candidates:candidate_detail', pk=ccs.candidate.pk)
 
     return render(request, 'casestudies/casestudy_detail.html', {
@@ -272,14 +273,14 @@ def casestudy_ai_generate(request, candidate_pk):
         if isinstance(result, dict):
             return JsonResponse(result)
         return JsonResponse({
-            'error': 'La IA no devolvió un formato válido. Inténtalo de nuevo.',
+            'error': _('La IA no devolvió un formato válido. Inténtalo de nuevo.'),
         }, status=500)
     except ValueError as e:
         return JsonResponse({'error': str(e)}, status=400)
     except Exception:
         logger.exception("Error llamando a Claude API para case study")
         return JsonResponse(
-            {'error': 'Error al conectar con la IA. Inténtalo de nuevo.'},
+            {'error': _('Error al conectar con la IA. Inténtalo de nuevo.')},
             status=500,
         )
 
@@ -317,14 +318,14 @@ def casestudy_send(request, candidate_pk):
             if candidate.email:
                 _send_casestudy_email(request, candidate, ccs)
 
-            messages.success(request, f'Case study enviado a {candidate.full_name}.')
+            messages.success(request, _('Case study enviado a %(name)s.') % {'name': candidate.full_name})
         else:
-            messages.info(request, 'Este case study ya fue enviado a este candidato.')
+            messages.info(request, _('Este case study ya fue enviado a este candidato.'))
 
         return redirect('candidates:candidate_detail', pk=candidate.pk)
 
     return render(request, 'casestudies/casestudy_send.html', {
         'candidate': candidate,
         'case_studies': case_studies,
-        'title': 'Enviar Case Study',
+        'title': _('Enviar Case Study'),
     })

@@ -1,26 +1,27 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load candidates_tags %}
 
 {% block tour_page %}candidate_detail{% endblock %}
 {% block title %}{{ candidate.full_name }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
-<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li><a href="/" class="hover:text-gray-700">{% trans "Inicio" %}</a></li>
 <li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_detail' position.pk %}" class="hover:text-gray-700">{{ position.title }}</a></li>
 <li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{{ candidate.full_name }}</span></li>
 {% endblock %}
 
 {% block topbar_actions %}
-<form method="post" action="{% url 'candidates:candidate_delete' candidate.pk %}" x-data @submit.prevent="$dispatch('confirm-delete', { title: 'Eliminar candidato', message: '¿Eliminar al candidato «{{ candidate.full_name }}»? Se ocultará de todas las vistas.', form: $el })">
+<form method="post" action="{% url 'candidates:candidate_delete' candidate.pk %}" x-data @submit.prevent="$dispatch('confirm-delete', { title: '{% trans "Eliminar candidato" %}', message: '{% blocktrans with name=candidate.full_name %}¿Eliminar al candidato «{{ name }}»? Se ocultará de todas las vistas.{% endblocktrans %}', form: $el })">
     {% csrf_token %}
     <button type="submit" class="inline-flex items-center rounded-md border border-red-300 bg-white px-3 py-1.5 text-sm font-medium text-red-700 shadow-sm hover:bg-red-50">
         <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
-        Eliminar candidato
+        {% trans "Eliminar candidato" %}
     </button>
 </form>
 <a href="{% url 'candidates:candidate_edit' candidate.pk %}" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
     <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
-    Editar
+    {% trans "Editar" %}
 </a>
 {% endblock %}
 
@@ -47,7 +48,7 @@
     <!-- Pipeline status selector -->
     <form id="tour-candidate-status" method="post" action="{% url 'candidates:candidate_status' candidate.pk %}" class="flex items-center gap-2">
         {% csrf_token %}
-        <label class="text-sm font-medium text-gray-700">Estado:</label>
+        <label class="text-sm font-medium text-gray-700">{% trans "Estado:" %}</label>
         <select name="status" onchange="this.form.submit()"
                 class="rounded-md border border-gray-300 py-1.5 pl-3 pr-8 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
             {% for value, label in status_choices %}
@@ -59,7 +60,7 @@
 
 <!-- Rating stars -->
 <div id="tour-candidate-rating" class="mb-6 flex items-center gap-4">
-    <span class="text-sm font-medium text-gray-700">Valoración:</span>
+    <span class="text-sm font-medium text-gray-700">{% trans "Valoración:" %}</span>
     <form method="post" action="{% url 'candidates:candidate_rating' candidate.pk %}" class="flex items-center gap-1">
         {% csrf_token %}
         {% for i in "12345" %}
@@ -71,7 +72,7 @@
         {% endfor %}
     </form>
     <span class="text-sm text-gray-500">{{ candidate.get_source_display }}</span>
-    <span class="text-sm text-gray-400">Añadido {{ candidate.created_at|date:"d/m/Y" }}</span>
+    <span class="text-sm text-gray-400">{% blocktrans with date=candidate.created_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktrans %}</span>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -80,12 +81,12 @@
         <!-- CV Section -->
         <div id="tour-candidate-cv" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                <h2 class="text-base font-semibold text-gray-900">Currículum</h2>
+                <h2 class="text-base font-semibold text-gray-900">{% trans "Currículum" %}</h2>
                 <div class="flex items-center gap-3">
-                    <a x-show="cvUrl" :href="cvUrl" target="_blank" class="text-sm font-medium text-blue-600 hover:text-blue-500">Descargar PDF</a>
+                    <a x-show="cvUrl" :href="cvUrl" target="_blank" class="text-sm font-medium text-blue-600 hover:text-blue-500">{% trans "Descargar PDF" %}</a>
                     <label class="cursor-pointer inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-                        <span x-text="hasCv ? 'Cambiar CV' : 'Subir CV'">{% if candidate.cv_file %}Cambiar CV{% else %}Subir CV{% endif %}</span>
+                        <span x-text="hasCv ? '{% trans "Cambiar CV" %}' : '{% trans "Subir CV" %}'">{% if candidate.cv_file %}{% trans "Cambiar CV" %}{% else %}{% trans "Subir CV" %}{% endif %}</span>
                         <input type="file" accept=".pdf" class="hidden" @change="uploadCv($event)">
                     </label>
                 </div>
@@ -97,7 +98,7 @@
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span class="text-sm font-medium text-blue-700">Subiendo y analizando CV con IA...</span>
+                    <span class="text-sm font-medium text-blue-700">{% trans "Subiendo y analizando CV con IA..." %}</span>
                 </div>
 
                 <!-- Upload error -->
@@ -118,7 +119,7 @@
                         <a :href="cvUrl" target="_blank" class="block rounded-lg border border-gray-200 bg-gray-50 overflow-hidden hover:border-blue-300 transition-colors">
                             <img :src="previewUrl" alt="Preview del CV" class="w-full" loading="lazy">
                         </a>
-                        <p class="mt-2 text-xs text-center text-gray-400">Haz clic en la imagen para abrir el PDF completo</p>
+                        <p class="mt-2 text-xs text-center text-gray-400">{% trans "Haz clic en la imagen para abrir el PDF completo" %}</p>
                     </div>
                 </template>
 
@@ -127,8 +128,8 @@
                         <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                         </svg>
-                        <p class="mt-2 text-sm text-gray-500">No se ha subido CV para este candidato.</p>
-                        <p class="mt-1 text-xs text-gray-400">Usa el botón "Subir CV" para añadir uno. La IA lo analizará automáticamente.</p>
+                        <p class="mt-2 text-sm text-gray-500">{% trans "No se ha subido CV para este candidato." %}</p>
+                        <p class="mt-1 text-xs text-gray-400">{% trans 'Usa el botón "Subir CV" para añadir uno. La IA lo analizará automáticamente.' %}</p>
                     </div>
                 </template>
             </div>
@@ -139,8 +140,8 @@
             <div id="tour-candidate-ai" class="bg-white rounded-lg border border-gray-200">
                 <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                     <h2 class="text-base font-semibold text-gray-900">
-                        Análisis IA
-                        <span class="ml-2 inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-800">IA</span>
+                        {% trans "Análisis IA" %}
+                        <span class="ml-2 inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-800">{% trans "IA" %}</span>
                     </h2>
                     <span x-show="fitScore" class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold"
                           :class="fitScore >= 7 ? 'bg-green-100 text-green-800' : fitScore >= 4 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'"
@@ -157,7 +158,7 @@
                             <div class="rounded-lg bg-green-50 border border-green-200 p-4">
                                 <h3 class="text-sm font-semibold text-green-800 mb-3 flex items-center gap-1.5">
                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                                    Puntos fuertes
+                                    {% trans "Puntos fuertes" %}
                                 </h3>
                                 <ul class="space-y-2">
                                     <template x-for="(item, i) in strengths" :key="i">
@@ -172,7 +173,7 @@
                             <div class="rounded-lg bg-red-50 border border-red-200 p-4">
                                 <h3 class="text-sm font-semibold text-red-800 mb-3 flex items-center gap-1.5">
                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-                                    Puntos débiles
+                                    {% trans "Puntos débiles" %}
                                 </h3>
                                 <ul class="space-y-2">
                                     <template x-for="(item, i) in weaknesses" :key="i">
@@ -192,8 +193,8 @@
         <!-- Interviews -->
         <div id="tour-candidate-interviews" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                <h2 class="text-base font-semibold text-gray-900">Entrevistas ({{ interviews|length }})</h2>
-                <a href="{% url 'interviews:interview_create' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ Programar</a>
+                <h2 class="text-base font-semibold text-gray-900">{% blocktrans with count=interviews|length %}Entrevistas ({{ count }}){% endblocktrans %}</h2>
+                <a href="{% url 'interviews:interview_create' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{% trans "+ Programar" %}</a>
             </div>
             {% if interviews %}
             <div class="divide-y divide-gray-200">
@@ -202,37 +203,37 @@
                     <div class="flex items-center justify-between mb-1">
                         <div class="flex items-center gap-2">
                             <span class="text-sm font-medium text-gray-900">{{ interview.scheduled_at|date:"d/m/Y H:i" }}</span>
-                            {% if interview.status == 'scheduled' %}{% include "partials/_badge.html" with label="Programada" color="blue" %}
-                            {% elif interview.status == 'completed' %}{% include "partials/_badge.html" with label="Realizada" color="green" %}
-                            {% elif interview.status == 'cancelled' %}{% include "partials/_badge.html" with label="Cancelada" color="red" %}
-                            {% else %}{% include "partials/_badge.html" with label="No show" color="gray" %}{% endif %}
+                            {% if interview.status == 'scheduled' %}{% include "partials/_badge.html" with label=_("Programada") color="blue" %}
+                            {% elif interview.status == 'completed' %}{% include "partials/_badge.html" with label=_("Realizada") color="green" %}
+                            {% elif interview.status == 'cancelled' %}{% include "partials/_badge.html" with label=_("Cancelada") color="red" %}
+                            {% else %}{% include "partials/_badge.html" with label=_("No show") color="gray" %}{% endif %}
                         </div>
-                        <a href="{% url 'interviews:interview_edit' interview.pk %}" class="text-xs text-blue-600 hover:text-blue-500">Editar</a>
+                        <a href="{% url 'interviews:interview_edit' interview.pk %}" class="text-xs text-blue-600 hover:text-blue-500">{% trans "Editar" %}</a>
                     </div>
                     <p class="text-sm text-gray-500">
                         {{ interview.duration_minutes }} min ·
-                        {% if interview.interviewer %}{{ interview.interviewer.get_full_name }}{% else %}Sin asignar{% endif %}
+                        {% if interview.interviewer %}{{ interview.interviewer.get_full_name }}{% else %}{% trans "Sin asignar" %}{% endif %}
                         {% if interview.location_or_link %} · {{ interview.location_or_link }}{% endif %}
                     </p>
                     {% if interview.notes %}
                     <p class="mt-2 text-sm text-gray-700">{{ interview.notes|truncatewords:30 }}</p>
                     {% endif %}
                     {% if interview.overall_score %}
-                    <p class="mt-1 text-sm"><span class="font-medium">Puntuación:</span> {{ interview.overall_score }}/10</p>
+                    <p class="mt-1 text-sm"><span class="font-medium">{% trans "Puntuación:" %}</span> {{ interview.overall_score }}/10</p>
                     {% endif %}
                 </div>
                 {% endfor %}
             </div>
             {% else %}
-            <div class="px-6 py-6 text-center text-sm text-gray-500">Sin entrevistas programadas.</div>
+            <div class="px-6 py-6 text-center text-sm text-gray-500">{% trans "Sin entrevistas programadas." %}</div>
             {% endif %}
         </div>
 
         <!-- Case Studies -->
         <div id="tour-candidate-casestudies" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                <h2 class="text-base font-semibold text-gray-900">Casos prácticos ({{ case_studies|length }})</h2>
-                <a href="{% url 'casestudies:casestudy_generate' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ Generar caso práctico</a>
+                <h2 class="text-base font-semibold text-gray-900">{% blocktrans with count=case_studies|length %}Casos prácticos ({{ count }}){% endblocktrans %}</h2>
+                <a href="{% url 'casestudies:casestudy_generate' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{% trans "+ Generar caso práctico" %}</a>
             </div>
             {% if case_studies %}
             <div class="divide-y divide-gray-200">
@@ -241,38 +242,38 @@
                     <div class="flex items-center justify-between mb-1">
                         <div class="flex items-center gap-2">
                             <a href="{% url 'casestudies:casestudy_detail' cs.pk %}" class="text-sm font-medium text-gray-900 hover:text-blue-600">{{ cs.case_study.title }}</a>
-                            {% if cs.submitted_at %}{% include "partials/_badge.html" with label="Entregado" color="green" %}
-                            {% elif cs.sent_at %}{% include "partials/_badge.html" with label="Enviado" color="blue" %}
-                            {% else %}{% include "partials/_badge.html" with label="Pendiente" color="gray" %}{% endif %}
+                            {% if cs.submitted_at %}{% include "partials/_badge.html" with label=_("Entregado") color="green" %}
+                            {% elif cs.sent_at %}{% include "partials/_badge.html" with label=_("Enviado") color="blue" %}
+                            {% else %}{% include "partials/_badge.html" with label=_("Pendiente") color="gray" %}{% endif %}
                         </div>
                         <div class="flex items-center gap-2">
-                            <a href="{% url 'casestudies:casestudy_detail' cs.pk %}" class="text-xs text-gray-600 hover:text-gray-900">Ver</a>
-                            <a href="{% url 'casestudies:casestudy_edit' cs.pk %}" class="text-xs text-blue-600 hover:text-blue-500">Editar</a>
+                            <a href="{% url 'casestudies:casestudy_detail' cs.pk %}" class="text-xs text-gray-600 hover:text-gray-900">{% trans "Ver" %}</a>
+                            <a href="{% url 'casestudies:casestudy_edit' cs.pk %}" class="text-xs text-blue-600 hover:text-blue-500">{% trans "Editar" %}</a>
                             {% if not cs.submitted_at %}
-                            <a href="{% url 'casestudies:casestudy_detail' cs.pk %}" class="text-xs text-amber-600 hover:text-amber-500">Subir respuesta</a>
+                            <a href="{% url 'casestudies:casestudy_detail' cs.pk %}" class="text-xs text-amber-600 hover:text-amber-500">{% trans "Subir respuesta" %}</a>
                             <form method="post" action="{% url 'casestudies:casestudy_resend' cs.pk %}" class="inline">
                                 {% csrf_token %}
-                                <button type="submit" class="text-xs text-indigo-600 hover:text-indigo-500">Reenviar email</button>
+                                <button type="submit" class="text-xs text-indigo-600 hover:text-indigo-500">{% trans "Reenviar email" %}</button>
                             </form>
                             {% endif %}
                         </div>
                     </div>
                     <p class="text-xs text-gray-500">
-                        {% if cs.sent_at %}Enviado {{ cs.sent_at|date:"d/m/Y" }}{% endif %}
-                        {% if cs.deadline %} · Límite: {{ cs.deadline|date:"d/m/Y" }}{% endif %}
-                        {% if cs.submitted_at %} · Entregado {{ cs.submitted_at|date:"d/m/Y H:i" }}{% endif %}
+                        {% if cs.sent_at %}{% blocktrans with date=cs.sent_at|date:"d/m/Y" %}Enviado {{ date }}{% endblocktrans %}{% endif %}
+                        {% if cs.deadline %} · {% blocktrans with date=cs.deadline|date:"d/m/Y" %}Límite: {{ date }}{% endblocktrans %}{% endif %}
+                        {% if cs.submitted_at %} · {% blocktrans with date=cs.submitted_at|date:"d/m/Y H:i" %}Entregado {{ date }}{% endblocktrans %}{% endif %}
                     </p>
                     {% if cs.sent_at and not cs.submitted_at %}
                     <div class="mt-2 flex items-center gap-2" x-data="{ copied: false }">
-                        <span class="text-xs text-gray-500">Enlace portal:</span>
+                        <span class="text-xs text-gray-500">{% trans "Enlace portal:" %}</span>
                         <code class="text-xs bg-gray-100 px-2 py-0.5 rounded select-all break-all">{{ request.scheme }}://{{ request.get_host }}/portal/case/{{ candidate.portal_token }}/</code>
                         <button type="button" @click="navigator.clipboard.writeText('{{ request.scheme }}://{{ request.get_host }}/portal/case/{{ candidate.portal_token }}/'); copied = true; setTimeout(() => copied = false, 2000)"
                                 class="text-xs text-blue-600 hover:text-blue-500 whitespace-nowrap">
-                            <span x-text="copied ? 'Copiado!' : 'Copiar'"></span>
+                            <span x-text="copied ? '{% trans "Copiado!" %}' : '{% trans "Copiar" %}'"></span>
                         </button>
                     </div>
                     {% endif %}
-                    {% if cs.score %}<p class="mt-1 text-sm"><span class="font-medium">Puntuación:</span> {{ cs.score }}/10</p>{% endif %}
+                    {% if cs.score %}<p class="mt-1 text-sm"><span class="font-medium">{% trans "Puntuación:" %}</span> {{ cs.score }}/10</p>{% endif %}
 
                     {% if cs.submitted_at and cs.submission_text %}
                     <p class="mt-2 text-sm text-gray-600">{{ cs.submission_text|truncatewords:25 }}</p>
@@ -281,7 +282,7 @@
                 {% endfor %}
             </div>
             {% else %}
-            <div class="px-6 py-6 text-center text-sm text-gray-500">Sin casos prácticos asignados.</div>
+            <div class="px-6 py-6 text-center text-sm text-gray-500">{% trans "Sin casos prácticos asignados." %}</div>
             {% endif %}
         </div>
 
@@ -289,10 +290,10 @@
         <div id="tour-candidate-evaluations" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 class="text-base font-semibold text-gray-900">
-                    Evaluación IA ({{ evaluations|length }})
-                    <span class="ml-1 inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-800">IA</span>
+                    {% blocktrans with count=evaluations|length %}Evaluación IA ({{ count }}){% endblocktrans %}
+                    <span class="ml-1 inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-800">{% trans "IA" %}</span>
                 </h2>
-                <a href="{% url 'evaluations:evaluate_candidate' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">Generar evaluación</a>
+                <a href="{% url 'evaluations:evaluate_candidate' candidate.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{% trans "Generar evaluación" %}</a>
             </div>
             {% if evaluations %}
             {% with eval=evaluations.0 %}
@@ -301,29 +302,29 @@
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
                     <div class="text-center p-3 rounded-lg bg-gray-50">
                         <p class="text-2xl font-bold {% if eval.overall_score >= 7 %}text-green-600{% elif eval.overall_score >= 5 %}text-yellow-600{% else %}text-red-600{% endif %}">{{ eval.overall_score|default:"—" }}</p>
-                        <p class="text-xs text-gray-500">Global</p>
+                        <p class="text-xs text-gray-500">{% trans "Global" %}</p>
                     </div>
                     <div class="text-center p-3 rounded-lg bg-gray-50">
                         <p class="text-xl font-semibold text-gray-900">{{ eval.cv_score|default:"—" }}</p>
-                        <p class="text-xs text-gray-500">CV</p>
+                        <p class="text-xs text-gray-500">{% trans "CV" %}</p>
                     </div>
                     <div class="text-center p-3 rounded-lg bg-gray-50">
                         <p class="text-xl font-semibold text-gray-900">{{ eval.interview_score|default:"—" }}</p>
-                        <p class="text-xs text-gray-500">Entrevista</p>
+                        <p class="text-xs text-gray-500">{% trans "Entrevista" %}</p>
                     </div>
                     <div class="text-center p-3 rounded-lg bg-gray-50">
                         <p class="text-xl font-semibold text-gray-900">{{ eval.case_score|default:"—" }}</p>
-                        <p class="text-xs text-gray-500">Case Study</p>
+                        <p class="text-xs text-gray-500">{% trans "Case Study" %}</p>
                     </div>
                 </div>
 
                 <!-- Recommendation -->
                 {% if eval.recommendation %}
                 <div class="mb-4">
-                    <span class="text-sm font-medium text-gray-700">Recomendación:</span>
-                    {% if eval.recommendation == 'hire' %}{% include "partials/_badge.html" with label="Contratar" color="green" %}
-                    {% elif eval.recommendation == 'hold' %}{% include "partials/_badge.html" with label="En espera" color="yellow" %}
-                    {% else %}{% include "partials/_badge.html" with label="Rechazar" color="red" %}{% endif %}
+                    <span class="text-sm font-medium text-gray-700">{% trans "Recomendación:" %}</span>
+                    {% if eval.recommendation == 'hire' %}{% include "partials/_badge.html" with label=_("Contratar") color="green" %}
+                    {% elif eval.recommendation == 'hold' %}{% include "partials/_badge.html" with label=_("En espera") color="yellow" %}
+                    {% else %}{% include "partials/_badge.html" with label=_("Rechazar") color="red" %}{% endif %}
                 </div>
                 {% endif %}
 
@@ -332,12 +333,12 @@
                 <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ eval.summary }}</div>
                 {% endif %}
 
-                <p class="mt-3 text-xs text-gray-400">Generada el {{ eval.generated_at|date:"d/m/Y H:i" }}</p>
+                <p class="mt-3 text-xs text-gray-400">{% blocktrans with date=eval.generated_at|date:"d/m/Y H:i" %}Generada el {{ date }}{% endblocktrans %}</p>
             </div>
             {% endwith %}
             {% else %}
             <div class="px-6 py-6 text-center text-sm text-gray-500">
-                Sin evaluaciones IA. Haz clic en "Generar evaluación" para crear una.
+                {% trans 'Sin evaluaciones IA. Haz clic en "Generar evaluación" para crear una.' %}
             </div>
             {% endif %}
         </div>
@@ -347,22 +348,22 @@
     <div class="space-y-6">
         <!-- Quick info -->
         <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 class="text-sm font-semibold text-gray-900 mb-3">Información</h3>
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Información" %}</h3>
             <dl class="space-y-2 text-sm">
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Posición</dt>
+                    <dt class="text-gray-500">{% trans "Posición" %}</dt>
                     <dd><a href="{% url 'positions:position_detail' position.pk %}" class="text-blue-600 hover:underline">{{ position.title }}</a></dd>
                 </div>
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Estado</dt>
+                    <dt class="text-gray-500">{% trans "Estado" %}</dt>
                     <dd>{% candidate_status_badge candidate.status %}</dd>
                 </div>
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Origen</dt>
+                    <dt class="text-gray-500">{% trans "Origen" %}</dt>
                     <dd class="text-gray-900">{{ candidate.get_source_display }}</dd>
                 </div>
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Añadido</dt>
+                    <dt class="text-gray-500">{% trans "Añadido" %}</dt>
                     <dd class="text-gray-900">{{ candidate.created_at|date:"d/m/Y" }}</dd>
                 </div>
             </dl>
@@ -373,8 +374,8 @@
             <div id="tour-candidate-sidebar-ai" class="bg-white rounded-lg border border-gray-200 p-6">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-sm font-semibold text-gray-900 flex items-center gap-1.5">
-                        Análisis IA
-                        <span class="inline-flex items-center rounded-full bg-indigo-100 px-1.5 py-0.5 text-[10px] font-medium text-indigo-800">IA</span>
+                        {% trans "Análisis IA" %}
+                        <span class="inline-flex items-center rounded-full bg-indigo-100 px-1.5 py-0.5 text-[10px] font-medium text-indigo-800">{% trans "IA" %}</span>
                     </h3>
                     <span x-show="fitScore" class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold"
                           :class="fitScore >= 7 ? 'bg-green-100 text-green-800' : fitScore >= 4 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'"
@@ -385,7 +386,7 @@
                     <div class="mb-3">
                         <h4 class="text-xs font-semibold text-green-800 mb-1.5 flex items-center gap-1">
                             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                            Puntos fuertes
+                            {% trans "Puntos fuertes" %}
                         </h4>
                         <ul class="space-y-1.5">
                             <template x-for="(item, i) in strengths" :key="i">
@@ -402,7 +403,7 @@
                     <div>
                         <h4 class="text-xs font-semibold text-red-800 mb-1.5 flex items-center gap-1">
                             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-                            Puntos débiles
+                            {% trans "Puntos débiles" %}
                         </h4>
                         <ul class="space-y-1.5">
                             <template x-for="(item, i) in weaknesses" :key="i">
@@ -419,36 +420,36 @@
 
         <!-- Recruiter notes -->
         <div id="tour-candidate-notes" class="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 class="text-sm font-semibold text-gray-900 mb-3">Notas del reclutador</h3>
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Notas del reclutador" %}</h3>
             <form method="post" action="{% url 'candidates:candidate_notes' candidate.pk %}">
                 {% csrf_token %}
                 <textarea name="recruiter_notes" rows="5"
                           class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                          placeholder="Escribe tus notas aquí...">{{ candidate.recruiter_notes }}</textarea>
+                          placeholder="{% trans "Escribe tus notas aquí..." %}">{{ candidate.recruiter_notes }}</textarea>
                 <button type="submit" class="mt-2 w-full rounded-md bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200">
-                    Guardar notas
+                    {% trans "Guardar notas" %}
                 </button>
             </form>
         </div>
 
         <!-- Quick actions -->
         <div id="tour-candidate-actions" class="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 class="text-sm font-semibold text-gray-900 mb-3">Acciones rápidas</h3>
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Acciones rápidas" %}</h3>
             <div class="space-y-2">
                 <a href="{% url 'interviews:interview_create' candidate.pk %}"
                    class="flex w-full items-center justify-center gap-2 rounded-md bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
-                    Programar entrevista
+                    {% trans "Programar entrevista" %}
                 </a>
                 <a href="{% url 'casestudies:casestudy_generate' candidate.pk %}"
                    class="flex w-full items-center justify-center gap-2 rounded-md bg-purple-50 px-3 py-2 text-sm font-medium text-purple-700 hover:bg-purple-100">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
-                    Generar caso práctico
+                    {% trans "Generar caso práctico" %}
                 </a>
                 <a href="{% url 'evaluations:evaluate_candidate' candidate.pk %}"
                    class="flex w-full items-center justify-center gap-2 rounded-md bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" /></svg>
-                    Generar evaluación IA
+                    {% trans "Generar evaluación IA" %}
                 </a>
             </div>
         </div>

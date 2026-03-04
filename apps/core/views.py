@@ -1,8 +1,12 @@
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import translation
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
+from apps.core.models import UserSettings
 from apps.tenants.models import Company
 
 
@@ -28,7 +32,7 @@ def login_view(request):
             login(request, user)
             next_url = request.GET.get('next', '/')
             return redirect(next_url)
-        error = 'Credenciales inválidas.'
+        error = _('Credenciales inválidas.')
     return render(request, 'registration/login.html', {'error': error})
 
 
@@ -72,6 +76,20 @@ def select_company(request):
     return render(request, 'tenants/company_select.html', {
         'company_data': company_data,
     })
+
+
+@require_POST
+@login_required
+def change_language(request):
+    """Change the user's preferred language."""
+    lang = request.POST.get('language', 'es')
+    valid_codes = [code for code, name in settings.LANGUAGES]
+    if lang in valid_codes:
+        settings_obj, _ = UserSettings.objects.get_or_create(user=request.user)
+        settings_obj.language = lang
+        settings_obj.save(update_fields=['language'])
+        translation.activate(lang)
+    return redirect(request.POST.get('next', request.META.get('HTTP_REFERER', '/')))
 
 
 @require_POST

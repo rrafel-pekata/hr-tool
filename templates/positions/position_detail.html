@@ -1,34 +1,35 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load candidates_tags %}
 
 {% block tour_page %}position_detail{% endblock %}
 {% block title %}{{ position.title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
-<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
-<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_list' %}" class="hover:text-gray-700">Posiciones</a></li>
+<li><a href="/" class="hover:text-gray-700">{% trans "Inicio" %}</a></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'positions:position_list' %}" class="hover:text-gray-700">{% trans "Posiciones" %}</a></li>
 <li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{{ position.title }}</span></li>
 {% endblock %}
 
 {% block topbar_actions %}
-<form method="post" action="{% url 'positions:position_delete' position.pk %}" x-data @submit.prevent="$dispatch('confirm-delete', { title: 'Eliminar posición', message: '¿Eliminar la posición «{{ position.title }}»? Se ocultará de todas las vistas.', form: $el })">
+<form method="post" action="{% url 'positions:position_delete' position.pk %}" x-data @submit.prevent="$dispatch('confirm-delete', { title: '{% trans "Eliminar posición" %}', message: '{% blocktrans with title=position.title %}¿Eliminar la posición «{{ title }}»? Se ocultará de todas las vistas.{% endblocktrans %}', form: $el })">
     {% csrf_token %}
     <button type="submit" class="inline-flex items-center rounded-md border border-red-300 bg-white px-3 py-1.5 text-sm font-medium text-red-700 shadow-sm hover:bg-red-50">
         <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
-        Eliminar
+        {% trans "Eliminar" %}
     </button>
 </form>
 <a href="{% url 'positions:position_edit' position.pk %}" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
     <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
-    Editar oferta
+    {% trans "Editar oferta" %}
 </a>
 <button @click="$dispatch('open-bulk-upload')" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
     <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-    Carga masiva de CVs
+    {% trans "Carga masiva de CVs" %}
 </button>
 <a href="{% url 'candidates:candidate_create' position.pk %}" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
     <svg class="-ml-0.5 mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
-    Añadir candidato
+    {% trans "Añadir candidato" %}
 </a>
 {% endblock %}
 
@@ -38,10 +39,10 @@
     <div>
         <div class="flex items-center gap-3">
             <h1 class="text-2xl font-bold text-gray-900">{{ position.title }}</h1>
-            {% if position.status == 'published' %}{% include "partials/_badge.html" with label="Publicada" color="green" %}
-            {% elif position.status == 'draft' %}{% include "partials/_badge.html" with label="Borrador" color="gray" %}
-            {% elif position.status == 'paused' %}{% include "partials/_badge.html" with label="Pausada" color="yellow" %}
-            {% else %}{% include "partials/_badge.html" with label="Cerrada" color="red" %}{% endif %}
+            {% if position.status == 'published' %}{% include "partials/_badge.html" with label=_("Publicada") color="green" %}
+            {% elif position.status == 'draft' %}{% include "partials/_badge.html" with label=_("Borrador") color="gray" %}
+            {% elif position.status == 'paused' %}{% include "partials/_badge.html" with label=_("Pausada") color="yellow" %}
+            {% else %}{% include "partials/_badge.html" with label=_("Cerrada") color="red" %}{% endif %}
         </div>
         <div class="mt-1 flex items-center gap-4 text-sm text-gray-500">
             {% if position.department %}<span>{{ position.department.name }}</span>{% endif %}
@@ -57,24 +58,24 @@
         <form method="post" action="{% url 'positions:position_status' position.pk %}">
             {% csrf_token %}
             <input type="hidden" name="action" value="publish">
-            <button type="submit" class="inline-flex items-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500">Publicar</button>
+            <button type="submit" class="inline-flex items-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500">{% trans "Publicar" %}</button>
         </form>
         {% elif position.status == 'published' %}
         <form method="post" action="{% url 'positions:position_status' position.pk %}">
             {% csrf_token %}
             <input type="hidden" name="action" value="pause">
-            <button type="submit" class="inline-flex items-center rounded-md bg-yellow-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-400">Pausar</button>
+            <button type="submit" class="inline-flex items-center rounded-md bg-yellow-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-400">{% trans "Pausar" %}</button>
         </form>
         <form method="post" action="{% url 'positions:position_status' position.pk %}">
             {% csrf_token %}
             <input type="hidden" name="action" value="close">
-            <button type="submit" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500">Cerrar</button>
+            <button type="submit" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500">{% trans "Cerrar" %}</button>
         </form>
         {% elif position.status == 'paused' %}
         <form method="post" action="{% url 'positions:position_status' position.pk %}">
             {% csrf_token %}
             <input type="hidden" name="action" value="publish">
-            <button type="submit" class="inline-flex items-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500">Reactivar</button>
+            <button type="submit" class="inline-flex items-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500">{% trans "Reactivar" %}</button>
         </form>
         {% endif %}
     </div>
@@ -85,28 +86,28 @@
     <div id="tour-position-description" class="lg:col-span-2 space-y-6">
         {% if position.description %}
         <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">Descripción</h2>
+            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Descripción" %}</h2>
             <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.description }}</div>
         </div>
         {% endif %}
 
         {% if position.requirements %}
         <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">Requisitos</h2>
+            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Requisitos" %}</h2>
             <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.requirements }}</div>
         </div>
         {% endif %}
 
         {% if position.benefits %}
         <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">Qué ofrecemos</h2>
+            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Qué ofrecemos" %}</h2>
             <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.benefits }}</div>
         </div>
         {% endif %}
 
         {% if position.about_company_snippet %}
         <div class="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 class="text-base font-semibold text-gray-900 mb-3">Sobre la empresa</h2>
+            <h2 class="text-base font-semibold text-gray-900 mb-3">{% trans "Sobre la empresa" %}</h2>
             <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ position.about_company_snippet }}</div>
         </div>
         {% endif %}
@@ -114,8 +115,8 @@
         <!-- Candidates section -->
         <div id="tour-position-candidates" class="bg-white rounded-lg border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                <h2 class="text-base font-semibold text-gray-900">Candidatos ({{ candidates|length }})</h2>
-                <a href="{% url 'candidates:candidate_create' position.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ Añadir</a>
+                <h2 class="text-base font-semibold text-gray-900">{% blocktrans with count=candidates|length %}Candidatos ({{ count }}){% endblocktrans %}</h2>
+                <a href="{% url 'candidates:candidate_create' position.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">+ {% trans "Añadir" %}</a>
             </div>
             {% if candidates %}
             <div class="divide-y divide-gray-200">
@@ -136,7 +137,7 @@
                     {% if candidate.eval_score %}
                     <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {% if candidate.eval_score >= 7 %}bg-green-100 text-green-700{% elif candidate.eval_score >= 4 %}bg-yellow-100 text-yellow-700{% else %}bg-red-100 text-red-700{% endif %}">
                         {{ candidate.eval_score }}/10
-                        {% if candidate.eval_recommendation == 'hire' %} · Contratar{% elif candidate.eval_recommendation == 'hold' %} · Espera{% elif candidate.eval_recommendation == 'reject' %} · Rechazar{% endif %}
+                        {% if candidate.eval_recommendation == 'hire' %} · {% trans "Contratar" %}{% elif candidate.eval_recommendation == 'hold' %} · {% trans "Espera" %}{% elif candidate.eval_recommendation == 'reject' %} · {% trans "Rechazar" %}{% endif %}
                     </span>
                     {% endif %}
                     {% if candidate.rating %}
@@ -151,7 +152,7 @@
             </div>
             {% else %}
             <div class="px-6 py-8 text-center text-sm text-gray-500">
-                Aún no hay candidatos para esta posición.
+                {% trans "Aún no hay candidatos para esta posición." %}
             </div>
             {% endif %}
         </div>
@@ -161,54 +162,54 @@
     <div class="space-y-6">
         <!-- Position info card -->
         <div id="tour-position-info" class="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 class="text-sm font-semibold text-gray-900 mb-3">Datos de la oferta</h3>
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Datos de la oferta" %}</h3>
             <dl class="space-y-2.5 text-sm">
                 {% if position.department %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Departamento</dt>
+                    <dt class="text-gray-500">{% trans "Departamento" %}</dt>
                     <dd class="text-gray-900 font-medium">{{ position.department.name }}</dd>
                 </div>
                 {% endif %}
                 {% if position.location %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Ubicación</dt>
+                    <dt class="text-gray-500">{% trans "Ubicación" %}</dt>
                     <dd class="text-gray-900">{{ position.location }}</dd>
                 </div>
                 {% endif %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Tipo</dt>
+                    <dt class="text-gray-500">{% trans "Tipo" %}</dt>
                     <dd class="text-gray-900">{{ position.get_employment_type_display }}</dd>
                 </div>
                 {% if position.salary_range %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Salario</dt>
+                    <dt class="text-gray-500">{% trans "Salario" %}</dt>
                     <dd class="text-gray-900 font-medium">{{ position.salary_range }}</dd>
                 </div>
                 {% endif %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Candidatos</dt>
+                    <dt class="text-gray-500">{% trans "Candidatos" %}</dt>
                     <dd class="text-gray-900 font-medium">{{ candidates|length }}</dd>
                 </div>
                 <div class="border-t border-gray-100 pt-2 mt-2 flex justify-between">
-                    <dt class="text-gray-500">Creada</dt>
+                    <dt class="text-gray-500">{% trans "Creada" %}</dt>
                     <dd class="text-gray-900">{{ position.created_at|date:"d/m/Y" }}</dd>
                 </div>
                 {% if position.published_at %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Publicada</dt>
+                    <dt class="text-gray-500">{% trans "Publicada" %}</dt>
                     <dd class="text-gray-900">{{ position.published_at|date:"d/m/Y" }}</dd>
                 </div>
                 {% endif %}
                 {% if position.closed_at %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">Cerrada</dt>
+                    <dt class="text-gray-500">{% trans "Cerrada" %}</dt>
                     <dd class="text-gray-900">{{ position.closed_at|date:"d/m/Y" }}</dd>
                 </div>
                 {% endif %}
                 {% if position.ai_generated_draft %}
                 <div class="flex justify-between">
-                    <dt class="text-gray-500">IA</dt>
-                    <dd>{% include "partials/_badge.html" with label="Generado con IA" color="indigo" %}</dd>
+                    <dt class="text-gray-500">{% trans "IA" %}</dt>
+                    <dd>{% include "partials/_badge.html" with label=_("Generado con IA") color="indigo" %}</dd>
                 </div>
                 {% endif %}
             </dl>
@@ -218,8 +219,8 @@
         {% if position.has_case_study %}
         <div id="tour-position-casestudies" class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-semibold text-gray-900">Case Studies</h3>
-                <a href="{% url 'casestudies:casestudy_create' position.pk %}" class="text-xs font-medium text-blue-600 hover:text-blue-500">+ Crear</a>
+                <h3 class="text-sm font-semibold text-gray-900">{% trans "Case Studies" %}</h3>
+                <a href="{% url 'casestudies:casestudy_create' position.pk %}" class="text-xs font-medium text-blue-600 hover:text-blue-500">+ {% trans "Crear" %}</a>
             </div>
             {% if case_studies %}
             <ul class="space-y-2">
@@ -227,14 +228,14 @@
                 <li class="text-sm">
                     <span class="font-medium text-gray-900">{{ cs.title }}</span>
                     {% if cs.ai_generated %}
-                    <span class="ml-1 text-xs text-indigo-600">(IA)</span>
+                    <span class="ml-1 text-xs text-indigo-600">({% trans "IA" %})</span>
                     {% endif %}
-                    <p class="text-xs text-gray-500">{{ cs.deadline_days }} días · {{ cs.submissions.count }} envíos</p>
+                    <p class="text-xs text-gray-500">{% blocktrans with days=cs.deadline_days submissions=cs.submissions.count %}{{ days }} días · {{ submissions }} envíos{% endblocktrans %}</p>
                 </li>
                 {% endfor %}
             </ul>
             {% else %}
-            <p class="text-sm text-gray-500">Sin case studies definidos aún.</p>
+            <p class="text-sm text-gray-500">{% trans "Sin case studies definidos aún." %}</p>
             {% endif %}
         </div>
         {% endif %}
@@ -252,7 +253,7 @@
             <div class="relative w-full max-w-lg rounded-xl bg-white shadow-2xl" @click.outside="closeIfDone()">
                 <!-- Header -->
                 <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-                    <h3 class="text-lg font-semibold text-gray-900">Carga masiva de CVs</h3>
+                    <h3 class="text-lg font-semibold text-gray-900">{% trans "Carga masiva de CVs" %}</h3>
                     <button @click="closeIfDone()" class="text-gray-400 hover:text-gray-500">
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -268,10 +269,10 @@
                              @dragleave.prevent="dragging = false"
                              @drop.prevent="handleDrop($event)">
                             <svg class="mx-auto h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-                            <p class="mt-2 text-sm text-gray-600">Arrastra archivos PDF aquí</p>
-                            <p class="mt-1 text-xs text-gray-500">o</p>
+                            <p class="mt-2 text-sm text-gray-600">{% trans "Arrastra archivos PDF aquí" %}</p>
+                            <p class="mt-1 text-xs text-gray-500">{% trans "o" %}</p>
                             <label class="mt-2 inline-flex cursor-pointer items-center rounded-md bg-white px-3 py-1.5 text-sm font-medium text-blue-600 ring-1 ring-inset ring-blue-600/20 hover:bg-blue-50">
-                                Seleccionar archivos
+                                {% trans "Seleccionar archivos" %}
                                 <input type="file" multiple accept=".pdf" class="sr-only" @change="handleSelect($event)">
                             </label>
                         </div>
@@ -313,9 +314,9 @@
                                                 'text-green-600': f.status === 'done',
                                                 'text-red-600': f.status === 'error',
                                             }">
-                                                <span x-show="f.status === 'pending'">Pendiente</span>
-                                                <span x-show="f.status === 'uploading'">Subiendo...</span>
-                                                <span x-show="f.status === 'analyzing'">Analizando con IA...</span>
+                                                <span x-show="f.status === 'pending'">{% trans "Pendiente" %}</span>
+                                                <span x-show="f.status === 'uploading'">{% trans "Subiendo..." %}</span>
+                                                <span x-show="f.status === 'analyzing'">{% trans "Analizando con IA..." %}</span>
                                                 <span x-show="f.status === 'done'" x-text="f.result"></span>
                                                 <span x-show="f.status === 'error'" x-text="f.error"></span>
                                             </p>
@@ -347,15 +348,15 @@
                 <div class="flex items-center justify-end gap-3 border-t border-gray-200 px-6 py-4">
                     <template x-if="!processing && !finished && files.length > 0">
                         <div class="flex gap-3">
-                            <button @click="reset()" class="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50">Cancelar</button>
-                            <button @click="startUpload()" class="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-500" x-text="'Subir ' + files.length + ' archivo' + (files.length !== 1 ? 's' : '')"></button>
+                            <button @click="reset()" class="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50">{% trans "Cancelar" %}</button>
+                            <button @click="startUpload()" class="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-500" x-text="'{% trans "Subir" %} ' + files.length + ' archivo' + (files.length !== 1 ? 's' : '')"></button>
                         </div>
                     </template>
                     <template x-if="processing">
-                        <button disabled class="rounded-md bg-gray-300 px-3 py-1.5 text-sm font-semibold text-gray-500 cursor-not-allowed">Procesando...</button>
+                        <button disabled class="rounded-md bg-gray-300 px-3 py-1.5 text-sm font-semibold text-gray-500 cursor-not-allowed">{% trans "Procesando..." %}</button>
                     </template>
                     <template x-if="finished">
-                        <button @click="closeAndReload()" class="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-500">Cerrar y actualizar</button>
+                        <button @click="closeAndReload()" class="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-500">{% trans "Cerrar y actualizar" %}</button>
                     </template>
                 </div>
             </div>

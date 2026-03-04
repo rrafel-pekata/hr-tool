@@ -1,0 +1,2773 @@
+# English translations for Pekata ATS.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 16:59+0100\n"
+"PO-Revision-Date: 2026-03-04 17:00+0100\n"
+"Last-Translator: Pekata ATS\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: apps/candidates/forms.py:18 apps/candidates/models.py:39
+#: apps/tenants/models.py:10 apps/tenants/models.py:115
+#: templates/candidates/candidate_form.html:135
+#: templates/tenants/company_form.html:52
+#: templates/tenants/department_form.html:21
+#: templates/tenants/department_list.html:29
+msgid "Nombre"
+msgstr "Name"
+
+#: apps/candidates/forms.py:19 apps/candidates/models.py:40
+#: templates/candidates/candidate_form.html:140
+msgid "Apellidos"
+msgstr "Last name"
+
+#: apps/candidates/forms.py:20
+msgid "email@ejemplo.com"
+msgstr "email@example.com"
+
+#: apps/candidates/forms.py:21
+msgid "+34 600 000 000"
+msgstr "+1 555 000 000"
+
+#: apps/candidates/forms.py:45
+msgid "Notas rápidas sobre el candidato..."
+msgstr "Quick notes about the candidate..."
+
+#: apps/candidates/models.py:14 templates/casestudies/casestudy_send.html:28
+msgid "Manual"
+msgstr "Manual"
+
+#: apps/candidates/models.py:15 apps/candidates/models.py:43
+#: templates/candidates/candidate_form.html:154
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: apps/candidates/models.py:16 apps/candidates/models.py:41
+#: templates/candidates/candidate_form.html:145
+msgid "Email"
+msgstr "Email"
+
+#: apps/candidates/models.py:17
+msgid "Portal"
+msgstr "Portal"
+
+#: apps/candidates/models.py:20 templates/tenants/department_form.html:9
+msgid "Nuevo"
+msgstr "New"
+
+#: apps/candidates/models.py:21
+msgid "En revisión"
+msgstr "Under review"
+
+#: apps/candidates/models.py:22
+msgid "Phone screen"
+msgstr "Phone screen"
+
+#: apps/candidates/models.py:23
+msgid "Entrevista programada"
+msgstr "Interview scheduled"
+
+#: apps/candidates/models.py:24
+msgid "Entrevista realizada"
+msgstr "Interview completed"
+
+#: apps/candidates/models.py:25
+msgid "Case study enviado"
+msgstr "Case study sent"
+
+#: apps/candidates/models.py:26
+msgid "Case study entregado"
+msgstr "Case study submitted"
+
+#: apps/candidates/models.py:27
+msgid "En evaluación"
+msgstr "Under evaluation"
+
+#: apps/candidates/models.py:28
+msgid "Oferta enviada"
+msgstr "Offer sent"
+
+#: apps/candidates/models.py:29
+msgid "Contratado"
+msgstr "Hired"
+
+#: apps/candidates/models.py:30
+msgid "Descartado"
+msgstr "Rejected"
+
+#: apps/candidates/models.py:31
+msgid "Retirado"
+msgstr "Withdrawn"
+
+#: apps/candidates/models.py:37 apps/casestudies/models.py:15
+#: apps/notifications/models.py:15 apps/positions/models.py:62
+#: templates/candidates/candidate_detail.html:354
+#: templates/candidates/candidate_list.html:64
+#: templates/positions/position_list.html:59
+#: templates/tenants/company_detail.html:78
+msgid "Posición"
+msgstr "Position"
+
+#: apps/candidates/models.py:42 templates/candidates/candidate_form.html:150
+msgid "Teléfono"
+msgstr "Phone"
+
+#: apps/candidates/models.py:44 templates/candidates/candidate_form.html:33
+msgid "CV (PDF)"
+msgstr "CV (PDF)"
+
+#: apps/candidates/models.py:45
+msgid "Texto extraído del CV"
+msgstr "Text extracted from CV"
+
+#: apps/candidates/models.py:47 templates/candidates/candidate_detail.html:362
+#: templates/candidates/candidate_form.html:69
+msgid "Origen"
+msgstr "Source"
+
+#: apps/candidates/models.py:53 apps/interviews/models.py:44
+#: apps/positions/models.py:51 templates/candidates/candidate_detail.html:358
+#: templates/candidates/candidate_list.html:65
+#: templates/interviews/interview_edit.html:22
+#: templates/positions/position_list.html:60
+#: templates/tenants/company_detail.html:79
+msgid "Estado"
+msgstr "Status"
+
+#: apps/candidates/models.py:59
+msgid "Token portal"
+msgstr "Portal token"
+
+#: apps/candidates/models.py:65
+msgid "Expiración del token"
+msgstr "Token expiration"
+
+#: apps/candidates/models.py:69 templates/candidates/candidate_detail.html:423
+#: templates/candidates/candidate_edit.html:41
+msgid "Notas del reclutador"
+msgstr "Recruiter notes"
+
+#: apps/candidates/models.py:70
+msgid "Resumen IA"
+msgstr "AI summary"
+
+#: apps/candidates/models.py:71
+msgid "Puntos fuertes IA"
+msgstr "AI strengths"
+
+#: apps/candidates/models.py:72
+msgid "Puntos débiles IA"
+msgstr "AI weaknesses"
+
+#: apps/candidates/models.py:73
+msgid "Puntuación encaje IA"
+msgstr "AI fit score"
+
+#: apps/candidates/models.py:74 templates/candidates/candidate_list.html:67
+msgid "Valoración"
+msgstr "Rating"
+
+#: apps/candidates/models.py:77 apps/casestudies/models.py:39
+#: apps/evaluations/models.py:20 apps/interviews/models.py:22
+#: templates/candidates/candidate_list.html:63
+msgid "Candidato"
+msgstr "Candidate"
+
+#: apps/candidates/models.py:78 templates/candidates/candidate_list.html:5
+#: templates/candidates/candidate_list.html:9
+#: templates/candidates/candidate_list.html:14 templates/core/help.html:165
+#: templates/partials/_sidebar_content.html:85
+#: templates/positions/position_detail.html:190
+#: templates/positions/position_list.html:63
+#: templates/tenants/company_detail.html:81
+msgid "Candidatos"
+msgstr "Candidates"
+
+#: apps/candidates/views.py:83 apps/candidates/views.py:171
+#: apps/candidates/views.py:419
+msgid "No se ha enviado ningún archivo."
+msgstr "No file was uploaded."
+
+#: apps/candidates/views.py:86 apps/candidates/views.py:174
+#: apps/candidates/views.py:422
+msgid "Solo se permiten archivos PDF."
+msgstr "Only PDF files are allowed."
+
+#: apps/candidates/views.py:89 apps/candidates/views.py:177
+#: apps/candidates/views.py:425
+msgid "El archivo excede el tamaño máximo de 10MB."
+msgstr "The file exceeds the maximum size of 10MB."
+
+#: apps/candidates/views.py:113
+msgid "Error al conectar con la IA."
+msgstr "Error connecting to AI."
+
+#: apps/candidates/views.py:116
+msgid "La IA no devolvió un formato válido."
+msgstr "AI did not return a valid format."
+
+#: apps/candidates/views.py:119
+msgid "Sin nombre"
+msgstr "No name"
+
+#: apps/candidates/views.py:203 apps/casestudies/views.py:276
+#: apps/evaluations/views.py:152
+msgid "La IA no devolvió un formato válido. Inténtalo de nuevo."
+msgstr "AI did not return a valid format. Please try again."
+
+#: apps/candidates/views.py:211 apps/casestudies/views.py:283
+#: apps/evaluations/views.py:158 apps/positions/views.py:227
+#: apps/tenants/views.py:144
+msgid "Error al conectar con la IA. Inténtalo de nuevo."
+msgstr "Error connecting to AI. Please try again."
+
+#: apps/candidates/views.py:256
+#, python-format
+msgid "Candidato %(name)s añadido correctamente."
+msgstr "Candidate %(name)s added successfully."
+
+#: apps/candidates/views.py:264 apps/notifications/models.py:10
+#: templates/candidates/candidate_form.html:10
+msgid "Nuevo candidato"
+msgstr "New candidate"
+
+#: apps/candidates/views.py:277
+msgid "Candidato actualizado correctamente."
+msgstr "Candidate updated successfully."
+
+#: apps/candidates/views.py:321
+#, python-format
+msgid "Estado actualizado a \"%(status)s\"."
+msgstr "Status updated to \"%(status)s\"."
+
+#: apps/candidates/views.py:339
+#, python-format
+msgid "La posición \"%(title)s\" se ha cerrado automáticamente."
+msgstr "The position \"%(title)s\" has been automatically closed."
+
+#: apps/candidates/views.py:350
+msgid "Notas guardadas."
+msgstr "Notes saved."
+
+#: apps/candidates/views.py:364
+#, python-format
+msgid "Valoración actualizada: %(rating)s/5."
+msgstr "Rating updated: %(rating)s/5."
+
+#: apps/candidates/views.py:377
+#, python-format
+msgid "Candidato \"%(name)s\" eliminado."
+msgstr "Candidate \"%(name)s\" deleted."
+
+#: apps/candidates/views.py:491
+msgid "CV subido correctamente, pero hubo un error al analizar con IA."
+msgstr "CV uploaded successfully, but there was an error analyzing it with AI."
+
+#: apps/casestudies/forms.py:14
+msgid "Título del case study"
+msgstr "Case study title"
+
+#: apps/casestudies/forms.py:15
+msgid "Descripción breve / briefing para IA..."
+msgstr "Brief description / AI briefing..."
+
+#: apps/casestudies/forms.py:16
+msgid "Contenido completo del case study..."
+msgstr "Full case study content..."
+
+#: apps/casestudies/forms.py:18
+msgid "Criterios de evaluación para la IA..."
+msgstr "Evaluation criteria for AI..."
+
+#: apps/casestudies/models.py:17 apps/notifications/models.py:37
+#: templates/casestudies/casestudy_edit.html:25
+#: templates/casestudies/casestudy_form.html:27
+#: templates/casestudies/casestudy_generate.html:58
+msgid "Título"
+msgstr "Title"
+
+#: apps/casestudies/models.py:18
+msgid "Descripción breve"
+msgstr "Brief description"
+
+#: apps/casestudies/models.py:19 templates/casestudies/casestudy_form.html:82
+msgid "Contenido completo"
+msgstr "Full content"
+
+#: apps/casestudies/models.py:20 templates/casestudies/casestudy_form.html:78
+#: templates/casestudies/casestudy_generate.html:53
+#: templates/casestudies/casestudy_send.html:28
+#: templates/positions/position_detail.html:212
+msgid "Generado con IA"
+msgstr "AI-generated"
+
+#: apps/casestudies/models.py:21 templates/casestudies/casestudy_edit.html:46
+#: templates/casestudies/casestudy_form.html:38
+#: templates/casestudies/casestudy_generate.html:79
+msgid "Días para entrega"
+msgstr "Days to submit"
+
+#: apps/casestudies/models.py:22 templates/casestudies/casestudy_edit.html:38
+#: templates/casestudies/casestudy_form.html:87
+#: templates/casestudies/casestudy_generate.html:71
+msgid "Criterios de evaluación"
+msgstr "Evaluation criteria"
+
+#: apps/casestudies/models.py:25 apps/casestudies/models.py:45
+#: templates/candidates/candidate_detail.html:317
+#: templates/evaluations/evaluate.html:52
+msgid "Case Study"
+msgstr "Case Study"
+
+#: apps/casestudies/models.py:26 templates/positions/position_detail.html:222
+msgid "Case Studies"
+msgstr "Case Studies"
+
+#: apps/casestudies/models.py:47
+msgid "Fecha de envío"
+msgstr "Sent date"
+
+#: apps/casestudies/models.py:48
+msgid "Fecha límite"
+msgstr "Deadline"
+
+#: apps/casestudies/models.py:49
+msgid "Fecha de entrega"
+msgstr "Submission date"
+
+#: apps/casestudies/models.py:51
+msgid "Archivo de respuesta"
+msgstr "Response file"
+
+#: apps/casestudies/models.py:55
+msgid "Texto extraído"
+msgstr "Extracted text"
+
+#: apps/casestudies/models.py:56
+msgid "Notas del candidato"
+msgstr "Candidate notes"
+
+#: apps/casestudies/models.py:57
+msgid "Notas del evaluador"
+msgstr "Evaluator notes"
+
+#: apps/casestudies/models.py:58 apps/evaluations/models.py:52
+#: templates/evaluations/evaluate.html:10
+msgid "Evaluación IA"
+msgstr "AI Evaluation"
+
+#: apps/casestudies/models.py:59
+msgid "Puntuación"
+msgstr "Score"
+
+#: apps/casestudies/models.py:62
+msgid "Case Study del candidato"
+msgstr "Candidate Case Study"
+
+#: apps/casestudies/models.py:63
+msgid "Case Studies de candidatos"
+msgstr "Candidate Case Studies"
+
+#: apps/casestudies/views.py:50
+#, python-format
+msgid "Caso práctico — %(position)s — %(company)s"
+msgstr "Case study — %(position)s — %(company)s"
+
+#: apps/casestudies/views.py:51
+#, python-format
+msgid "Hola %(name)s, tienes un caso práctico pendiente. Accede aquí: %(url)s"
+msgstr "Hi %(name)s, you have a pending case study. Access it here: %(url)s"
+
+#: apps/casestudies/views.py:76
+#, python-format
+msgid "Case study \"%(title)s\" creado correctamente."
+msgstr "Case study \"%(title)s\" created successfully."
+
+#: apps/casestudies/views.py:84
+msgid "Nuevo Case Study"
+msgstr "New Case Study"
+
+#: apps/casestudies/views.py:101
+msgid "El caso práctico debe tener título y contenido."
+msgstr "The case study must have a title and content."
+
+#: apps/casestudies/views.py:136
+#, python-format
+msgid "Caso práctico creado y enviado por email a %(email)s."
+msgstr "Case study created and sent by email to %(email)s."
+
+#: apps/casestudies/views.py:138
+msgid ""
+"Caso práctico creado, pero hubo un error al enviar el email. Puedes "
+"reenviarlo."
+msgstr ""
+"Case study created, but there was an error sending the email. You can "
+"resend it."
+
+#: apps/casestudies/views.py:140
+msgid "Caso práctico creado. El candidato no tiene email, no se pudo enviar."
+msgstr "Case study created. The candidate has no email, it could not be sent."
+
+#: apps/casestudies/views.py:169
+msgid "Caso práctico actualizado."
+msgstr "Case study updated."
+
+#: apps/casestudies/views.py:194
+#, python-format
+msgid "Email reenviado a %(email)s."
+msgstr "Email resent to %(email)s."
+
+#: apps/casestudies/views.py:196
+msgid "Error al enviar el email."
+msgstr "Error sending the email."
+
+#: apps/casestudies/views.py:215
+msgid "Debes escribir una respuesta o adjuntar un archivo."
+msgstr "You must write a response or attach a file."
+
+#: apps/casestudies/views.py:237
+#, python-format
+msgid "Respuesta registrada para %(name)s."
+msgstr "Response recorded for %(name)s."
+
+#: apps/casestudies/views.py:321
+#, python-format
+msgid "Case study enviado a %(name)s."
+msgstr "Case study sent to %(name)s."
+
+#: apps/casestudies/views.py:323
+msgid "Este case study ya fue enviado a este candidato."
+msgstr "This case study has already been sent to this candidate."
+
+#: apps/casestudies/views.py:330
+msgid "Enviar Case Study"
+msgstr "Send Case Study"
+
+#: apps/chatbot/views.py:20
+msgid "Mensaje inválido"
+msgstr "Invalid message"
+
+#: apps/chatbot/views.py:23
+msgid "El mensaje no puede estar vacío"
+msgstr "The message cannot be empty"
+
+#: apps/core/models.py:28
+msgid "Eliminado en"
+msgstr "Deleted at"
+
+#: apps/core/views.py:35
+msgid "Credenciales inválidas."
+msgstr "Invalid credentials."
+
+#: apps/evaluations/models.py:12 templates/candidates/candidate_detail.html:325
+#: templates/evaluations/evaluate.html:61
+#: templates/evaluations/evaluate.html:139
+#: templates/positions/position_detail.html:140
+msgid "Contratar"
+msgstr "Hire"
+
+#: apps/evaluations/models.py:13 templates/candidates/candidate_detail.html:326
+#: templates/evaluations/evaluate.html:63
+#: templates/evaluations/evaluate.html:140
+msgid "En espera"
+msgstr "On hold"
+
+#: apps/evaluations/models.py:14 templates/candidates/candidate_detail.html:327
+#: templates/evaluations/evaluate.html:65
+#: templates/evaluations/evaluate.html:141
+#: templates/positions/position_detail.html:140
+msgid "Rechazar"
+msgstr "Reject"
+
+#: apps/evaluations/models.py:22
+msgid "Fecha de generación"
+msgstr "Generation date"
+
+#: apps/evaluations/models.py:23
+msgid "Prompt enviado"
+msgstr "Prompt sent"
+
+#: apps/evaluations/models.py:24
+msgid "Respuesta completa de Claude"
+msgstr "Full response from Claude"
+
+#: apps/evaluations/models.py:25
+msgid "Puntuación CV"
+msgstr "CV score"
+
+#: apps/evaluations/models.py:27
+msgid "Puntuación entrevista"
+msgstr "Interview score"
+
+#: apps/evaluations/models.py:32
+msgid "Puntuación case study"
+msgstr "Case study score"
+
+#: apps/evaluations/models.py:37
+msgid "Puntuación final"
+msgstr "Final score"
+
+#: apps/evaluations/models.py:42
+msgid "Recomendación"
+msgstr "Recommendation"
+
+#: apps/evaluations/models.py:47 templates/evaluations/evaluate.html:111
+msgid "Resumen ejecutivo"
+msgstr "Executive summary"
+
+#: apps/evaluations/models.py:48 apps/interviews/models.py:50
+#: templates/candidates/candidate_detail.html:161
+#: templates/candidates/candidate_detail.html:389
+#: templates/candidates/candidate_form.html:95
+#: templates/evaluations/evaluate.html:77
+#: templates/interviews/interview_edit.html:31
+msgid "Puntos fuertes"
+msgstr "Strengths"
+
+#: apps/evaluations/models.py:49 apps/interviews/models.py:51
+#: templates/candidates/candidate_detail.html:176
+#: templates/candidates/candidate_detail.html:406
+#: templates/candidates/candidate_form.html:109
+#: templates/evaluations/evaluate.html:93
+#: templates/interviews/interview_edit.html:35
+msgid "Puntos débiles"
+msgstr "Weaknesses"
+
+#: apps/evaluations/models.py:53
+msgid "Evaluaciones IA"
+msgstr "AI Evaluations"
+
+#: apps/evaluations/views.py:150
+msgid "Evaluación IA generada correctamente."
+msgstr "AI Evaluation generated successfully."
+
+#: apps/interviews/forms.py:20
+msgid "Lugar o link de videollamada"
+msgstr "Location or video call link"
+
+#: apps/interviews/forms.py:21
+msgid "Notas previas..."
+msgstr "Pre-interview notes..."
+
+#: apps/interviews/forms.py:31
+msgid "Notas de la entrevista..."
+msgstr "Interview notes..."
+
+#: apps/interviews/forms.py:32
+msgid "Puntos fuertes observados..."
+msgstr "Observed strengths..."
+
+#: apps/interviews/forms.py:33
+msgid "Puntos débiles observados..."
+msgstr "Observed weaknesses..."
+
+#: apps/interviews/models.py:13 templates/candidates/candidate_detail.html:206
+msgid "Programada"
+msgstr "Scheduled"
+
+#: apps/interviews/models.py:14 templates/candidates/candidate_detail.html:207
+msgid "Realizada"
+msgstr "Completed"
+
+#: apps/interviews/models.py:15 templates/candidates/candidate_detail.html:208
+msgid "Cancelada"
+msgstr "Cancelled"
+
+#: apps/interviews/models.py:16
+msgid "No se presentó"
+msgstr "No show"
+
+#: apps/interviews/models.py:29
+msgid "Entrevistador"
+msgstr "Interviewer"
+
+#: apps/interviews/models.py:31
+msgid "Fecha y hora"
+msgstr "Date and time"
+
+#: apps/interviews/models.py:32
+msgid "Duración (minutos)"
+msgstr "Duration (minutes)"
+
+#: apps/interviews/models.py:34
+msgid "Lugar o link"
+msgstr "Location or link"
+
+#: apps/interviews/models.py:39
+msgid "ID evento Google Calendar"
+msgstr "Google Calendar event ID"
+
+#: apps/interviews/models.py:49
+msgid "Notas"
+msgstr "Notes"
+
+#: apps/interviews/models.py:53
+msgid "Puntuación global"
+msgstr "Overall score"
+
+#: apps/interviews/models.py:59 apps/notifications/models.py:12
+#: templates/candidates/candidate_detail.html:313
+#: templates/evaluations/evaluate.html:48
+msgid "Entrevista"
+msgstr "Interview"
+
+#: apps/interviews/models.py:60 templates/core/help.html:209
+msgid "Entrevistas"
+msgstr "Interviews"
+
+#: apps/interviews/views.py:32
+msgid "Entrevista programada correctamente."
+msgstr "Interview scheduled successfully."
+
+#: apps/interviews/views.py:44 templates/candidates/candidate_detail.html:442
+#: templates/interviews/interview_form.html:33
+msgid "Programar entrevista"
+msgstr "Schedule interview"
+
+#: apps/interviews/views.py:82
+msgid "Entrevista actualizada correctamente."
+msgstr "Interview updated successfully."
+
+#: apps/notifications/models.py:11
+msgid "Cambio de estado"
+msgstr "Status change"
+
+#: apps/notifications/models.py:13
+#: templates/casestudies/casestudy_generate.html:11
+#: templates/casestudies/casestudy_generate.html:17
+#: templates/portal/case_study.html:7
+msgid "Caso práctico"
+msgstr "Case study"
+
+#: apps/notifications/models.py:14
+msgid "Evaluación"
+msgstr "Evaluation"
+
+#: apps/notifications/models.py:16
+#: templates/candidates/candidate_detail.html:351
+msgid "Información"
+msgstr "Information"
+
+#: apps/notifications/models.py:17
+msgid "Sistema"
+msgstr "System"
+
+#: apps/notifications/models.py:23 apps/positions/models.py:27
+#: apps/tenants/models.py:24 apps/tenants/models.py:48
+#: apps/tenants/models.py:85 apps/tenants/models.py:113
+msgid "Empresa"
+msgstr "Company"
+
+#: apps/notifications/models.py:29
+msgid "Destinatario"
+msgstr "Recipient"
+
+#: apps/notifications/models.py:32 templates/positions/position_detail.html:180
+#: templates/positions/position_list.html:62
+#: templates/tenants/company_detail.html:80
+msgid "Tipo"
+msgstr "Type"
+
+#: apps/notifications/models.py:38
+msgid "Mensaje"
+msgstr "Message"
+
+#: apps/notifications/models.py:39
+msgid "Enlace"
+msgstr "Link"
+
+#: apps/notifications/models.py:40
+msgid "Leída"
+msgstr "Read"
+
+#: apps/notifications/models.py:43
+msgid "Notificación"
+msgstr "Notification"
+
+#: apps/notifications/models.py:44
+#: templates/partials/_notification_dropdown.html:27
+msgid "Notificaciones"
+msgstr "Notifications"
+
+#: apps/portal/views.py:42
+msgid "Debes escribir tu respuesta o adjuntar un archivo."
+msgstr "You must write your response or attach a file."
+
+#: apps/portal/views.py:108
+#, python-format
+msgid "Caso práctico entregado — %(name)s — %(position)s"
+msgstr "Case study submitted — %(name)s — %(position)s"
+
+#: apps/portal/views.py:109
+#, python-format
+msgid "%(name)s ha entregado el caso práctico \"%(title)s\"."
+msgstr "%(name)s has submitted the case study \"%(title)s\"."
+
+#: apps/positions/forms.py:21
+msgid "Ej: Senior Backend Developer"
+msgstr "E.g.: Senior Backend Developer"
+
+#: apps/positions/forms.py:23
+msgid "Ej: Remoto / Barcelona"
+msgstr "E.g.: Remote / New York"
+
+#: apps/positions/forms.py:25
+msgid "Descripción del puesto..."
+msgstr "Job description..."
+
+#: apps/positions/forms.py:26
+msgid "Requisitos del puesto..."
+msgstr "Job requirements..."
+
+#: apps/positions/forms.py:27
+msgid "Beneficios, ventajas, jornada, modalidad de trabajo..."
+msgstr "Benefits, perks, schedule, work arrangement..."
+
+#: apps/positions/forms.py:28
+msgid "Texto sobre la empresa para la oferta..."
+msgstr "Company description for the job posting..."
+
+#: apps/positions/forms.py:29
+msgid "Ej: 40.000€ - 55.000€"
+msgstr "E.g.: $40,000 - $55,000"
+
+#: apps/positions/forms.py:39
+msgid "(Sin departamento)"
+msgstr "(No department)"
+
+#: apps/positions/models.py:12
+msgid "Tiempo completo"
+msgstr "Full-time"
+
+#: apps/positions/models.py:13
+msgid "Media jornada"
+msgstr "Part-time"
+
+#: apps/positions/models.py:14
+msgid "Freelance"
+msgstr "Freelance"
+
+#: apps/positions/models.py:15
+msgid "Prácticas"
+msgstr "Internship"
+
+#: apps/positions/models.py:18 templates/positions/position_detail.html:43
+#: templates/positions/position_list.html:76
+#: templates/tenants/company_detail.html:94
+msgid "Borrador"
+msgstr "Draft"
+
+#: apps/positions/models.py:19 templates/positions/position_detail.html:42
+#: templates/positions/position_detail.html:199
+#: templates/positions/position_list.html:75
+#: templates/tenants/company_detail.html:93
+msgid "Publicada"
+msgstr "Published"
+
+#: apps/positions/models.py:20 templates/positions/position_detail.html:44
+#: templates/positions/position_list.html:77
+#: templates/tenants/company_detail.html:95
+msgid "Pausada"
+msgstr "Paused"
+
+#: apps/positions/models.py:21 templates/positions/position_detail.html:45
+#: templates/positions/position_detail.html:205
+#: templates/positions/position_list.html:78
+#: templates/tenants/company_detail.html:96
+msgid "Cerrada"
+msgstr "Closed"
+
+#: apps/positions/models.py:29 templates/positions/position_form.html:26
+msgid "Título del puesto"
+msgstr "Job title"
+
+#: apps/positions/models.py:36 apps/tenants/models.py:119
+#: templates/positions/position_detail.html:169
+#: templates/positions/position_form.html:31
+msgid "Departamento"
+msgstr "Department"
+
+#: apps/positions/models.py:38 templates/positions/position_detail.html:175
+#: templates/positions/position_form.html:35
+#: templates/positions/position_list.html:61
+msgid "Ubicación"
+msgstr "Location"
+
+#: apps/positions/models.py:40 templates/positions/position_form.html:39
+msgid "Tipo de empleo"
+msgstr "Employment type"
+
+#: apps/positions/models.py:45 templates/positions/position_form.html:82
+msgid "Descripción del puesto"
+msgstr "Job description"
+
+#: apps/positions/models.py:46 templates/positions/position_detail.html:96
+#: templates/positions/position_form.html:86
+msgid "Requisitos"
+msgstr "Requirements"
+
+#: apps/positions/models.py:47 templates/positions/position_detail.html:110
+#: templates/positions/position_form.html:94
+msgid "Sobre la empresa"
+msgstr "About the company"
+
+#: apps/positions/models.py:48 templates/positions/position_detail.html:103
+#: templates/positions/position_form.html:90
+msgid "Qué ofrecemos"
+msgstr "What we offer"
+
+#: apps/positions/models.py:49 templates/positions/position_form.html:43
+msgid "Rango salarial"
+msgstr "Salary range"
+
+#: apps/positions/models.py:56
+msgid "Fecha de publicación"
+msgstr "Publication date"
+
+#: apps/positions/models.py:57
+msgid "Fecha de cierre"
+msgstr "Closing date"
+
+#: apps/positions/models.py:58
+msgid "Usa case study"
+msgstr "Uses case study"
+
+#: apps/positions/models.py:59
+msgid "Borrador generado con IA"
+msgstr "AI-generated draft"
+
+#: apps/positions/models.py:63 templates/core/help.html:121
+#: templates/partials/_sidebar_content.html:78
+#: templates/positions/position_detail.html:10
+#: templates/positions/position_form.html:9
+#: templates/positions/position_list.html:5
+#: templates/positions/position_list.html:9
+#: templates/positions/position_list.html:22
+#: templates/tenants/company_detail.html:70
+#: templates/tenants/department_list.html:31
+msgid "Posiciones"
+msgstr "Positions"
+
+#: apps/positions/views.py:62
+msgid "Debes tener una empresa asignada para crear posiciones."
+msgstr "You must have an assigned company to create positions."
+
+#: apps/positions/views.py:71
+#, python-format
+msgid "Posición \"%(title)s\" creada correctamente."
+msgstr "Position \"%(title)s\" created successfully."
+
+#: apps/positions/views.py:77 templates/positions/position_list.html:15
+#: templates/positions/position_list.html:90
+#: templates/tenants/company_detail.html:27
+#: templates/tenants/company_detail.html:107
+msgid "Nueva posición"
+msgstr "New position"
+
+#: apps/positions/views.py:89
+msgid "Posición actualizada correctamente."
+msgstr "Position updated successfully."
+
+#: apps/positions/views.py:96
+#, python-format
+msgid "Editar: %(title)s"
+msgstr "Edit: %(title)s"
+
+#: apps/positions/views.py:140
+msgid "Posición publicada."
+msgstr "Position published."
+
+#: apps/positions/views.py:143
+msgid "Posición pausada."
+msgstr "Position paused."
+
+#: apps/positions/views.py:147
+msgid "Posición cerrada."
+msgstr "Position closed."
+
+#: apps/positions/views.py:150
+msgid "Posición movida a borrador."
+msgstr "Position moved to draft."
+
+#: apps/positions/views.py:170
+#, python-format
+msgid "Posición \"%(title)s\" eliminada."
+msgstr "Position \"%(title)s\" deleted."
+
+#: apps/positions/views.py:179
+msgid "Sin empresa asignada."
+msgstr "No company assigned."
+
+#: apps/positions/views.py:184 apps/tenants/views.py:121
+msgid "JSON inválido."
+msgstr "Invalid JSON."
+
+#: apps/tenants/forms.py:17
+msgid "Nombre de la empresa"
+msgstr "Company name"
+
+#: apps/tenants/forms.py:18
+msgid "slug-de-la-empresa"
+msgstr "company-slug"
+
+#: apps/tenants/forms.py:19 apps/tenants/models.py:12
+msgid "Qué hace la empresa, sector, misión..."
+msgstr "What the company does, industry, mission..."
+
+#: apps/tenants/forms.py:24
+msgid "Seguro médico, formación, fruta en la oficina, gym..."
+msgstr "Health insurance, training, office snacks, gym..."
+
+#: apps/tenants/forms.py:25 apps/tenants/models.py:17
+msgid "Ej: L-V 9:00-18:00, jornada flexible..."
+msgstr "E.g.: Mon-Fri 9:00-18:00, flexible schedule..."
+
+#: apps/tenants/forms.py:26
+#, python-format
+msgid "Ej: Híbrido 2 días oficina, 100% remoto..."
+msgstr "E.g.: Hybrid 2 days in office, 100%% remote..."
+
+#: apps/tenants/forms.py:27
+msgid "Ej: Calle Mayor 10, Barcelona"
+msgstr "E.g.: 123 Main St, New York"
+
+#: apps/tenants/forms.py:28
+msgid "Valores de la empresa, ambiente de trabajo..."
+msgstr "Company values, work environment..."
+
+#: apps/tenants/forms.py:37
+msgid "Ej: Ingeniería"
+msgstr "E.g.: Engineering"
+
+#: apps/tenants/forms.py:38
+msgid "Descripción del departamento..."
+msgstr "Department description..."
+
+#: apps/tenants/models.py:11 templates/tenants/company_form.html:57
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/tenants/models.py:12 apps/tenants/models.py:116
+#: templates/positions/position_detail.html:89
+#: templates/tenants/department_form.html:26
+#: templates/tenants/department_list.html:30
+msgid "Descripción"
+msgstr "Description"
+
+#: apps/tenants/models.py:13 templates/tenants/company_form.html:73
+msgid "Logo"
+msgstr "Logo"
+
+#: apps/tenants/models.py:14 templates/tenants/company_form.html:69
+msgid "Web corporativa"
+msgstr "Company website"
+
+#: apps/tenants/models.py:16 templates/tenants/company_form.html:86
+msgid "Beneficios y ventajas"
+msgstr "Benefits and perks"
+
+#: apps/tenants/models.py:16
+msgid ""
+"Qué ofrece la empresa a los trabajadores: seguro, formación, fruta, gym..."
+msgstr ""
+"What the company offers employees: insurance, training, snacks, gym..."
+
+#: apps/tenants/models.py:17 templates/tenants/company_form.html:92
+msgid "Jornada laboral"
+msgstr "Work schedule"
+
+#: apps/tenants/models.py:18
+msgid "Política de trabajo remoto"
+msgstr "Remote work policy"
+
+#: apps/tenants/models.py:18
+#, python-format
+msgid "Ej: 100% remoto, híbrido 3 días oficina, presencial..."
+msgstr "E.g.: 100%% remote, hybrid 3 days in office, on-site..."
+
+#: apps/tenants/models.py:19 templates/tenants/company_form.html:101
+msgid "Ubicación oficina"
+msgstr "Office location"
+
+#: apps/tenants/models.py:19
+msgid "Dirección o zona de la oficina principal"
+msgstr "Address or area of the main office"
+
+#: apps/tenants/models.py:20 templates/tenants/company_form.html:105
+msgid "Cultura y valores"
+msgstr "Culture and values"
+
+#: apps/tenants/models.py:20
+msgid "Valores de la empresa, ambiente de trabajo, equipo..."
+msgstr "Company values, work environment, team..."
+
+#: apps/tenants/models.py:21
+msgid "Activa"
+msgstr "Active"
+
+#: apps/tenants/models.py:25 templates/core/help.html:77
+#: templates/tenants/company_detail.html:9
+#: templates/tenants/company_form.html:9 templates/tenants/company_list.html:5
+#: templates/tenants/company_list.html:9 templates/tenants/company_list.html:21
+msgid "Empresas"
+msgstr "Companies"
+
+#: apps/tenants/models.py:36 apps/tenants/models.py:73
+msgid "Admin"
+msgstr "Admin"
+
+#: apps/tenants/models.py:37 apps/tenants/models.py:74
+msgid "Recruiter"
+msgstr "Recruiter"
+
+#: apps/tenants/models.py:51 apps/tenants/models.py:88
+msgid "Rol"
+msgstr "Role"
+
+#: apps/tenants/models.py:58
+msgid "Perfil de usuario"
+msgstr "User profile"
+
+#: apps/tenants/models.py:59
+msgid "Perfiles de usuario"
+msgstr "User profiles"
+
+#: apps/tenants/models.py:95
+msgid "Membresía de empresa"
+msgstr "Company membership"
+
+#: apps/tenants/models.py:96
+msgid "Membresías de empresa"
+msgstr "Company memberships"
+
+#: apps/tenants/models.py:120 templates/partials/_sidebar_content.html:71
+#: templates/tenants/department_form.html:8
+#: templates/tenants/department_list.html:4
+#: templates/tenants/department_list.html:8
+#: templates/tenants/department_list.html:20
+msgid "Departamentos"
+msgstr "Departments"
+
+#: apps/tenants/views.py:63
+#, python-format
+msgid "Empresa \"%(name)s\" creada correctamente."
+msgstr "Company \"%(name)s\" created successfully."
+
+#: apps/tenants/views.py:69 templates/tenants/company_list.html:15
+#: templates/tenants/company_list.html:57
+msgid "Nueva empresa"
+msgstr "New company"
+
+#: apps/tenants/views.py:81
+msgid "Empresa actualizada correctamente."
+msgstr "Company updated successfully."
+
+#: apps/tenants/views.py:158
+#, python-format
+msgid "Empresa \"%(name)s\" eliminada."
+msgstr "Company \"%(name)s\" deleted."
+
+#: apps/tenants/views.py:170
+msgid "Empresa activada correctamente."
+msgstr "Company activated successfully."
+
+#: apps/tenants/views.py:172
+msgid "Empresa desactivada correctamente."
+msgstr "Company deactivated successfully."
+
+#: apps/tenants/views.py:207
+#, python-format
+msgid "Departamento \"%(name)s\" creado correctamente."
+msgstr "Department \"%(name)s\" created successfully."
+
+#: apps/tenants/views.py:213 templates/tenants/department_list.html:14
+#: templates/tenants/department_list.html:59
+msgid "Nuevo departamento"
+msgstr "New department"
+
+#: apps/tenants/views.py:225
+msgid "Departamento actualizado correctamente."
+msgstr "Department updated successfully."
+
+#: apps/tenants/views.py:243
+#, python-format
+msgid "Departamento \"%(name)s\" eliminado."
+msgstr "Department \"%(name)s\" deleted."
+
+#: config/settings.py:101
+msgid "Español"
+msgstr "Spanish"
+
+#: config/settings.py:102
+msgid "English"
+msgstr "English"
+
+#: config/settings.py:103
+msgid "Català"
+msgstr "Catalan"
+
+#: templates/base.html:7 templates/registration/login.html:7
+#: templates/registration/login.html:13
+msgid "Pekata ATS"
+msgstr "Pekata ATS"
+
+#: templates/base.html:75 templates/candidates/candidate_detail.html:9
+#: templates/candidates/candidate_edit.html:7
+#: templates/candidates/candidate_form.html:8
+#: templates/candidates/candidate_list.html:8
+#: templates/casestudies/casestudy_detail.html:7
+#: templates/casestudies/casestudy_edit.html:7
+#: templates/casestudies/casestudy_form.html:8
+#: templates/casestudies/casestudy_generate.html:8
+#: templates/casestudies/casestudy_send.html:7 templates/core/help.html:9
+#: templates/evaluations/evaluate.html:8
+#: templates/interviews/interview_edit.html:8
+#: templates/interviews/interview_form.html:8
+#: templates/positions/position_detail.html:9
+#: templates/positions/position_form.html:8
+#: templates/positions/position_list.html:8
+#: templates/tenants/company_detail.html:8
+#: templates/tenants/company_form.html:8 templates/tenants/company_list.html:8
+#: templates/tenants/department_form.html:7
+#: templates/tenants/department_list.html:7
+msgid "Inicio"
+msgstr "Home"
+
+#: templates/candidates/candidate_detail.html:15
+#: templates/candidates/candidate_detail.html:19
+msgid "Eliminar candidato"
+msgstr "Delete candidate"
+
+#: templates/candidates/candidate_detail.html:15
+#, python-format
+msgid "¿Eliminar al candidato «%(name)s»? Se ocultará de todas las vistas."
+msgstr "Delete candidate \"%(name)s\"? It will be hidden from all views."
+
+#: templates/candidates/candidate_detail.html:24
+#: templates/candidates/candidate_detail.html:211
+#: templates/candidates/candidate_detail.html:251
+#: templates/candidates/candidate_edit.html:10
+#: templates/casestudies/casestudy_detail.html:25
+#: templates/positions/position_form.html:11
+#: templates/tenants/company_detail.html:23
+#: templates/tenants/department_form.html:9
+#: templates/tenants/department_list.html:45
+msgid "Editar"
+msgstr "Edit"
+
+#: templates/candidates/candidate_detail.html:51
+msgid "Estado:"
+msgstr "Status:"
+
+#: templates/candidates/candidate_detail.html:63
+msgid "Valoración:"
+msgstr "Rating:"
+
+#: templates/candidates/candidate_detail.html:75
+#, python-format
+msgid "Añadido %(date)s"
+msgstr "Added %(date)s"
+
+#: templates/candidates/candidate_detail.html:84
+msgid "Currículum"
+msgstr "Resume"
+
+#: templates/candidates/candidate_detail.html:86
+msgid "Descargar PDF"
+msgstr "Download PDF"
+
+#: templates/candidates/candidate_detail.html:89
+msgid "Cambiar CV"
+msgstr "Change CV"
+
+#: templates/candidates/candidate_detail.html:89
+msgid "Subir CV"
+msgstr "Upload CV"
+
+#: templates/candidates/candidate_detail.html:101
+msgid "Subiendo y analizando CV con IA..."
+msgstr "Uploading and analyzing CV with AI..."
+
+#: templates/candidates/candidate_detail.html:122
+msgid "Haz clic en la imagen para abrir el PDF completo"
+msgstr "Click on the image to open the full PDF"
+
+#: templates/candidates/candidate_detail.html:131
+msgid "No se ha subido CV para este candidato."
+msgstr "No CV has been uploaded for this candidate."
+
+#: templates/candidates/candidate_detail.html:132
+msgid ""
+"Usa el botón \"Subir CV\" para añadir uno. La IA lo analizará "
+"automáticamente."
+msgstr ""
+"Use the \"Upload CV\" button to add one. AI will analyze it "
+"automatically."
+
+#: templates/candidates/candidate_detail.html:143
+#: templates/candidates/candidate_detail.html:377
+#: templates/candidates/candidate_form.html:81
+msgid "Análisis IA"
+msgstr "AI Analysis"
+
+#: templates/candidates/candidate_detail.html:144
+#: templates/candidates/candidate_detail.html:294
+#: templates/candidates/candidate_detail.html:378
+#: templates/casestudies/casestudy_detail.html:43
+#: templates/positions/position_detail.html:211
+#: templates/positions/position_detail.html:231
+msgid "IA"
+msgstr "AI"
+
+#: templates/candidates/candidate_detail.html:196
+#, python-format
+msgid "Entrevistas (%(count)s)"
+msgstr "Interviews (%(count)s)"
+
+#: templates/candidates/candidate_detail.html:197
+msgid "+ Programar"
+msgstr "+ Schedule"
+
+#: templates/candidates/candidate_detail.html:209
+msgid "No show"
+msgstr "No show"
+
+#: templates/candidates/candidate_detail.html:215
+msgid "Sin asignar"
+msgstr "Unassigned"
+
+#: templates/candidates/candidate_detail.html:222
+#: templates/candidates/candidate_detail.html:276
+#: templates/casestudies/casestudy_detail.html:85
+msgid "Puntuación:"
+msgstr "Score:"
+
+#: templates/candidates/candidate_detail.html:228
+msgid "Sin entrevistas programadas."
+msgstr "No interviews scheduled."
+
+#: templates/candidates/candidate_detail.html:235
+#, python-format
+msgid "Casos prácticos (%(count)s)"
+msgstr "Case studies (%(count)s)"
+
+#: templates/candidates/candidate_detail.html:236
+msgid "+ Generar caso práctico"
+msgstr "+ Generate case study"
+
+#: templates/candidates/candidate_detail.html:245
+#: templates/casestudies/casestudy_detail.html:19
+#: templates/casestudies/casestudy_detail.html:61
+msgid "Entregado"
+msgstr "Submitted"
+
+#: templates/candidates/candidate_detail.html:246
+#: templates/casestudies/casestudy_detail.html:21
+msgid "Enviado"
+msgstr "Sent"
+
+#: templates/candidates/candidate_detail.html:247
+#: templates/casestudies/casestudy_detail.html:23
+#: templates/positions/position_detail.html:317
+msgid "Pendiente"
+msgstr "Pending"
+
+#: templates/candidates/candidate_detail.html:250
+msgid "Ver"
+msgstr "View"
+
+#: templates/candidates/candidate_detail.html:253
+msgid "Subir respuesta"
+msgstr "Upload response"
+
+#: templates/candidates/candidate_detail.html:256
+msgid "Reenviar email"
+msgstr "Resend email"
+
+#: templates/candidates/candidate_detail.html:262
+#: templates/casestudies/casestudy_detail.html:33
+#, python-format
+msgid "Enviado %(date)s"
+msgstr "Sent %(date)s"
+
+#: templates/candidates/candidate_detail.html:263
+#: templates/casestudies/casestudy_detail.html:34
+#, python-format
+msgid "Límite: %(date)s"
+msgstr "Deadline: %(date)s"
+
+#: templates/candidates/candidate_detail.html:264
+#, python-format
+msgid "Entregado %(date)s"
+msgstr "Submitted %(date)s"
+
+#: templates/candidates/candidate_detail.html:268
+msgid "Enlace portal:"
+msgstr "Portal link:"
+
+#: templates/candidates/candidate_detail.html:272
+msgid "Copiado!"
+msgstr "Copied!"
+
+#: templates/candidates/candidate_detail.html:272
+msgid "Copiar"
+msgstr "Copy"
+
+#: templates/candidates/candidate_detail.html:285
+msgid "Sin casos prácticos asignados."
+msgstr "No case studies assigned."
+
+#: templates/candidates/candidate_detail.html:293
+#, python-format
+msgid "Evaluación IA (%(count)s)"
+msgstr "AI Evaluation (%(count)s)"
+
+#: templates/candidates/candidate_detail.html:296
+#: templates/evaluations/evaluate.html:28
+msgid "Generar evaluación"
+msgstr "Generate evaluation"
+
+#: templates/candidates/candidate_detail.html:305
+#: templates/evaluations/evaluate.html:40
+msgid "Global"
+msgstr "Overall"
+
+#: templates/candidates/candidate_detail.html:309
+#: templates/evaluations/evaluate.html:44
+msgid "CV"
+msgstr "CV"
+
+#: templates/candidates/candidate_detail.html:324
+#: templates/evaluations/evaluate.html:59
+msgid "Recomendación:"
+msgstr "Recommendation:"
+
+#: templates/candidates/candidate_detail.html:336
+#: templates/evaluations/evaluate.html:124
+#, python-format
+msgid "Generada el %(date)s"
+msgstr "Generated on %(date)s"
+
+#: templates/candidates/candidate_detail.html:341
+msgid "Sin evaluaciones IA. Haz clic en \"Generar evaluación\" para crear una."
+msgstr "No AI evaluations. Click \"Generate evaluation\" to create one."
+
+#: templates/candidates/candidate_detail.html:366
+msgid "Añadido"
+msgstr "Added"
+
+#: templates/candidates/candidate_detail.html:428
+msgid "Escribe tus notas aquí..."
+msgstr "Write your notes here..."
+
+#: templates/candidates/candidate_detail.html:430
+msgid "Guardar notas"
+msgstr "Save notes"
+
+#: templates/candidates/candidate_detail.html:437
+msgid "Acciones rápidas"
+msgstr "Quick actions"
+
+#: templates/candidates/candidate_detail.html:447
+msgid "Generar caso práctico"
+msgstr "Generate case study"
+
+#: templates/candidates/candidate_detail.html:452
+msgid "Generar evaluación IA"
+msgstr "Generate AI evaluation"
+
+#: templates/candidates/candidate_edit.html:37
+msgid "Valoración (1-5)"
+msgstr "Rating (1-5)"
+
+#: templates/candidates/candidate_edit.html:49
+#: templates/candidates/candidate_form.html:162
+#: templates/casestudies/casestudy_edit.html:55
+#: templates/casestudies/casestudy_form.html:95
+#: templates/casestudies/casestudy_generate.html:94
+#: templates/casestudies/casestudy_send.html:37
+#: templates/interviews/interview_edit.html:47
+#: templates/interviews/interview_form.html:32
+#: templates/partials/_confirm_modal.html:50
+#: templates/positions/position_detail.html:351
+#: templates/positions/position_form.html:112
+#: templates/tenants/company_form.html:114
+#: templates/tenants/department_form.html:35
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: templates/candidates/candidate_edit.html:50
+#: templates/interviews/interview_edit.html:48
+msgid "Guardar"
+msgstr "Save"
+
+#: templates/candidates/candidate_form.html:16
+#: templates/casestudies/casestudy_form.html:16
+#, python-format
+msgid ""
+"Para la posición: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+msgstr ""
+"For position: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+
+#: templates/candidates/candidate_form.html:30
+msgid "CV y origen"
+msgstr "CV and source"
+
+#: templates/candidates/candidate_form.html:40
+msgid ""
+"Solo archivos PDF, máximo 10MB. Al subir un CV, la IA extraerá los datos "
+"automáticamente."
+msgstr ""
+"PDF files only, maximum 10MB. When uploading a CV, AI will extract the data "
+"automatically."
+
+#: templates/candidates/candidate_form.html:49
+msgid "Analizando CV con IA... Esto puede tardar unos segundos."
+msgstr "Analyzing CV with AI... This may take a few seconds."
+
+#: templates/candidates/candidate_form.html:64
+msgid "CV analizado correctamente. Los datos han sido autocompletados."
+msgstr "CV analyzed successfully. The data has been auto-filled."
+
+#: templates/candidates/candidate_form.html:128
+msgid "Datos personales"
+msgstr "Personal details"
+
+#: templates/candidates/candidate_form.html:130
+msgid "Autocompletado por IA"
+msgstr "Auto-filled by AI"
+
+#: templates/candidates/candidate_form.html:167
+#: templates/positions/position_detail.html:32
+msgid "Añadir candidato"
+msgstr "Add candidate"
+
+#: templates/candidates/candidate_list.html:15
+#, python-format
+msgid "Base de datos de todos los candidatos de %(company)s."
+msgstr "Database of all candidates for %(company)s."
+
+#: templates/candidates/candidate_list.html:24
+msgid "Buscar por nombre o email..."
+msgstr "Search by name or email..."
+
+#: templates/candidates/candidate_list.html:30
+msgid "Todos los estados"
+msgstr "All statuses"
+
+#: templates/candidates/candidate_list.html:38
+#: templates/positions/position_list.html:44
+msgid "Todos los departamentos"
+msgstr "All departments"
+
+#: templates/candidates/candidate_list.html:46
+msgid "Todas las posiciones"
+msgstr "All positions"
+
+#: templates/candidates/candidate_list.html:51
+msgid "Filtrar"
+msgstr "Filter"
+
+#: templates/candidates/candidate_list.html:53
+msgid "Limpiar"
+msgstr "Clear"
+
+#: templates/candidates/candidate_list.html:66
+msgid "Encaje IA"
+msgstr "AI Fit"
+
+#: templates/candidates/candidate_list.html:68
+#: templates/positions/position_list.html:64
+#: templates/tenants/company_detail.html:82
+msgid "Fecha"
+msgstr "Date"
+
+#: templates/candidates/candidate_list.html:117
+msgid "Sin candidatos"
+msgstr "No candidates"
+
+#: templates/candidates/candidate_list.html:117
+msgid "Aún no hay candidatos que coincidan con tu búsqueda."
+msgstr "No candidates match your search yet."
+
+#: templates/casestudies/casestudy_detail.html:29
+#, python-format
+msgid ""
+"Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Posición: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+msgstr ""
+"Candidate: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Position: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+
+#: templates/casestudies/casestudy_detail.html:41
+msgid "Enunciado del caso"
+msgstr "Case brief"
+
+#: templates/casestudies/casestudy_detail.html:51
+msgid "Criterios de evaluación (interno)"
+msgstr "Evaluation criteria (internal)"
+
+#: templates/casestudies/casestudy_detail.html:60
+msgid "Respuesta del candidato"
+msgstr "Candidate response"
+
+#: templates/casestudies/casestudy_detail.html:63
+#, python-format
+msgid "Entregado el %(date)s a las %(time)s"
+msgstr "Submitted on %(date)s at %(time)s"
+
+#: templates/casestudies/casestudy_detail.html:75
+msgid "Descargar archivo adjunto"
+msgstr "Download attachment"
+
+#: templates/casestudies/casestudy_detail.html:81
+msgid "Notas del candidato:"
+msgstr "Candidate notes:"
+
+#: templates/casestudies/casestudy_detail.html:94
+msgid "Subir respuesta del candidato"
+msgstr "Upload candidate response"
+
+#: templates/casestudies/casestudy_detail.html:96
+msgid ""
+"Si el candidato te ha enviado la respuesta por email u otro medio, puedes "
+"subirla aquí manualmente."
+msgstr ""
+"If the candidate sent you the response by email or other means, you can "
+"upload it here manually."
+
+#: templates/casestudies/casestudy_detail.html:101
+msgid "Respuesta en texto"
+msgstr "Text response"
+
+#: templates/casestudies/casestudy_detail.html:104
+msgid "Pega aquí la respuesta del candidato..."
+msgstr "Paste the candidate's response here..."
+
+#: templates/casestudies/casestudy_detail.html:108
+msgid "Archivo adjunto (opcional)"
+msgstr "Attachment (optional)"
+
+#: templates/casestudies/casestudy_detail.html:111
+msgid "PDF, Word, PowerPoint, Excel o ZIP."
+msgstr "PDF, Word, PowerPoint, Excel, or ZIP."
+
+#: templates/casestudies/casestudy_detail.html:115
+msgid "Notas internas (opcional)"
+msgstr "Internal notes (optional)"
+
+#: templates/casestudies/casestudy_detail.html:118
+msgid "Ej: Recibido por email el 15/02..."
+msgstr "E.g.: Received by email on 02/15..."
+
+#: templates/casestudies/casestudy_detail.html:122
+msgid "Registrar respuesta"
+msgstr "Record response"
+
+#: templates/casestudies/casestudy_detail.html:128
+#: templates/evaluations/evaluate.html:161
+msgid "Volver al candidato"
+msgstr "Back to candidate"
+
+#: templates/casestudies/casestudy_edit.html:9
+msgid "Editar caso práctico"
+msgstr "Edit case study"
+
+#: templates/casestudies/casestudy_edit.html:16
+#, python-format
+msgid ""
+"Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"        — Posición: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+msgstr ""
+"Candidate: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"        — Position: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+
+#: templates/casestudies/casestudy_edit.html:31
+#: templates/casestudies/casestudy_generate.html:64
+msgid "Contenido del caso práctico"
+msgstr "Case study content"
+
+#: templates/casestudies/casestudy_edit.html:34
+msgid "Este es el contenido que verá el candidato."
+msgstr "This is the content the candidate will see."
+
+#: templates/casestudies/casestudy_edit.html:41
+msgid "Criterios internos (no los verá el candidato)."
+msgstr "Internal criteria (the candidate will not see these)."
+
+#: templates/casestudies/casestudy_edit.html:57
+#: templates/positions/position_form.html:115
+#: templates/tenants/company_form.html:117
+#: templates/tenants/department_form.html:38
+msgid "Guardar cambios"
+msgstr "Save changes"
+
+#: templates/casestudies/casestudy_form.html:24
+msgid "Tu idea"
+msgstr "Your idea"
+
+#: templates/casestudies/casestudy_form.html:25
+msgid ""
+"Escribe el título y una descripción breve de lo que quieres evaluar. La IA "
+"generará el case study completo."
+msgstr ""
+"Write the title and a brief description of what you want to evaluate. AI "
+"will generate the complete case study."
+
+#: templates/casestudies/casestudy_form.html:32
+msgid "Descripción breve / Briefing"
+msgstr "Brief description / Briefing"
+
+#: templates/casestudies/casestudy_form.html:34
+msgid "Describe qué quieres evaluar, el contexto del caso, los objetivos..."
+msgstr "Describe what you want to evaluate, the case context, the objectives..."
+
+#: templates/casestudies/casestudy_form.html:61
+msgid "Generando case study..."
+msgstr "Generating case study..."
+
+#: templates/casestudies/casestudy_form.html:61
+#: templates/positions/position_form.html:68
+#: templates/tenants/company_form.html:32
+msgid "Mejorar con IA"
+msgstr "Enhance with AI"
+
+#: templates/casestudies/casestudy_form.html:76
+msgid "Contenido del case study"
+msgstr "Case study content"
+
+#: templates/casestudies/casestudy_form.html:84
+msgid "Este es el contenido que verá el candidato. Puedes editarlo libremente."
+msgstr "This is the content the candidate will see. You can edit it freely."
+
+#: templates/casestudies/casestudy_form.html:89
+msgid ""
+"Criterios que usará la IA para evaluar las respuestas de los candidatos."
+msgstr ""
+"Criteria that AI will use to evaluate candidate responses."
+
+#: templates/casestudies/casestudy_form.html:96
+#: templates/casestudies/casestudy_send.html:44
+msgid "Crear case study"
+msgstr "Create case study"
+
+#: templates/casestudies/casestudy_generate.html:19
+#, python-format
+msgid ""
+"Para <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Posición: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+msgstr ""
+"For <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Position: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+
+#: templates/casestudies/casestudy_generate.html:30
+msgid "Generando caso práctico con IA..."
+msgstr "Generating case study with AI..."
+
+#: templates/casestudies/casestudy_generate.html:31
+msgid "Analizando el perfil del candidato y los requisitos del puesto."
+msgstr "Analyzing the candidate's profile and the job requirements."
+
+#: templates/casestudies/casestudy_generate.html:40
+msgid "Reintentar"
+msgstr "Retry"
+
+#: templates/casestudies/casestudy_generate.html:50
+msgid "Caso generado"
+msgstr "Case generated"
+
+#: templates/casestudies/casestudy_generate.html:67
+msgid ""
+"Este es el contenido que verá el candidato. Puedes editarlo antes de enviar."
+msgstr ""
+"This is the content the candidate will see. You can edit it before sending."
+
+#: templates/casestudies/casestudy_generate.html:74
+msgid ""
+"Criterios internos para evaluar la respuesta (no los verá el candidato)."
+msgstr ""
+"Internal criteria for evaluating the response (the candidate will not see these)."
+
+#: templates/casestudies/casestudy_generate.html:90
+msgid "Regenerar"
+msgstr "Regenerate"
+
+#: templates/casestudies/casestudy_generate.html:96
+msgid "Guardar y enviar"
+msgstr "Save and send"
+
+#: templates/casestudies/casestudy_send.html:15
+#, python-format
+msgid "Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span>"
+msgstr "Candidate: <span class=\"font-medium text-gray-700\">%(name)s</span>"
+
+#: templates/casestudies/casestudy_send.html:21
+msgid "Selecciona el case study a enviar:"
+msgstr "Select the case study to send:"
+
+#: templates/casestudies/casestudy_send.html:28
+#, python-format
+msgid "%(days)s días de plazo"
+msgstr "%(days)s days deadline"
+
+#: templates/casestudies/casestudy_send.html:38
+msgid "Enviar case study"
+msgstr "Send case study"
+
+#: templates/casestudies/casestudy_send.html:43
+msgid "No hay case studies definidos para esta posición."
+msgstr "No case studies defined for this position."
+
+#: templates/core/help.html:4 templates/core/help.html:12
+#: templates/partials/_chatbot_widget.html:82
+#: templates/partials/_sidebar_content.html:93
+msgid "Ayuda"
+msgstr "Help"
+
+#: templates/core/help.html:20
+msgid "Centro de Ayuda"
+msgstr "Help Center"
+
+#: templates/core/help.html:21
+msgid ""
+"Guia completa de Pekata ATS. Haz clic en cada seccion para ver las preguntas "
+"frecuentes y tutoriales."
+msgstr ""
+"Complete guide to Pekata ATS. Click on each section to see frequently asked "
+"questions and tutorials."
+
+#: templates/core/help.html:33
+msgid "Primeros pasos"
+msgstr "Getting started"
+
+#: templates/core/help.html:41
+msgid "Que es Pekata ATS?"
+msgstr "What is Pekata ATS?"
+
+#: templates/core/help.html:45
+msgid ""
+"Pekata es un sistema de seguimiento de candidatos (ATS) con inteligencia "
+"artificial integrada. Te ayuda a gestionar todo el proceso de seleccion: "
+"desde publicar posiciones hasta evaluar candidatos con IA."
+msgstr ""
+"Pekata is an applicant tracking system (ATS) with integrated artificial "
+"intelligence. It helps you manage the entire recruitment process: "
+"from posting positions to evaluating candidates with AI."
+
+#: templates/core/help.html:50
+msgid "Cual es el flujo general del sistema?"
+msgstr "What is the general system workflow?"
+
+#: templates/core/help.html:54
+msgid ""
+"El flujo principal es: <strong>Empresa</strong> &rarr; <strong>Posicion</"
+"strong> &rarr; <strong>Candidato</strong> &rarr; <strong>Evaluacion</"
+"strong>. Primero creas o seleccionas una empresa, luego defines posiciones "
+"abiertas, agregas candidatos a esas posiciones, y finalmente evaluas a los "
+"candidatos con entrevistas, casos practicos y evaluacion IA."
+msgstr ""
+"The main workflow is: <strong>Company</strong> &rarr; <strong>Position</"
+"strong> &rarr; <strong>Candidate</strong> &rarr; <strong>Evaluation</"
+"strong>. First you create or select a company, then define open positions, "
+"add candidates to those positions, and finally evaluate "
+"candidates with interviews, case studies, and AI evaluation."
+
+#: templates/core/help.html:59
+msgid "Como empiezo a usar el sistema?"
+msgstr "How do I start using the system?"
+
+#: templates/core/help.html:63
+msgid ""
+"1. Ve a <strong>Empresas</strong> y crea tu primera empresa con su "
+"informacion basica. 2. Dentro de la empresa, crea una <strong>Posicion</"
+"strong> abierta. 3. Agrega <strong>Candidatos</strong> a esa posicion. 4. "
+"Usa las herramientas de evaluacion (entrevistas, casos practicos, evaluacion "
+"IA) para seleccionar al mejor candidato."
+msgstr ""
+"1. Go to <strong>Companies</strong> and create your first company with its "
+"basic information. 2. Within the company, create an open <strong>Position</"
+"strong>. 3. Add <strong>Candidates</strong> to that position. 4. "
+"Use the evaluation tools (interviews, case studies, AI evaluation"
+") to select the best candidate."
+
+#: templates/core/help.html:85
+msgid "Como creo o edito una empresa?"
+msgstr "How do I create or edit a company?"
+
+#: templates/core/help.html:89
+msgid ""
+"Desde la pagina de <strong>Empresas</strong>, haz clic en <strong>\"Nueva "
+"empresa\"</strong>. Rellena el nombre, sector, descripcion y otros datos. "
+"Puedes usar el boton <strong>\"Mejorar con IA\"</strong> para que la IA "
+"complete automaticamente la descripcion de la empresa a partir del nombre y "
+"sector. Para editar, entra al dashboard de la empresa y haz clic en "
+"<strong>\"Editar\"</strong>."
+msgstr ""
+"From the <strong>Companies</strong> page, click <strong>\"New "
+"company\"</strong>. Fill in the name, industry, description, and other details. "
+"You can use the <strong>\"Enhance with AI\"</strong> button to have AI "
+"automatically complete the company description from the name and "
+"industry. To edit, go to the company dashboard and click "
+"<strong>\"Edit\"</strong>."
+
+#: templates/core/help.html:94
+msgid "Que son los KPIs del dashboard?"
+msgstr "What are the dashboard KPIs?"
+
+#: templates/core/help.html:98
+msgid ""
+"El dashboard de cada empresa muestra metricas clave: <strong>Posiciones "
+"activas</strong> (cuantas posiciones estan publicadas), <strong>Candidatos "
+"en proceso</strong> (cuantos candidatos estan siendo evaluados), "
+"<strong>Entrevistas programadas</strong> y <strong>Evaluaciones completadas</"
+"strong>. Estos KPIs te dan una vision rapida del estado de la seleccion."
+msgstr ""
+"Each company's dashboard shows key metrics: <strong>Active "
+"positions</strong> (how many positions are published), <strong>Candidates "
+"in process</strong> (how many candidates are being evaluated), "
+"<strong>Scheduled interviews</strong> and <strong>Completed evaluations</"
+"strong>. These KPIs give you a quick overview of the recruitment status."
+
+#: templates/core/help.html:103
+msgid "Puedo gestionar varias empresas?"
+msgstr "Can I manage multiple companies?"
+
+#: templates/core/help.html:107
+msgid ""
+"Si. Pekata es multi-empresa: puedes crear tantas empresas como necesites. "
+"Desde el menu <strong>Empresas</strong> del sidebar puedes ver todas tus "
+"empresas y cambiar entre ellas. Cada empresa tiene sus propias posiciones, "
+"candidatos y evaluaciones de forma independiente."
+msgstr ""
+"Yes. Pekata is multi-company: you can create as many companies as you need. "
+"From the <strong>Companies</strong> menu in the sidebar you can see all your "
+"companies and switch between them. Each company has its own positions, "
+"candidates, and evaluations independently."
+
+#: templates/core/help.html:129
+msgid "Como creo una posicion?"
+msgstr "How do I create a position?"
+
+#: templates/core/help.html:133
+msgid ""
+"Desde el dashboard de la empresa, haz clic en <strong>\"Nueva posicion\"</"
+"strong>. Completa el titulo, departamento, tipo de contrato, ubicacion y "
+"descripcion. Puedes usar <strong>\"Generar con IA\"</strong> para que la IA "
+"cree automaticamente la descripcion del puesto, requisitos y "
+"responsabilidades a partir del titulo y datos basicos."
+msgstr ""
+"From the company dashboard, click <strong>\"New position\"</"
+"strong>. Fill in the title, department, contract type, location, and "
+"description. You can use <strong>\"Generate with AI\"</strong> to have AI "
+"automatically create the job description, requirements, and "
+"responsibilities from the title and basic details."
+
+#: templates/core/help.html:138
+msgid "Que estados tiene una posicion?"
+msgstr "What statuses does a position have?"
+
+#: templates/core/help.html:142
+msgid ""
+"Las posiciones siguen un ciclo de vida: <strong>Borrador</strong> (en "
+"preparacion, no visible), <strong>Publicada</strong> (activa y recibiendo "
+"candidatos), <strong>Pausada</strong> (temporalmente inactiva) y "
+"<strong>Cerrada</strong> (proceso finalizado). Puedes cambiar el estado "
+"desde el detalle de la posicion."
+msgstr ""
+"Positions follow a lifecycle: <strong>Draft</strong> (in "
+"preparation, not visible), <strong>Published</strong> (active and receiving "
+"candidates), <strong>Paused</strong> (temporarily inactive), and "
+"<strong>Closed</strong> (process completed). You can change the status "
+"from the position detail page."
+
+#: templates/core/help.html:147
+msgid "Como filtro las posiciones?"
+msgstr "How do I filter positions?"
+
+#: templates/core/help.html:151
+msgid ""
+"En la lista de posiciones tienes filtros por <strong>estado</strong> "
+"(borrador, publicada, etc.) y un <strong>buscador</strong> por titulo. Usa "
+"estos filtros para encontrar rapidamente la posicion que necesitas."
+msgstr ""
+"In the positions list you have filters by <strong>status</strong> "
+"(draft, published, etc.) and a <strong>search bar</strong> by title. Use "
+"these filters to quickly find the position you need."
+
+#: templates/core/help.html:173
+msgid "Como agrego un candidato?"
+msgstr "How do I add a candidate?"
+
+#: templates/core/help.html:177
+msgid ""
+"Desde el detalle de una posicion, haz clic en <strong>\"Agregar candidato\"</"
+"strong>. Rellena nombre, email, telefono y sube su CV en formato PDF. Al "
+"subir el CV, la IA lo analiza automaticamente extrayendo experiencia, "
+"habilidades y educacion relevantes para la posicion."
+msgstr ""
+"From the position detail page, click <strong>\"Add candidate\"</"
+"strong>. Fill in name, email, phone, and upload their CV in PDF format. When "
+"uploading the CV, AI automatically analyzes it extracting experience, "
+"skills, and education relevant to the position."
+
+#: templates/core/help.html:182
+msgid "Que es el pipeline de estados?"
+msgstr "What is the status pipeline?"
+
+#: templates/core/help.html:186
+msgid ""
+"Cada candidato pasa por etapas del proceso de seleccion: <strong>Nuevo</"
+"strong> &rarr; <strong>En revision</strong> &rarr; <strong>Entrevista</"
+"strong> &rarr; <strong>Evaluacion</strong> &rarr; <strong>Oferta</strong> "
+"&rarr; <strong>Contratado</strong> (o <strong>Descartado</strong> en "
+"cualquier momento). Puedes cambiar el estado desde el perfil del candidato "
+"para mantener el seguimiento actualizado."
+msgstr ""
+"Each candidate goes through stages of the recruitment process: <strong>New</"
+"strong> &rarr; <strong>Under review</strong> &rarr; <strong>Interview</"
+"strong> &rarr; <strong>Evaluation</strong> &rarr; <strong>Offer</strong> "
+"&rarr; <strong>Hired</strong> (or <strong>Rejected</strong> at "
+"any point). You can change the status from the candidate's profile "
+"to keep the tracking up to date."
+
+#: templates/core/help.html:191
+msgid "Como funciona la valoracion con estrellas?"
+msgstr "How does the star rating work?"
+
+#: templates/core/help.html:195
+msgid ""
+"Puedes asignar una valoracion de 1 a 5 estrellas a cada candidato como "
+"indicador rapido de tu impresion general. Esta valoracion es manual y "
+"complementa las puntuaciones de la evaluacion IA, entrevistas y casos "
+"practicos."
+msgstr ""
+"You can assign a rating from 1 to 5 stars to each candidate as "
+"a quick indicator of your overall impression. This rating is manual and "
+"complements the scores from AI evaluation, interviews, and case "
+"studies."
+
+#: templates/core/help.html:217
+msgid "Como programo una entrevista?"
+msgstr "How do I schedule an interview?"
+
+#: templates/core/help.html:221
+msgid ""
+"Desde el perfil del candidato, haz clic en <strong>\"Programar entrevista\"</"
+"strong>. Selecciona la fecha, hora, tipo de entrevista (presencial, "
+"telefonica, videollamada) y agrega notas opcionales. La entrevista aparecera "
+"tanto en el perfil del candidato como en el dashboard de la empresa."
+msgstr ""
+"From the candidate's profile, click <strong>\"Schedule interview\"</"
+"strong>. Select the date, time, interview type (in-person, "
+"phone, video call), and add optional notes. The interview will appear "
+"both in the candidate's profile and in the company dashboard."
+
+#: templates/core/help.html:226
+msgid "Como registro el resultado de una entrevista?"
+msgstr "How do I record the result of an interview?"
+
+#: templates/core/help.html:230
+msgid ""
+"Despues de realizar la entrevista, accede a ella y haz clic en "
+"<strong>\"Editar\"</strong>. Ahi puedes registrar tus <strong>notas</strong> "
+"detalladas y asignar una <strong>puntuacion</strong>. Estas notas y "
+"puntuacion se reflejan en el perfil del candidato y se usan como input para "
+"la evaluacion IA."
+msgstr ""
+"After conducting the interview, access it and click "
+"<strong>\"Edit\"</strong>. There you can record your detailed <strong>notes</strong> "
+"and assign a <strong>score</strong>. These notes and "
+"score are reflected in the candidate's profile and are used as input for "
+"the AI evaluation."
+
+#: templates/core/help.html:244
+msgid "Casos practicos"
+msgstr "Case studies"
+
+#: templates/core/help.html:252
+msgid "Que es un caso practico?"
+msgstr "What is a case study?"
+
+#: templates/core/help.html:256
+msgid ""
+"Un caso practico (case study) es un ejercicio o prueba que envias al "
+"candidato para evaluar sus habilidades en un escenario real. Puede ser una "
+"prueba tecnica, un analisis de negocio, una presentacion, etc. Pekata te "
+"permite crear estos casos y gestionar su envio y entrega."
+msgstr ""
+"A case study is an exercise or test that you send to the "
+"candidate to evaluate their skills in a real-world scenario. It can be a "
+"technical test, a business analysis, a presentation, etc. Pekata allows you to "
+"create these cases and manage their delivery and submission."
+
+#: templates/core/help.html:261
+msgid "Como genero un caso con IA?"
+msgstr "How do I generate a case with AI?"
+
+#: templates/core/help.html:265
+msgid ""
+"Tienes dos opciones: 1. <strong>Crear manualmente</strong>: redacta tu "
+"propio caso practico con titulo, descripcion y criterios de evaluacion. 2. "
+"<strong>Generar con IA</strong>: la IA crea un caso personalizado basado en "
+"la posicion y el perfil del candidato. Puedes editar el caso generado antes "
+"de enviarlo."
+msgstr ""
+"You have two options: 1. <strong>Create manually</strong>: write your "
+"own case study with title, description, and evaluation criteria. 2. "
+"<strong>Generate with AI</strong>: AI creates a customized case based on "
+"the position and the candidate's profile. You can edit the generated case before "
+"sending it."
+
+#: templates/core/help.html:270
+msgid "Como es el flujo de envio y entrega?"
+msgstr "What is the send and submission workflow?"
+
+#: templates/core/help.html:274
+msgid ""
+"Una vez creado el caso, lo <strong>envias</strong> al candidato. El caso "
+"queda en estado <strong>\"Enviado\"</strong> hasta que el candidato entrega "
+"su respuesta. Cuando registras la entrega, puedes agregar notas y una "
+"puntuacion. El resultado se integra en la evaluacion global del candidato."
+msgstr ""
+"Once the case is created, you <strong>send</strong> it to the candidate. The case "
+"remains in <strong>\"Sent\"</strong> status until the candidate submits "
+"their response. When you record the submission, you can add notes and a "
+"score. The result is integrated into the candidate's overall evaluation."
+
+#: templates/core/help.html:288
+msgid "Evaluacion IA"
+msgstr "AI Evaluation"
+
+#: templates/core/help.html:296
+msgid "Que evalua la IA?"
+msgstr "What does AI evaluate?"
+
+#: templates/core/help.html:300
+msgid ""
+"La evaluacion IA analiza toda la informacion disponible del candidato: "
+"<strong>CV</strong> (experiencia, habilidades, educacion), <strong>notas de "
+"entrevistas</strong>, <strong>resultados de casos practicos</strong> y los "
+"<strong>requisitos de la posicion</strong>. Genera una puntuacion global y "
+"un analisis detallado de fortalezas, debilidades y fit con el puesto."
+msgstr ""
+"The AI evaluation analyzes all available candidate information: "
+"<strong>CV</strong> (experience, skills, education), <strong>interview "
+"notes</strong>, <strong>case study results</strong>, and the "
+"<strong>position requirements</strong>. It generates an overall score and "
+"a detailed analysis of strengths, weaknesses, and fit with the role."
+
+#: templates/core/help.html:305
+msgid "Como interpreto las puntuaciones?"
+msgstr "How do I interpret the scores?"
+
+#: templates/core/help.html:309
+msgid ""
+"La IA asigna puntuaciones en varias dimensiones (ajuste tecnico, "
+"experiencia, habilidades blandas, etc.) y una <strong>puntuacion global</"
+"strong>. Las puntuaciones son orientativas y deben complementarse con tu "
+"criterio profesional. Usa el analisis detallado para entender las razones "
+"detras de cada puntuacion."
+msgstr ""
+"AI assigns scores across various dimensions (technical fit, "
+"experience, soft skills, etc.) and an <strong>overall score</"
+"strong>. Scores are indicative and should be complemented with your "
+"professional judgment. Use the detailed analysis to understand the reasons "
+"behind each score."
+
+#: templates/core/help.html:314
+msgid "Puedo regenerar una evaluacion?"
+msgstr "Can I regenerate an evaluation?"
+
+#: templates/core/help.html:318
+msgid ""
+"Si. Si has actualizado informacion del candidato (nuevas notas de "
+"entrevista, resultado de caso practico, CV actualizado), puedes "
+"<strong>regenerar la evaluacion</strong> para que la IA tenga en cuenta los "
+"datos mas recientes. La nueva evaluacion reemplaza la anterior."
+msgstr ""
+"Yes. If you have updated candidate information (new interview "
+"notes, case study results, updated CV), you can "
+"<strong>regenerate the evaluation</strong> so that AI takes into account the "
+"most recent data. The new evaluation replaces the previous one."
+
+#: templates/core/help.html:332
+msgid "Tours interactivos"
+msgstr "Interactive tours"
+
+#: templates/core/help.html:340
+msgid "Que es el boton \"?\" flotante?"
+msgstr "What is the floating \"?\" button?"
+
+#: templates/core/help.html:344
+msgid ""
+"En cada pagina del sistema veras un boton <strong>\"?\"</strong> flotante en "
+"la esquina inferior derecha. Al hacer clic se abre un menu con dos opciones: "
+"<strong>\"Ver tour de esta pagina\"</strong> (inicia una guia paso a paso "
+"que explica cada elemento de la pagina actual) y <strong>\"Reiniciar todos "
+"los tours\"</strong> (permite volver a ver los tours aunque ya los hayas "
+"completado)."
+msgstr ""
+"On every page of the system you will see a floating <strong>\"?\"</strong> button in "
+"the bottom right corner. Clicking it opens a menu with two options: "
+"<strong>\"View this page's tour\"</strong> (starts a step-by-step guide "
+"that explains each element of the current page) and <strong>\"Reset all "
+"tours\"</strong> (allows you to view the tours again even if you have already "
+"completed them)."
+
+#: templates/core/help.html:349
+msgid "Como reinicio los tours?"
+msgstr "How do I reset the tours?"
+
+#: templates/core/help.html:353
+msgid ""
+"Haz clic en el boton <strong>\"?\"</strong> y selecciona <strong>\"Reiniciar "
+"todos los tours\"</strong>. Esto borra el registro de tours completados y la "
+"proxima vez que entres a cualquier pagina, el tour se mostrara "
+"automaticamente de nuevo. Es util si quieres refrescar la memoria sobre como "
+"funciona una seccion."
+msgstr ""
+"Click the <strong>\"?\"</strong> button and select <strong>\"Reset "
+"all tours\"</strong>. This clears the record of completed tours and the "
+"next time you enter any page, the tour will be shown "
+"automatically again. It is useful if you want to refresh your memory about how "
+"a section works."
+
+#: templates/emails/casestudy_sent.html:15
+#, python-format
+msgid "Hola %(name)s,"
+msgstr "Hi %(name)s,"
+
+#: templates/emails/casestudy_sent.html:17
+#, python-format
+msgid ""
+"Como parte del proceso de selección para la posición de "
+"<strong>%(position)s</strong>,\n"
+"            te enviamos un caso práctico para que lo completes."
+msgstr ""
+"As part of the recruitment process for the "
+"<strong>%(position)s</strong> position,\n"
+"            we are sending you a case study for you to complete."
+
+#: templates/emails/casestudy_sent.html:20
+msgid "Caso:"
+msgstr "Case:"
+
+#: templates/emails/casestudy_sent.html:21 templates/portal/case_study.html:51
+msgid "Fecha límite:"
+msgstr "Deadline:"
+
+#: templates/emails/casestudy_sent.html:25
+msgid "Ver caso práctico y responder"
+msgstr "View case study and respond"
+
+#: templates/emails/casestudy_sent.html:29
+msgid ""
+"Haz clic en el botón para ver el caso completo. Podrás escribir tu respuesta "
+"directamente o subir un documento."
+msgstr ""
+"Click the button to view the full case. You can write your response "
+"directly or upload a document."
+
+#: templates/emails/casestudy_sent.html:32
+msgid "Si el botón no funciona, copia y pega este enlace en tu navegador:"
+msgstr "If the button doesn't work, copy and paste this link in your browser:"
+
+#: templates/emails/casestudy_sent.html:38
+#, python-format
+msgid "Este email fue enviado por %(company)s a través de Pekata ATS."
+msgstr "This email was sent by %(company)s through Pekata ATS."
+
+#: templates/emails/casestudy_submitted.html:10
+#: templates/portal/case_study.html:29
+msgid "Caso práctico entregado"
+msgstr "Case study submitted"
+
+#: templates/emails/casestudy_submitted.html:13
+msgid "Nueva entrega recibida"
+msgstr "New submission received"
+
+#: templates/emails/casestudy_submitted.html:15
+#, python-format
+msgid ""
+"<strong>%(name)s</strong> ha entregado el caso práctico\n"
+"            \"<strong>%(cs_title)s</strong>\" para la posición de "
+"<strong>%(position)s</strong>."
+msgstr ""
+"<strong>%(name)s</strong> has submitted the case study\n"
+"            \"<strong>%(cs_title)s</strong>\" for the "
+"<strong>%(position)s</strong> position."
+
+#: templates/emails/casestudy_submitted.html:18
+msgid "Entregado:"
+msgstr "Submitted:"
+
+#: templates/emails/casestudy_submitted.html:21
+msgid "Ver candidato"
+msgstr "View candidate"
+
+#: templates/evaluations/evaluate.html:28
+msgid "Generando evaluación..."
+msgstr "Generating evaluation..."
+
+#: templates/evaluations/evaluate.html:28
+msgid "Regenerar evaluación"
+msgstr "Regenerate evaluation"
+
+#: templates/evaluations/evaluate.html:119
+msgid "Ver respuesta completa de IA"
+msgstr "View full AI response"
+
+#: templates/evaluations/evaluate.html:131
+msgid "Historial de evaluaciones"
+msgstr "Evaluation history"
+
+#: templates/evaluations/evaluate.html:138
+msgid "Global:"
+msgstr "Overall:"
+
+#: templates/evaluations/evaluate.html:155
+msgid "Sin evaluaciones"
+msgstr "No evaluations"
+
+#: templates/evaluations/evaluate.html:156
+msgid ""
+"Pulsa \"Generar evaluación\" para que la IA analice toda la información "
+"disponible del candidato."
+msgstr ""
+"Click \"Generate evaluation\" to have AI analyze all available "
+"candidate information."
+
+#: templates/interviews/interview_edit.html:10
+#, python-format
+msgid "Entrevista %(date)s"
+msgstr "Interview %(date)s"
+
+#: templates/interviews/interview_edit.html:26
+msgid "Notas de la entrevista"
+msgstr "Interview notes"
+
+#: templates/interviews/interview_edit.html:40
+msgid "Puntuación global (1-10)"
+msgstr "Overall score (1-10)"
+
+#: templates/interviews/interview_form.html:16
+#, python-format
+msgid ""
+"Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span> · "
+"%(pos)s"
+msgstr ""
+"Candidate: <span class=\"font-medium text-gray-700\">%(name)s</span> · "
+"%(pos)s"
+
+#: templates/partials/_chatbot_widget.html:10
+msgid "Pekata Assistant"
+msgstr "Pekata Assistant"
+
+#: templates/partials/_chatbot_widget.html:13
+msgid "Ver tour de esta página"
+msgstr "View this page's tour"
+
+#: templates/partials/_chatbot_widget.html:17
+msgid "Limpiar chat"
+msgstr "Clear chat"
+
+#: templates/partials/_chatbot_widget.html:21
+#: templates/positions/position_detail.html:72
+msgid "Cerrar"
+msgstr "Close"
+
+#: templates/partials/_chatbot_widget.html:32
+msgid "Hola, soy Pekata Assistant"
+msgstr "Hi, I'm Pekata Assistant"
+
+#: templates/partials/_chatbot_widget.html:33
+msgid ""
+"Pregúntame sobre cómo usar la aplicación, crear posiciones, gestionar "
+"candidatos y más."
+msgstr ""
+"Ask me about how to use the application, create positions, manage "
+"candidates, and more."
+
+#: templates/partials/_chatbot_widget.html:37
+msgid "Tour de esta página"
+msgstr "Tour of this page"
+
+#: templates/partials/_chatbot_widget.html:41
+msgid "Reiniciar tours"
+msgstr "Reset tours"
+
+#: templates/partials/_chatbot_widget.html:71
+msgid "Escribe tu pregunta..."
+msgstr "Type your question..."
+
+#: templates/partials/_confirm_modal.html:54
+#: templates/positions/position_detail.html:19
+#: templates/tenants/department_list.html:49
+msgid "Eliminar"
+msgstr "Delete"
+
+#: templates/partials/_notification_dropdown.html:29
+msgid "Marcar todas como leídas"
+msgstr "Mark all as read"
+
+#: templates/partials/_notification_dropdown.html:36
+msgid "Sin notificaciones"
+msgstr "No notifications"
+
+#: templates/partials/_pagination.html:6
+msgid "Anterior"
+msgstr "Previous"
+
+#: templates/partials/_pagination.html:9
+msgid "Siguiente"
+msgstr "Next"
+
+#: templates/partials/_pagination.html:14
+#, python-format
+msgid ""
+"Mostrando <span class=\"font-medium\">%(start)s</span> a <span class=\"font-"
+"medium\">%(end)s</span> de <span class=\"font-medium\">%(total)s</span> "
+"resultados"
+msgstr ""
+"Showing <span class=\"font-medium\">%(start)s</span> to <span class=\"font-"
+"medium\">%(end)s</span> of <span class=\"font-medium\">%(total)s</span> "
+"results"
+
+#: templates/partials/_sidebar_content.html:50
+#: templates/tenants/company_form.html:117
+msgid "Crear empresa"
+msgstr "Create company"
+
+#: templates/partials/_sidebar_content.html:64
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: templates/partials/_sidebar_content.html:102
+msgid "Configuración"
+msgstr "Settings"
+
+#: templates/partials/_sidebar_content.html:148
+msgid "Cerrar sesión"
+msgstr "Log out"
+
+#: templates/portal/case_study.html:30
+#, python-format
+msgid "Tu respuesta fue recibida el %(date)s a las %(time)s."
+msgstr "Your response was received on %(date)s at %(time)s."
+
+#: templates/portal/case_study.html:39
+msgid "Plazo expirado"
+msgstr "Deadline expired"
+
+#: templates/portal/case_study.html:40
+#, python-format
+msgid "El plazo para entregar este caso práctico ha finalizado (%(date)s)."
+msgstr "The deadline to submit this case study has passed (%(date)s)."
+
+#: templates/portal/case_study.html:48
+#, python-format
+msgid "Posición: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+msgstr "Position: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+
+#: templates/portal/case_study.html:70
+msgid "Tu respuesta"
+msgstr "Your response"
+
+#: templates/portal/case_study.html:75
+msgid "Escribe tu respuesta"
+msgstr "Write your response"
+
+#: templates/portal/case_study.html:78
+msgid "Escribe aquí tu respuesta al caso práctico..."
+msgstr "Write your case study response here..."
+
+#: templates/portal/case_study.html:83
+msgid "o también puedes"
+msgstr "or you can also"
+
+#: templates/portal/case_study.html:87
+msgid "Adjuntar archivo (opcional)"
+msgstr "Attach file (optional)"
+
+#: templates/portal/case_study.html:90
+msgid "PDF, Word, PowerPoint, Excel o ZIP. Máximo 10MB."
+msgstr "PDF, Word, PowerPoint, Excel, or ZIP. Maximum 10MB."
+
+#: templates/portal/case_study.html:94
+msgid "Comentarios adicionales (opcional)"
+msgstr "Additional comments (optional)"
+
+#: templates/portal/case_study.html:97
+msgid "Cualquier nota o comentario adicional..."
+msgstr "Any additional notes or comments..."
+
+#: templates/portal/case_study.html:101
+msgid "Entregar respuesta"
+msgstr "Submit response"
+
+#: templates/portal/case_study.html:103
+msgid "Una vez entregada no podrás modificar tu respuesta."
+msgstr "Once submitted, you will not be able to modify your response."
+
+#: templates/portal/confirmation.html:7 templates/portal/confirmation.html:19
+msgid "Entrega confirmada"
+msgstr "Submission confirmed"
+
+#: templates/portal/confirmation.html:20
+#, python-format
+msgid ""
+"Tu case study ha sido recibido correctamente el %(date)s a las %(time)s."
+msgstr ""
+"Your case study has been received successfully on %(date)s at %(time)s."
+
+#: templates/portal/confirmation.html:21
+#, python-format
+msgid ""
+"Gracias por completar el proceso. El equipo de %(company)s revisará tu "
+"respuesta."
+msgstr ""
+"Thank you for completing the process. The %(company)s team will review your "
+"response."
+
+#: templates/positions/position_detail.html:15
+msgid "Eliminar posición"
+msgstr "Delete position"
+
+#: templates/positions/position_detail.html:15
+#, python-format
+msgid "¿Eliminar la posición «%(title)s»? Se ocultará de todas las vistas."
+msgstr "Delete position \"%(title)s\"? It will be hidden from all views."
+
+#: templates/positions/position_detail.html:24
+msgid "Editar oferta"
+msgstr "Edit job posting"
+
+#: templates/positions/position_detail.html:28
+#: templates/positions/position_detail.html:256
+msgid "Carga masiva de CVs"
+msgstr "Bulk CV upload"
+
+#: templates/positions/position_detail.html:61
+msgid "Publicar"
+msgstr "Publish"
+
+#: templates/positions/position_detail.html:67
+msgid "Pausar"
+msgstr "Pause"
+
+#: templates/positions/position_detail.html:78
+msgid "Reactivar"
+msgstr "Reactivate"
+
+#: templates/positions/position_detail.html:118
+#, python-format
+msgid "Candidatos (%(count)s)"
+msgstr "Candidates (%(count)s)"
+
+#: templates/positions/position_detail.html:119
+msgid "Añadir"
+msgstr "Add"
+
+#: templates/positions/position_detail.html:140
+msgid "Espera"
+msgstr "Hold"
+
+#: templates/positions/position_detail.html:155
+msgid "Aún no hay candidatos para esta posición."
+msgstr "No candidates for this position yet."
+
+#: templates/positions/position_detail.html:165
+msgid "Datos de la oferta"
+msgstr "Job posting details"
+
+#: templates/positions/position_detail.html:185
+msgid "Salario"
+msgstr "Salary"
+
+#: templates/positions/position_detail.html:194
+msgid "Creada"
+msgstr "Created"
+
+#: templates/positions/position_detail.html:223
+msgid "Crear"
+msgstr "Create"
+
+#: templates/positions/position_detail.html:233
+#, python-format
+msgid "%(days)s días · %(submissions)s envíos"
+msgstr "%(days)s days · %(submissions)s submissions"
+
+#: templates/positions/position_detail.html:238
+msgid "Sin case studies definidos aún."
+msgstr "No case studies defined yet."
+
+#: templates/positions/position_detail.html:272
+msgid "Arrastra archivos PDF aquí"
+msgstr "Drag PDF files here"
+
+#: templates/positions/position_detail.html:273
+msgid "o"
+msgstr "or"
+
+#: templates/positions/position_detail.html:275
+msgid "Seleccionar archivos"
+msgstr "Select files"
+
+#: templates/positions/position_detail.html:318
+msgid "Subiendo..."
+msgstr "Uploading..."
+
+#: templates/positions/position_detail.html:319
+msgid "Analizando con IA..."
+msgstr "Analyzing with AI..."
+
+#: templates/positions/position_detail.html:352
+msgid "Subir"
+msgstr "Upload"
+
+#: templates/positions/position_detail.html:356
+msgid "Procesando..."
+msgstr "Processing..."
+
+#: templates/positions/position_detail.html:359
+msgid "Cerrar y actualizar"
+msgstr "Close and refresh"
+
+#: templates/positions/position_form.html:11
+msgid "Nueva"
+msgstr "New"
+
+#: templates/positions/position_form.html:23
+msgid "Información básica"
+msgstr "Basic information"
+
+#: templates/positions/position_form.html:52
+msgid "Contenido de la oferta"
+msgstr "Job posting content"
+
+#: templates/positions/position_form.html:68
+#: templates/tenants/company_form.html:32
+msgid "Generando..."
+msgstr "Generating..."
+
+#: templates/positions/position_form.html:102
+msgid "Opciones"
+msgstr "Options"
+
+#: templates/positions/position_form.html:105
+msgid "Esta posición incluye case study"
+msgstr "This position includes a case study"
+
+#: templates/positions/position_form.html:115
+msgid "Crear posición"
+msgstr "Create position"
+
+#: templates/positions/position_form.html:134
+msgid "Escribe al menos el título del puesto antes de generar."
+msgstr "Enter at least the job title before generating."
+
+#: templates/positions/position_form.html:166
+#: templates/tenants/company_form.html:169
+msgid "Error al generar contenido."
+msgstr "Error generating content."
+
+#: templates/positions/position_form.html:185
+#: templates/tenants/company_form.html:180
+msgid "Contenido generado con IA. Revisa y edita antes de guardar."
+msgstr "Content generated with AI. Review and edit before saving."
+
+#: templates/positions/position_form.html:188
+#: templates/tenants/company_form.html:183
+msgid "Error de conexión. Inténtalo de nuevo."
+msgstr "Connection error. Please try again."
+
+#: templates/positions/position_list.html:23
+#, python-format
+msgid "Gestiona las ofertas de trabajo de %(name)s."
+msgstr "Manage job postings for %(name)s."
+
+#: templates/positions/position_list.html:30
+msgid "Todas"
+msgstr "All"
+
+#: templates/positions/position_list.html:90
+#: templates/tenants/company_detail.html:107
+msgid "Sin posiciones"
+msgstr "No positions"
+
+#: templates/positions/position_list.html:90
+msgid "Crea tu primera oferta de trabajo."
+msgstr "Create your first job posting."
+
+#: templates/registration/login.html:7 templates/registration/login.html:14
+msgid "Iniciar sesión"
+msgstr "Log in"
+
+#: templates/registration/login.html:28
+msgid "Email / Usuario"
+msgstr "Email / Username"
+
+#: templates/registration/login.html:33
+msgid "Contraseña"
+msgstr "Password"
+
+#: templates/registration/login.html:39
+msgid "Entrar"
+msgstr "Log in"
+
+#: templates/tenants/company_detail.html:14
+#: templates/tenants/company_detail.html:18
+msgid "Eliminar empresa"
+msgstr "Delete company"
+
+#: templates/tenants/company_detail.html:14
+#, python-format
+msgid "¿Eliminar la empresa «%(name)s»? Se ocultará de todas las vistas."
+msgstr "Delete company \"%(name)s\"? It will be hidden from all views."
+
+#: templates/tenants/company_detail.html:48
+#: templates/tenants/company_list.html:48
+msgid "Inactiva"
+msgstr "Inactive"
+
+#: templates/tenants/company_detail.html:55
+msgid "Total posiciones"
+msgstr "Total positions"
+
+#: templates/tenants/company_detail.html:59
+msgid "Posiciones activas"
+msgstr "Active positions"
+
+#: templates/tenants/company_detail.html:63
+msgid "Total candidatos"
+msgstr "Total candidates"
+
+#: templates/tenants/company_detail.html:107
+msgid "Crea tu primera posición para esta empresa."
+msgstr "Create your first position for this company."
+
+#: templates/tenants/company_form.html:49
+msgid "Datos básicos"
+msgstr "Basic details"
+
+#: templates/tenants/company_form.html:63
+msgid "Descripción de la empresa"
+msgstr "Company description"
+
+#: templates/tenants/company_form.html:65
+msgid ""
+"Qué hace la empresa, sector, misión. Se usará en las ofertas generadas con "
+"IA."
+msgstr ""
+"What the company does, industry, mission. It will be used in AI-generated job "
+"postings."
+
+#: templates/tenants/company_form.html:82
+msgid "Información general para ofertas"
+msgstr "General information for job postings"
+
+#: templates/tenants/company_form.html:83
+msgid ""
+"Esta información se usará como base al generar ofertas de trabajo con IA."
+msgstr ""
+"This information will be used as a basis when generating job postings with AI."
+
+#: templates/tenants/company_form.html:88
+msgid "Seguro médico, formación, bonus, fruta, gym, plan de carrera..."
+msgstr "Health insurance, training, bonus, snacks, gym, career plan..."
+
+#: templates/tenants/company_form.html:96
+msgid "Trabajo remoto"
+msgstr "Remote work"
+
+#: templates/tenants/company_form.html:107
+msgid "Ambiente de trabajo, valores, tipo de equipo..."
+msgstr "Work environment, values, team type..."
+
+#: templates/tenants/company_form.html:136
+msgid "Escribe al menos el nombre de la empresa antes de generar."
+msgstr "Enter at least the company name before generating."
+
+#: templates/tenants/company_list.html:22
+msgid "Gestiona las empresas registradas en el sistema."
+msgstr "Manage the companies registered in the system."
+
+#: templates/tenants/company_list.html:45
+#, python-format
+msgid "%(count)s posiciones activas"
+msgstr "%(count)s active positions"
+
+#: templates/tenants/company_list.html:57
+#: templates/tenants/company_select.html:51
+msgid "Sin empresas"
+msgstr "No companies"
+
+#: templates/tenants/company_list.html:57
+msgid ""
+"Crea tu primera empresa para empezar a gestionar posiciones y candidatos."
+msgstr ""
+"Create your first company to start managing positions and candidates."
+
+#: templates/tenants/company_select.html:4
+#: templates/tenants/company_select.html:7
+msgid "Seleccionar empresa"
+msgstr "Select company"
+
+#: templates/tenants/company_select.html:13
+msgid "Selecciona una empresa"
+msgstr "Select a company"
+
+#: templates/tenants/company_select.html:14
+msgid "Elige la empresa con la que quieres trabajar."
+msgstr "Choose the company you want to work with."
+
+#: templates/tenants/company_select.html:52
+msgid "No tienes ninguna empresa asignada. Contacta al administrador."
+msgstr "You don't have any assigned company. Contact the administrator."
+
+#: templates/tenants/department_form.html:38
+msgid "Crear departamento"
+msgstr "Create department"
+
+#: templates/tenants/department_list.html:21
+#, python-format
+msgid "Gestiona los departamentos de %(name)s."
+msgstr "Manage departments for %(name)s."
+
+#: templates/tenants/department_list.html:32
+msgid "Acciones"
+msgstr "Actions"
+
+#: templates/tenants/department_list.html:47
+msgid "Eliminar departamento"
+msgstr "Delete department"
+
+#: templates/tenants/department_list.html:47
+#, python-format
+msgid ""
+"¿Eliminar departamento «%(name)s»? Las posiciones asociadas quedarán sin "
+"departamento."
+msgstr ""
+"Delete department \"%(name)s\"? Associated positions will be left without a "
+"department."
+
+#: templates/tenants/department_list.html:59
+msgid "Sin departamentos"
+msgstr "No departments"
+
+#: templates/tenants/department_list.html:59
+msgid "Crea tu primer departamento para organizar las posiciones."
+msgstr "Create your first department to organize positions."

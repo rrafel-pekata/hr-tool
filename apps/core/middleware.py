@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.shortcuts import redirect
+from django.utils import translation
 
 from apps.tenants.models import CompanyMembership, Company
 
@@ -49,5 +51,23 @@ class TenantMiddleware:
                     request.membership = memberships[0]
                     request.session['active_company_id'] = str(request.company.pk)
 
+        response = self.get_response(request)
+        return response
+
+
+class UserLanguageMiddleware:
+    """Activate the user's preferred language from their UserSettings."""
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.user.is_authenticated:
+            try:
+                lang = request.user.settings.language
+            except Exception:
+                lang = settings.LANGUAGE_CODE
+            translation.activate(lang)
+            request.LANGUAGE_CODE = lang
         response = self.get_response(request)
         return response

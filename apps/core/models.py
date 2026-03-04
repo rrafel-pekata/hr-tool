@@ -1,7 +1,9 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class TimeStampedModel(models.Model):
@@ -23,7 +25,7 @@ class SoftDeleteManager(models.Manager):
 
 class SoftDeleteMixin(models.Model):
     """Mixin para soft-delete: campo deleted_at + métodos soft_delete/restore."""
-    deleted_at = models.DateTimeField('Eliminado en', null=True, blank=True, default=None)
+    deleted_at = models.DateTimeField(_('Eliminado en'), null=True, blank=True, default=None)
 
     objects = SoftDeleteManager()
     all_objects = models.Manager()
@@ -38,3 +40,24 @@ class SoftDeleteMixin(models.Model):
     def restore(self):
         self.deleted_at = None
         self.save(update_fields=['deleted_at'])
+
+
+class UserSettings(models.Model):
+    """Per-user settings, independent of company membership."""
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='settings',
+    )
+    language = models.CharField(
+        max_length=5,
+        choices=settings.LANGUAGES,
+        default='es',
+    )
+
+    class Meta:
+        verbose_name = 'User settings'
+        verbose_name_plural = 'User settings'
+
+    def __str__(self):
+        return f'{self.user} - {self.language}'

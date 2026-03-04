@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
 from apps.candidates.models import Candidate
 from apps.notifications.services import notify_company
@@ -28,7 +29,7 @@ def interview_create(request, candidate_pk):
                 notification_type='interview',
                 exclude_user=request.user,
             )
-            messages.success(request, 'Entrevista programada correctamente.')
+            messages.success(request, _('Entrevista programada correctamente.'))
             return redirect('candidates:candidate_detail', pk=candidate.pk)
     else:
         form = InterviewForm()
@@ -40,7 +41,7 @@ def interview_create(request, candidate_pk):
     return render(request, 'interviews/interview_form.html', {
         'form': form,
         'candidate': candidate,
-        'title': 'Programar entrevista',
+        'title': _('Programar entrevista'),
     })
 
 
@@ -78,7 +79,7 @@ def interview_edit(request, pk):
                     notification_type='interview',
                     exclude_user=request.user,
                 )
-            messages.success(request, 'Entrevista actualizada correctamente.')
+            messages.success(request, _('Entrevista actualizada correctamente.'))
             return redirect('candidates:candidate_detail', pk=interview.candidate.pk)
     else:
         form = InterviewNotesForm(instance=interview)

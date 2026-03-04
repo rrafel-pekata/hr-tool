@@ -1,0 +1,2773 @@
+# Catalan translation for Pekata ATS.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 16:59+0100\n"
+"PO-Revision-Date: 2026-03-04 17:00+0100\n"
+"Last-Translator: Pekata ATS\n"
+"Language-Team: Catalan\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: apps/candidates/forms.py:18 apps/candidates/models.py:39
+#: apps/tenants/models.py:10 apps/tenants/models.py:115
+#: templates/candidates/candidate_form.html:135
+#: templates/tenants/company_form.html:52
+#: templates/tenants/department_form.html:21
+#: templates/tenants/department_list.html:29
+msgid "Nombre"
+msgstr "Nom"
+
+#: apps/candidates/forms.py:19 apps/candidates/models.py:40
+#: templates/candidates/candidate_form.html:140
+msgid "Apellidos"
+msgstr "Cognoms"
+
+#: apps/candidates/forms.py:20
+msgid "email@ejemplo.com"
+msgstr "email@exemple.com"
+
+#: apps/candidates/forms.py:21
+msgid "+34 600 000 000"
+msgstr "+34 600 000 000"
+
+#: apps/candidates/forms.py:45
+msgid "Notas rápidas sobre el candidato..."
+msgstr "Notes ràpides sobre el candidat..."
+
+#: apps/candidates/models.py:14 templates/casestudies/casestudy_send.html:28
+msgid "Manual"
+msgstr "Manual"
+
+#: apps/candidates/models.py:15 apps/candidates/models.py:43
+#: templates/candidates/candidate_form.html:154
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: apps/candidates/models.py:16 apps/candidates/models.py:41
+#: templates/candidates/candidate_form.html:145
+msgid "Email"
+msgstr "Email"
+
+#: apps/candidates/models.py:17
+msgid "Portal"
+msgstr "Portal"
+
+#: apps/candidates/models.py:20 templates/tenants/department_form.html:9
+msgid "Nuevo"
+msgstr "Nou"
+
+#: apps/candidates/models.py:21
+msgid "En revisión"
+msgstr "En revisió"
+
+#: apps/candidates/models.py:22
+msgid "Phone screen"
+msgstr "Phone screen"
+
+#: apps/candidates/models.py:23
+msgid "Entrevista programada"
+msgstr "Entrevista programada"
+
+#: apps/candidates/models.py:24
+msgid "Entrevista realizada"
+msgstr "Entrevista realitzada"
+
+#: apps/candidates/models.py:25
+msgid "Case study enviado"
+msgstr "Case study enviat"
+
+#: apps/candidates/models.py:26
+msgid "Case study entregado"
+msgstr "Case study lliurat"
+
+#: apps/candidates/models.py:27
+msgid "En evaluación"
+msgstr "En avaluació"
+
+#: apps/candidates/models.py:28
+msgid "Oferta enviada"
+msgstr "Oferta enviada"
+
+#: apps/candidates/models.py:29
+msgid "Contratado"
+msgstr "Contractat"
+
+#: apps/candidates/models.py:30
+msgid "Descartado"
+msgstr "Descartat"
+
+#: apps/candidates/models.py:31
+msgid "Retirado"
+msgstr "Retirat"
+
+#: apps/candidates/models.py:37 apps/casestudies/models.py:15
+#: apps/notifications/models.py:15 apps/positions/models.py:62
+#: templates/candidates/candidate_detail.html:354
+#: templates/candidates/candidate_list.html:64
+#: templates/positions/position_list.html:59
+#: templates/tenants/company_detail.html:78
+msgid "Posición"
+msgstr "Posició"
+
+#: apps/candidates/models.py:42 templates/candidates/candidate_form.html:150
+msgid "Teléfono"
+msgstr "Telèfon"
+
+#: apps/candidates/models.py:44 templates/candidates/candidate_form.html:33
+msgid "CV (PDF)"
+msgstr "CV (PDF)"
+
+#: apps/candidates/models.py:45
+msgid "Texto extraído del CV"
+msgstr "Text extret del CV"
+
+#: apps/candidates/models.py:47 templates/candidates/candidate_detail.html:362
+#: templates/candidates/candidate_form.html:69
+msgid "Origen"
+msgstr "Origen"
+
+#: apps/candidates/models.py:53 apps/interviews/models.py:44
+#: apps/positions/models.py:51 templates/candidates/candidate_detail.html:358
+#: templates/candidates/candidate_list.html:65
+#: templates/interviews/interview_edit.html:22
+#: templates/positions/position_list.html:60
+#: templates/tenants/company_detail.html:79
+msgid "Estado"
+msgstr "Estat"
+
+#: apps/candidates/models.py:59
+msgid "Token portal"
+msgstr "Token portal"
+
+#: apps/candidates/models.py:65
+msgid "Expiración del token"
+msgstr "Expiració del token"
+
+#: apps/candidates/models.py:69 templates/candidates/candidate_detail.html:423
+#: templates/candidates/candidate_edit.html:41
+msgid "Notas del reclutador"
+msgstr "Notes del reclutador"
+
+#: apps/candidates/models.py:70
+msgid "Resumen IA"
+msgstr "Resum IA"
+
+#: apps/candidates/models.py:71
+msgid "Puntos fuertes IA"
+msgstr "Punts forts IA"
+
+#: apps/candidates/models.py:72
+msgid "Puntos débiles IA"
+msgstr "Punts febles IA"
+
+#: apps/candidates/models.py:73
+msgid "Puntuación encaje IA"
+msgstr "Puntuació encaix IA"
+
+#: apps/candidates/models.py:74 templates/candidates/candidate_list.html:67
+msgid "Valoración"
+msgstr "Valoració"
+
+#: apps/candidates/models.py:77 apps/casestudies/models.py:39
+#: apps/evaluations/models.py:20 apps/interviews/models.py:22
+#: templates/candidates/candidate_list.html:63
+msgid "Candidato"
+msgstr "Candidat"
+
+#: apps/candidates/models.py:78 templates/candidates/candidate_list.html:5
+#: templates/candidates/candidate_list.html:9
+#: templates/candidates/candidate_list.html:14 templates/core/help.html:165
+#: templates/partials/_sidebar_content.html:85
+#: templates/positions/position_detail.html:190
+#: templates/positions/position_list.html:63
+#: templates/tenants/company_detail.html:81
+msgid "Candidatos"
+msgstr "Candidats"
+
+#: apps/candidates/views.py:83 apps/candidates/views.py:171
+#: apps/candidates/views.py:419
+msgid "No se ha enviado ningún archivo."
+msgstr "No s'ha enviat cap fitxer."
+
+#: apps/candidates/views.py:86 apps/candidates/views.py:174
+#: apps/candidates/views.py:422
+msgid "Solo se permiten archivos PDF."
+msgstr "Només es permeten fitxers PDF."
+
+#: apps/candidates/views.py:89 apps/candidates/views.py:177
+#: apps/candidates/views.py:425
+msgid "El archivo excede el tamaño máximo de 10MB."
+msgstr "El fitxer excedeix la mida màxima de 10MB."
+
+#: apps/candidates/views.py:113
+msgid "Error al conectar con la IA."
+msgstr "Error en connectar amb la IA."
+
+#: apps/candidates/views.py:116
+msgid "La IA no devolvió un formato válido."
+msgstr "La IA no ha retornat un format vàlid."
+
+#: apps/candidates/views.py:119
+msgid "Sin nombre"
+msgstr "Sense nom"
+
+#: apps/candidates/views.py:203 apps/casestudies/views.py:276
+#: apps/evaluations/views.py:152
+msgid "La IA no devolvió un formato válido. Inténtalo de nuevo."
+msgstr "La IA no ha retornat un format vàlid. Torna-ho a provar."
+
+#: apps/candidates/views.py:211 apps/casestudies/views.py:283
+#: apps/evaluations/views.py:158 apps/positions/views.py:227
+#: apps/tenants/views.py:144
+msgid "Error al conectar con la IA. Inténtalo de nuevo."
+msgstr "Error en connectar amb la IA. Torna-ho a provar."
+
+#: apps/candidates/views.py:256
+#, python-format
+msgid "Candidato %(name)s añadido correctamente."
+msgstr "Candidat %(name)s afegit correctament."
+
+#: apps/candidates/views.py:264 apps/notifications/models.py:10
+#: templates/candidates/candidate_form.html:10
+msgid "Nuevo candidato"
+msgstr "Nou candidat"
+
+#: apps/candidates/views.py:277
+msgid "Candidato actualizado correctamente."
+msgstr "Candidat actualitzat correctament."
+
+#: apps/candidates/views.py:321
+#, python-format
+msgid "Estado actualizado a \"%(status)s\"."
+msgstr "Estat actualitzat a \"%(status)s\"."
+
+#: apps/candidates/views.py:339
+#, python-format
+msgid "La posición \"%(title)s\" se ha cerrado automáticamente."
+msgstr "La posició \"%(title)s\" s'ha tancat automàticament."
+
+#: apps/candidates/views.py:350
+msgid "Notas guardadas."
+msgstr "Notes desades."
+
+#: apps/candidates/views.py:364
+#, python-format
+msgid "Valoración actualizada: %(rating)s/5."
+msgstr "Valoració actualitzada: %(rating)s/5."
+
+#: apps/candidates/views.py:377
+#, python-format
+msgid "Candidato \"%(name)s\" eliminado."
+msgstr "Candidat \"%(name)s\" eliminat."
+
+#: apps/candidates/views.py:491
+msgid "CV subido correctamente, pero hubo un error al analizar con IA."
+msgstr "CV pujat correctament, però hi ha hagut un error en analitzar amb IA."
+
+#: apps/casestudies/forms.py:14
+msgid "Título del case study"
+msgstr "Títol del case study"
+
+#: apps/casestudies/forms.py:15
+msgid "Descripción breve / briefing para IA..."
+msgstr "Descripció breu / briefing per a IA..."
+
+#: apps/casestudies/forms.py:16
+msgid "Contenido completo del case study..."
+msgstr "Contingut complet del case study..."
+
+#: apps/casestudies/forms.py:18
+msgid "Criterios de evaluación para la IA..."
+msgstr "Criteris d'avaluació per a la IA..."
+
+#: apps/casestudies/models.py:17 apps/notifications/models.py:37
+#: templates/casestudies/casestudy_edit.html:25
+#: templates/casestudies/casestudy_form.html:27
+#: templates/casestudies/casestudy_generate.html:58
+msgid "Título"
+msgstr "Títol"
+
+#: apps/casestudies/models.py:18
+msgid "Descripción breve"
+msgstr "Descripció breu"
+
+#: apps/casestudies/models.py:19 templates/casestudies/casestudy_form.html:82
+msgid "Contenido completo"
+msgstr "Contingut complet"
+
+#: apps/casestudies/models.py:20 templates/casestudies/casestudy_form.html:78
+#: templates/casestudies/casestudy_generate.html:53
+#: templates/casestudies/casestudy_send.html:28
+#: templates/positions/position_detail.html:212
+msgid "Generado con IA"
+msgstr "Generat amb IA"
+
+#: apps/casestudies/models.py:21 templates/casestudies/casestudy_edit.html:46
+#: templates/casestudies/casestudy_form.html:38
+#: templates/casestudies/casestudy_generate.html:79
+msgid "Días para entrega"
+msgstr "Dies per al lliurament"
+
+#: apps/casestudies/models.py:22 templates/casestudies/casestudy_edit.html:38
+#: templates/casestudies/casestudy_form.html:87
+#: templates/casestudies/casestudy_generate.html:71
+msgid "Criterios de evaluación"
+msgstr "Criteris d'avaluació"
+
+#: apps/casestudies/models.py:25 apps/casestudies/models.py:45
+#: templates/candidates/candidate_detail.html:317
+#: templates/evaluations/evaluate.html:52
+msgid "Case Study"
+msgstr "Case Study"
+
+#: apps/casestudies/models.py:26 templates/positions/position_detail.html:222
+msgid "Case Studies"
+msgstr "Case Studies"
+
+#: apps/casestudies/models.py:47
+msgid "Fecha de envío"
+msgstr "Data d'enviament"
+
+#: apps/casestudies/models.py:48
+msgid "Fecha límite"
+msgstr "Data límit"
+
+#: apps/casestudies/models.py:49
+msgid "Fecha de entrega"
+msgstr "Data de lliurament"
+
+#: apps/casestudies/models.py:51
+msgid "Archivo de respuesta"
+msgstr "Fitxer de resposta"
+
+#: apps/casestudies/models.py:55
+msgid "Texto extraído"
+msgstr "Text extret"
+
+#: apps/casestudies/models.py:56
+msgid "Notas del candidato"
+msgstr "Notes del candidat"
+
+#: apps/casestudies/models.py:57
+msgid "Notas del evaluador"
+msgstr "Notes de l'avaluador"
+
+#: apps/casestudies/models.py:58 apps/evaluations/models.py:52
+#: templates/evaluations/evaluate.html:10
+msgid "Evaluación IA"
+msgstr "Avaluació IA"
+
+#: apps/casestudies/models.py:59
+msgid "Puntuación"
+msgstr "Puntuació"
+
+#: apps/casestudies/models.py:62
+msgid "Case Study del candidato"
+msgstr "Case Study del candidat"
+
+#: apps/casestudies/models.py:63
+msgid "Case Studies de candidatos"
+msgstr "Case Studies de candidats"
+
+#: apps/casestudies/views.py:50
+#, python-format
+msgid "Caso práctico — %(position)s — %(company)s"
+msgstr "Cas pràctic — %(position)s — %(company)s"
+
+#: apps/casestudies/views.py:51
+#, python-format
+msgid "Hola %(name)s, tienes un caso práctico pendiente. Accede aquí: %(url)s"
+msgstr "Hola %(name)s, tens un cas pràctic pendent. Accedeix aquí: %(url)s"
+
+#: apps/casestudies/views.py:76
+#, python-format
+msgid "Case study \"%(title)s\" creado correctamente."
+msgstr "Case study \"%(title)s\" creat correctament."
+
+#: apps/casestudies/views.py:84
+msgid "Nuevo Case Study"
+msgstr "Nou Case Study"
+
+#: apps/casestudies/views.py:101
+msgid "El caso práctico debe tener título y contenido."
+msgstr "El cas pràctic ha de tenir títol i contingut."
+
+#: apps/casestudies/views.py:136
+#, python-format
+msgid "Caso práctico creado y enviado por email a %(email)s."
+msgstr "Cas pràctic creat i enviat per email a %(email)s."
+
+#: apps/casestudies/views.py:138
+msgid ""
+"Caso práctico creado, pero hubo un error al enviar el email. Puedes "
+"reenviarlo."
+msgstr ""
+"Cas pràctic creat, però hi ha hagut un error en enviar l'email. Pots "
+"reenviar-lo."
+
+#: apps/casestudies/views.py:140
+msgid "Caso práctico creado. El candidato no tiene email, no se pudo enviar."
+msgstr "Cas pràctic creat. El candidat no té email, no s'ha pogut enviar."
+
+#: apps/casestudies/views.py:169
+msgid "Caso práctico actualizado."
+msgstr "Cas pràctic actualitzat."
+
+#: apps/casestudies/views.py:194
+#, python-format
+msgid "Email reenviado a %(email)s."
+msgstr "Email reenviat a %(email)s."
+
+#: apps/casestudies/views.py:196
+msgid "Error al enviar el email."
+msgstr "Error en enviar l'email."
+
+#: apps/casestudies/views.py:215
+msgid "Debes escribir una respuesta o adjuntar un archivo."
+msgstr "Has d'escriure una resposta o adjuntar un fitxer."
+
+#: apps/casestudies/views.py:237
+#, python-format
+msgid "Respuesta registrada para %(name)s."
+msgstr "Resposta registrada per a %(name)s."
+
+#: apps/casestudies/views.py:321
+#, python-format
+msgid "Case study enviado a %(name)s."
+msgstr "Case study enviat a %(name)s."
+
+#: apps/casestudies/views.py:323
+msgid "Este case study ya fue enviado a este candidato."
+msgstr "Aquest case study ja ha estat enviat a aquest candidat."
+
+#: apps/casestudies/views.py:330
+msgid "Enviar Case Study"
+msgstr "Enviar Case Study"
+
+#: apps/chatbot/views.py:20
+msgid "Mensaje inválido"
+msgstr "Missatge invàlid"
+
+#: apps/chatbot/views.py:23
+msgid "El mensaje no puede estar vacío"
+msgstr "El missatge no pot estar buit"
+
+#: apps/core/models.py:28
+msgid "Eliminado en"
+msgstr "Eliminat el"
+
+#: apps/core/views.py:35
+msgid "Credenciales inválidas."
+msgstr "Credencials invàlides."
+
+#: apps/evaluations/models.py:12 templates/candidates/candidate_detail.html:325
+#: templates/evaluations/evaluate.html:61
+#: templates/evaluations/evaluate.html:139
+#: templates/positions/position_detail.html:140
+msgid "Contratar"
+msgstr "Contractar"
+
+#: apps/evaluations/models.py:13 templates/candidates/candidate_detail.html:326
+#: templates/evaluations/evaluate.html:63
+#: templates/evaluations/evaluate.html:140
+msgid "En espera"
+msgstr "En espera"
+
+#: apps/evaluations/models.py:14 templates/candidates/candidate_detail.html:327
+#: templates/evaluations/evaluate.html:65
+#: templates/evaluations/evaluate.html:141
+#: templates/positions/position_detail.html:140
+msgid "Rechazar"
+msgstr "Rebutjar"
+
+#: apps/evaluations/models.py:22
+msgid "Fecha de generación"
+msgstr "Data de generació"
+
+#: apps/evaluations/models.py:23
+msgid "Prompt enviado"
+msgstr "Prompt enviat"
+
+#: apps/evaluations/models.py:24
+msgid "Respuesta completa de Claude"
+msgstr "Resposta completa de Claude"
+
+#: apps/evaluations/models.py:25
+msgid "Puntuación CV"
+msgstr "Puntuació CV"
+
+#: apps/evaluations/models.py:27
+msgid "Puntuación entrevista"
+msgstr "Puntuació entrevista"
+
+#: apps/evaluations/models.py:32
+msgid "Puntuación case study"
+msgstr "Puntuació case study"
+
+#: apps/evaluations/models.py:37
+msgid "Puntuación final"
+msgstr "Puntuació final"
+
+#: apps/evaluations/models.py:42
+msgid "Recomendación"
+msgstr "Recomanació"
+
+#: apps/evaluations/models.py:47 templates/evaluations/evaluate.html:111
+msgid "Resumen ejecutivo"
+msgstr "Resum executiu"
+
+#: apps/evaluations/models.py:48 apps/interviews/models.py:50
+#: templates/candidates/candidate_detail.html:161
+#: templates/candidates/candidate_detail.html:389
+#: templates/candidates/candidate_form.html:95
+#: templates/evaluations/evaluate.html:77
+#: templates/interviews/interview_edit.html:31
+msgid "Puntos fuertes"
+msgstr "Punts forts"
+
+#: apps/evaluations/models.py:49 apps/interviews/models.py:51
+#: templates/candidates/candidate_detail.html:176
+#: templates/candidates/candidate_detail.html:406
+#: templates/candidates/candidate_form.html:109
+#: templates/evaluations/evaluate.html:93
+#: templates/interviews/interview_edit.html:35
+msgid "Puntos débiles"
+msgstr "Punts febles"
+
+#: apps/evaluations/models.py:53
+msgid "Evaluaciones IA"
+msgstr "Avaluacions IA"
+
+#: apps/evaluations/views.py:150
+msgid "Evaluación IA generada correctamente."
+msgstr "Avaluació IA generada correctament."
+
+#: apps/interviews/forms.py:20
+msgid "Lugar o link de videollamada"
+msgstr "Lloc o enllaç de videotrucada"
+
+#: apps/interviews/forms.py:21
+msgid "Notas previas..."
+msgstr "Notes prèvies..."
+
+#: apps/interviews/forms.py:31
+msgid "Notas de la entrevista..."
+msgstr "Notes de l'entrevista..."
+
+#: apps/interviews/forms.py:32
+msgid "Puntos fuertes observados..."
+msgstr "Punts forts observats..."
+
+#: apps/interviews/forms.py:33
+msgid "Puntos débiles observados..."
+msgstr "Punts febles observats..."
+
+#: apps/interviews/models.py:13 templates/candidates/candidate_detail.html:206
+msgid "Programada"
+msgstr "Programada"
+
+#: apps/interviews/models.py:14 templates/candidates/candidate_detail.html:207
+msgid "Realizada"
+msgstr "Realitzada"
+
+#: apps/interviews/models.py:15 templates/candidates/candidate_detail.html:208
+msgid "Cancelada"
+msgstr "Cancel·lada"
+
+#: apps/interviews/models.py:16
+msgid "No se presentó"
+msgstr "No es va presentar"
+
+#: apps/interviews/models.py:29
+msgid "Entrevistador"
+msgstr "Entrevistador"
+
+#: apps/interviews/models.py:31
+msgid "Fecha y hora"
+msgstr "Data i hora"
+
+#: apps/interviews/models.py:32
+msgid "Duración (minutos)"
+msgstr "Durada (minuts)"
+
+#: apps/interviews/models.py:34
+msgid "Lugar o link"
+msgstr "Lloc o enllaç"
+
+#: apps/interviews/models.py:39
+msgid "ID evento Google Calendar"
+msgstr "ID esdeveniment Google Calendar"
+
+#: apps/interviews/models.py:49
+msgid "Notas"
+msgstr "Notes"
+
+#: apps/interviews/models.py:53
+msgid "Puntuación global"
+msgstr "Puntuació global"
+
+#: apps/interviews/models.py:59 apps/notifications/models.py:12
+#: templates/candidates/candidate_detail.html:313
+#: templates/evaluations/evaluate.html:48
+msgid "Entrevista"
+msgstr "Entrevista"
+
+#: apps/interviews/models.py:60 templates/core/help.html:209
+msgid "Entrevistas"
+msgstr "Entrevistes"
+
+#: apps/interviews/views.py:32
+msgid "Entrevista programada correctamente."
+msgstr "Entrevista programada correctament."
+
+#: apps/interviews/views.py:44 templates/candidates/candidate_detail.html:442
+#: templates/interviews/interview_form.html:33
+msgid "Programar entrevista"
+msgstr "Programar entrevista"
+
+#: apps/interviews/views.py:82
+msgid "Entrevista actualizada correctamente."
+msgstr "Entrevista actualitzada correctament."
+
+#: apps/notifications/models.py:11
+msgid "Cambio de estado"
+msgstr "Canvi d'estat"
+
+#: apps/notifications/models.py:13
+#: templates/casestudies/casestudy_generate.html:11
+#: templates/casestudies/casestudy_generate.html:17
+#: templates/portal/case_study.html:7
+msgid "Caso práctico"
+msgstr "Cas pràctic"
+
+#: apps/notifications/models.py:14
+msgid "Evaluación"
+msgstr "Avaluació"
+
+#: apps/notifications/models.py:16
+#: templates/candidates/candidate_detail.html:351
+msgid "Información"
+msgstr "Informació"
+
+#: apps/notifications/models.py:17
+msgid "Sistema"
+msgstr "Sistema"
+
+#: apps/notifications/models.py:23 apps/positions/models.py:27
+#: apps/tenants/models.py:24 apps/tenants/models.py:48
+#: apps/tenants/models.py:85 apps/tenants/models.py:113
+msgid "Empresa"
+msgstr "Empresa"
+
+#: apps/notifications/models.py:29
+msgid "Destinatario"
+msgstr "Destinatari"
+
+#: apps/notifications/models.py:32 templates/positions/position_detail.html:180
+#: templates/positions/position_list.html:62
+#: templates/tenants/company_detail.html:80
+msgid "Tipo"
+msgstr "Tipus"
+
+#: apps/notifications/models.py:38
+msgid "Mensaje"
+msgstr "Missatge"
+
+#: apps/notifications/models.py:39
+msgid "Enlace"
+msgstr "Enllaç"
+
+#: apps/notifications/models.py:40
+msgid "Leída"
+msgstr "Llegida"
+
+#: apps/notifications/models.py:43
+msgid "Notificación"
+msgstr "Notificació"
+
+#: apps/notifications/models.py:44
+#: templates/partials/_notification_dropdown.html:27
+msgid "Notificaciones"
+msgstr "Notificacions"
+
+#: apps/portal/views.py:42
+msgid "Debes escribir tu respuesta o adjuntar un archivo."
+msgstr "Has d'escriure la teva resposta o adjuntar un fitxer."
+
+#: apps/portal/views.py:108
+#, python-format
+msgid "Caso práctico entregado — %(name)s — %(position)s"
+msgstr "Cas pràctic lliurat — %(name)s — %(position)s"
+
+#: apps/portal/views.py:109
+#, python-format
+msgid "%(name)s ha entregado el caso práctico \"%(title)s\"."
+msgstr "%(name)s ha lliurat el cas pràctic \"%(title)s\"."
+
+#: apps/positions/forms.py:21
+msgid "Ej: Senior Backend Developer"
+msgstr "Ex: Senior Backend Developer"
+
+#: apps/positions/forms.py:23
+msgid "Ej: Remoto / Barcelona"
+msgstr "Ex: Remot / Barcelona"
+
+#: apps/positions/forms.py:25
+msgid "Descripción del puesto..."
+msgstr "Descripció del lloc de treball..."
+
+#: apps/positions/forms.py:26
+msgid "Requisitos del puesto..."
+msgstr "Requisits del lloc de treball..."
+
+#: apps/positions/forms.py:27
+msgid "Beneficios, ventajas, jornada, modalidad de trabajo..."
+msgstr "Beneficis, avantatges, jornada, modalitat de treball..."
+
+#: apps/positions/forms.py:28
+msgid "Texto sobre la empresa para la oferta..."
+msgstr "Text sobre l'empresa per a l'oferta..."
+
+#: apps/positions/forms.py:29
+msgid "Ej: 40.000€ - 55.000€"
+msgstr "Ex: 40.000€ - 55.000€"
+
+#: apps/positions/forms.py:39
+msgid "(Sin departamento)"
+msgstr "(Sense departament)"
+
+#: apps/positions/models.py:12
+msgid "Tiempo completo"
+msgstr "Jornada completa"
+
+#: apps/positions/models.py:13
+msgid "Media jornada"
+msgstr "Mitja jornada"
+
+#: apps/positions/models.py:14
+msgid "Freelance"
+msgstr "Freelance"
+
+#: apps/positions/models.py:15
+msgid "Prácticas"
+msgstr "Pràctiques"
+
+#: apps/positions/models.py:18 templates/positions/position_detail.html:43
+#: templates/positions/position_list.html:76
+#: templates/tenants/company_detail.html:94
+msgid "Borrador"
+msgstr "Esborrany"
+
+#: apps/positions/models.py:19 templates/positions/position_detail.html:42
+#: templates/positions/position_detail.html:199
+#: templates/positions/position_list.html:75
+#: templates/tenants/company_detail.html:93
+msgid "Publicada"
+msgstr "Publicada"
+
+#: apps/positions/models.py:20 templates/positions/position_detail.html:44
+#: templates/positions/position_list.html:77
+#: templates/tenants/company_detail.html:95
+msgid "Pausada"
+msgstr "Pausada"
+
+#: apps/positions/models.py:21 templates/positions/position_detail.html:45
+#: templates/positions/position_detail.html:205
+#: templates/positions/position_list.html:78
+#: templates/tenants/company_detail.html:96
+msgid "Cerrada"
+msgstr "Tancada"
+
+#: apps/positions/models.py:29 templates/positions/position_form.html:26
+msgid "Título del puesto"
+msgstr "Títol del lloc de treball"
+
+#: apps/positions/models.py:36 apps/tenants/models.py:119
+#: templates/positions/position_detail.html:169
+#: templates/positions/position_form.html:31
+msgid "Departamento"
+msgstr "Departament"
+
+#: apps/positions/models.py:38 templates/positions/position_detail.html:175
+#: templates/positions/position_form.html:35
+#: templates/positions/position_list.html:61
+msgid "Ubicación"
+msgstr "Ubicació"
+
+#: apps/positions/models.py:40 templates/positions/position_form.html:39
+msgid "Tipo de empleo"
+msgstr "Tipus de feina"
+
+#: apps/positions/models.py:45 templates/positions/position_form.html:82
+msgid "Descripción del puesto"
+msgstr "Descripció del lloc de treball"
+
+#: apps/positions/models.py:46 templates/positions/position_detail.html:96
+#: templates/positions/position_form.html:86
+msgid "Requisitos"
+msgstr "Requisits"
+
+#: apps/positions/models.py:47 templates/positions/position_detail.html:110
+#: templates/positions/position_form.html:94
+msgid "Sobre la empresa"
+msgstr "Sobre l'empresa"
+
+#: apps/positions/models.py:48 templates/positions/position_detail.html:103
+#: templates/positions/position_form.html:90
+msgid "Qué ofrecemos"
+msgstr "Què oferim"
+
+#: apps/positions/models.py:49 templates/positions/position_form.html:43
+msgid "Rango salarial"
+msgstr "Rang salarial"
+
+#: apps/positions/models.py:56
+msgid "Fecha de publicación"
+msgstr "Data de publicació"
+
+#: apps/positions/models.py:57
+msgid "Fecha de cierre"
+msgstr "Data de tancament"
+
+#: apps/positions/models.py:58
+msgid "Usa case study"
+msgstr "Utilitza case study"
+
+#: apps/positions/models.py:59
+msgid "Borrador generado con IA"
+msgstr "Esborrany generat amb IA"
+
+#: apps/positions/models.py:63 templates/core/help.html:121
+#: templates/partials/_sidebar_content.html:78
+#: templates/positions/position_detail.html:10
+#: templates/positions/position_form.html:9
+#: templates/positions/position_list.html:5
+#: templates/positions/position_list.html:9
+#: templates/positions/position_list.html:22
+#: templates/tenants/company_detail.html:70
+#: templates/tenants/department_list.html:31
+msgid "Posiciones"
+msgstr "Posicions"
+
+#: apps/positions/views.py:62
+msgid "Debes tener una empresa asignada para crear posiciones."
+msgstr "Has de tenir una empresa assignada per crear posicions."
+
+#: apps/positions/views.py:71
+#, python-format
+msgid "Posición \"%(title)s\" creada correctamente."
+msgstr "Posició \"%(title)s\" creada correctament."
+
+#: apps/positions/views.py:77 templates/positions/position_list.html:15
+#: templates/positions/position_list.html:90
+#: templates/tenants/company_detail.html:27
+#: templates/tenants/company_detail.html:107
+msgid "Nueva posición"
+msgstr "Nova posició"
+
+#: apps/positions/views.py:89
+msgid "Posición actualizada correctamente."
+msgstr "Posició actualitzada correctament."
+
+#: apps/positions/views.py:96
+#, python-format
+msgid "Editar: %(title)s"
+msgstr "Editar: %(title)s"
+
+#: apps/positions/views.py:140
+msgid "Posición publicada."
+msgstr "Posició publicada."
+
+#: apps/positions/views.py:143
+msgid "Posición pausada."
+msgstr "Posició pausada."
+
+#: apps/positions/views.py:147
+msgid "Posición cerrada."
+msgstr "Posició tancada."
+
+#: apps/positions/views.py:150
+msgid "Posición movida a borrador."
+msgstr "Posició moguda a esborrany."
+
+#: apps/positions/views.py:170
+#, python-format
+msgid "Posición \"%(title)s\" eliminada."
+msgstr "Posició \"%(title)s\" eliminada."
+
+#: apps/positions/views.py:179
+msgid "Sin empresa asignada."
+msgstr "Sense empresa assignada."
+
+#: apps/positions/views.py:184 apps/tenants/views.py:121
+msgid "JSON inválido."
+msgstr "JSON invàlid."
+
+#: apps/tenants/forms.py:17
+msgid "Nombre de la empresa"
+msgstr "Nom de l'empresa"
+
+#: apps/tenants/forms.py:18
+msgid "slug-de-la-empresa"
+msgstr "slug-de-l-empresa"
+
+#: apps/tenants/forms.py:19 apps/tenants/models.py:12
+msgid "Qué hace la empresa, sector, misión..."
+msgstr "Què fa l'empresa, sector, missió..."
+
+#: apps/tenants/forms.py:24
+msgid "Seguro médico, formación, fruta en la oficina, gym..."
+msgstr "Assegurança mèdica, formació, fruita a l'oficina, gym..."
+
+#: apps/tenants/forms.py:25 apps/tenants/models.py:17
+msgid "Ej: L-V 9:00-18:00, jornada flexible..."
+msgstr "Ex: Dl-Dv 9:00-18:00, jornada flexible..."
+
+#: apps/tenants/forms.py:26
+#, python-format
+msgid "Ej: Híbrido 2 días oficina, 100% remoto..."
+msgstr "Ex: Híbrid 2 dies oficina, 100%% remot..."
+
+#: apps/tenants/forms.py:27
+msgid "Ej: Calle Mayor 10, Barcelona"
+msgstr "Ex: Carrer Major 10, Barcelona"
+
+#: apps/tenants/forms.py:28
+msgid "Valores de la empresa, ambiente de trabajo..."
+msgstr "Valors de l'empresa, ambient de treball..."
+
+#: apps/tenants/forms.py:37
+msgid "Ej: Ingeniería"
+msgstr "Ex: Enginyeria"
+
+#: apps/tenants/forms.py:38
+msgid "Descripción del departamento..."
+msgstr "Descripció del departament..."
+
+#: apps/tenants/models.py:11 templates/tenants/company_form.html:57
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/tenants/models.py:12 apps/tenants/models.py:116
+#: templates/positions/position_detail.html:89
+#: templates/tenants/department_form.html:26
+#: templates/tenants/department_list.html:30
+msgid "Descripción"
+msgstr "Descripció"
+
+#: apps/tenants/models.py:13 templates/tenants/company_form.html:73
+msgid "Logo"
+msgstr "Logo"
+
+#: apps/tenants/models.py:14 templates/tenants/company_form.html:69
+msgid "Web corporativa"
+msgstr "Web corporativa"
+
+#: apps/tenants/models.py:16 templates/tenants/company_form.html:86
+msgid "Beneficios y ventajas"
+msgstr "Beneficis i avantatges"
+
+#: apps/tenants/models.py:16
+msgid ""
+"Qué ofrece la empresa a los trabajadores: seguro, formación, fruta, gym..."
+msgstr ""
+"Què ofereix l'empresa als treballadors: assegurança, formació, fruita, gym..."
+
+#: apps/tenants/models.py:17 templates/tenants/company_form.html:92
+msgid "Jornada laboral"
+msgstr "Jornada laboral"
+
+#: apps/tenants/models.py:18
+msgid "Política de trabajo remoto"
+msgstr "Política de treball remot"
+
+#: apps/tenants/models.py:18
+#, python-format
+msgid "Ej: 100% remoto, híbrido 3 días oficina, presencial..."
+msgstr "Ex: 100%% remot, híbrid 3 dies oficina, presencial..."
+
+#: apps/tenants/models.py:19 templates/tenants/company_form.html:101
+msgid "Ubicación oficina"
+msgstr "Ubicació oficina"
+
+#: apps/tenants/models.py:19
+msgid "Dirección o zona de la oficina principal"
+msgstr "Adreça o zona de l'oficina principal"
+
+#: apps/tenants/models.py:20 templates/tenants/company_form.html:105
+msgid "Cultura y valores"
+msgstr "Cultura i valors"
+
+#: apps/tenants/models.py:20
+msgid "Valores de la empresa, ambiente de trabajo, equipo..."
+msgstr "Valors de l'empresa, ambient de treball, equip..."
+
+#: apps/tenants/models.py:21
+msgid "Activa"
+msgstr "Activa"
+
+#: apps/tenants/models.py:25 templates/core/help.html:77
+#: templates/tenants/company_detail.html:9
+#: templates/tenants/company_form.html:9 templates/tenants/company_list.html:5
+#: templates/tenants/company_list.html:9 templates/tenants/company_list.html:21
+msgid "Empresas"
+msgstr "Empreses"
+
+#: apps/tenants/models.py:36 apps/tenants/models.py:73
+msgid "Admin"
+msgstr "Admin"
+
+#: apps/tenants/models.py:37 apps/tenants/models.py:74
+msgid "Recruiter"
+msgstr "Recruiter"
+
+#: apps/tenants/models.py:51 apps/tenants/models.py:88
+msgid "Rol"
+msgstr "Rol"
+
+#: apps/tenants/models.py:58
+msgid "Perfil de usuario"
+msgstr "Perfil d'usuari"
+
+#: apps/tenants/models.py:59
+msgid "Perfiles de usuario"
+msgstr "Perfils d'usuari"
+
+#: apps/tenants/models.py:95
+msgid "Membresía de empresa"
+msgstr "Membresía d'empresa"
+
+#: apps/tenants/models.py:96
+msgid "Membresías de empresa"
+msgstr "Membresies d'empresa"
+
+#: apps/tenants/models.py:120 templates/partials/_sidebar_content.html:71
+#: templates/tenants/department_form.html:8
+#: templates/tenants/department_list.html:4
+#: templates/tenants/department_list.html:8
+#: templates/tenants/department_list.html:20
+msgid "Departamentos"
+msgstr "Departaments"
+
+#: apps/tenants/views.py:63
+#, python-format
+msgid "Empresa \"%(name)s\" creada correctamente."
+msgstr "Empresa \"%(name)s\" creada correctament."
+
+#: apps/tenants/views.py:69 templates/tenants/company_list.html:15
+#: templates/tenants/company_list.html:57
+msgid "Nueva empresa"
+msgstr "Nova empresa"
+
+#: apps/tenants/views.py:81
+msgid "Empresa actualizada correctamente."
+msgstr "Empresa actualitzada correctament."
+
+#: apps/tenants/views.py:158
+#, python-format
+msgid "Empresa \"%(name)s\" eliminada."
+msgstr "Empresa \"%(name)s\" eliminada."
+
+#: apps/tenants/views.py:170
+msgid "Empresa activada correctamente."
+msgstr "Empresa activada correctament."
+
+#: apps/tenants/views.py:172
+msgid "Empresa desactivada correctamente."
+msgstr "Empresa desactivada correctament."
+
+#: apps/tenants/views.py:207
+#, python-format
+msgid "Departamento \"%(name)s\" creado correctamente."
+msgstr "Departament \"%(name)s\" creat correctament."
+
+#: apps/tenants/views.py:213 templates/tenants/department_list.html:14
+#: templates/tenants/department_list.html:59
+msgid "Nuevo departamento"
+msgstr "Nou departament"
+
+#: apps/tenants/views.py:225
+msgid "Departamento actualizado correctamente."
+msgstr "Departament actualitzat correctament."
+
+#: apps/tenants/views.py:243
+#, python-format
+msgid "Departamento \"%(name)s\" eliminado."
+msgstr "Departament \"%(name)s\" eliminat."
+
+#: config/settings.py:101
+msgid "Español"
+msgstr "Espanyol"
+
+#: config/settings.py:102
+msgid "English"
+msgstr "Anglès"
+
+#: config/settings.py:103
+msgid "Català"
+msgstr "Català"
+
+#: templates/base.html:7 templates/registration/login.html:7
+#: templates/registration/login.html:13
+msgid "Pekata ATS"
+msgstr "Pekata ATS"
+
+#: templates/base.html:75 templates/candidates/candidate_detail.html:9
+#: templates/candidates/candidate_edit.html:7
+#: templates/candidates/candidate_form.html:8
+#: templates/candidates/candidate_list.html:8
+#: templates/casestudies/casestudy_detail.html:7
+#: templates/casestudies/casestudy_edit.html:7
+#: templates/casestudies/casestudy_form.html:8
+#: templates/casestudies/casestudy_generate.html:8
+#: templates/casestudies/casestudy_send.html:7 templates/core/help.html:9
+#: templates/evaluations/evaluate.html:8
+#: templates/interviews/interview_edit.html:8
+#: templates/interviews/interview_form.html:8
+#: templates/positions/position_detail.html:9
+#: templates/positions/position_form.html:8
+#: templates/positions/position_list.html:8
+#: templates/tenants/company_detail.html:8
+#: templates/tenants/company_form.html:8 templates/tenants/company_list.html:8
+#: templates/tenants/department_form.html:7
+#: templates/tenants/department_list.html:7
+msgid "Inicio"
+msgstr "Inici"
+
+#: templates/candidates/candidate_detail.html:15
+#: templates/candidates/candidate_detail.html:19
+msgid "Eliminar candidato"
+msgstr "Eliminar candidat"
+
+#: templates/candidates/candidate_detail.html:15
+#, python-format
+msgid "¿Eliminar al candidato «%(name)s»? Se ocultará de todas las vistas."
+msgstr "Eliminar el candidat «%(name)s»? S'ocultarà de totes les vistes."
+
+#: templates/candidates/candidate_detail.html:24
+#: templates/candidates/candidate_detail.html:211
+#: templates/candidates/candidate_detail.html:251
+#: templates/candidates/candidate_edit.html:10
+#: templates/casestudies/casestudy_detail.html:25
+#: templates/positions/position_form.html:11
+#: templates/tenants/company_detail.html:23
+#: templates/tenants/department_form.html:9
+#: templates/tenants/department_list.html:45
+msgid "Editar"
+msgstr "Editar"
+
+#: templates/candidates/candidate_detail.html:51
+msgid "Estado:"
+msgstr "Estat:"
+
+#: templates/candidates/candidate_detail.html:63
+msgid "Valoración:"
+msgstr "Valoració:"
+
+#: templates/candidates/candidate_detail.html:75
+#, python-format
+msgid "Añadido %(date)s"
+msgstr "Afegit %(date)s"
+
+#: templates/candidates/candidate_detail.html:84
+msgid "Currículum"
+msgstr "Currículum"
+
+#: templates/candidates/candidate_detail.html:86
+msgid "Descargar PDF"
+msgstr "Descarregar PDF"
+
+#: templates/candidates/candidate_detail.html:89
+msgid "Cambiar CV"
+msgstr "Canviar CV"
+
+#: templates/candidates/candidate_detail.html:89
+msgid "Subir CV"
+msgstr "Pujar CV"
+
+#: templates/candidates/candidate_detail.html:101
+msgid "Subiendo y analizando CV con IA..."
+msgstr "Pujant i analitzant CV amb IA..."
+
+#: templates/candidates/candidate_detail.html:122
+msgid "Haz clic en la imagen para abrir el PDF completo"
+msgstr "Fes clic a la imatge per obrir el PDF complet"
+
+#: templates/candidates/candidate_detail.html:131
+msgid "No se ha subido CV para este candidato."
+msgstr "No s'ha pujat CV per a aquest candidat."
+
+#: templates/candidates/candidate_detail.html:132
+msgid ""
+"Usa el botón \"Subir CV\" para añadir uno. La IA lo analizará "
+"automáticamente."
+msgstr ""
+"Utilitza el botó \"Pujar CV\" per afegir-ne un. La IA l'analitzarà "
+"automàticament."
+
+#: templates/candidates/candidate_detail.html:143
+#: templates/candidates/candidate_detail.html:377
+#: templates/candidates/candidate_form.html:81
+msgid "Análisis IA"
+msgstr "Anàlisi IA"
+
+#: templates/candidates/candidate_detail.html:144
+#: templates/candidates/candidate_detail.html:294
+#: templates/candidates/candidate_detail.html:378
+#: templates/casestudies/casestudy_detail.html:43
+#: templates/positions/position_detail.html:211
+#: templates/positions/position_detail.html:231
+msgid "IA"
+msgstr "IA"
+
+#: templates/candidates/candidate_detail.html:196
+#, python-format
+msgid "Entrevistas (%(count)s)"
+msgstr "Entrevistes (%(count)s)"
+
+#: templates/candidates/candidate_detail.html:197
+msgid "+ Programar"
+msgstr "+ Programar"
+
+#: templates/candidates/candidate_detail.html:209
+msgid "No show"
+msgstr "No show"
+
+#: templates/candidates/candidate_detail.html:215
+msgid "Sin asignar"
+msgstr "Sense assignar"
+
+#: templates/candidates/candidate_detail.html:222
+#: templates/candidates/candidate_detail.html:276
+#: templates/casestudies/casestudy_detail.html:85
+msgid "Puntuación:"
+msgstr "Puntuació:"
+
+#: templates/candidates/candidate_detail.html:228
+msgid "Sin entrevistas programadas."
+msgstr "Sense entrevistes programades."
+
+#: templates/candidates/candidate_detail.html:235
+#, python-format
+msgid "Casos prácticos (%(count)s)"
+msgstr "Casos pràctics (%(count)s)"
+
+#: templates/candidates/candidate_detail.html:236
+msgid "+ Generar caso práctico"
+msgstr "+ Generar cas pràctic"
+
+#: templates/candidates/candidate_detail.html:245
+#: templates/casestudies/casestudy_detail.html:19
+#: templates/casestudies/casestudy_detail.html:61
+msgid "Entregado"
+msgstr "Lliurat"
+
+#: templates/candidates/candidate_detail.html:246
+#: templates/casestudies/casestudy_detail.html:21
+msgid "Enviado"
+msgstr "Enviat"
+
+#: templates/candidates/candidate_detail.html:247
+#: templates/casestudies/casestudy_detail.html:23
+#: templates/positions/position_detail.html:317
+msgid "Pendiente"
+msgstr "Pendent"
+
+#: templates/candidates/candidate_detail.html:250
+msgid "Ver"
+msgstr "Veure"
+
+#: templates/candidates/candidate_detail.html:253
+msgid "Subir respuesta"
+msgstr "Pujar resposta"
+
+#: templates/candidates/candidate_detail.html:256
+msgid "Reenviar email"
+msgstr "Reenviar email"
+
+#: templates/candidates/candidate_detail.html:262
+#: templates/casestudies/casestudy_detail.html:33
+#, python-format
+msgid "Enviado %(date)s"
+msgstr "Enviat %(date)s"
+
+#: templates/candidates/candidate_detail.html:263
+#: templates/casestudies/casestudy_detail.html:34
+#, python-format
+msgid "Límite: %(date)s"
+msgstr "Límit: %(date)s"
+
+#: templates/candidates/candidate_detail.html:264
+#, python-format
+msgid "Entregado %(date)s"
+msgstr "Lliurat %(date)s"
+
+#: templates/candidates/candidate_detail.html:268
+msgid "Enlace portal:"
+msgstr "Enllaç portal:"
+
+#: templates/candidates/candidate_detail.html:272
+msgid "Copiado!"
+msgstr "Copiat!"
+
+#: templates/candidates/candidate_detail.html:272
+msgid "Copiar"
+msgstr "Copiar"
+
+#: templates/candidates/candidate_detail.html:285
+msgid "Sin casos prácticos asignados."
+msgstr "Sense casos pràctics assignats."
+
+#: templates/candidates/candidate_detail.html:293
+#, python-format
+msgid "Evaluación IA (%(count)s)"
+msgstr "Avaluació IA (%(count)s)"
+
+#: templates/candidates/candidate_detail.html:296
+#: templates/evaluations/evaluate.html:28
+msgid "Generar evaluación"
+msgstr "Generar avaluació"
+
+#: templates/candidates/candidate_detail.html:305
+#: templates/evaluations/evaluate.html:40
+msgid "Global"
+msgstr "Global"
+
+#: templates/candidates/candidate_detail.html:309
+#: templates/evaluations/evaluate.html:44
+msgid "CV"
+msgstr "CV"
+
+#: templates/candidates/candidate_detail.html:324
+#: templates/evaluations/evaluate.html:59
+msgid "Recomendación:"
+msgstr "Recomanació:"
+
+#: templates/candidates/candidate_detail.html:336
+#: templates/evaluations/evaluate.html:124
+#, python-format
+msgid "Generada el %(date)s"
+msgstr "Generada el %(date)s"
+
+#: templates/candidates/candidate_detail.html:341
+msgid "Sin evaluaciones IA. Haz clic en \"Generar evaluación\" para crear una."
+msgstr "Sense avaluacions IA. Fes clic a \"Generar avaluació\" per crear-ne una."
+
+#: templates/candidates/candidate_detail.html:366
+msgid "Añadido"
+msgstr "Afegit"
+
+#: templates/candidates/candidate_detail.html:428
+msgid "Escribe tus notas aquí..."
+msgstr "Escriu les teves notes aquí..."
+
+#: templates/candidates/candidate_detail.html:430
+msgid "Guardar notas"
+msgstr "Desar notes"
+
+#: templates/candidates/candidate_detail.html:437
+msgid "Acciones rápidas"
+msgstr "Accions ràpides"
+
+#: templates/candidates/candidate_detail.html:447
+msgid "Generar caso práctico"
+msgstr "Generar cas pràctic"
+
+#: templates/candidates/candidate_detail.html:452
+msgid "Generar evaluación IA"
+msgstr "Generar avaluació IA"
+
+#: templates/candidates/candidate_edit.html:37
+msgid "Valoración (1-5)"
+msgstr "Valoració (1-5)"
+
+#: templates/candidates/candidate_edit.html:49
+#: templates/candidates/candidate_form.html:162
+#: templates/casestudies/casestudy_edit.html:55
+#: templates/casestudies/casestudy_form.html:95
+#: templates/casestudies/casestudy_generate.html:94
+#: templates/casestudies/casestudy_send.html:37
+#: templates/interviews/interview_edit.html:47
+#: templates/interviews/interview_form.html:32
+#: templates/partials/_confirm_modal.html:50
+#: templates/positions/position_detail.html:351
+#: templates/positions/position_form.html:112
+#: templates/tenants/company_form.html:114
+#: templates/tenants/department_form.html:35
+msgid "Cancelar"
+msgstr "Cancel·lar"
+
+#: templates/candidates/candidate_edit.html:50
+#: templates/interviews/interview_edit.html:48
+msgid "Guardar"
+msgstr "Desar"
+
+#: templates/candidates/candidate_form.html:16
+#: templates/casestudies/casestudy_form.html:16
+#, python-format
+msgid ""
+"Para la posición: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+msgstr ""
+"Per a la posició: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+
+#: templates/candidates/candidate_form.html:30
+msgid "CV y origen"
+msgstr "CV i origen"
+
+#: templates/candidates/candidate_form.html:40
+msgid ""
+"Solo archivos PDF, máximo 10MB. Al subir un CV, la IA extraerá los datos "
+"automáticamente."
+msgstr ""
+"Només fitxers PDF, màxim 10MB. En pujar un CV, la IA n'extreurà les dades "
+"automàticament."
+
+#: templates/candidates/candidate_form.html:49
+msgid "Analizando CV con IA... Esto puede tardar unos segundos."
+msgstr "Analitzant CV amb IA... Això pot trigar uns segons."
+
+#: templates/candidates/candidate_form.html:64
+msgid "CV analizado correctamente. Los datos han sido autocompletados."
+msgstr "CV analitzat correctament. Les dades s'han autocompletat."
+
+#: templates/candidates/candidate_form.html:128
+msgid "Datos personales"
+msgstr "Dades personals"
+
+#: templates/candidates/candidate_form.html:130
+msgid "Autocompletado por IA"
+msgstr "Autocompletat per IA"
+
+#: templates/candidates/candidate_form.html:167
+#: templates/positions/position_detail.html:32
+msgid "Añadir candidato"
+msgstr "Afegir candidat"
+
+#: templates/candidates/candidate_list.html:15
+#, python-format
+msgid "Base de datos de todos los candidatos de %(company)s."
+msgstr "Base de dades de tots els candidats de %(company)s."
+
+#: templates/candidates/candidate_list.html:24
+msgid "Buscar por nombre o email..."
+msgstr "Cercar per nom o email..."
+
+#: templates/candidates/candidate_list.html:30
+msgid "Todos los estados"
+msgstr "Tots els estats"
+
+#: templates/candidates/candidate_list.html:38
+#: templates/positions/position_list.html:44
+msgid "Todos los departamentos"
+msgstr "Tots els departaments"
+
+#: templates/candidates/candidate_list.html:46
+msgid "Todas las posiciones"
+msgstr "Totes les posicions"
+
+#: templates/candidates/candidate_list.html:51
+msgid "Filtrar"
+msgstr "Filtrar"
+
+#: templates/candidates/candidate_list.html:53
+msgid "Limpiar"
+msgstr "Netejar"
+
+#: templates/candidates/candidate_list.html:66
+msgid "Encaje IA"
+msgstr "Encaix IA"
+
+#: templates/candidates/candidate_list.html:68
+#: templates/positions/position_list.html:64
+#: templates/tenants/company_detail.html:82
+msgid "Fecha"
+msgstr "Data"
+
+#: templates/candidates/candidate_list.html:117
+msgid "Sin candidatos"
+msgstr "Sense candidats"
+
+#: templates/candidates/candidate_list.html:117
+msgid "Aún no hay candidatos que coincidan con tu búsqueda."
+msgstr "Encara no hi ha candidats que coincideixin amb la teva cerca."
+
+#: templates/casestudies/casestudy_detail.html:29
+#, python-format
+msgid ""
+"Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Posición: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+msgstr ""
+"Candidat: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Posició: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+
+#: templates/casestudies/casestudy_detail.html:41
+msgid "Enunciado del caso"
+msgstr "Enunciat del cas"
+
+#: templates/casestudies/casestudy_detail.html:51
+msgid "Criterios de evaluación (interno)"
+msgstr "Criteris d'avaluació (intern)"
+
+#: templates/casestudies/casestudy_detail.html:60
+msgid "Respuesta del candidato"
+msgstr "Resposta del candidat"
+
+#: templates/casestudies/casestudy_detail.html:63
+#, python-format
+msgid "Entregado el %(date)s a las %(time)s"
+msgstr "Lliurat el %(date)s a les %(time)s"
+
+#: templates/casestudies/casestudy_detail.html:75
+msgid "Descargar archivo adjunto"
+msgstr "Descarregar fitxer adjunt"
+
+#: templates/casestudies/casestudy_detail.html:81
+msgid "Notas del candidato:"
+msgstr "Notes del candidat:"
+
+#: templates/casestudies/casestudy_detail.html:94
+msgid "Subir respuesta del candidato"
+msgstr "Pujar resposta del candidat"
+
+#: templates/casestudies/casestudy_detail.html:96
+msgid ""
+"Si el candidato te ha enviado la respuesta por email u otro medio, puedes "
+"subirla aquí manualmente."
+msgstr ""
+"Si el candidat t'ha enviat la resposta per email o un altre mitjà, pots "
+"pujar-la aquí manualment."
+
+#: templates/casestudies/casestudy_detail.html:101
+msgid "Respuesta en texto"
+msgstr "Resposta en text"
+
+#: templates/casestudies/casestudy_detail.html:104
+msgid "Pega aquí la respuesta del candidato..."
+msgstr "Enganxa aquí la resposta del candidat..."
+
+#: templates/casestudies/casestudy_detail.html:108
+msgid "Archivo adjunto (opcional)"
+msgstr "Fitxer adjunt (opcional)"
+
+#: templates/casestudies/casestudy_detail.html:111
+msgid "PDF, Word, PowerPoint, Excel o ZIP."
+msgstr "PDF, Word, PowerPoint, Excel o ZIP."
+
+#: templates/casestudies/casestudy_detail.html:115
+msgid "Notas internas (opcional)"
+msgstr "Notes internes (opcional)"
+
+#: templates/casestudies/casestudy_detail.html:118
+msgid "Ej: Recibido por email el 15/02..."
+msgstr "Ex: Rebut per email el 15/02..."
+
+#: templates/casestudies/casestudy_detail.html:122
+msgid "Registrar respuesta"
+msgstr "Registrar resposta"
+
+#: templates/casestudies/casestudy_detail.html:128
+#: templates/evaluations/evaluate.html:161
+msgid "Volver al candidato"
+msgstr "Tornar al candidat"
+
+#: templates/casestudies/casestudy_edit.html:9
+msgid "Editar caso práctico"
+msgstr "Editar cas pràctic"
+
+#: templates/casestudies/casestudy_edit.html:16
+#, python-format
+msgid ""
+"Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"        — Posición: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+msgstr ""
+"Candidat: <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"        — Posició: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+
+#: templates/casestudies/casestudy_edit.html:31
+#: templates/casestudies/casestudy_generate.html:64
+msgid "Contenido del caso práctico"
+msgstr "Contingut del cas pràctic"
+
+#: templates/casestudies/casestudy_edit.html:34
+msgid "Este es el contenido que verá el candidato."
+msgstr "Aquest és el contingut que veurà el candidat."
+
+#: templates/casestudies/casestudy_edit.html:41
+msgid "Criterios internos (no los verá el candidato)."
+msgstr "Criteris interns (no els veurà el candidat)."
+
+#: templates/casestudies/casestudy_edit.html:57
+#: templates/positions/position_form.html:115
+#: templates/tenants/company_form.html:117
+#: templates/tenants/department_form.html:38
+msgid "Guardar cambios"
+msgstr "Desar canvis"
+
+#: templates/casestudies/casestudy_form.html:24
+msgid "Tu idea"
+msgstr "La teva idea"
+
+#: templates/casestudies/casestudy_form.html:25
+msgid ""
+"Escribe el título y una descripción breve de lo que quieres evaluar. La IA "
+"generará el case study completo."
+msgstr ""
+"Escriu el títol i una descripció breu del que vols avaluar. La IA "
+"generarà el case study complet."
+
+#: templates/casestudies/casestudy_form.html:32
+msgid "Descripción breve / Briefing"
+msgstr "Descripció breu / Briefing"
+
+#: templates/casestudies/casestudy_form.html:34
+msgid "Describe qué quieres evaluar, el contexto del caso, los objetivos..."
+msgstr "Descriu què vols avaluar, el context del cas, els objectius..."
+
+#: templates/casestudies/casestudy_form.html:61
+msgid "Generando case study..."
+msgstr "Generant case study..."
+
+#: templates/casestudies/casestudy_form.html:61
+#: templates/positions/position_form.html:68
+#: templates/tenants/company_form.html:32
+msgid "Mejorar con IA"
+msgstr "Millorar amb IA"
+
+#: templates/casestudies/casestudy_form.html:76
+msgid "Contenido del case study"
+msgstr "Contingut del case study"
+
+#: templates/casestudies/casestudy_form.html:84
+msgid "Este es el contenido que verá el candidato. Puedes editarlo libremente."
+msgstr "Aquest és el contingut que veurà el candidat. Pots editar-lo lliurement."
+
+#: templates/casestudies/casestudy_form.html:89
+msgid ""
+"Criterios que usará la IA para evaluar las respuestas de los candidatos."
+msgstr ""
+"Criteris que farà servir la IA per avaluar les respostes dels candidats."
+
+#: templates/casestudies/casestudy_form.html:96
+#: templates/casestudies/casestudy_send.html:44
+msgid "Crear case study"
+msgstr "Crear case study"
+
+#: templates/casestudies/casestudy_generate.html:19
+#, python-format
+msgid ""
+"Para <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Posición: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+msgstr ""
+"Per a <span class=\"font-medium text-gray-700\">%(name)s</span>\n"
+"            — Posició: <span class=\"font-medium text-gray-700\">%(pos)s</"
+"span>"
+
+#: templates/casestudies/casestudy_generate.html:30
+msgid "Generando caso práctico con IA..."
+msgstr "Generant cas pràctic amb IA..."
+
+#: templates/casestudies/casestudy_generate.html:31
+msgid "Analizando el perfil del candidato y los requisitos del puesto."
+msgstr "Analitzant el perfil del candidat i els requisits del lloc de treball."
+
+#: templates/casestudies/casestudy_generate.html:40
+msgid "Reintentar"
+msgstr "Reintentar"
+
+#: templates/casestudies/casestudy_generate.html:50
+msgid "Caso generado"
+msgstr "Cas generat"
+
+#: templates/casestudies/casestudy_generate.html:67
+msgid ""
+"Este es el contenido que verá el candidato. Puedes editarlo antes de enviar."
+msgstr ""
+"Aquest és el contingut que veurà el candidat. Pots editar-lo abans d'enviar."
+
+#: templates/casestudies/casestudy_generate.html:74
+msgid ""
+"Criterios internos para evaluar la respuesta (no los verá el candidato)."
+msgstr ""
+"Criteris interns per avaluar la resposta (no els veurà el candidat)."
+
+#: templates/casestudies/casestudy_generate.html:90
+msgid "Regenerar"
+msgstr "Regenerar"
+
+#: templates/casestudies/casestudy_generate.html:96
+msgid "Guardar y enviar"
+msgstr "Desar i enviar"
+
+#: templates/casestudies/casestudy_send.html:15
+#, python-format
+msgid "Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span>"
+msgstr "Candidat: <span class=\"font-medium text-gray-700\">%(name)s</span>"
+
+#: templates/casestudies/casestudy_send.html:21
+msgid "Selecciona el case study a enviar:"
+msgstr "Selecciona el case study a enviar:"
+
+#: templates/casestudies/casestudy_send.html:28
+#, python-format
+msgid "%(days)s días de plazo"
+msgstr "%(days)s dies de termini"
+
+#: templates/casestudies/casestudy_send.html:38
+msgid "Enviar case study"
+msgstr "Enviar case study"
+
+#: templates/casestudies/casestudy_send.html:43
+msgid "No hay case studies definidos para esta posición."
+msgstr "No hi ha case studies definits per a aquesta posició."
+
+#: templates/core/help.html:4 templates/core/help.html:12
+#: templates/partials/_chatbot_widget.html:82
+#: templates/partials/_sidebar_content.html:93
+msgid "Ayuda"
+msgstr "Ajuda"
+
+#: templates/core/help.html:20
+msgid "Centro de Ayuda"
+msgstr "Centre d'Ajuda"
+
+#: templates/core/help.html:21
+msgid ""
+"Guia completa de Pekata ATS. Haz clic en cada seccion para ver las preguntas "
+"frecuentes y tutoriales."
+msgstr ""
+"Guia completa de Pekata ATS. Fes clic a cada secció per veure les preguntes "
+"freqüents i tutorials."
+
+#: templates/core/help.html:33
+msgid "Primeros pasos"
+msgstr "Primers passos"
+
+#: templates/core/help.html:41
+msgid "Que es Pekata ATS?"
+msgstr "Què és Pekata ATS?"
+
+#: templates/core/help.html:45
+msgid ""
+"Pekata es un sistema de seguimiento de candidatos (ATS) con inteligencia "
+"artificial integrada. Te ayuda a gestionar todo el proceso de seleccion: "
+"desde publicar posiciones hasta evaluar candidatos con IA."
+msgstr ""
+"Pekata és un sistema de seguiment de candidats (ATS) amb intel·ligència "
+"artificial integrada. T'ajuda a gestionar tot el procés de selecció: "
+"des de publicar posicions fins a avaluar candidats amb IA."
+
+#: templates/core/help.html:50
+msgid "Cual es el flujo general del sistema?"
+msgstr "Quin és el flux general del sistema?"
+
+#: templates/core/help.html:54
+msgid ""
+"El flujo principal es: <strong>Empresa</strong> &rarr; <strong>Posicion</"
+"strong> &rarr; <strong>Candidato</strong> &rarr; <strong>Evaluacion</"
+"strong>. Primero creas o seleccionas una empresa, luego defines posiciones "
+"abiertas, agregas candidatos a esas posiciones, y finalmente evaluas a los "
+"candidatos con entrevistas, casos practicos y evaluacion IA."
+msgstr ""
+"El flux principal és: <strong>Empresa</strong> &rarr; <strong>Posició</"
+"strong> &rarr; <strong>Candidat</strong> &rarr; <strong>Avaluació</"
+"strong>. Primer crees o selecciones una empresa, després defineixes posicions "
+"obertes, afegeixes candidats a aquestes posicions, i finalment avalues els "
+"candidats amb entrevistes, casos pràctics i avaluació IA."
+
+#: templates/core/help.html:59
+msgid "Como empiezo a usar el sistema?"
+msgstr "Com començo a utilitzar el sistema?"
+
+#: templates/core/help.html:63
+msgid ""
+"1. Ve a <strong>Empresas</strong> y crea tu primera empresa con su "
+"informacion basica. 2. Dentro de la empresa, crea una <strong>Posicion</"
+"strong> abierta. 3. Agrega <strong>Candidatos</strong> a esa posicion. 4. "
+"Usa las herramientas de evaluacion (entrevistas, casos practicos, evaluacion "
+"IA) para seleccionar al mejor candidato."
+msgstr ""
+"1. Ves a <strong>Empreses</strong> i crea la teva primera empresa amb la seva "
+"informació bàsica. 2. Dins de l'empresa, crea una <strong>Posició</"
+"strong> oberta. 3. Afegeix <strong>Candidats</strong> a aquesta posició. 4. "
+"Utilitza les eines d'avaluació (entrevistes, casos pràctics, avaluació "
+"IA) per seleccionar el millor candidat."
+
+#: templates/core/help.html:85
+msgid "Como creo o edito una empresa?"
+msgstr "Com creo o edito una empresa?"
+
+#: templates/core/help.html:89
+msgid ""
+"Desde la pagina de <strong>Empresas</strong>, haz clic en <strong>\"Nueva "
+"empresa\"</strong>. Rellena el nombre, sector, descripcion y otros datos. "
+"Puedes usar el boton <strong>\"Mejorar con IA\"</strong> para que la IA "
+"complete automaticamente la descripcion de la empresa a partir del nombre y "
+"sector. Para editar, entra al dashboard de la empresa y haz clic en "
+"<strong>\"Editar\"</strong>."
+msgstr ""
+"Des de la pàgina d'<strong>Empreses</strong>, fes clic a <strong>\"Nova "
+"empresa\"</strong>. Omple el nom, sector, descripció i altres dades. "
+"Pots fer servir el botó <strong>\"Millorar amb IA\"</strong> perquè la IA "
+"completi automàticament la descripció de l'empresa a partir del nom i "
+"sector. Per editar, entra al dashboard de l'empresa i fes clic a "
+"<strong>\"Editar\"</strong>."
+
+#: templates/core/help.html:94
+msgid "Que son los KPIs del dashboard?"
+msgstr "Què són els KPIs del dashboard?"
+
+#: templates/core/help.html:98
+msgid ""
+"El dashboard de cada empresa muestra metricas clave: <strong>Posiciones "
+"activas</strong> (cuantas posiciones estan publicadas), <strong>Candidatos "
+"en proceso</strong> (cuantos candidatos estan siendo evaluados), "
+"<strong>Entrevistas programadas</strong> y <strong>Evaluaciones completadas</"
+"strong>. Estos KPIs te dan una vision rapida del estado de la seleccion."
+msgstr ""
+"El dashboard de cada empresa mostra mètriques clau: <strong>Posicions "
+"actives</strong> (quantes posicions estan publicades), <strong>Candidats "
+"en procés</strong> (quants candidats estan sent avaluats), "
+"<strong>Entrevistes programades</strong> i <strong>Avaluacions completades</"
+"strong>. Aquests KPIs et donen una visió ràpida de l'estat de la selecció."
+
+#: templates/core/help.html:103
+msgid "Puedo gestionar varias empresas?"
+msgstr "Puc gestionar diverses empreses?"
+
+#: templates/core/help.html:107
+msgid ""
+"Si. Pekata es multi-empresa: puedes crear tantas empresas como necesites. "
+"Desde el menu <strong>Empresas</strong> del sidebar puedes ver todas tus "
+"empresas y cambiar entre ellas. Cada empresa tiene sus propias posiciones, "
+"candidatos y evaluaciones de forma independiente."
+msgstr ""
+"Sí. Pekata és multi-empresa: pots crear tantes empreses com necessitis. "
+"Des del menú <strong>Empreses</strong> del sidebar pots veure totes les teves "
+"empreses i canviar entre elles. Cada empresa té les seves pròpies posicions, "
+"candidats i avaluacions de forma independent."
+
+#: templates/core/help.html:129
+msgid "Como creo una posicion?"
+msgstr "Com creo una posició?"
+
+#: templates/core/help.html:133
+msgid ""
+"Desde el dashboard de la empresa, haz clic en <strong>\"Nueva posicion\"</"
+"strong>. Completa el titulo, departamento, tipo de contrato, ubicacion y "
+"descripcion. Puedes usar <strong>\"Generar con IA\"</strong> para que la IA "
+"cree automaticamente la descripcion del puesto, requisitos y "
+"responsabilidades a partir del titulo y datos basicos."
+msgstr ""
+"Des del dashboard de l'empresa, fes clic a <strong>\"Nova posició\"</"
+"strong>. Completa el títol, departament, tipus de contracte, ubicació i "
+"descripció. Pots fer servir <strong>\"Generar amb IA\"</strong> perquè la IA "
+"creï automàticament la descripció del lloc de treball, requisits i "
+"responsabilitats a partir del títol i dades bàsiques."
+
+#: templates/core/help.html:138
+msgid "Que estados tiene una posicion?"
+msgstr "Quins estats té una posició?"
+
+#: templates/core/help.html:142
+msgid ""
+"Las posiciones siguen un ciclo de vida: <strong>Borrador</strong> (en "
+"preparacion, no visible), <strong>Publicada</strong> (activa y recibiendo "
+"candidatos), <strong>Pausada</strong> (temporalmente inactiva) y "
+"<strong>Cerrada</strong> (proceso finalizado). Puedes cambiar el estado "
+"desde el detalle de la posicion."
+msgstr ""
+"Les posicions segueixen un cicle de vida: <strong>Esborrany</strong> (en "
+"preparació, no visible), <strong>Publicada</strong> (activa i rebent "
+"candidats), <strong>Pausada</strong> (temporalment inactiva) i "
+"<strong>Tancada</strong> (procés finalitzat). Pots canviar l'estat "
+"des del detall de la posició."
+
+#: templates/core/help.html:147
+msgid "Como filtro las posiciones?"
+msgstr "Com filtro les posicions?"
+
+#: templates/core/help.html:151
+msgid ""
+"En la lista de posiciones tienes filtros por <strong>estado</strong> "
+"(borrador, publicada, etc.) y un <strong>buscador</strong> por titulo. Usa "
+"estos filtros para encontrar rapidamente la posicion que necesitas."
+msgstr ""
+"A la llista de posicions tens filtres per <strong>estat</strong> "
+"(esborrany, publicada, etc.) i un <strong>cercador</strong> per títol. Fes servir "
+"aquests filtres per trobar ràpidament la posició que necessites."
+
+#: templates/core/help.html:173
+msgid "Como agrego un candidato?"
+msgstr "Com afegeixo un candidat?"
+
+#: templates/core/help.html:177
+msgid ""
+"Desde el detalle de una posicion, haz clic en <strong>\"Agregar candidato\"</"
+"strong>. Rellena nombre, email, telefono y sube su CV en formato PDF. Al "
+"subir el CV, la IA lo analiza automaticamente extrayendo experiencia, "
+"habilidades y educacion relevantes para la posicion."
+msgstr ""
+"Des del detall d'una posició, fes clic a <strong>\"Afegir candidat\"</"
+"strong>. Omple nom, email, telèfon i puja el seu CV en format PDF. En "
+"pujar el CV, la IA l'analitza automàticament extraient experiència, "
+"habilitats i educació rellevants per a la posició."
+
+#: templates/core/help.html:182
+msgid "Que es el pipeline de estados?"
+msgstr "Què és el pipeline d'estats?"
+
+#: templates/core/help.html:186
+msgid ""
+"Cada candidato pasa por etapas del proceso de seleccion: <strong>Nuevo</"
+"strong> &rarr; <strong>En revision</strong> &rarr; <strong>Entrevista</"
+"strong> &rarr; <strong>Evaluacion</strong> &rarr; <strong>Oferta</strong> "
+"&rarr; <strong>Contratado</strong> (o <strong>Descartado</strong> en "
+"cualquier momento). Puedes cambiar el estado desde el perfil del candidato "
+"para mantener el seguimiento actualizado."
+msgstr ""
+"Cada candidat passa per etapes del procés de selecció: <strong>Nou</"
+"strong> &rarr; <strong>En revisió</strong> &rarr; <strong>Entrevista</"
+"strong> &rarr; <strong>Avaluació</strong> &rarr; <strong>Oferta</strong> "
+"&rarr; <strong>Contractat</strong> (o <strong>Descartat</strong> en "
+"qualsevol moment). Pots canviar l'estat des del perfil del candidat "
+"per mantenir el seguiment actualitzat."
+
+#: templates/core/help.html:191
+msgid "Como funciona la valoracion con estrellas?"
+msgstr "Com funciona la valoració amb estrelles?"
+
+#: templates/core/help.html:195
+msgid ""
+"Puedes asignar una valoracion de 1 a 5 estrellas a cada candidato como "
+"indicador rapido de tu impresion general. Esta valoracion es manual y "
+"complementa las puntuaciones de la evaluacion IA, entrevistas y casos "
+"practicos."
+msgstr ""
+"Pots assignar una valoració d'1 a 5 estrelles a cada candidat com a "
+"indicador ràpid de la teva impressió general. Aquesta valoració és manual i "
+"complementa les puntuacions de l'avaluació IA, entrevistes i casos "
+"pràctics."
+
+#: templates/core/help.html:217
+msgid "Como programo una entrevista?"
+msgstr "Com programo una entrevista?"
+
+#: templates/core/help.html:221
+msgid ""
+"Desde el perfil del candidato, haz clic en <strong>\"Programar entrevista\"</"
+"strong>. Selecciona la fecha, hora, tipo de entrevista (presencial, "
+"telefonica, videollamada) y agrega notas opcionales. La entrevista aparecera "
+"tanto en el perfil del candidato como en el dashboard de la empresa."
+msgstr ""
+"Des del perfil del candidat, fes clic a <strong>\"Programar entrevista\"</"
+"strong>. Selecciona la data, hora, tipus d'entrevista (presencial, "
+"telefònica, videotrucada) i afegeix notes opcionals. L'entrevista apareixerà "
+"tant al perfil del candidat com al dashboard de l'empresa."
+
+#: templates/core/help.html:226
+msgid "Como registro el resultado de una entrevista?"
+msgstr "Com registro el resultat d'una entrevista?"
+
+#: templates/core/help.html:230
+msgid ""
+"Despues de realizar la entrevista, accede a ella y haz clic en "
+"<strong>\"Editar\"</strong>. Ahi puedes registrar tus <strong>notas</strong> "
+"detalladas y asignar una <strong>puntuacion</strong>. Estas notas y "
+"puntuacion se reflejan en el perfil del candidato y se usan como input para "
+"la evaluacion IA."
+msgstr ""
+"Després de realitzar l'entrevista, accedeix-hi i fes clic a "
+"<strong>\"Editar\"</strong>. Allà pots registrar les teves <strong>notes</strong> "
+"detallades i assignar una <strong>puntuació</strong>. Aquestes notes i "
+"puntuació es reflecteixen al perfil del candidat i es fan servir com a input per a "
+"l'avaluació IA."
+
+#: templates/core/help.html:244
+msgid "Casos practicos"
+msgstr "Casos pràctics"
+
+#: templates/core/help.html:252
+msgid "Que es un caso practico?"
+msgstr "Què és un cas pràctic?"
+
+#: templates/core/help.html:256
+msgid ""
+"Un caso practico (case study) es un ejercicio o prueba que envias al "
+"candidato para evaluar sus habilidades en un escenario real. Puede ser una "
+"prueba tecnica, un analisis de negocio, una presentacion, etc. Pekata te "
+"permite crear estos casos y gestionar su envio y entrega."
+msgstr ""
+"Un cas pràctic (case study) és un exercici o prova que envies al "
+"candidat per avaluar les seves habilitats en un escenari real. Pot ser una "
+"prova tècnica, una anàlisi de negoci, una presentació, etc. Pekata et "
+"permet crear aquests casos i gestionar el seu enviament i lliurament."
+
+#: templates/core/help.html:261
+msgid "Como genero un caso con IA?"
+msgstr "Com genero un cas amb IA?"
+
+#: templates/core/help.html:265
+msgid ""
+"Tienes dos opciones: 1. <strong>Crear manualmente</strong>: redacta tu "
+"propio caso practico con titulo, descripcion y criterios de evaluacion. 2. "
+"<strong>Generar con IA</strong>: la IA crea un caso personalizado basado en "
+"la posicion y el perfil del candidato. Puedes editar el caso generado antes "
+"de enviarlo."
+msgstr ""
+"Tens dues opcions: 1. <strong>Crear manualment</strong>: redacta el teu "
+"propi cas pràctic amb títol, descripció i criteris d'avaluació. 2. "
+"<strong>Generar amb IA</strong>: la IA crea un cas personalitzat basat en "
+"la posició i el perfil del candidat. Pots editar el cas generat abans "
+"d'enviar-lo."
+
+#: templates/core/help.html:270
+msgid "Como es el flujo de envio y entrega?"
+msgstr "Com és el flux d'enviament i lliurament?"
+
+#: templates/core/help.html:274
+msgid ""
+"Una vez creado el caso, lo <strong>envias</strong> al candidato. El caso "
+"queda en estado <strong>\"Enviado\"</strong> hasta que el candidato entrega "
+"su respuesta. Cuando registras la entrega, puedes agregar notas y una "
+"puntuacion. El resultado se integra en la evaluacion global del candidato."
+msgstr ""
+"Un cop creat el cas, l'<strong>envies</strong> al candidat. El cas "
+"queda en estat <strong>\"Enviat\"</strong> fins que el candidat lliura "
+"la seva resposta. Quan registres el lliurament, pots afegir notes i una "
+"puntuació. El resultat s'integra en l'avaluació global del candidat."
+
+#: templates/core/help.html:288
+msgid "Evaluacion IA"
+msgstr "Avaluació IA"
+
+#: templates/core/help.html:296
+msgid "Que evalua la IA?"
+msgstr "Què avalua la IA?"
+
+#: templates/core/help.html:300
+msgid ""
+"La evaluacion IA analiza toda la informacion disponible del candidato: "
+"<strong>CV</strong> (experiencia, habilidades, educacion), <strong>notas de "
+"entrevistas</strong>, <strong>resultados de casos practicos</strong> y los "
+"<strong>requisitos de la posicion</strong>. Genera una puntuacion global y "
+"un analisis detallado de fortalezas, debilidades y fit con el puesto."
+msgstr ""
+"L'avaluació IA analitza tota la informació disponible del candidat: "
+"<strong>CV</strong> (experiència, habilitats, educació), <strong>notes "
+"d'entrevistes</strong>, <strong>resultats de casos pràctics</strong> i els "
+"<strong>requisits de la posició</strong>. Genera una puntuació global i "
+"una anàlisi detallada de fortaleses, debilitats i encaix amb el lloc de treball."
+
+#: templates/core/help.html:305
+msgid "Como interpreto las puntuaciones?"
+msgstr "Com interpreto les puntuacions?"
+
+#: templates/core/help.html:309
+msgid ""
+"La IA asigna puntuaciones en varias dimensiones (ajuste tecnico, "
+"experiencia, habilidades blandas, etc.) y una <strong>puntuacion global</"
+"strong>. Las puntuaciones son orientativas y deben complementarse con tu "
+"criterio profesional. Usa el analisis detallado para entender las razones "
+"detras de cada puntuacion."
+msgstr ""
+"La IA assigna puntuacions en diverses dimensions (ajust tècnic, "
+"experiència, habilitats toves, etc.) i una <strong>puntuació global</"
+"strong>. Les puntuacions són orientatives i s'han de complementar amb el teu "
+"criteri professional. Fes servir l'anàlisi detallada per entendre les raons "
+"darrere de cada puntuació."
+
+#: templates/core/help.html:314
+msgid "Puedo regenerar una evaluacion?"
+msgstr "Puc regenerar una avaluació?"
+
+#: templates/core/help.html:318
+msgid ""
+"Si. Si has actualizado informacion del candidato (nuevas notas de "
+"entrevista, resultado de caso practico, CV actualizado), puedes "
+"<strong>regenerar la evaluacion</strong> para que la IA tenga en cuenta los "
+"datos mas recientes. La nueva evaluacion reemplaza la anterior."
+msgstr ""
+"Sí. Si has actualitzat informació del candidat (noves notes "
+"d'entrevista, resultat de cas pràctic, CV actualitzat), pots "
+"<strong>regenerar l'avaluació</strong> perquè la IA tingui en compte les "
+"dades més recents. La nova avaluació reemplaça l'anterior."
+
+#: templates/core/help.html:332
+msgid "Tours interactivos"
+msgstr "Tours interactius"
+
+#: templates/core/help.html:340
+msgid "Que es el boton \"?\" flotante?"
+msgstr "Què és el botó \"?\" flotant?"
+
+#: templates/core/help.html:344
+msgid ""
+"En cada pagina del sistema veras un boton <strong>\"?\"</strong> flotante en "
+"la esquina inferior derecha. Al hacer clic se abre un menu con dos opciones: "
+"<strong>\"Ver tour de esta pagina\"</strong> (inicia una guia paso a paso "
+"que explica cada elemento de la pagina actual) y <strong>\"Reiniciar todos "
+"los tours\"</strong> (permite volver a ver los tours aunque ya los hayas "
+"completado)."
+msgstr ""
+"A cada pàgina del sistema veuràs un botó <strong>\"?\"</strong> flotant a "
+"la cantonada inferior dreta. En fer clic s'obre un menú amb dues opcions: "
+"<strong>\"Veure tour d'aquesta pàgina\"</strong> (inicia una guia pas a pas "
+"que explica cada element de la pàgina actual) i <strong>\"Reiniciar tots "
+"els tours\"</strong> (permet tornar a veure els tours encara que ja els hagis "
+"completat)."
+
+#: templates/core/help.html:349
+msgid "Como reinicio los tours?"
+msgstr "Com reinicio els tours?"
+
+#: templates/core/help.html:353
+msgid ""
+"Haz clic en el boton <strong>\"?\"</strong> y selecciona <strong>\"Reiniciar "
+"todos los tours\"</strong>. Esto borra el registro de tours completados y la "
+"proxima vez que entres a cualquier pagina, el tour se mostrara "
+"automaticamente de nuevo. Es util si quieres refrescar la memoria sobre como "
+"funciona una seccion."
+msgstr ""
+"Fes clic al botó <strong>\"?\"</strong> i selecciona <strong>\"Reiniciar "
+"tots els tours\"</strong>. Això esborra el registre de tours completats i la "
+"propera vegada que entris a qualsevol pàgina, el tour es mostrarà "
+"automàticament de nou. És útil si vols refrescar la memòria sobre com "
+"funciona una secció."
+
+#: templates/emails/casestudy_sent.html:15
+#, python-format
+msgid "Hola %(name)s,"
+msgstr "Hola %(name)s,"
+
+#: templates/emails/casestudy_sent.html:17
+#, python-format
+msgid ""
+"Como parte del proceso de selección para la posición de "
+"<strong>%(position)s</strong>,\n"
+"            te enviamos un caso práctico para que lo completes."
+msgstr ""
+"Com a part del procés de selecció per a la posició de "
+"<strong>%(position)s</strong>,\n"
+"            t'enviem un cas pràctic perquè el completis."
+
+#: templates/emails/casestudy_sent.html:20
+msgid "Caso:"
+msgstr "Cas:"
+
+#: templates/emails/casestudy_sent.html:21 templates/portal/case_study.html:51
+msgid "Fecha límite:"
+msgstr "Data límit:"
+
+#: templates/emails/casestudy_sent.html:25
+msgid "Ver caso práctico y responder"
+msgstr "Veure cas pràctic i respondre"
+
+#: templates/emails/casestudy_sent.html:29
+msgid ""
+"Haz clic en el botón para ver el caso completo. Podrás escribir tu respuesta "
+"directamente o subir un documento."
+msgstr ""
+"Fes clic al botó per veure el cas complet. Podràs escriure la teva resposta "
+"directament o pujar un document."
+
+#: templates/emails/casestudy_sent.html:32
+msgid "Si el botón no funciona, copia y pega este enlace en tu navegador:"
+msgstr "Si el botó no funciona, copia i enganxa aquest enllaç al teu navegador:"
+
+#: templates/emails/casestudy_sent.html:38
+#, python-format
+msgid "Este email fue enviado por %(company)s a través de Pekata ATS."
+msgstr "Aquest email ha estat enviat per %(company)s a través de Pekata ATS."
+
+#: templates/emails/casestudy_submitted.html:10
+#: templates/portal/case_study.html:29
+msgid "Caso práctico entregado"
+msgstr "Cas pràctic lliurat"
+
+#: templates/emails/casestudy_submitted.html:13
+msgid "Nueva entrega recibida"
+msgstr "Nou lliurament rebut"
+
+#: templates/emails/casestudy_submitted.html:15
+#, python-format
+msgid ""
+"<strong>%(name)s</strong> ha entregado el caso práctico\n"
+"            \"<strong>%(cs_title)s</strong>\" para la posición de "
+"<strong>%(position)s</strong>."
+msgstr ""
+"<strong>%(name)s</strong> ha lliurat el cas pràctic\n"
+"            \"<strong>%(cs_title)s</strong>\" per a la posició de "
+"<strong>%(position)s</strong>."
+
+#: templates/emails/casestudy_submitted.html:18
+msgid "Entregado:"
+msgstr "Lliurat:"
+
+#: templates/emails/casestudy_submitted.html:21
+msgid "Ver candidato"
+msgstr "Veure candidat"
+
+#: templates/evaluations/evaluate.html:28
+msgid "Generando evaluación..."
+msgstr "Generant avaluació..."
+
+#: templates/evaluations/evaluate.html:28
+msgid "Regenerar evaluación"
+msgstr "Regenerar avaluació"
+
+#: templates/evaluations/evaluate.html:119
+msgid "Ver respuesta completa de IA"
+msgstr "Veure resposta completa de IA"
+
+#: templates/evaluations/evaluate.html:131
+msgid "Historial de evaluaciones"
+msgstr "Historial d'avaluacions"
+
+#: templates/evaluations/evaluate.html:138
+msgid "Global:"
+msgstr "Global:"
+
+#: templates/evaluations/evaluate.html:155
+msgid "Sin evaluaciones"
+msgstr "Sense avaluacions"
+
+#: templates/evaluations/evaluate.html:156
+msgid ""
+"Pulsa \"Generar evaluación\" para que la IA analice toda la información "
+"disponible del candidato."
+msgstr ""
+"Prem \"Generar avaluació\" perquè la IA analitzi tota la informació "
+"disponible del candidat."
+
+#: templates/interviews/interview_edit.html:10
+#, python-format
+msgid "Entrevista %(date)s"
+msgstr "Entrevista %(date)s"
+
+#: templates/interviews/interview_edit.html:26
+msgid "Notas de la entrevista"
+msgstr "Notes de l'entrevista"
+
+#: templates/interviews/interview_edit.html:40
+msgid "Puntuación global (1-10)"
+msgstr "Puntuació global (1-10)"
+
+#: templates/interviews/interview_form.html:16
+#, python-format
+msgid ""
+"Candidato: <span class=\"font-medium text-gray-700\">%(name)s</span> · "
+"%(pos)s"
+msgstr ""
+"Candidat: <span class=\"font-medium text-gray-700\">%(name)s</span> · "
+"%(pos)s"
+
+#: templates/partials/_chatbot_widget.html:10
+msgid "Pekata Assistant"
+msgstr "Pekata Assistant"
+
+#: templates/partials/_chatbot_widget.html:13
+msgid "Ver tour de esta página"
+msgstr "Veure tour d'aquesta pàgina"
+
+#: templates/partials/_chatbot_widget.html:17
+msgid "Limpiar chat"
+msgstr "Netejar xat"
+
+#: templates/partials/_chatbot_widget.html:21
+#: templates/positions/position_detail.html:72
+msgid "Cerrar"
+msgstr "Tancar"
+
+#: templates/partials/_chatbot_widget.html:32
+msgid "Hola, soy Pekata Assistant"
+msgstr "Hola, soc Pekata Assistant"
+
+#: templates/partials/_chatbot_widget.html:33
+msgid ""
+"Pregúntame sobre cómo usar la aplicación, crear posiciones, gestionar "
+"candidatos y más."
+msgstr ""
+"Pregunta'm sobre com utilitzar l'aplicació, crear posicions, gestionar "
+"candidats i més."
+
+#: templates/partials/_chatbot_widget.html:37
+msgid "Tour de esta página"
+msgstr "Tour d'aquesta pàgina"
+
+#: templates/partials/_chatbot_widget.html:41
+msgid "Reiniciar tours"
+msgstr "Reiniciar tours"
+
+#: templates/partials/_chatbot_widget.html:71
+msgid "Escribe tu pregunta..."
+msgstr "Escriu la teva pregunta..."
+
+#: templates/partials/_confirm_modal.html:54
+#: templates/positions/position_detail.html:19
+#: templates/tenants/department_list.html:49
+msgid "Eliminar"
+msgstr "Eliminar"
+
+#: templates/partials/_notification_dropdown.html:29
+msgid "Marcar todas como leídas"
+msgstr "Marcar totes com a llegides"
+
+#: templates/partials/_notification_dropdown.html:36
+msgid "Sin notificaciones"
+msgstr "Sense notificacions"
+
+#: templates/partials/_pagination.html:6
+msgid "Anterior"
+msgstr "Anterior"
+
+#: templates/partials/_pagination.html:9
+msgid "Siguiente"
+msgstr "Següent"
+
+#: templates/partials/_pagination.html:14
+#, python-format
+msgid ""
+"Mostrando <span class=\"font-medium\">%(start)s</span> a <span class=\"font-"
+"medium\">%(end)s</span> de <span class=\"font-medium\">%(total)s</span> "
+"resultados"
+msgstr ""
+"Mostrant <span class=\"font-medium\">%(start)s</span> a <span class=\"font-"
+"medium\">%(end)s</span> de <span class=\"font-medium\">%(total)s</span> "
+"resultats"
+
+#: templates/partials/_sidebar_content.html:50
+#: templates/tenants/company_form.html:117
+msgid "Crear empresa"
+msgstr "Crear empresa"
+
+#: templates/partials/_sidebar_content.html:64
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: templates/partials/_sidebar_content.html:102
+msgid "Configuración"
+msgstr "Configuració"
+
+#: templates/partials/_sidebar_content.html:148
+msgid "Cerrar sesión"
+msgstr "Tancar sessió"
+
+#: templates/portal/case_study.html:30
+#, python-format
+msgid "Tu respuesta fue recibida el %(date)s a las %(time)s."
+msgstr "La teva resposta ha estat rebuda el %(date)s a les %(time)s."
+
+#: templates/portal/case_study.html:39
+msgid "Plazo expirado"
+msgstr "Termini expirat"
+
+#: templates/portal/case_study.html:40
+#, python-format
+msgid "El plazo para entregar este caso práctico ha finalizado (%(date)s)."
+msgstr "El termini per lliurar aquest cas pràctic ha finalitzat (%(date)s)."
+
+#: templates/portal/case_study.html:48
+#, python-format
+msgid "Posición: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+msgstr "Posició: <span class=\"font-medium text-gray-700\">%(pos)s</span>"
+
+#: templates/portal/case_study.html:70
+msgid "Tu respuesta"
+msgstr "La teva resposta"
+
+#: templates/portal/case_study.html:75
+msgid "Escribe tu respuesta"
+msgstr "Escriu la teva resposta"
+
+#: templates/portal/case_study.html:78
+msgid "Escribe aquí tu respuesta al caso práctico..."
+msgstr "Escriu aquí la teva resposta al cas pràctic..."
+
+#: templates/portal/case_study.html:83
+msgid "o también puedes"
+msgstr "o també pots"
+
+#: templates/portal/case_study.html:87
+msgid "Adjuntar archivo (opcional)"
+msgstr "Adjuntar fitxer (opcional)"
+
+#: templates/portal/case_study.html:90
+msgid "PDF, Word, PowerPoint, Excel o ZIP. Máximo 10MB."
+msgstr "PDF, Word, PowerPoint, Excel o ZIP. Màxim 10MB."
+
+#: templates/portal/case_study.html:94
+msgid "Comentarios adicionales (opcional)"
+msgstr "Comentaris addicionals (opcional)"
+
+#: templates/portal/case_study.html:97
+msgid "Cualquier nota o comentario adicional..."
+msgstr "Qualsevol nota o comentari addicional..."
+
+#: templates/portal/case_study.html:101
+msgid "Entregar respuesta"
+msgstr "Lliurar resposta"
+
+#: templates/portal/case_study.html:103
+msgid "Una vez entregada no podrás modificar tu respuesta."
+msgstr "Un cop lliurada no podràs modificar la teva resposta."
+
+#: templates/portal/confirmation.html:7 templates/portal/confirmation.html:19
+msgid "Entrega confirmada"
+msgstr "Lliurament confirmat"
+
+#: templates/portal/confirmation.html:20
+#, python-format
+msgid ""
+"Tu case study ha sido recibido correctamente el %(date)s a las %(time)s."
+msgstr ""
+"El teu case study ha estat rebut correctament el %(date)s a les %(time)s."
+
+#: templates/portal/confirmation.html:21
+#, python-format
+msgid ""
+"Gracias por completar el proceso. El equipo de %(company)s revisará tu "
+"respuesta."
+msgstr ""
+"Gràcies per completar el procés. L'equip de %(company)s revisarà la teva "
+"resposta."
+
+#: templates/positions/position_detail.html:15
+msgid "Eliminar posición"
+msgstr "Eliminar posició"
+
+#: templates/positions/position_detail.html:15
+#, python-format
+msgid "¿Eliminar la posición «%(title)s»? Se ocultará de todas las vistas."
+msgstr "Eliminar la posició «%(title)s»? S'ocultarà de totes les vistes."
+
+#: templates/positions/position_detail.html:24
+msgid "Editar oferta"
+msgstr "Editar oferta"
+
+#: templates/positions/position_detail.html:28
+#: templates/positions/position_detail.html:256
+msgid "Carga masiva de CVs"
+msgstr "Càrrega massiva de CVs"
+
+#: templates/positions/position_detail.html:61
+msgid "Publicar"
+msgstr "Publicar"
+
+#: templates/positions/position_detail.html:67
+msgid "Pausar"
+msgstr "Pausar"
+
+#: templates/positions/position_detail.html:78
+msgid "Reactivar"
+msgstr "Reactivar"
+
+#: templates/positions/position_detail.html:118
+#, python-format
+msgid "Candidatos (%(count)s)"
+msgstr "Candidats (%(count)s)"
+
+#: templates/positions/position_detail.html:119
+msgid "Añadir"
+msgstr "Afegir"
+
+#: templates/positions/position_detail.html:140
+msgid "Espera"
+msgstr "Espera"
+
+#: templates/positions/position_detail.html:155
+msgid "Aún no hay candidatos para esta posición."
+msgstr "Encara no hi ha candidats per a aquesta posició."
+
+#: templates/positions/position_detail.html:165
+msgid "Datos de la oferta"
+msgstr "Dades de l'oferta"
+
+#: templates/positions/position_detail.html:185
+msgid "Salario"
+msgstr "Salari"
+
+#: templates/positions/position_detail.html:194
+msgid "Creada"
+msgstr "Creada"
+
+#: templates/positions/position_detail.html:223
+msgid "Crear"
+msgstr "Crear"
+
+#: templates/positions/position_detail.html:233
+#, python-format
+msgid "%(days)s días · %(submissions)s envíos"
+msgstr "%(days)s dies · %(submissions)s enviaments"
+
+#: templates/positions/position_detail.html:238
+msgid "Sin case studies definidos aún."
+msgstr "Sense case studies definits encara."
+
+#: templates/positions/position_detail.html:272
+msgid "Arrastra archivos PDF aquí"
+msgstr "Arrossega fitxers PDF aquí"
+
+#: templates/positions/position_detail.html:273
+msgid "o"
+msgstr "o"
+
+#: templates/positions/position_detail.html:275
+msgid "Seleccionar archivos"
+msgstr "Seleccionar fitxers"
+
+#: templates/positions/position_detail.html:318
+msgid "Subiendo..."
+msgstr "Pujant..."
+
+#: templates/positions/position_detail.html:319
+msgid "Analizando con IA..."
+msgstr "Analitzant amb IA..."
+
+#: templates/positions/position_detail.html:352
+msgid "Subir"
+msgstr "Pujar"
+
+#: templates/positions/position_detail.html:356
+msgid "Procesando..."
+msgstr "Processant..."
+
+#: templates/positions/position_detail.html:359
+msgid "Cerrar y actualizar"
+msgstr "Tancar i actualitzar"
+
+#: templates/positions/position_form.html:11
+msgid "Nueva"
+msgstr "Nova"
+
+#: templates/positions/position_form.html:23
+msgid "Información básica"
+msgstr "Informació bàsica"
+
+#: templates/positions/position_form.html:52
+msgid "Contenido de la oferta"
+msgstr "Contingut de l'oferta"
+
+#: templates/positions/position_form.html:68
+#: templates/tenants/company_form.html:32
+msgid "Generando..."
+msgstr "Generant..."
+
+#: templates/positions/position_form.html:102
+msgid "Opciones"
+msgstr "Opcions"
+
+#: templates/positions/position_form.html:105
+msgid "Esta posición incluye case study"
+msgstr "Aquesta posició inclou case study"
+
+#: templates/positions/position_form.html:115
+msgid "Crear posición"
+msgstr "Crear posició"
+
+#: templates/positions/position_form.html:134
+msgid "Escribe al menos el título del puesto antes de generar."
+msgstr "Escriu almenys el títol del lloc de treball abans de generar."
+
+#: templates/positions/position_form.html:166
+#: templates/tenants/company_form.html:169
+msgid "Error al generar contenido."
+msgstr "Error en generar contingut."
+
+#: templates/positions/position_form.html:185
+#: templates/tenants/company_form.html:180
+msgid "Contenido generado con IA. Revisa y edita antes de guardar."
+msgstr "Contingut generat amb IA. Revisa i edita abans de desar."
+
+#: templates/positions/position_form.html:188
+#: templates/tenants/company_form.html:183
+msgid "Error de conexión. Inténtalo de nuevo."
+msgstr "Error de connexió. Torna-ho a provar."
+
+#: templates/positions/position_list.html:23
+#, python-format
+msgid "Gestiona las ofertas de trabajo de %(name)s."
+msgstr "Gestiona les ofertes de treball de %(name)s."
+
+#: templates/positions/position_list.html:30
+msgid "Todas"
+msgstr "Totes"
+
+#: templates/positions/position_list.html:90
+#: templates/tenants/company_detail.html:107
+msgid "Sin posiciones"
+msgstr "Sense posicions"
+
+#: templates/positions/position_list.html:90
+msgid "Crea tu primera oferta de trabajo."
+msgstr "Crea la teva primera oferta de treball."
+
+#: templates/registration/login.html:7 templates/registration/login.html:14
+msgid "Iniciar sesión"
+msgstr "Iniciar sessió"
+
+#: templates/registration/login.html:28
+msgid "Email / Usuario"
+msgstr "Email / Usuari"
+
+#: templates/registration/login.html:33
+msgid "Contraseña"
+msgstr "Contrasenya"
+
+#: templates/registration/login.html:39
+msgid "Entrar"
+msgstr "Entrar"
+
+#: templates/tenants/company_detail.html:14
+#: templates/tenants/company_detail.html:18
+msgid "Eliminar empresa"
+msgstr "Eliminar empresa"
+
+#: templates/tenants/company_detail.html:14
+#, python-format
+msgid "¿Eliminar la empresa «%(name)s»? Se ocultará de todas las vistas."
+msgstr "Eliminar l'empresa «%(name)s»? S'ocultarà de totes les vistes."
+
+#: templates/tenants/company_detail.html:48
+#: templates/tenants/company_list.html:48
+msgid "Inactiva"
+msgstr "Inactiva"
+
+#: templates/tenants/company_detail.html:55
+msgid "Total posiciones"
+msgstr "Total posicions"
+
+#: templates/tenants/company_detail.html:59
+msgid "Posiciones activas"
+msgstr "Posicions actives"
+
+#: templates/tenants/company_detail.html:63
+msgid "Total candidatos"
+msgstr "Total candidats"
+
+#: templates/tenants/company_detail.html:107
+msgid "Crea tu primera posición para esta empresa."
+msgstr "Crea la teva primera posició per a aquesta empresa."
+
+#: templates/tenants/company_form.html:49
+msgid "Datos básicos"
+msgstr "Dades bàsiques"
+
+#: templates/tenants/company_form.html:63
+msgid "Descripción de la empresa"
+msgstr "Descripció de l'empresa"
+
+#: templates/tenants/company_form.html:65
+msgid ""
+"Qué hace la empresa, sector, misión. Se usará en las ofertas generadas con "
+"IA."
+msgstr ""
+"Què fa l'empresa, sector, missió. S'utilitzarà a les ofertes generades amb "
+"IA."
+
+#: templates/tenants/company_form.html:82
+msgid "Información general para ofertas"
+msgstr "Informació general per a ofertes"
+
+#: templates/tenants/company_form.html:83
+msgid ""
+"Esta información se usará como base al generar ofertas de trabajo con IA."
+msgstr ""
+"Aquesta informació s'utilitzarà com a base en generar ofertes de treball amb IA."
+
+#: templates/tenants/company_form.html:88
+msgid "Seguro médico, formación, bonus, fruta, gym, plan de carrera..."
+msgstr "Assegurança mèdica, formació, bonus, fruita, gym, pla de carrera..."
+
+#: templates/tenants/company_form.html:96
+msgid "Trabajo remoto"
+msgstr "Treball remot"
+
+#: templates/tenants/company_form.html:107
+msgid "Ambiente de trabajo, valores, tipo de equipo..."
+msgstr "Ambient de treball, valors, tipus d'equip..."
+
+#: templates/tenants/company_form.html:136
+msgid "Escribe al menos el nombre de la empresa antes de generar."
+msgstr "Escriu almenys el nom de l'empresa abans de generar."
+
+#: templates/tenants/company_list.html:22
+msgid "Gestiona las empresas registradas en el sistema."
+msgstr "Gestiona les empreses registrades al sistema."
+
+#: templates/tenants/company_list.html:45
+#, python-format
+msgid "%(count)s posiciones activas"
+msgstr "%(count)s posicions actives"
+
+#: templates/tenants/company_list.html:57
+#: templates/tenants/company_select.html:51
+msgid "Sin empresas"
+msgstr "Sense empreses"
+
+#: templates/tenants/company_list.html:57
+msgid ""
+"Crea tu primera empresa para empezar a gestionar posiciones y candidatos."
+msgstr ""
+"Crea la teva primera empresa per començar a gestionar posicions i candidats."
+
+#: templates/tenants/company_select.html:4
+#: templates/tenants/company_select.html:7
+msgid "Seleccionar empresa"
+msgstr "Seleccionar empresa"
+
+#: templates/tenants/company_select.html:13
+msgid "Selecciona una empresa"
+msgstr "Selecciona una empresa"
+
+#: templates/tenants/company_select.html:14
+msgid "Elige la empresa con la que quieres trabajar."
+msgstr "Tria l'empresa amb la qual vols treballar."
+
+#: templates/tenants/company_select.html:52
+msgid "No tienes ninguna empresa asignada. Contacta al administrador."
+msgstr "No tens cap empresa assignada. Contacta amb l'administrador."
+
+#: templates/tenants/department_form.html:38
+msgid "Crear departamento"
+msgstr "Crear departament"
+
+#: templates/tenants/department_list.html:21
+#, python-format
+msgid "Gestiona los departamentos de %(name)s."
+msgstr "Gestiona els departaments de %(name)s."
+
+#: templates/tenants/department_list.html:32
+msgid "Acciones"
+msgstr "Accions"
+
+#: templates/tenants/department_list.html:47
+msgid "Eliminar departamento"
+msgstr "Eliminar departament"
+
+#: templates/tenants/department_list.html:47
+#, python-format
+msgid ""
+"¿Eliminar departamento «%(name)s»? Las posiciones asociadas quedarán sin "
+"departamento."
+msgstr ""
+"Eliminar departament «%(name)s»? Les posicions associades quedaran sense "
+"departament."
+
+#: templates/tenants/department_list.html:59
+msgid "Sin departamentos"
+msgstr "Sense departaments"
+
+#: templates/tenants/department_list.html:59
+msgid "Crea tu primer departamento para organizar las posiciones."
+msgstr "Crea el teu primer departament per organitzar les posicions."

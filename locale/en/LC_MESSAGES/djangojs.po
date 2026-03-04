@@ -1,0 +1,541 @@
+# English translations for Pekata ATS JavaScript strings.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 16:59+0100\n"
+"PO-Revision-Date: 2026-03-04 17:00+0100\n"
+"Last-Translator: Pekata ATS\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: static/js/chatbot.js:57
+msgid "Error de conexión. Inténtalo de nuevo."
+msgstr "Connection error. Please try again."
+
+#: static/js/notifications.js:73
+msgid "ahora"
+msgstr "now"
+
+#: static/js/notifications.js:74
+msgid "min"
+msgstr "min"
+
+#: static/js/notifications.js:75
+msgid "h"
+msgstr "h"
+
+#: static/js/notifications.js:76
+msgid "d"
+msgstr "d"
+
+#: static/js/tours.js:47
+msgid "Siguiente"
+msgstr "Next"
+
+#: static/js/tours.js:48
+msgid "Anterior"
+msgstr "Previous"
+
+#: static/js/tours.js:49
+msgid "Entendido"
+msgstr "Got it"
+
+#: static/js/tours.js:50
+msgid "de"
+msgstr "of"
+
+#: static/js/tours.js:66
+msgid "Bienvenido a Pekata ATS"
+msgstr "Welcome to Pekata ATS"
+
+#: static/js/tours.js:67
+msgid ""
+"Lo primero que necesitas es crear tu empresa. Toda la gestión de posiciones "
+"y candidatos se organiza dentro de una empresa."
+msgstr ""
+"The first thing you need to do is create your company. All position and "
+"candidate management is organized within a company."
+
+#: static/js/tours.js:73
+msgid "Crear empresa"
+msgstr "Create company"
+
+#: static/js/tours.js:74
+msgid ""
+"Haz clic aquí para crear tu primera empresa. Rellena los datos básicos y, si "
+"quieres, usa la IA para mejorar la descripción."
+msgstr ""
+"Click here to create your first company. Fill in the basic details and, if "
+"you wish, use AI to enhance the description."
+
+#: static/js/tours.js:80
+msgid "Tus empresas"
+msgstr "Your companies"
+
+#: static/js/tours.js:81
+msgid ""
+"Aquí aparecerán tus empresas. Haz clic en cualquiera para ver su dashboard "
+"con posiciones, candidatos y KPIs."
+msgstr ""
+"Your companies will appear here. Click on any of them to view its dashboard "
+"with positions, candidates, and KPIs."
+
+#: static/js/tours.js:89
+msgid "Crear tu empresa"
+msgstr "Create your company"
+
+#: static/js/tours.js:90
+msgid ""
+"Completa los datos de tu empresa. Cuanta más información añadas, mejores "
+"serán las sugerencias de la IA al generar ofertas de trabajo."
+msgstr ""
+"Fill in your company details. The more information you provide, the better "
+"the AI suggestions will be when generating job postings."
+
+#: static/js/tours.js:96
+msgid "Datos básicos"
+msgstr "Basic details"
+
+#: static/js/tours.js:97
+msgid ""
+"Nombre, descripción, web y logo. La descripción es especialmente importante: "
+"la IA la usará como contexto para generar ofertas."
+msgstr ""
+"Name, description, website, and logo. The description is especially "
+"important: AI will use it as context when generating job postings."
+
+#: static/js/tours.js:103
+msgid "Mejorar con IA"
+msgstr "Enhance with AI"
+
+#: static/js/tours.js:104
+msgid ""
+"Escribe al menos el nombre y pulsa este botón. La IA generará una "
+"descripción profesional, beneficios y cultura automáticamente."
+msgstr ""
+"Enter at least the name and click this button. AI will automatically "
+"generate a professional description, benefits, and culture."
+
+#: static/js/tours.js:110
+msgid "Info para ofertas"
+msgstr "Job posting info"
+
+#: static/js/tours.js:111
+msgid ""
+"Beneficios, jornada, política de remoto y cultura. Esta información se "
+"reutilizará en todas las ofertas que generes con IA."
+msgstr ""
+"Benefits, work schedule, remote policy, and culture. This information will "
+"be reused across all job postings you generate with AI."
+
+#: static/js/tours.js:120
+msgid "Panel de empresa"
+msgstr "Company dashboard"
+
+#: static/js/tours.js:121
+msgid ""
+"Aquí verás la información general de la empresa: nombre, logo y enlace web."
+msgstr ""
+"Here you will see the company's general information: name, logo, and website "
+"link."
+
+#: static/js/tours.js:127
+msgid "Indicadores clave"
+msgstr "Key metrics"
+
+#: static/js/tours.js:128
+msgid ""
+"Estos KPIs te muestran el total de posiciones, las activas y el número de "
+"candidatos de un vistazo."
+msgstr ""
+"These KPIs show you the total number of positions, active ones, and the "
+"number of candidates at a glance."
+
+#: static/js/tours.js:134
+msgid "Tabla de posiciones"
+msgstr "Positions table"
+
+#: static/js/tours.js:135
+msgid ""
+"Aquí aparecen todas las posiciones de la empresa con su estado, tipo y "
+"candidatos."
+msgstr ""
+"All company positions appear here with their status, type, and candidates."
+
+#: static/js/tours.js:141
+msgid "Editar empresa"
+msgstr "Edit company"
+
+#: static/js/tours.js:142
+msgid ""
+"Haz clic aquí para modificar los datos de la empresa (nombre, web, logo...)."
+msgstr ""
+"Click here to edit the company details (name, website, logo, etc.)."
+
+#: static/js/tours.js:148
+msgid "Crear posición"
+msgstr "Create position"
+
+#: static/js/tours.js:149
+msgid "Crea una nueva oferta de trabajo para esta empresa."
+msgstr "Create a new job posting for this company."
+
+#: static/js/tours.js:158
+msgid "Filtros de estado"
+msgstr "Status filters"
+
+#: static/js/tours.js:159
+msgid ""
+"Filtra las posiciones por estado: todas, publicadas, borradores, pausadas o "
+"cerradas."
+msgstr ""
+"Filter positions by status: all, published, drafts, paused, or closed."
+
+#: static/js/tours.js:165
+msgid "Listado de posiciones"
+msgstr "Positions list"
+
+#: static/js/tours.js:166
+msgid ""
+"Haz clic en cualquier posición para ver su detalle, candidatos y case "
+"studies."
+msgstr ""
+"Click on any position to view its details, candidates, and case studies."
+
+#: static/js/tours.js:172
+msgid "Nueva posición"
+msgstr "New position"
+
+#: static/js/tours.js:173
+msgid "Crea una nueva oferta de trabajo desde aquí."
+msgstr "Create a new job posting from here."
+
+#: static/js/tours.js:182
+msgid "Ciclo de vida"
+msgstr "Lifecycle"
+
+#: static/js/tours.js:183
+msgid ""
+"Cambia el estado de la posición: publícala, páusala o ciérrala según avance "
+"el proceso."
+msgstr ""
+"Change the position status: publish, pause, or close it as the process "
+"progresses."
+
+#: static/js/tours.js:189
+msgid "Descripción de la oferta"
+msgstr "Job posting description"
+
+#: static/js/tours.js:190
+msgid ""
+"Contenido de la oferta: descripción, requisitos, beneficios y sobre la "
+"empresa."
+msgstr ""
+"Job posting content: description, requirements, benefits, and about the "
+"company."
+
+#: static/js/tours.js:196
+msgid "Candidatos"
+msgstr "Candidates"
+
+#: static/js/tours.js:197
+msgid ""
+"Listado de candidatos para esta posición. Haz clic en uno para ver su perfil "
+"completo."
+msgstr ""
+"List of candidates for this position. Click on one to view their full "
+"profile."
+
+#: static/js/tours.js:203
+msgid "Datos de la oferta"
+msgstr "Job posting details"
+
+#: static/js/tours.js:204
+msgid ""
+"Resumen con departamento, ubicación, tipo de empleo, salario y fechas clave."
+msgstr ""
+"Summary with department, location, employment type, salary, and key dates."
+
+#: static/js/tours.js:210
+msgid "Case Studies"
+msgstr "Case Studies"
+
+#: static/js/tours.js:211
+msgid ""
+"Si la posición incluye case study, aquí verás los casos creados y podrás "
+"añadir nuevos."
+msgstr ""
+"If the position includes a case study, you will see the created cases here "
+"and can add new ones."
+
+#: static/js/tours.js:220
+msgid "Información básica"
+msgstr "Basic information"
+
+#: static/js/tours.js:221
+msgid "Completa el título, departamento, ubicación, tipo de empleo y salario."
+msgstr "Fill in the title, department, location, employment type, and salary."
+
+#: static/js/tours.js:227 static/js/tours.js:366
+msgid "Generar con IA"
+msgstr "Generate with AI"
+
+#: static/js/tours.js:228
+msgid ""
+"Escribe al menos el título y pulsa este botón. La IA generará descripción, "
+"requisitos y beneficios automáticamente."
+msgstr ""
+"Enter at least the title and click this button. AI will automatically "
+"generate the description, requirements, and benefits."
+
+#: static/js/tours.js:234
+msgid "Contenido de la oferta"
+msgstr "Job posting content"
+
+#: static/js/tours.js:235
+msgid ""
+"Edita o revisa el contenido generado. Puedes modificarlo libremente antes de "
+"guardar."
+msgstr ""
+"Edit or review the generated content. You can freely modify it before "
+"saving."
+
+#: static/js/tours.js:241
+msgid "Opciones"
+msgstr "Options"
+
+#: static/js/tours.js:242
+msgid ""
+"Activa el case study si quieres enviar pruebas prácticas a los candidatos de "
+"esta posición."
+msgstr ""
+"Enable the case study if you want to send practical assessments to "
+"candidates for this position."
+
+#: static/js/tours.js:251
+msgid "Sube el CV"
+msgstr "Upload the CV"
+
+#: static/js/tours.js:252
+msgid ""
+"Sube un PDF y la IA extraerá automáticamente los datos del candidato "
+"(nombre, email, teléfono, LinkedIn)."
+msgstr ""
+"Upload a PDF and AI will automatically extract the candidate's details "
+"(name, email, phone, LinkedIn)."
+
+#: static/js/tours.js:258
+msgid "Datos personales"
+msgstr "Personal details"
+
+#: static/js/tours.js:259
+msgid ""
+"Estos campos se autocompletarán con la información extraída del CV. Puedes "
+"editarlos si necesitas corregir algo."
+msgstr ""
+"These fields will be auto-filled with information extracted from the CV. You "
+"can edit them if you need to correct anything."
+
+#: static/js/tours.js:268
+msgid "Estado del pipeline"
+msgstr "Pipeline status"
+
+#: static/js/tours.js:269
+msgid ""
+"Cambia el estado del candidato a medida que avanza en el proceso de "
+"selección."
+msgstr ""
+"Change the candidate's status as they progress through the hiring process."
+
+#: static/js/tours.js:275
+msgid "Valoración"
+msgstr "Rating"
+
+#: static/js/tours.js:276
+msgid "Puntúa al candidato de 1 a 5 estrellas para priorizar entre candidatos."
+msgstr "Rate the candidate from 1 to 5 stars to prioritize among candidates."
+
+#: static/js/tours.js:282
+msgid "Currículum"
+msgstr "Resume"
+
+#: static/js/tours.js:283
+msgid ""
+"Visualiza, descarga o sube un nuevo CV. La IA lo analizará automáticamente."
+msgstr ""
+"View, download, or upload a new CV. AI will analyze it automatically."
+
+#: static/js/tours.js:289
+msgid "Análisis IA"
+msgstr "AI Analysis"
+
+#: static/js/tours.js:290
+msgid ""
+"Resumen generado por IA con puntos fuertes, débiles y puntuación de encaje "
+"con la posición."
+msgstr ""
+"AI-generated summary with strengths, weaknesses, and position fit score."
+
+#: static/js/tours.js:296
+msgid "Entrevistas"
+msgstr "Interviews"
+
+#: static/js/tours.js:297
+msgid "Programa, consulta y gestiona las entrevistas del candidato."
+msgstr "Schedule, view, and manage the candidate's interviews."
+
+#: static/js/tours.js:303
+msgid "Casos prácticos"
+msgstr "Case studies"
+
+#: static/js/tours.js:304
+msgid "Envía case studies y consulta el estado de las entregas."
+msgstr "Send case studies and check the status of submissions."
+
+#: static/js/tours.js:310
+msgid "Evaluación IA"
+msgstr "AI Evaluation"
+
+#: static/js/tours.js:311
+msgid ""
+"Genera una evaluación global del candidato usando toda la información "
+"disponible (CV, entrevistas, case studies)."
+msgstr ""
+"Generate an overall candidate evaluation using all available information "
+"(CV, interviews, case studies)."
+
+#: static/js/tours.js:317
+msgid "Notas del reclutador"
+msgstr "Recruiter notes"
+
+#: static/js/tours.js:318
+msgid ""
+"Espacio libre para anotar impresiones, recordatorios o comentarios sobre el "
+"candidato."
+msgstr ""
+"Free space to write down impressions, reminders, or comments about the "
+"candidate."
+
+#: static/js/tours.js:324
+msgid "Acciones rápidas"
+msgstr "Quick actions"
+
+#: static/js/tours.js:325
+msgid ""
+"Accesos directos para programar entrevistas, generar casos prácticos o "
+"evaluaciones IA."
+msgstr ""
+"Shortcuts to schedule interviews, generate case studies, or AI evaluations."
+
+#: static/js/tours.js:331
+msgid "Resumen IA (sidebar)"
+msgstr "AI Summary (sidebar)"
+
+#: static/js/tours.js:332
+msgid ""
+"Vista compacta del análisis IA con puntos fuertes y débiles en la barra "
+"lateral."
+msgstr ""
+"Compact view of the AI analysis with strengths and weaknesses in the "
+"sidebar."
+
+#: static/js/tours.js:340
+msgid "Programar entrevista"
+msgstr "Schedule interview"
+
+#: static/js/tours.js:341
+msgid ""
+"Completa la fecha, hora, duración, entrevistador y ubicación o enlace de "
+"videollamada para programar la entrevista."
+msgstr ""
+"Fill in the date, time, duration, interviewer, and location or video call "
+"link to schedule the interview."
+
+#: static/js/tours.js:349
+msgid "Editar entrevista"
+msgstr "Edit interview"
+
+#: static/js/tours.js:350
+msgid ""
+"Tras realizar la entrevista, actualiza el estado, añade notas, puntos "
+"fuertes/débiles y una puntuación global."
+msgstr ""
+"After conducting the interview, update the status, add notes, strengths/"
+"weaknesses, and an overall score."
+
+#: static/js/tours.js:359
+msgid "Tu idea"
+msgstr "Your idea"
+
+#: static/js/tours.js:360
+msgid ""
+"Escribe el título y una descripción breve de lo que quieres evaluar. La IA "
+"se encargará del resto."
+msgstr ""
+"Enter the title and a brief description of what you want to assess. AI will "
+"take care of the rest."
+
+#: static/js/tours.js:367
+msgid ""
+"Pulsa aquí para que la IA genere el contenido completo del case study "
+"basándose en tu briefing."
+msgstr ""
+"Click here for AI to generate the full case study content based on your "
+"briefing."
+
+#: static/js/tours.js:373
+msgid "Contenido generado"
+msgstr "Generated content"
+
+#: static/js/tours.js:374
+msgid ""
+"Revisa y edita el case study y los criterios de evaluación antes de "
+"guardarlo."
+msgstr ""
+"Review and edit the case study and evaluation criteria before saving."
+
+#: static/js/tours.js:382
+msgid "Caso práctico con IA"
+msgstr "AI-powered case study"
+
+#: static/js/tours.js:383
+msgid ""
+"La IA genera automáticamente un caso práctico personalizado para este "
+"candidato basándose en su perfil y la posición. Puedes editar el resultado "
+"antes de enviarlo."
+msgstr ""
+"AI automatically generates a personalized case study for this candidate "
+"based on their profile and the position. You can edit the result before "
+"sending it."
+
+#: static/js/tours.js:392
+msgid "Generar evaluación"
+msgstr "Generate evaluation"
+
+#: static/js/tours.js:393
+msgid ""
+"Pulsa este botón para que la IA analice toda la información del candidato "
+"(CV, entrevistas, case studies) y genere una evaluación global."
+msgstr ""
+"Click this button for AI to analyze all of the candidate's information "
+"(CV, interviews, case studies) and generate an overall evaluation."
+
+#: static/js/tours.js:399
+msgid "Puntuaciones"
+msgstr "Scores"
+
+#: static/js/tours.js:400
+msgid ""
+"Desglose de puntuaciones: global, CV, entrevista y case study, con una "
+"recomendación final (contratar, esperar o rechazar)."
+msgstr ""
+"Score breakdown: overall, CV, interview, and case study, with a final "
+"recommendation (hire, hold, or reject)."

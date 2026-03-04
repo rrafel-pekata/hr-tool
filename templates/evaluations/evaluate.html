@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block tour_page %}evaluation_page{% endblock %}
 {% block title %}{{ title }} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
-<li><a href="/" class="hover:text-gray-700">Inicio</a></li>
+<li><a href="/" class="hover:text-gray-700">{% trans "Inicio" %}</a></li>
 <li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="hover:text-gray-700">{{ candidate.full_name }}</a></li>
-<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">Evaluación IA</span></li>
+<li class="flex items-center"><svg class="h-4 w-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg><span class="text-gray-900 font-medium">{% trans "Evaluación IA" %}</span></li>
 {% endblock %}
 
 {% block content %}
@@ -24,7 +25,7 @@
                 <template x-if="loading">
                     <svg class="-ml-0.5 mr-1.5 h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                 </template>
-                <span x-text="loading ? 'Generando evaluación...' : '{% if latest_evaluation %}Regenerar evaluación{% else %}Generar evaluación{% endif %}'"></span>
+                <span x-text="loading ? '{% trans "Generando evaluación..." %}' : '{% if latest_evaluation %}{% trans "Regenerar evaluación" %}{% else %}{% trans "Generar evaluación" %}{% endif %}'"></span>
             </button>
         </form>
     </div>
@@ -36,32 +37,32 @@
         <div id="tour-eval-scores" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div class="text-center p-4 rounded-lg bg-gray-50">
                 <p class="text-3xl font-bold {% if eval.overall_score >= 7 %}text-green-600{% elif eval.overall_score >= 5 %}text-yellow-600{% else %}text-red-600{% endif %}">{{ eval.overall_score|default:"—" }}</p>
-                <p class="text-sm text-gray-500">Global</p>
+                <p class="text-sm text-gray-500">{% trans "Global" %}</p>
             </div>
             <div class="text-center p-4 rounded-lg bg-gray-50">
                 <p class="text-2xl font-semibold text-gray-900">{{ eval.cv_score|default:"—" }}</p>
-                <p class="text-sm text-gray-500">CV</p>
+                <p class="text-sm text-gray-500">{% trans "CV" %}</p>
             </div>
             <div class="text-center p-4 rounded-lg bg-gray-50">
                 <p class="text-2xl font-semibold text-gray-900">{{ eval.interview_score|default:"—" }}</p>
-                <p class="text-sm text-gray-500">Entrevista</p>
+                <p class="text-sm text-gray-500">{% trans "Entrevista" %}</p>
             </div>
             <div class="text-center p-4 rounded-lg bg-gray-50">
                 <p class="text-2xl font-semibold text-gray-900">{{ eval.case_score|default:"—" }}</p>
-                <p class="text-sm text-gray-500">Case Study</p>
+                <p class="text-sm text-gray-500">{% trans "Case Study" %}</p>
             </div>
         </div>
 
         <!-- Recommendation -->
         {% if eval.recommendation %}
         <div class="flex items-center gap-3">
-            <span class="text-sm font-medium text-gray-700">Recomendación:</span>
+            <span class="text-sm font-medium text-gray-700">{% trans "Recomendación:" %}</span>
             {% if eval.recommendation == 'hire' %}
-            <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">Contratar</span>
+            <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">{% trans "Contratar" %}</span>
             {% elif eval.recommendation == 'hold' %}
-            <span class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800">En espera</span>
+            <span class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800">{% trans "En espera" %}</span>
             {% else %}
-            <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800">Rechazar</span>
+            <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800">{% trans "Rechazar" %}</span>
             {% endif %}
         </div>
         {% endif %}
@@ -73,7 +74,7 @@
             <div class="rounded-lg bg-green-50 border border-green-200 p-4">
                 <h3 class="text-sm font-semibold text-green-800 mb-3 flex items-center gap-1.5">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                    Puntos fuertes
+                    {% trans "Puntos fuertes" %}
                 </h3>
                 <ul class="space-y-2">
                     {% for item in eval.strengths %}
@@ -89,7 +90,7 @@
             <div class="rounded-lg bg-red-50 border border-red-200 p-4">
                 <h3 class="text-sm font-semibold text-red-800 mb-3 flex items-center gap-1.5">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-                    Puntos débiles
+                    {% trans "Puntos débiles" %}
                 </h3>
                 <ul class="space-y-2">
                     {% for item in eval.weaknesses %}
@@ -107,7 +108,7 @@
         <!-- Summary -->
         {% if eval.summary %}
         <div>
-            <h3 class="text-sm font-semibold text-gray-900 mb-2">Resumen ejecutivo</h3>
+            <h3 class="text-sm font-semibold text-gray-900 mb-2">{% trans "Resumen ejecutivo" %}</h3>
             <div class="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{{ eval.summary }}</div>
         </div>
         {% endif %}
@@ -115,29 +116,29 @@
         <!-- Full result -->
         {% if eval.result %}
         <details>
-            <summary class="cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900">Ver respuesta completa de IA</summary>
+            <summary class="cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900">{% trans "Ver respuesta completa de IA" %}</summary>
             <pre class="mt-2 text-xs text-gray-600 whitespace-pre-wrap bg-gray-50 rounded-md p-4 max-h-96 overflow-auto">{{ eval.result }}</pre>
         </details>
         {% endif %}
 
-        <p class="text-xs text-gray-400">Generada el {{ eval.generated_at|date:"d/m/Y H:i" }}</p>
+        <p class="text-xs text-gray-400">{% blocktrans with date=eval.generated_at|date:"d/m/Y H:i" %}Generada el {{ date }}{% endblocktrans %}</p>
     </div>
     {% endwith %}
 
     <!-- History -->
     {% if evaluations.count > 1 %}
     <div class="mt-6">
-        <h3 class="text-sm font-semibold text-gray-900 mb-3">Historial de evaluaciones</h3>
+        <h3 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Historial de evaluaciones" %}</h3>
         <div class="space-y-2">
             {% for eval in evaluations %}
             {% if not forloop.first %}
             <div class="bg-white rounded-lg border border-gray-200 px-4 py-3 flex items-center justify-between">
                 <span class="text-sm text-gray-600">{{ eval.generated_at|date:"d/m/Y H:i" }}</span>
                 <div class="flex items-center gap-4 text-sm">
-                    <span>Global: <span class="font-medium">{{ eval.overall_score|default:"—" }}</span></span>
-                    {% if eval.recommendation == 'hire' %}{% include "partials/_badge.html" with label="Contratar" color="green" %}
-                    {% elif eval.recommendation == 'hold' %}{% include "partials/_badge.html" with label="En espera" color="yellow" %}
-                    {% elif eval.recommendation == 'reject' %}{% include "partials/_badge.html" with label="Rechazar" color="red" %}{% endif %}
+                    <span>{% trans "Global:" %} <span class="font-medium">{{ eval.overall_score|default:"—" }}</span></span>
+                    {% if eval.recommendation == 'hire' %}{% include "partials/_badge.html" with label=_("Contratar") color="green" %}
+                    {% elif eval.recommendation == 'hold' %}{% include "partials/_badge.html" with label=_("En espera") color="yellow" %}
+                    {% elif eval.recommendation == 'reject' %}{% include "partials/_badge.html" with label=_("Rechazar") color="red" %}{% endif %}
                 </div>
             </div>
             {% endif %}
@@ -151,13 +152,13 @@
         <svg class="mx-auto h-12 w-12 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
         </svg>
-        <h3 class="mt-2 text-sm font-semibold text-gray-900">Sin evaluaciones</h3>
-        <p class="mt-1 text-sm text-gray-500">Pulsa "Generar evaluación" para que la IA analice toda la información disponible del candidato.</p>
+        <h3 class="mt-2 text-sm font-semibold text-gray-900">{% trans "Sin evaluaciones" %}</h3>
+        <p class="mt-1 text-sm text-gray-500">{% trans 'Pulsa "Generar evaluación" para que la IA analice toda la información disponible del candidato.' %}</p>
     </div>
     {% endif %}
 
     <div class="mt-4">
-        <a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="text-sm text-blue-600 hover:text-blue-500">&larr; Volver al candidato</a>
+        <a href="{% url 'candidates:candidate_detail' candidate.pk %}" class="text-sm text-blue-600 hover:text-blue-500">&larr; {% trans "Volver al candidato" %}</a>
     </div>
 </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="chatbot-widget" x-data="chatbotWidget" @click.away="open = false">
     <!-- CSRF token -->
     <div id="chatbot-csrf" style="display:none">{% csrf_token %}</div>
@@ -6,18 +7,18 @@
     <div class="chatbot-panel" x-show="open" x-cloak x-transition>
         <!-- Header -->
         <div class="chatbot-header">
-            <span>Pekata Assistant</span>
+            <span>{% trans "Pekata Assistant" %}</span>
             <div class="chatbot-header-actions">
                 <!-- Tour button -->
-                <button @click="startTour()" title="Ver tour de esta página">
+                <button @click="startTour()" title="{% trans "Ver tour de esta página" %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                 </button>
                 <!-- Clear chat -->
-                <button @click="clear()" title="Limpiar chat">
+                <button @click="clear()" title="{% trans "Limpiar chat" %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
                 <!-- Close -->
-                <button @click="open = false" title="Cerrar">
+                <button @click="open = false" title="{% trans "Cerrar" %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
                 </button>
             </div>
@@ -28,16 +29,16 @@
             <!-- Welcome message (shown when no messages) -->
             <template x-if="messages.length === 0 && !loading">
                 <div class="chatbot-welcome">
-                    <p><strong>Hola, soy Pekata Assistant</strong></p>
-                    <p>Pregúntame sobre cómo usar la aplicación, crear posiciones, gestionar candidatos y más.</p>
+                    <p><strong>{% trans "Hola, soy Pekata Assistant" %}</strong></p>
+                    <p>{% trans "Pregúntame sobre cómo usar la aplicación, crear posiciones, gestionar candidatos y más." %}</p>
                     <div class="chatbot-quick-actions">
                         <button class="chatbot-quick-btn" @click="startTour()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                            Tour de esta página
+                            {% trans "Tour de esta página" %}
                         </button>
                         <button class="chatbot-quick-btn" @click="resetTours()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                            Reiniciar tours
+                            {% trans "Reiniciar tours" %}
                         </button>
                     </div>
                 </div>
@@ -67,7 +68,7 @@
         <div class="chatbot-input-area">
             <input type="text"
                    class="chatbot-input"
-                   placeholder="Escribe tu pregunta..."
+                   placeholder="{% trans "Escribe tu pregunta..." %}"
                    x-model="input"
                    @keydown="handleKey($event)"
                    :disabled="loading">
@@ -78,7 +79,7 @@
     </div>
 
     <!-- FAB button -->
-    <button class="chatbot-fab" @click="toggle()" title="Ayuda">
+    <button class="chatbot-fab" @click="toggle()" title="{% trans "Ayuda" %}">
         <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
     </button>

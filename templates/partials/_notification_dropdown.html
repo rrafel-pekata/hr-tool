@@ -1,3 +1,4 @@
+{% load i18n %}
 <!-- Notification bell + dropdown -->
 <div x-data="notificationBell()" @click.away="open = false" class="relative">
     <!-- Bell button -->
@@ -23,16 +24,16 @@
 
         <!-- Header -->
         <div class="flex items-center justify-between border-b px-4 py-3">
-            <h3 class="text-sm font-semibold text-gray-900">Notificaciones</h3>
+            <h3 class="text-sm font-semibold text-gray-900">{% trans "Notificaciones" %}</h3>
             <button x-show="count > 0" @click="markAllRead()" class="text-xs text-primary-600 hover:text-primary-800">
-                Marcar todas como leídas
+                {% trans "Marcar todas como leídas" %}
             </button>
         </div>
 
         <!-- List -->
         <div class="max-h-96 overflow-y-auto">
             <template x-if="notifications.length === 0">
-                <p class="px-4 py-8 text-center text-sm text-gray-500">Sin notificaciones</p>
+                <p class="px-4 py-8 text-center text-sm text-gray-500">{% trans "Sin notificaciones" %}</p>
             </template>
             <template x-for="n in notifications" :key="n.id">
                 <a :href="n.link || '#'" @click="markRead(n)"

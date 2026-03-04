@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Seleccionar empresa — Pekata ATS{% endblock %}
+{% block title %}{% trans "Seleccionar empresa" %} — Pekata ATS{% endblock %}
 
 {% block breadcrumb %}
-<li><span class="text-gray-900 font-medium">Seleccionar empresa</span></li>
+<li><span class="text-gray-900 font-medium">{% trans "Seleccionar empresa" %}</span></li>
 {% endblock %}
 
 {% block content %}
 <div class="mx-auto max-w-2xl py-8">
     <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold text-gray-900">Selecciona una empresa</h1>
-        <p class="mt-2 text-sm text-gray-500">Elige la empresa con la que quieres trabajar.</p>
+        <h1 class="text-2xl font-bold text-gray-900">{% trans "Selecciona una empresa" %}</h1>
+        <p class="mt-2 text-sm text-gray-500">{% trans "Elige la empresa con la que quieres trabajar." %}</p>
     </div>
 
     {% if company_data %}
@@ -47,8 +48,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
             </svg>
         </div>
-        <h3 class="mt-4 text-sm font-semibold text-gray-900">Sin empresas</h3>
-        <p class="mt-1 text-sm text-gray-500">No tienes ninguna empresa asignada. Contacta al administrador.</p>
+        <h3 class="mt-4 text-sm font-semibold text-gray-900">{% trans "Sin empresas" %}</h3>
+        <p class="mt-1 text-sm text-gray-500">{% trans "No tienes ninguna empresa asignada. Contacta al administrador." %}</p>
     </div>
     {% endif %}
 </div>

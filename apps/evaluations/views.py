@@ -3,6 +3,7 @@ import logging
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
 from apps.candidates.models import Candidate
 from apps.core.services import call_claude
@@ -146,15 +147,15 @@ def evaluate_candidate(request, candidate_pk):
                     exclude_user=request.user,
                 )
 
-                messages.success(request, 'Evaluación IA generada correctamente.')
+                messages.success(request, _('Evaluación IA generada correctamente.'))
             else:
-                messages.error(request, 'La IA no devolvió un formato válido. Inténtalo de nuevo.')
+                messages.error(request, _('La IA no devolvió un formato válido. Inténtalo de nuevo.'))
 
         except ValueError as e:
             messages.error(request, str(e))
         except Exception:
             logger.exception("Error llamando a Claude API para evaluación")
-            messages.error(request, 'Error al conectar con la IA. Inténtalo de nuevo.')
+            messages.error(request, _('Error al conectar con la IA. Inténtalo de nuevo.'))
 
         return redirect('evaluations:evaluate_candidate', candidate_pk=candidate.pk)
 

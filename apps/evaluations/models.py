@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from apps.candidates.models import Candidate
 from apps.core.models import TimeStampedModel
@@ -8,48 +9,48 @@ class AIEvaluation(TimeStampedModel):
     """Evaluación final generada por IA para un candidato."""
 
     class Recommendation(models.TextChoices):
-        HIRE = 'hire', 'Contratar'
-        HOLD = 'hold', 'En espera'
-        REJECT = 'reject', 'Rechazar'
+        HIRE = 'hire', _('Contratar')
+        HOLD = 'hold', _('En espera')
+        REJECT = 'reject', _('Rechazar')
 
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
         related_name='evaluations',
-        verbose_name='Candidato',
+        verbose_name=_('Candidato'),
     )
-    generated_at = models.DateTimeField('Fecha de generación', auto_now_add=True)
-    prompt_used = models.TextField('Prompt enviado')
-    result = models.TextField('Respuesta completa de Claude')
-    cv_score = models.IntegerField('Puntuación CV', null=True, blank=True)
+    generated_at = models.DateTimeField(_('Fecha de generación'), auto_now_add=True)
+    prompt_used = models.TextField(_('Prompt enviado'))
+    result = models.TextField(_('Respuesta completa de Claude'))
+    cv_score = models.IntegerField(_('Puntuación CV'), null=True, blank=True)
     interview_score = models.IntegerField(
-        'Puntuación entrevista',
+        _('Puntuación entrevista'),
         null=True,
         blank=True,
     )
     case_score = models.IntegerField(
-        'Puntuación case study',
+        _('Puntuación case study'),
         null=True,
         blank=True,
     )
     overall_score = models.IntegerField(
-        'Puntuación final',
+        _('Puntuación final'),
         null=True,
         blank=True,
     )
     recommendation = models.CharField(
-        'Recomendación',
+        _('Recomendación'),
         max_length=10,
         choices=Recommendation.choices,
         blank=True,
     )
-    summary = models.TextField('Resumen ejecutivo', blank=True)
-    strengths = models.JSONField('Puntos fuertes', default=list, blank=True)
-    weaknesses = models.JSONField('Puntos débiles', default=list, blank=True)
+    summary = models.TextField(_('Resumen ejecutivo'), blank=True)
+    strengths = models.JSONField(_('Puntos fuertes'), default=list, blank=True)
+    weaknesses = models.JSONField(_('Puntos débiles'), default=list, blank=True)
 
     class Meta:
-        verbose_name = 'Evaluación IA'
-        verbose_name_plural = 'Evaluaciones IA'
+        verbose_name = _('Evaluación IA')
+        verbose_name_plural = _('Evaluaciones IA')
         ordering = ['-generated_at']
 
     def __str__(self):
