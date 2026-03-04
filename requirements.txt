@@ -17,6 +17,9 @@ django-celery-beat==2.7.0
 # AI
 anthropic==0.43.0
 
+# Translations
+django-modeltranslation==0.19.11
+
 # PDF extraction
 pdfplumber==0.11.4
 

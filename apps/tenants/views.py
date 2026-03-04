@@ -6,10 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 from django.views.decorators.http import require_POST
 
 from apps.core.services import call_claude
+from apps.core.tasks import translate_instance_fields
 
 from .forms import CompanyForm, DepartmentForm
 from .models import Company, CompanyMembership, Department
@@ -60,6 +61,10 @@ def company_create(request):
             )
             # Set as active company
             request.session['active_company_id'] = str(company.pk)
+            translate_instance_fields.delay(
+                'tenants', 'Company', str(company.pk), get_language(),
+                ['name', 'description', 'benefits', 'work_schedule', 'remote_policy', 'office_location', 'culture'],
+            )
             messages.success(request, _('Empresa "%(name)s" creada correctamente.') % {'name': company.name})
             return redirect('tenants:company_detail', pk=company.pk)
     else:
@@ -78,6 +83,10 @@ def company_edit(request, pk):
         form = CompanyForm(request.POST, request.FILES, instance=company)
         if form.is_valid():
             form.save()
+            translate_instance_fields.delay(
+                'tenants', 'Company', str(company.pk), get_language(),
+                ['name', 'description', 'benefits', 'work_schedule', 'remote_policy', 'office_location', 'culture'],
+            )
             messages.success(request, _('Empresa actualizada correctamente.'))
             return redirect('tenants:company_detail', pk=company.pk)
     else:
@@ -204,6 +213,10 @@ def department_create(request):
             department = form.save(commit=False)
             department.company = request.company
             department.save()
+            translate_instance_fields.delay(
+                'tenants', 'Department', str(department.pk), get_language(),
+                ['name', 'description'],
+            )
             messages.success(request, _('Departamento "%(name)s" creado correctamente.') % {'name': department.name})
             return redirect('tenants:department_list')
     else:
@@ -222,6 +235,10 @@ def department_edit(request, pk):
         form = DepartmentForm(request.POST, instance=department)
         if form.is_valid():
             form.save()
+            translate_instance_fields.delay(
+                'tenants', 'Department', str(department.pk), get_language(),
+                ['name', 'description'],
+            )
             messages.success(request, _('Departamento actualizado correctamente.'))
             return redirect('tenants:department_list')
     else:

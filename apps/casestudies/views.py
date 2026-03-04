@@ -10,11 +10,12 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.utils import timezone
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 from django.views.decorators.http import require_POST
 
 from apps.candidates.models import Candidate
 from apps.core.services import call_claude
+from apps.core.tasks import translate_instance_fields
 from apps.positions.models import Position
 
 from apps.notifications.services import notify_company
@@ -73,6 +74,10 @@ def casestudy_create(request, position_pk):
             if request.POST.get('ai_generated') == 'true':
                 cs.ai_generated = True
             cs.save()
+            translate_instance_fields.delay(
+                'casestudies', 'CaseStudy', str(cs.pk), get_language(),
+                ['title', 'brief_description', 'full_content', 'evaluation_criteria'],
+            )
             messages.success(request, _('Case study "%(title)s" creado correctamente.') % {'title': cs.title})
             return redirect('positions:position_detail', pk=position.pk)
     else:
@@ -109,6 +114,10 @@ def casestudy_generate(request, candidate_pk):
             evaluation_criteria=evaluation_criteria,
             ai_generated=True,
             deadline_days=deadline_days,
+        )
+        translate_instance_fields.delay(
+            'casestudies', 'CaseStudy', str(cs.pk), get_language(),
+            ['title', 'brief_description', 'full_content', 'evaluation_criteria'],
         )
 
         ccs = CandidateCaseStudy.objects.create(
@@ -165,6 +174,10 @@ def casestudy_edit(request, ccs_pk):
         cs.evaluation_criteria = request.POST.get('evaluation_criteria', cs.evaluation_criteria).strip()
         cs.deadline_days = int(request.POST.get('deadline_days', cs.deadline_days))
         cs.save()
+        translate_instance_fields.delay(
+            'casestudies', 'CaseStudy', str(cs.pk), get_language(),
+            ['title', 'full_content', 'evaluation_criteria'],
+        )
 
         messages.success(request, _('Caso práctico actualizado.'))
         return redirect('candidates:candidate_detail', pk=candidate.pk)

@@ -7,10 +7,11 @@ from django.db.models import Count, OuterRef, Subquery
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 from django.views.decorators.http import require_POST
 
 from apps.core.services import call_claude
+from apps.core.tasks import translate_instance_fields
 from apps.evaluations.models import AIEvaluation
 from apps.notifications.services import notify_company
 from apps.tenants.models import Department
@@ -68,6 +69,10 @@ def position_create(request):
             position = form.save(commit=False)
             position.company = request.company
             position.save()
+            translate_instance_fields.delay(
+                'positions', 'Position', str(position.pk), get_language(),
+                ['title', 'description', 'requirements', 'about_company_snippet', 'benefits', 'salary_range'],
+            )
             messages.success(request, _('Posición "%(title)s" creada correctamente.') % {'title': position.title})
             return redirect('positions:position_detail', pk=position.pk)
     else:
@@ -86,6 +91,10 @@ def position_edit(request, pk):
         form = PositionForm(request.POST, instance=position, company=request.company)
         if form.is_valid():
             form.save()
+            translate_instance_fields.delay(
+                'positions', 'Position', str(position.pk), get_language(),
+                ['title', 'description', 'requirements', 'about_company_snippet', 'benefits', 'salary_range'],
+            )
             messages.success(request, _('Posición actualizada correctamente.'))
             return redirect('positions:position_detail', pk=position.pk)
     else:

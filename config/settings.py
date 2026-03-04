@@ -20,6 +20,8 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
 
 # ---------- Apps ----------
 INSTALLED_APPS = [
+    # modeltranslation must be before django.contrib.admin and project apps
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -106,6 +108,10 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 TIME_ZONE = 'Europe/Madrid'
 USE_I18N = True
 USE_TZ = True
+
+# ---------- django-modeltranslation ----------
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'es'
+MODELTRANSLATION_LANGUAGES = ('es', 'en', 'ca')
 
 # ---------- Static & Media ----------
 STATIC_URL = 'static/'
