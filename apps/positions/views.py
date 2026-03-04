@@ -258,11 +258,16 @@ def position_translate(request, pk):
     except json.JSONDecodeError:
         return JsonResponse({'error': _('JSON inválido.')}, status=400)
 
-    source_lang = data.get('source_lang', get_language())
-    if source_lang not in ('es', 'en', 'ca'):
-        return JsonResponse({'error': _('Idioma no válido.')}, status=400)
-
     translatable_fields = ['description', 'requirements', 'benefits', 'about_company_snippet']
+
+    # Auto-detect source language: pick the language that has the most content
+    source_lang = None
+    for lang in ALL_LANGUAGES:
+        if any((getattr(position, f'{f}_{lang}', '') or '').strip() for f in translatable_fields):
+            source_lang = lang
+            break
+    if not source_lang:
+        return JsonResponse({'error': _('No hay contenido para traducir.')}, status=400)
 
     try:
         translate_fields(position, source_lang, translatable_fields)
