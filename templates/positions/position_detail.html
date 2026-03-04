@@ -449,15 +449,18 @@ function positionTranslations() {
                     },
                     body: JSON.stringify({ source_lang: this.activeTab }),
                 });
+                if (!resp.ok) {
+                    const errData = await resp.json().catch(() => null);
+                    this.message = errData?.error || `Error ${resp.status}`;
+                    this.messageType = 'error';
+                    return;
+                }
                 const data = await resp.json();
                 if (data.translations) {
                     this.translations = data.translations;
                     this.message = '{% trans "Traducción completada" %}';
                     this.messageType = 'success';
                     setTimeout(() => this.message = '', 5000);
-                } else if (data.error) {
-                    this.message = data.error;
-                    this.messageType = 'error';
                 }
             } catch (err) {
                 this.message = '{% trans "Error de conexión" %}';
