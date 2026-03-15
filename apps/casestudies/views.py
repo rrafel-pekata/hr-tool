@@ -1,3 +1,4 @@
+import io
 import json
 import logging
 from datetime import timedelta
@@ -6,7 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -269,6 +270,9 @@ def casestudy_ai_generate(request, candidate_pk):
 
     cv_text = (candidate.cv_text_extracted or '')[:MAX_CV_TEXT_FOR_PROMPT]
 
+    body = json.loads(request.body) if request.body else {}
+    instructions = body.get('instructions', '').strip()
+
     user_prompt = GENERATE_CASE_STUDY_PROMPT.format(
         position_title=position.title,
         position_department=position.department.name if position.department else 'No especificado',
@@ -280,6 +284,9 @@ def casestudy_ai_generate(request, candidate_pk):
         candidate_summary=candidate.ai_summary or 'No disponible',
         candidate_cv_text=cv_text or 'No disponible',
     )
+
+    if instructions:
+        user_prompt += f"\n\nINDICACIONES ADICIONALES DEL RECLUTADOR:\n{instructions}"
 
     try:
         result = call_claude(SYSTEM_PROMPT, user_prompt, json_output=True)
@@ -342,3 +349,138 @@ def casestudy_send(request, candidate_pk):
         'case_studies': case_studies,
         'title': _('Enviar Case Study'),
     })
+
+
+@login_required
+def casestudy_pdf(request, ccs_pk):
+    """Download the case study as a PDF."""
+    from reportlab.lib import colors
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+    from reportlab.lib.units import cm
+    from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+
+    ccs = get_object_or_404(
+        CandidateCaseStudy.objects.select_related('case_study', 'candidate', 'candidate__position'),
+        pk=ccs_pk,
+        candidate__position__company=request.company,
+    )
+    cs = ccs.case_study
+    candidate = ccs.candidate
+    position = candidate.position
+
+    buf = io.BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=1.5 * cm, bottomMargin=1.5 * cm)
+    styles = getSampleStyleSheet()
+
+    title_style = ParagraphStyle('CustomTitle', parent=styles['Title'], fontSize=16, spaceAfter=6)
+    subtitle_style = ParagraphStyle('Subtitle', parent=styles['Normal'], fontSize=10, textColor=colors.grey, spaceAfter=14)
+    h2_style = ParagraphStyle('H2', parent=styles['Heading2'], fontSize=12, spaceBefore=14, spaceAfter=6)
+    body_style = ParagraphStyle('Body', parent=styles['Normal'], fontSize=10, leading=14)
+
+    elements = []
+
+    # Header
+    elements.append(Paragraph(cs.title, title_style))
+    meta = f'{position.title} — {candidate.full_name}'
+    if ccs.deadline:
+        meta += f' — {_("Fecha límite")}: {ccs.deadline.strftime("%d/%m/%Y")}'
+    elements.append(Paragraph(meta, subtitle_style))
+
+    # Content - split by newlines and convert to paragraphs
+    elements.append(Paragraph(_('Enunciado'), h2_style))
+    for line in cs.full_content.split('\n'):
+        line = line.strip()
+        if line:
+            elements.append(Paragraph(line, body_style))
+        else:
+            elements.append(Spacer(1, 6))
+
+    doc.build(elements)
+    buf.seek(0)
+
+    filename = f'caso_practico_{candidate.last_name}_{candidate.first_name}.pdf'.replace(' ', '_')
+    response = HttpResponse(buf.read(), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
+
+
+@require_POST
+@login_required
+def bulk_generate_casestudy(request, candidate_pk):
+    """AJAX endpoint: generate a case study for a single candidate (used in bulk from position page)."""
+    candidate = get_object_or_404(Candidate, pk=candidate_pk, position__company=request.company)
+    position = candidate.position
+    company = request.company
+
+    body = json.loads(request.body) if request.body else {}
+    instructions = body.get('instructions', '').strip()
+    deadline_days = int(body.get('deadline_days', 7))
+
+    cv_text = (candidate.cv_text_extracted or '')[:MAX_CV_TEXT_FOR_PROMPT]
+
+    user_prompt = GENERATE_CASE_STUDY_PROMPT.format(
+        position_title=position.title,
+        position_department=position.department.name if position.department else 'No especificado',
+        position_description=position.description or 'No disponible',
+        position_requirements=position.requirements or 'No disponibles',
+        company_name=company.name,
+        company_description=company.description or 'No disponible',
+        candidate_name=candidate.full_name,
+        candidate_summary=candidate.ai_summary or 'No disponible',
+        candidate_cv_text=cv_text or 'No disponible',
+    )
+
+    if instructions:
+        user_prompt += f"\n\nINDICACIONES ADICIONALES DEL RECLUTADOR:\n{instructions}"
+
+    try:
+        result = call_claude(SYSTEM_PROMPT, user_prompt, json_output=True)
+        if not isinstance(result, dict):
+            return JsonResponse({'error': _('La IA no devolvió un formato válido.')}, status=500)
+
+        cs = CaseStudy.objects.create(
+            position=position,
+            title=result.get('title', ''),
+            brief_description=f'Caso práctico generado con IA para {candidate.full_name}',
+            full_content=result.get('full_content', ''),
+            evaluation_criteria=result.get('evaluation_criteria', ''),
+            ai_generated=True,
+            deadline_days=deadline_days,
+        )
+        translate_instance_fields.delay(
+            'casestudies', 'CaseStudy', str(cs.pk), get_language(),
+            ['title', 'brief_description', 'full_content', 'evaluation_criteria'],
+        )
+
+        ccs = CandidateCaseStudy.objects.create(
+            candidate=candidate,
+            case_study=cs,
+            sent_at=timezone.now(),
+            deadline=timezone.now() + timedelta(days=deadline_days),
+        )
+
+        candidate.status = 'case_sent'
+        candidate.save(update_fields=['status', 'updated_at'])
+
+        notify_company(
+            company=position.company,
+            title='Caso práctico enviado',
+            message=f'"{cs.title}" enviado a {candidate.full_name}.',
+            link=f'/candidates/{candidate.pk}/',
+            notification_type='case_study',
+            exclude_user=request.user,
+        )
+
+        if candidate.email:
+            _send_casestudy_email(request, candidate, ccs)
+
+        return JsonResponse({
+            'success': True,
+            'candidate_name': candidate.full_name,
+            'title': cs.title,
+        })
+
+    except Exception:
+        logger.exception("Error generating bulk case study for candidate %s", candidate_pk)
+        return JsonResponse({'error': _('Error al generar con IA.')}, status=500)

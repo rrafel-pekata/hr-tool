@@ -13,4 +13,5 @@ urlpatterns = [
     path('<uuid:pk>/status/', views.position_status, name='position_status'),
     path('<uuid:pk>/translate/', views.position_translate, name='position_translate'),
     path('ai/generate/', views.position_ai_generate, name='position_ai_generate'),
+    path('<uuid:pk>/candidates-pdf/', views.position_candidates_pdf, name='position_candidates_pdf'),
 ]

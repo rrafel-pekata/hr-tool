@@ -1,24 +1,27 @@
-"""Receive a base64-encoded tar.gz of media/ from stdin and extract it."""
-import base64
+"""Download and extract a tar.gz of media files from a URL."""
 import io
-import sys
 import tarfile
 
+import requests
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = 'Load media files from base64-encoded tar.gz on stdin'
+    help = 'Load media files from a tar.gz URL'
+
+    def add_arguments(self, parser):
+        parser.add_argument('url', type=str, help='URL of tar.gz file')
 
     def handle(self, *args, **options):
-        self.stdout.write('Reading base64 data from stdin...')
-        b64_data = sys.stdin.read().strip()
-        raw = base64.b64decode(b64_data)
-        self.stdout.write(f'Received {len(raw)} bytes, extracting...')
+        url = options['url']
+        self.stdout.write(f'Downloading {url}...')
+        resp = requests.get(url, timeout=120)
+        resp.raise_for_status()
+        self.stdout.write(f'Received {len(resp.content)} bytes, extracting...')
 
         media_root = str(settings.MEDIA_ROOT)
-        with tarfile.open(fileobj=io.BytesIO(raw), mode='r:gz') as tar:
+        with tarfile.open(fileobj=io.BytesIO(resp.content), mode='r:gz') as tar:
             tar.extractall(path=media_root)
             names = tar.getnames()
 

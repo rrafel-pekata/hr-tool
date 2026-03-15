@@ -12,4 +12,6 @@ urlpatterns = [
     path('resend/<uuid:ccs_pk>/', views.casestudy_resend, name='casestudy_resend'),
     path('ai/generate/<uuid:candidate_pk>/', views.casestudy_ai_generate, name='casestudy_ai_generate'),
     path('send/<uuid:candidate_pk>/', views.casestudy_send, name='casestudy_send'),
+    path('pdf/<uuid:ccs_pk>/', views.casestudy_pdf, name='casestudy_pdf'),
+    path('bulk-generate/<uuid:candidate_pk>/', views.bulk_generate_casestudy, name='bulk_generate_casestudy'),
 ]

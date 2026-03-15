@@ -1,14 +1,26 @@
+import io
 import json
 import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, OuterRef, Subquery
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.utils.translation import get_language, gettext as _
 from django.views.decorators.http import require_POST
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.units import cm
+from reportlab.platypus import (
+    Paragraph,
+    SimpleDocTemplate,
+    Spacer,
+    Table,
+    TableStyle,
+)
 
 from apps.core.services import ALL_LANGUAGES, call_claude, translate_fields
 from apps.core.tasks import translate_instance_fields
@@ -287,3 +299,104 @@ def position_translate(request, pk):
         }
 
     return JsonResponse({'translations': translations})
+
+
+@login_required
+def position_candidates_pdf(request, pk):
+    """Generate a PDF report with candidate summaries and AI analysis."""
+    position = get_object_or_404(Position, pk=pk, company=request.company)
+    candidates = position.candidates.order_by('-ai_fit_score', '-created_at')
+
+    buf = io.BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=1.5 * cm, bottomMargin=1.5 * cm)
+    styles = getSampleStyleSheet()
+
+    title_style = ParagraphStyle('CustomTitle', parent=styles['Title'], fontSize=16, spaceAfter=6)
+    subtitle_style = ParagraphStyle('Subtitle', parent=styles['Normal'], fontSize=10, textColor=colors.grey, spaceAfter=14)
+    h2_style = ParagraphStyle('H2', parent=styles['Heading2'], fontSize=13, spaceBefore=16, spaceAfter=6)
+    body_style = ParagraphStyle('Body', parent=styles['Normal'], fontSize=9, leading=12)
+    label_style = ParagraphStyle('Label', parent=styles['Normal'], fontSize=9, textColor=colors.grey)
+    bullet_style = ParagraphStyle('Bullet', parent=styles['Normal'], fontSize=9, leading=12, leftIndent=12)
+
+    elements = []
+
+    # Header
+    elements.append(Paragraph(position.title, title_style))
+    dept = position.department.name if position.department else ''
+    location = position.location or ''
+    meta_parts = [p for p in [dept, location, position.get_status_display()] if p]
+    elements.append(Paragraph(' · '.join(meta_parts), subtitle_style))
+
+    if not candidates.exists():
+        elements.append(Paragraph(_('No hay candidatos en esta posición.'), body_style))
+    else:
+        elements.append(Paragraph(
+            _('%(count)d candidatos') % {'count': candidates.count()},
+            body_style,
+        ))
+        elements.append(Spacer(1, 8))
+
+        for candidate in candidates:
+            # Candidate name header
+            score_text = f' — {candidate.ai_fit_score}/10' if candidate.ai_fit_score else ''
+            elements.append(Paragraph(
+                f'{candidate.full_name}{score_text}',
+                h2_style,
+            ))
+
+            # Info table
+            info_data = [
+                [Paragraph(_('Email'), label_style), Paragraph(candidate.email or '—', body_style)],
+                [Paragraph(_('Estado'), label_style), Paragraph(candidate.get_status_display(), body_style)],
+            ]
+            if candidate.phone:
+                info_data.append([Paragraph(_('Teléfono'), label_style), Paragraph(candidate.phone, body_style)])
+            if candidate.rating:
+                info_data.append([
+                    Paragraph(_('Valoración'), label_style),
+                    Paragraph('★' * candidate.rating + '☆' * (5 - candidate.rating), body_style),
+                ])
+
+            info_table = Table(info_data, colWidths=[3.5 * cm, 13 * cm])
+            info_table.setStyle(TableStyle([
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ('TOPPADDING', (0, 0), (-1, -1), 2),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+            ]))
+            elements.append(info_table)
+
+            # AI Summary
+            if candidate.ai_summary:
+                elements.append(Spacer(1, 4))
+                elements.append(Paragraph(_('Resumen IA'), label_style))
+                elements.append(Paragraph(candidate.ai_summary, body_style))
+
+            # Strengths
+            if candidate.ai_strengths:
+                elements.append(Spacer(1, 4))
+                elements.append(Paragraph(_('Puntos fuertes'), label_style))
+                for s in candidate.ai_strengths:
+                    elements.append(Paragraph(f'• {s}', bullet_style))
+
+            # Weaknesses
+            if candidate.ai_weaknesses:
+                elements.append(Spacer(1, 4))
+                elements.append(Paragraph(_('Puntos débiles'), label_style))
+                for w in candidate.ai_weaknesses:
+                    elements.append(Paragraph(f'• {w}', bullet_style))
+
+            # Recruiter notes
+            if candidate.recruiter_notes:
+                elements.append(Spacer(1, 4))
+                elements.append(Paragraph(_('Notas del reclutador'), label_style))
+                elements.append(Paragraph(candidate.recruiter_notes, body_style))
+
+            elements.append(Spacer(1, 10))
+
+    doc.build(elements)
+    buf.seek(0)
+
+    filename = f'candidatos_{position.title[:30].replace(" ", "_")}.pdf'
+    response = HttpResponse(buf.read(), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response

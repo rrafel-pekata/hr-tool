@@ -12,13 +12,30 @@
 {% endblock %}
 
 {% block content %}
-<div class="mx-auto max-w-3xl" x-data="caseStudyGenerate()" x-init="generate()">
+<div class="mx-auto max-w-3xl" x-data="caseStudyGenerate()">
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-gray-900">{% trans "Caso práctico" %}</h1>
         <p class="mt-1 text-sm text-gray-500">
             {% blocktrans with name=candidate.full_name pos=position.title %}Para <span class="font-medium text-gray-700">{{ name }}</span>
             — Posición: <span class="font-medium text-gray-700">{{ pos }}</span>{% endblocktrans %}
         </p>
+    </div>
+
+    <!-- Instructions step (before generating) -->
+    <div x-show="!generated && !loading" class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
+        <h2 class="text-base font-semibold text-gray-900">{% trans "Indicaciones para la IA" %}</h2>
+        <p class="text-sm text-gray-500">{% trans "Opcionalmente, añade indicaciones específicas para personalizar el caso práctico. Si no escribes nada, la IA generará el caso basándose en el perfil del candidato y el puesto." %}</p>
+        <textarea x-model="instructions" rows="4" placeholder="{% trans 'Ej: Enfocarlo en análisis de datos con Excel, incluir un ejercicio de presentación a cliente, nivel de dificultad alto...' %}"
+                  class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"></textarea>
+        <div class="flex justify-end gap-3">
+            <a href="{% url 'candidates:candidate_detail' candidate.pk %}"
+               class="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-300">{% trans "Cancelar" %}</a>
+            <button type="button" @click="generate()"
+                    class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 inline-flex items-center gap-2">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                {% trans "Generar con IA" %}
+            </button>
+        </div>
     </div>
 
     <!-- Loading state -->
@@ -42,7 +59,7 @@
     </div>
 
     <!-- Generated content (editable form) -->
-    <form x-show="!loading && !error" x-cloak method="post" class="space-y-5">
+    <form x-show="generated && !loading && !error" x-cloak method="post" class="space-y-5">
         {% csrf_token %}
 
         <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
@@ -107,6 +124,8 @@ function caseStudyGenerate() {
     return {
         loading: false,
         error: '',
+        generated: false,
+        instructions: '',
         title: '',
         fullContent: '',
         evaluationCriteria: '',
@@ -122,7 +141,7 @@ function caseStudyGenerate() {
                         'Content-Type': 'application/json',
                         'X-CSRFToken': '{{ csrf_token }}',
                     },
-                    body: JSON.stringify({}),
+                    body: JSON.stringify({ instructions: this.instructions }),
                 });
 
                 const data = await response.json();
@@ -135,6 +154,7 @@ function caseStudyGenerate() {
                 this.title = data.title || '';
                 this.fullContent = data.full_content || '';
                 this.evaluationCriteria = data.evaluation_criteria || '';
+                this.generated = true;
             } catch (err) {
                 this.error = 'Error de conexión. Inténtalo de nuevo.';
             } finally {
