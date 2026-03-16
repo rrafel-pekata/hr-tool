@@ -1,6 +1,7 @@
 import io
 import json
 import logging
+import zipfile
 from datetime import timedelta
 
 from django.conf import settings
@@ -401,6 +402,68 @@ def casestudy_pdf(request, ccs_pk):
 
     filename = f'caso_practico_{candidate.last_name}_{candidate.first_name}.pdf'.replace(' ', '_')
     response = HttpResponse(buf.read(), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
+
+
+@login_required
+def casestudies_bulk_pdf(request, position_pk):
+    """Download all case studies for a position as a ZIP of PDFs."""
+    from reportlab.lib import colors
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+    from reportlab.lib.units import cm
+    from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+
+    position = get_object_or_404(Position, pk=position_pk, company=request.company)
+    ccs_list = CandidateCaseStudy.objects.filter(
+        candidate__position=position,
+        candidate__deleted_at__isnull=True,
+    ).select_related('case_study', 'candidate')
+
+    if not ccs_list.exists():
+        messages.warning(request, _('No hay casos prácticos para descargar.'))
+        return redirect('positions:position_detail', pk=position_pk)
+
+    zip_buf = io.BytesIO()
+    with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for ccs in ccs_list:
+            cs = ccs.case_study
+            candidate = ccs.candidate
+
+            buf = io.BytesIO()
+            doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=1.5 * cm, bottomMargin=1.5 * cm)
+            styles = getSampleStyleSheet()
+
+            title_style = ParagraphStyle('CustomTitle', parent=styles['Title'], fontSize=16, spaceAfter=6)
+            subtitle_style = ParagraphStyle('Subtitle', parent=styles['Normal'], fontSize=10, textColor=colors.grey, spaceAfter=14)
+            h2_style = ParagraphStyle('H2', parent=styles['Heading2'], fontSize=12, spaceBefore=14, spaceAfter=6)
+            body_style = ParagraphStyle('Body', parent=styles['Normal'], fontSize=10, leading=14)
+
+            elements = []
+            elements.append(Paragraph(cs.title, title_style))
+            meta = f'{position.title} — {candidate.full_name}'
+            if ccs.deadline:
+                meta += f' — {_("Fecha límite")}: {ccs.deadline.strftime("%d/%m/%Y")}'
+            elements.append(Paragraph(meta, subtitle_style))
+
+            elements.append(Paragraph(_('Enunciado'), h2_style))
+            for line in cs.full_content.split('\n'):
+                line = line.strip()
+                if line:
+                    elements.append(Paragraph(line, body_style))
+                else:
+                    elements.append(Spacer(1, 6))
+
+            doc.build(elements)
+            buf.seek(0)
+
+            pdf_name = f'caso_practico_{candidate.last_name}_{candidate.first_name}.pdf'.replace(' ', '_')
+            zf.writestr(pdf_name, buf.read())
+
+    zip_buf.seek(0)
+    filename = f'casos_practicos_{position.title[:30].replace(" ", "_")}.zip'
+    response = HttpResponse(zip_buf.read(), content_type='application/zip')
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response
 
