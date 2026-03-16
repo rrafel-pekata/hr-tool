@@ -77,6 +77,13 @@ class Candidate(SoftDeleteMixin, TimeStampedModel):
         verbose_name = _('Candidato')
         verbose_name_plural = _('Candidatos')
         ordering = ['-created_at']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['position', 'email'],
+                condition=models.Q(deleted_at__isnull=True),
+                name='unique_candidate_per_position',
+            ),
+        ]
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
