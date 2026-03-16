@@ -4,6 +4,7 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import models
 from django.db.models import Count, OuterRef, Subquery
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -305,7 +306,9 @@ def position_translate(request, pk):
 def position_candidates_pdf(request, pk):
     """Generate a PDF report with candidate summaries and AI analysis."""
     position = get_object_or_404(Position, pk=pk, company=request.company)
-    candidates = position.candidates.order_by('-ai_fit_score', '-created_at')
+    candidates = position.candidates.order_by(
+        models.F('ai_fit_score').desc(nulls_last=True), '-created_at',
+    ).distinct()
 
     buf = io.BytesIO()
     doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=1.5 * cm, bottomMargin=1.5 * cm)
