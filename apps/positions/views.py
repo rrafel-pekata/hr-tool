@@ -12,10 +12,13 @@ from django.utils import timezone
 from django.utils.translation import get_language, gettext as _
 from django.views.decorators.http import require_POST
 from reportlab.lib import colors
+from reportlab.lib.enums import TA_RIGHT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import cm
 from reportlab.platypus import (
+    HRFlowable,
+    Image,
     Paragraph,
     SimpleDocTemplate,
     Spacer,
@@ -306,46 +309,96 @@ def position_translate(request, pk):
 def position_candidates_pdf(request, pk):
     """Generate a PDF report with candidate summaries and AI analysis."""
     position = get_object_or_404(Position, pk=pk, company=request.company)
+    company = request.company
     candidates = position.candidates.order_by(
         models.F('ai_fit_score').desc(nulls_last=True), '-created_at',
     ).distinct()
 
     buf = io.BytesIO()
-    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=1.5 * cm, bottomMargin=1.5 * cm)
+    doc = SimpleDocTemplate(
+        buf, pagesize=A4,
+        topMargin=1.5 * cm, bottomMargin=1.5 * cm,
+        leftMargin=2 * cm, rightMargin=2 * cm,
+    )
     styles = getSampleStyleSheet()
 
-    title_style = ParagraphStyle('CustomTitle', parent=styles['Title'], fontSize=16, spaceAfter=6)
-    subtitle_style = ParagraphStyle('Subtitle', parent=styles['Normal'], fontSize=10, textColor=colors.grey, spaceAfter=14)
-    h2_style = ParagraphStyle('H2', parent=styles['Heading2'], fontSize=13, spaceBefore=16, spaceAfter=6)
-    body_style = ParagraphStyle('Body', parent=styles['Normal'], fontSize=9, leading=12)
-    label_style = ParagraphStyle('Label', parent=styles['Normal'], fontSize=9, textColor=colors.grey)
-    bullet_style = ParagraphStyle('Bullet', parent=styles['Normal'], fontSize=9, leading=12, leftIndent=12)
+    # Brand color
+    brand = colors.HexColor('#4F46E5')
+    brand_light = colors.HexColor('#EEF2FF')
+    green_bg = colors.HexColor('#F0FDF4')
+    green_text = colors.HexColor('#166534')
+    red_bg = colors.HexColor('#FEF2F2')
+    red_text = colors.HexColor('#991B1B')
+    grey_text = colors.HexColor('#6B7280')
+    dark_text = colors.HexColor('#111827')
+
+    title_style = ParagraphStyle('CustomTitle', parent=styles['Title'], fontSize=18, textColor=brand, spaceAfter=4)
+    subtitle_style = ParagraphStyle('Subtitle', parent=styles['Normal'], fontSize=10, textColor=grey_text, spaceAfter=6)
+    company_style = ParagraphStyle('Company', parent=styles['Normal'], fontSize=11, textColor=dark_text, alignment=TA_RIGHT)
+    h2_style = ParagraphStyle('H2', parent=styles['Heading2'], fontSize=12, textColor=brand, spaceBefore=4, spaceAfter=4)
+    body_style = ParagraphStyle('Body', parent=styles['Normal'], fontSize=9, leading=13, textColor=dark_text)
+    label_style = ParagraphStyle('Label', parent=styles['Normal'], fontSize=8, textColor=grey_text, spaceBefore=6, spaceAfter=2)
+    bullet_green = ParagraphStyle('BulletGreen', parent=styles['Normal'], fontSize=9, leading=12, leftIndent=12, textColor=green_text)
+    bullet_red = ParagraphStyle('BulletRed', parent=styles['Normal'], fontSize=9, leading=12, leftIndent=12, textColor=red_text)
+    score_style = ParagraphStyle('Score', parent=styles['Normal'], fontSize=11, textColor=brand, alignment=TA_RIGHT)
+    count_style = ParagraphStyle('Count', parent=styles['Normal'], fontSize=10, textColor=grey_text, spaceAfter=10)
 
     elements = []
 
-    # Header
-    elements.append(Paragraph(position.title, title_style))
+    # --- Header with logo ---
+    header_data = []
+    title_parts = [Paragraph(position.title, title_style)]
     dept = position.department.name if position.department else ''
     location = position.location or ''
     meta_parts = [p for p in [dept, location, position.get_status_display()] if p]
-    elements.append(Paragraph(' · '.join(meta_parts), subtitle_style))
+    if meta_parts:
+        title_parts.append(Paragraph(' · '.join(meta_parts), subtitle_style))
+
+    right_parts = [Paragraph(company.name, company_style)]
+
+    if company.logo:
+        try:
+            logo_img = Image(company.logo.path, width=2.5 * cm, height=2.5 * cm)
+            logo_img.hAlign = 'RIGHT'
+            right_parts.insert(0, logo_img)
+        except Exception:
+            pass
+
+    header_data.append([title_parts, right_parts])
+    header_table = Table(header_data, colWidths=[12 * cm, 5 * cm])
+    header_table.setStyle(TableStyle([
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('ALIGN', (1, 0), (1, 0), 'RIGHT'),
+    ]))
+    elements.append(header_table)
+    elements.append(HRFlowable(width='100%', thickness=2, color=brand, spaceAfter=12))
 
     if not candidates.exists():
         elements.append(Paragraph(_('No hay candidatos en esta posición.'), body_style))
     else:
         elements.append(Paragraph(
             _('%(count)d candidatos') % {'count': candidates.count()},
-            body_style,
+            count_style,
         ))
-        elements.append(Spacer(1, 8))
 
-        for candidate in candidates:
-            # Candidate name header
-            score_text = f' — {candidate.ai_fit_score}/10' if candidate.ai_fit_score else ''
-            elements.append(Paragraph(
-                f'{candidate.full_name}{score_text}',
-                h2_style,
-            ))
+        for idx, candidate in enumerate(candidates):
+            # Candidate card header with score
+            name_text = f'<b>{candidate.full_name}</b>'
+            score_text = f'<b>{candidate.ai_fit_score}/10</b>' if candidate.ai_fit_score else ''
+            card_header = Table(
+                [[Paragraph(name_text, h2_style), Paragraph(score_text, score_style)]],
+                colWidths=[13 * cm, 4 * cm],
+            )
+            card_header.setStyle(TableStyle([
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                ('BACKGROUND', (0, 0), (-1, -1), brand_light),
+                ('TOPPADDING', (0, 0), (-1, -1), 6),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+                ('LEFTPADDING', (0, 0), (0, 0), 10),
+                ('RIGHTPADDING', (1, 0), (1, 0), 10),
+                ('ROUNDEDCORNERS', [4, 4, 0, 0]),
+            ]))
+            elements.append(card_header)
 
             # Info table
             info_data = [
@@ -360,41 +413,60 @@ def position_candidates_pdf(request, pk):
                     Paragraph('★' * candidate.rating + '☆' * (5 - candidate.rating), body_style),
                 ])
 
-            info_table = Table(info_data, colWidths=[3.5 * cm, 13 * cm])
+            info_table = Table(info_data, colWidths=[3.5 * cm, 13.5 * cm])
             info_table.setStyle(TableStyle([
                 ('VALIGN', (0, 0), (-1, -1), 'TOP'),
                 ('TOPPADDING', (0, 0), (-1, -1), 2),
                 ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+                ('LEFTPADDING', (0, 0), (0, -1), 10),
             ]))
             elements.append(info_table)
 
             # AI Summary
             if candidate.ai_summary:
-                elements.append(Spacer(1, 4))
                 elements.append(Paragraph(_('Resumen IA'), label_style))
                 elements.append(Paragraph(candidate.ai_summary, body_style))
 
-            # Strengths
-            if candidate.ai_strengths:
-                elements.append(Spacer(1, 4))
-                elements.append(Paragraph(_('Puntos fuertes'), label_style))
-                for s in candidate.ai_strengths:
-                    elements.append(Paragraph(f'• {s}', bullet_style))
+            # Strengths & Weaknesses side by side
+            has_strengths = bool(candidate.ai_strengths)
+            has_weaknesses = bool(candidate.ai_weaknesses)
+            if has_strengths or has_weaknesses:
+                elements.append(Spacer(1, 6))
+                strength_parts = []
+                weakness_parts = []
+                if has_strengths:
+                    strength_parts.append(Paragraph(f'<b>{_("Puntos fuertes")}</b>', ParagraphStyle('SLabel', parent=body_style, textColor=green_text, fontSize=8)))
+                    for s in candidate.ai_strengths:
+                        strength_parts.append(Paragraph(f'• {s}', bullet_green))
+                if has_weaknesses:
+                    weakness_parts.append(Paragraph(f'<b>{_("Puntos débiles")}</b>', ParagraphStyle('WLabel', parent=body_style, textColor=red_text, fontSize=8)))
+                    for w in candidate.ai_weaknesses:
+                        weakness_parts.append(Paragraph(f'• {w}', bullet_red))
 
-            # Weaknesses
-            if candidate.ai_weaknesses:
-                elements.append(Spacer(1, 4))
-                elements.append(Paragraph(_('Puntos débiles'), label_style))
-                for w in candidate.ai_weaknesses:
-                    elements.append(Paragraph(f'• {w}', bullet_style))
+                sw_table = Table(
+                    [[strength_parts or '', weakness_parts or '']],
+                    colWidths=[8.5 * cm, 8.5 * cm],
+                )
+                sw_table.setStyle(TableStyle([
+                    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                    ('BACKGROUND', (0, 0), (0, 0), green_bg if has_strengths else colors.white),
+                    ('BACKGROUND', (1, 0), (1, 0), red_bg if has_weaknesses else colors.white),
+                    ('TOPPADDING', (0, 0), (-1, -1), 6),
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+                    ('LEFTPADDING', (0, 0), (-1, -1), 8),
+                    ('RIGHTPADDING', (0, 0), (-1, -1), 8),
+                    ('ROUNDEDCORNERS', [4, 4, 4, 4]),
+                ]))
+                elements.append(sw_table)
 
             # Recruiter notes
             if candidate.recruiter_notes:
-                elements.append(Spacer(1, 4))
                 elements.append(Paragraph(_('Notas del reclutador'), label_style))
                 elements.append(Paragraph(candidate.recruiter_notes, body_style))
 
-            elements.append(Spacer(1, 10))
+            elements.append(Spacer(1, 14))
+            if idx < len(candidates) - 1:
+                elements.append(HRFlowable(width='100%', thickness=0.5, color=colors.HexColor('#E5E7EB'), spaceAfter=6))
 
     doc.build(elements)
     buf.seek(0)
