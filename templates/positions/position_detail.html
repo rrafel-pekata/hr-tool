@@ -193,7 +193,9 @@
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 truncate">{{ candidate.full_name }}</p>
                         <p class="text-xs text-gray-500">{{ candidate.email }}</p>
-                        {% if candidate.recruiter_notes %}
+                        {% if candidate.ai_summary %}
+                        <p class="text-xs text-gray-400 truncate mt-0.5">{{ candidate.ai_summary|truncatewords:20 }}</p>
+                        {% elif candidate.recruiter_notes %}
                         <p class="text-xs text-gray-400 truncate mt-0.5">{{ candidate.recruiter_notes|truncatewords:15 }}</p>
                         {% endif %}
                     </div>
