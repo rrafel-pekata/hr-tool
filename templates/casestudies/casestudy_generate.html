@@ -59,7 +59,7 @@
     </div>
 
     <!-- Generated content (editable form) -->
-    <form x-show="generated && !loading && !error" x-cloak method="post" class="space-y-5">
+    <form x-show="generated && !loading && !error" x-cloak method="post" class="space-y-5" x-data="{ submitting: false }" @submit="if (submitting) { $event.preventDefault(); return; } submitting = true;">
         {% csrf_token %}
 
         <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
@@ -109,8 +109,12 @@
             <div class="flex items-center gap-3">
                 <a href="{% url 'candidates:candidate_detail' candidate.pk %}"
                    class="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border border-gray-300">{% trans "Cancelar" %}</a>
-                <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
-                    {% trans "Guardar y enviar" %}
+                <button type="submit" :disabled="submitting" :class="submitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500'" class="rounded-md px-4 py-2 text-sm font-semibold text-white shadow-sm">
+                    <span x-show="!submitting">{% trans "Guardar y enviar" %}</span>
+                    <span x-show="submitting" x-cloak class="inline-flex items-center gap-2">
+                        <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        {% trans "Enviando..." %}
+                    </span>
                 </button>
             </div>
         </div>
@@ -135,14 +139,18 @@ function caseStudyGenerate() {
             this.error = '';
 
             try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 110000);
                 const response = await fetch('{% url "casestudies:casestudy_ai_generate" candidate.pk %}', {
                     method: 'POST',
+                    signal: controller.signal,
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRFToken': '{{ csrf_token }}',
                     },
                     body: JSON.stringify({ instructions: this.instructions }),
                 });
+                clearTimeout(timeout);
 
                 const data = await response.json();
 
@@ -156,7 +164,9 @@ function caseStudyGenerate() {
                 this.evaluationCriteria = data.evaluation_criteria || '';
                 this.generated = true;
             } catch (err) {
-                this.error = 'Error de conexión. Inténtalo de nuevo.';
+                this.error = err.name === 'AbortError'
+                    ? '{% trans "Tiempo de espera agotado. Inténtalo de nuevo." %}'
+                    : 'Error de conexión. Inténtalo de nuevo.';
             } finally {
                 this.loading = false;
             }

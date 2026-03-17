@@ -49,13 +49,16 @@ def _send_casestudy_email(request, candidate, ccs):
     })
 
     try:
+        from django.core.mail import get_connection
+        connection = get_connection(fail_silently=False)
+        connection.timeout = 10
         send_mail(
             subject=_('Caso práctico — %(position)s — %(company)s') % {'position': candidate.position.title, 'company': company.name},
             message=_('Hola %(name)s, tienes un caso práctico pendiente. Accede aquí: %(url)s') % {'name': candidate.first_name, 'url': portal_url},
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[candidate.email],
             html_message=html_content,
-            fail_silently=False,
+            connection=connection,
         )
         return True
     except Exception:
