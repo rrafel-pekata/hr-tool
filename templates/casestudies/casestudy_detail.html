@@ -27,6 +27,10 @@
                     PDF
                 </a>
                 <a href="{% url 'casestudies:casestudy_edit' ccs.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-500">{% trans "Editar" %}</a>
+                <form method="post" action="{% url 'casestudies:casestudy_delete' ccs.pk %}" class="inline" onsubmit="return confirm('{% trans "¿Estás seguro de que quieres eliminar este caso práctico?" %}')">
+                    {% csrf_token %}
+                    <button type="submit" class="text-sm font-medium text-red-600 hover:text-red-500">{% trans "Eliminar" %}</button>
+                </form>
             </div>
         </div>
         <p class="mt-1 text-sm text-gray-500">

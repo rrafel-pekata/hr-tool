@@ -13,6 +13,7 @@ urlpatterns = [
     path('ai/generate/<uuid:candidate_pk>/', views.casestudy_ai_generate, name='casestudy_ai_generate'),
     path('send/<uuid:candidate_pk>/', views.casestudy_send, name='casestudy_send'),
     path('pdf/<uuid:ccs_pk>/', views.casestudy_pdf, name='casestudy_pdf'),
+    path('delete/<uuid:ccs_pk>/', views.casestudy_delete, name='casestudy_delete'),
     path('bulk-pdf/<uuid:position_pk>/', views.casestudies_bulk_pdf, name='casestudies_bulk_pdf'),
     path('bulk-generate/<uuid:candidate_pk>/', views.bulk_generate_casestudy, name='bulk_generate_casestudy'),
 ]

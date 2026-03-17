@@ -406,6 +406,28 @@ def casestudy_pdf(request, ccs_pk):
     return response
 
 
+@require_POST
+@login_required
+def casestudy_delete(request, ccs_pk):
+    """Delete a candidate case study assignment."""
+    ccs = get_object_or_404(
+        CandidateCaseStudy.objects.select_related('candidate', 'candidate__position', 'case_study'),
+        pk=ccs_pk,
+        candidate__position__company=request.company,
+    )
+    candidate = ccs.candidate
+    cs_title = ccs.case_study.title
+
+    # If candidate status was case_sent/case_submitted, revert to previous status
+    if candidate.status in ('case_sent', 'case_submitted'):
+        candidate.status = 'new'
+        candidate.save(update_fields=['status', 'updated_at'])
+
+    ccs.delete()
+    messages.success(request, _('Caso práctico "%(title)s" eliminado.') % {'title': cs_title})
+    return redirect('candidates:candidate_detail', pk=candidate.pk)
+
+
 @login_required
 def casestudies_bulk_pdf(request, position_pk):
     """Download all case studies for a position as a ZIP of PDFs."""
